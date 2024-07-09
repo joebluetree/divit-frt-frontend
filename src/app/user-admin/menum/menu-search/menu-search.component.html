@@ -1,0 +1,40 @@
+<form [formGroup]="mform">
+  <div class="row">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Name</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="menu_name"> </app-input>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Module</label>
+        <div class="col-sm-8">
+          <auto-complete maxlength="60" formControlName="module_name" (CallBack)="callBack($event)" [table]="'modulem'"
+            [company_id]="getCompanyId()" [display_column]="'module_name'" [url]="url"></auto-complete>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Visible</label>
+        <div class="col-sm-8">
+          <app-combobox [dataSource]="dataList" [displayColumn]="'value'" [valueColumn]="'key'"
+            formControlName="menu_visible"></app-combobox>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>

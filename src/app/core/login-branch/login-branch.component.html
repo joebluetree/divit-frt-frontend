@@ -1,0 +1,47 @@
+<div class="wrapper">
+
+  <form [formGroup]="mForm">
+
+    <div class="container-fluid">
+
+      <div class="row page-header">
+        <div class="col-sm-12 text-center">
+          <label for="">Branch Login</label>
+        </div>
+      </div>
+
+      <div class="row page-body">
+
+        <div class="col-sm-12">
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-label-sm" for="">Branch</label>
+
+            <div class="col-sm-8">
+              <app-combobox [dataSource]="records" [displayColumn]="'branch_name'" [valueColumn]="'branch_id'"
+                formControlName="branch_id"></app-combobox>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row page-footer">
+        <div class="col-sm-12 text-center">
+          <button class="btn btn-sm btn-success" (click)="login()">Login</button>
+          <button class="btn btn-sm btn-success ms-1" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+
+      <div class="row page-error">
+        <div class="col-sm-12 text-center">
+          <label for="" class="text-danger">{{loginError$()}}</label>
+        </div>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
