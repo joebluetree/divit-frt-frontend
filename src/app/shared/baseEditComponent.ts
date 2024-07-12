@@ -3,12 +3,16 @@ import { iMenum } from "../core/models/imenum";
 import { GlobalService } from "../core/services/global.service";
 import { inject } from "@angular/core";
 import { Location } from "@angular/common";
+import { FormGroup } from "@angular/forms";
 
 export abstract class baseEditComponent {
 
   protected route = inject(ActivatedRoute);
   protected location = inject(Location);
   public gs = inject(GlobalService);
+
+  protected mform: FormGroup;
+  protected showModel = true;
 
   protected id = 0;
   protected appid = '';
@@ -52,6 +56,17 @@ export abstract class baseEditComponent {
 
   }
 
+
+  public get url() {
+    return this.gs.url;
+  }
+  getCompanyId() {
+    return this.gs.user.user_company_id;
+  }
+
+  getControl(ctrlName: string) {
+    return this.mform.controls[ctrlName];
+  }
 
   return2Parent() {
     this.location.back();

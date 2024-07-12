@@ -18,7 +18,7 @@ import { baseEditComponent } from '../../../shared/baseEditComponent';
 })
 export class ParamEditComponent extends baseEditComponent {
 
-  mform: FormGroup;
+
   constructor(
     private service: ParamService,
     private fb: FormBuilder,
@@ -63,9 +63,6 @@ export class ParamEditComponent extends baseEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
     if (this.mform.invalid) {

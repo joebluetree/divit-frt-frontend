@@ -14,8 +14,7 @@ import { baseEditComponent } from '../../../shared/baseEditComponent';
 })
 export class CustomerEditComponent extends baseEditComponent {
 
-  showModel = true;
-  mform: FormGroup;
+
 
   filter = { cust_row_type: this.type };
 
@@ -83,9 +82,7 @@ export class CustomerEditComponent extends baseEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
+
 
   save() {
     if (this.mform.invalid) {
@@ -142,12 +139,6 @@ export class CustomerEditComponent extends baseEditComponent {
     }
   }
 
-  public get url() {
-    return this.gs.url;
-  }
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
 
 }
 
