@@ -108,17 +108,14 @@ export abstract class baseService<T> {
     });
   }
 
-  public getRecord(id: number) {
-    const options = {
-      params: {
-        'id': id
-      }
-    };
-    return this.http.get<T>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
+  public getRecord(param: any) {
+    let data = { ...param, ...this.gs.getGlobalConstants() }
+    return this.http.post<T>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), data);
   }
 
   public save(id: number, record: T) {
     const options = {
+      Headers: { ...this.gs.getGlobalConstants() },
       params: {
         'id': id,
         'mode': id == 0 ? "add" : "edit"
@@ -127,16 +124,15 @@ export abstract class baseService<T> {
     return this.http.post<T>(this.gs.getUrl(`${this.baseEndPoint}/SaveAsync`), record, options);
   }
 
-  public delete(id: number) {
+  public delete(data: any) {
     const options = {
-      params: {
-        'id': id
-      }
+      Headers: { ...this.gs.getGlobalConstants() },
+      params: { ...data }
     }
     this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options).subscribe({
       next: (v: any) => {
         if (v.status) {
-          this.RemoveRecord(id);
+          this.RemoveRecord(data.id);
         }
       },
       error: (err: any) => {

@@ -49,7 +49,7 @@ export class AccGroupEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+    this.ms.getRecord({ 'id': this.id }).subscribe({
       next: (rec) => {
         this.mform.setValue({
           grp_id: rec.grp_id,
