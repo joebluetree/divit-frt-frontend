@@ -31,7 +31,7 @@
                 </tr>
               </thead>
               <tbody formArrayName="records">
-                <tr *ngFor="let iRow of formArray.controls; let i=index;" [formGroupName]="i">
+                <tr *ngFor="let iRow of formArray('records').controls; let i=index;" [formGroupName]="i">
                   <td> {{iRow.get('rights_module_name')?.value}}</td>
                   <td> {{iRow.get('rights_menu_name')?.value}}</td>
                   <td> <app-checkbox formControlName="rights_selected"></app-checkbox> </td>

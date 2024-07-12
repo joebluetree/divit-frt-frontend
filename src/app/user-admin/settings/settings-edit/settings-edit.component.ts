@@ -7,6 +7,7 @@ import { SettingsService } from '../../services/settings.service';
 
 import { iSettings } from '../../models/isettings';
 import { CustomControls } from '../../../app.config';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-settings-edit',
@@ -15,38 +16,20 @@ import { CustomControls } from '../../../app.config';
   standalone: true,
   imports: [...CustomControls]
 })
-export class SettingsEditComponent {
-  id = 0;
+export class SettingsEditComponent extends baseEditComponent {
 
-  title = '';
-
-  @Input() appid: string = '';
-  @Input() menuid: string = '';
-  @Input() type: string = '';
+  @Input() sappid: string = '';
+  @Input() smenuid: string = '';
+  @Input() stype: string = '';
   @Input() rec: any = {};
 
   inputType = 'text';
+
   format = "";
-
-  //@Output() output = new EventEmitter<iSettings_Search>();
-
-
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-  showModel = true;
-
 
   code = '';
   name = '';
   value = '';
-
-
 
   table_name = '';
 
@@ -55,14 +38,10 @@ export class SettingsEditComponent {
   display_column2 = '';
 
 
-  mform: FormGroup;
   constructor(
-    private gs: GlobalService,
-    private service: SettingsService,
-    private fb: FormBuilder,
-    private location: Location,
-
+    private ms: SettingsService,
   ) {
+    super();
     this.mform = this.fb.group({
       code: ['',],
       name: ['',],
@@ -72,15 +51,9 @@ export class SettingsEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.menum = this.gs.getUserRights(this.menuid);
-    if (this.menum) {
-      this.title = this.menum.menu_name;
-      this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-      this.bAdd = this.menum.rights_add == "Y" ? true : false;
-      this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-      this.bView = this.menum.rights_view == "Y" ? true : false;
-      this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-    }
+
+    this.init();
+
     const mrec = JSON.parse(this.rec.value.replaceAll("'", '"'));
 
     if (this.rec.type == "INT" || this.rec.type == "NUMBER" || this.rec.type == "STRING") {
@@ -122,38 +95,17 @@ export class SettingsEditComponent {
         value: this.value
       })
     }
-
-
-
   }
 
   callBack(action: { id: string, rec: any }) {
-
 
     this.mform.patchValue({
       value: action.rec ? action.rec[this.value_column] : '',
       code: action.rec ? action.rec[this.display_column2] : '',
       name: action.rec ? action.rec[this.display_column2] : '',
     });
-
-
-
-
   }
 
-
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
-
-  public get url() {
-    return this.gs.url;
-  }
-
-
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
 
@@ -172,7 +124,7 @@ export class SettingsEditComponent {
     //data.rec_company_id = this.gs.user.user_company_id;
     data.rec_edited_by = this.gs.user.user_code;
 
-    this.service.save(data.id, data).subscribe({
+    this.ms.save(data.id, data).subscribe({
       next: (v) => {
         //this.store.dispatch(upsert_row({ record: data, category: data.category }));
       },
@@ -182,10 +134,6 @@ export class SettingsEditComponent {
       complete: () => { }
 
     })
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-branch-edit',
@@ -15,30 +16,12 @@ import { CustomControls } from '../../../app.config';
   standalone: true,
   imports: [...CustomControls]
 })
-export class BranchEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
-
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-  menum: iMenum | null;
-
-  showModel = true;
-  mform: FormGroup;
+export class BranchEditComponent extends baseEditComponent {
 
   constructor(
-    private gs: GlobalService,
-    private service: BranchService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
+    private ms: BranchService
   ) {
+    super();
     this.mform = this.fb.group({
       branch_id: [0],
       branch_code: ['', [Validators.required, Validators.maxLength(20)]],
@@ -51,33 +34,14 @@ export class BranchEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
-
+    this.init();
     this.getRecord();
   }
 
   getRecord() {
     if (this.id <= 0)
       return;
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.mform.setValue({
           branch_id: rec.branch_id,
@@ -96,10 +60,6 @@ export class BranchEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -110,12 +70,14 @@ export class BranchEditComponent {
     if (data.branch_id == null)
       data.branch_id = 0;
 
+    let bAdd = data.branch_id == 0 ? true : false;
+
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iBranchm) => {
         if (data.branch_id == 0) {
           this.id = v.branch_id;
@@ -126,10 +88,8 @@ export class BranchEditComponent {
           };
           this.gs.updateURL(param);
         };
-
-
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
-
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
@@ -137,10 +97,6 @@ export class BranchEditComponent {
       complete: () => { }
 
     })
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

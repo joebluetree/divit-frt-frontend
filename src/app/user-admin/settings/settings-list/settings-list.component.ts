@@ -22,9 +22,9 @@ export class SettingsListComponent extends baseComponent {
   }
 
   deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.grp_name} y/n`))
+    if (!confirm(`Delete ${data.rec.caption} y/n`))
       return;
-    this.ms.delete(data.rec.acc_id)
+    this.ms.delete(data.rec.id)
   }
 
   ngOnInit(): void {
@@ -46,8 +46,6 @@ export class SettingsListComponent extends baseComponent {
     ];
   }
 
-
-
   save() {
     this.ms.ReUpdate(this.type, this.gs.user.user_company_id, this.gs.user.user_branch_id, this.gs.user.user_code).subscribe({
       next: (v) => {
@@ -63,12 +61,10 @@ export class SettingsListComponent extends baseComponent {
 
   changeFormat() {
     this.format = this.format == 'READ' ? 'WRITE' : 'READ';
-    //this.store.dispatch(allActions.update_format({ category: this.type }));
   }
 
   selectRow(rec: any) {
     this.selected_row_id = rec.id;
-    //this.store.dispatch(allActions.update_selected_rowid({ id: rec.id, category: this.type }));
   }
 
 }

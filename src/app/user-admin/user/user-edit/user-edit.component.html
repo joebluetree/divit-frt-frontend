@@ -74,7 +74,7 @@
 
             <tbody formArrayName="userbranches">
 
-              <tr *ngFor="let iRow of formArray.controls; let i=index;" [formGroupName]="i">
+              <tr *ngFor="let iRow of formArray('userbranches').controls; let i=index;" [formGroupName]="i">
                 <td>
                   <app-checkbox formControlName="ub_selected"></app-checkbox>
                 </td>

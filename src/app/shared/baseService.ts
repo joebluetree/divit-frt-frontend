@@ -37,6 +37,14 @@ export abstract class baseService<T> {
     }
   }
 
+  public RemoveRecord(id: number) {
+    const index = this.state.records.findIndex((obj: any) => obj[this.pkid] === id);
+    let rec = this.state.records.find((f: any) => f[this.pkid] == id);
+    if (index !== -1) {
+      this.state.records.splice(index, 1);
+    }
+  }
+
   public updateSearchRecord(_Record: any) {
     this.state.searchRecord = { ..._Record };
   }
@@ -125,7 +133,15 @@ export abstract class baseService<T> {
         'id': id
       }
     }
-    return this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options);
+    this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options).subscribe({
+      next: (v: any) => {
+        if (v.status) {
+          this.RemoveRecord(id);
+        }
+      },
+      error: (err: any) => {
+        this.gs.showAlert([err.error]);
+      }
+    });
   }
 }
-

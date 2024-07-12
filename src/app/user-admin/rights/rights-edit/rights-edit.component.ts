@@ -1,14 +1,9 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RightsService } from '../../services/rights.service';
 import { iRights_header, iRights } from '../../models/irights';
-import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-
 import { iBranchm } from '../../models/ibranchm';
-import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
-import { Location } from '@angular/common';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 
 @Component({
@@ -18,35 +13,12 @@ import { Location } from '@angular/common';
   standalone: true,
   imports: [...CustomControls]
 })
-export class RightsEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
-
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-
-  showModel = true;
-
-  mform: FormGroup;
+export class RightsEditComponent extends baseEditComponent {
 
   constructor(
-    private gs: GlobalService,
-    private service: RightsService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
-
+    private ms: RightsService
   ) {
-
+    super();
     this.mform = this.fb.group({
       id: [0],
       comp_id: [0],
@@ -83,68 +55,38 @@ export class RightsEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
+    this.init();
     this.getRecord();
-  }
-
-
-  get formArray(): FormArray {
-    return this.mform.get("records") as FormArray;
   }
 
 
   getRecord() {
     if (this.id <= 0)
       return;
-
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.loaddata(rec);
       },
       error: (e) => {
         alert(e.message);
-      },
-      complete: () => { }
+      }
     })
   }
 
   loaddata(rec: iRights_header) {
-
     this.mform.patchValue({
       id: rec.id,
       comp_id: rec.comp_id,
       branch_id: rec.branch_id,
       user_id: rec.user_id,
     });
-    this.formArray.clear();
+    this.formArray('records').clear();
     rec.records.forEach(rec => {
-      this.formArray.push(this.addRow(rec));
+      this.formArray('records').push(this.addRow(rec));
     });
   }
 
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
     if (this.mform.invalid) {
@@ -158,14 +100,15 @@ export class RightsEditComponent {
     //data.rec_created_by = this.gs.user.user_code;
 
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (rec: iRights_header) => {
         this.loaddata(rec);
+        /*
         const param = {
           id: this.id.toString()
         };
-        //this.gs.updateURL(param);
-        //this.store.dispatch(rights_upsert_row({ record: rec }));
+        this.gs.updateURL(param);
+        */
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {
@@ -179,21 +122,12 @@ export class RightsEditComponent {
   callBack(action: { id: string, rec: iBranchm }) {
 
     if (action.id == 'rec_branch_name') {
-
       this.mform.patchValue({
         rec_branch_id: action.rec ? action.rec.branch_id : 0,
         rec_branch_name: action.rec ? action.rec.branch_name : '',
       })
 
     }
-  }
-
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

@@ -24,10 +24,8 @@ export class ParamListComponent extends baseComponent {
   }
   ngOnInit(): void {
 
-    this.init(); this.ms.init(this.menuid, this.type);
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
+    this.init();
+    this.ms.init(this.menuid, this.type);
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [

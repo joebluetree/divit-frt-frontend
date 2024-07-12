@@ -1,12 +1,10 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
+import { Validators } from '@angular/forms';
 import { iMenum } from '../../models/imenum';
 import { iModulem } from '../../models/imodulem';
 import { CustomControls } from '../../../app.config';
 import { MenuService } from '../../services/menu.service';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-menu-edit',
@@ -15,30 +13,12 @@ import { MenuService } from '../../services/menu.service';
   standalone: true,
   imports: [...CustomControls]
 })
-export class MenuEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
+export class MenuEditComponent extends baseEditComponent {
 
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-  showModel = true;
-  mform: FormGroup;
   constructor(
-    private gs: GlobalService,
-    private service: MenuService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
+    private ms: MenuService,
   ) {
+    super();
     this.mform = this.fb.group({
       menu_id: [0],
       menu_code: ['', [Validators.required, Validators.maxLength(20)]],
@@ -52,37 +32,16 @@ export class MenuEditComponent {
     })
   }
 
-  public get url() {
-    return this.gs.url;
-  }
-
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-
-    })
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
+    this.init();
     this.getRecord();
   }
 
   getRecord() {
     if (this.id <= 0)
       return;
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.mform.setValue({
           menu_id: rec.menu_id,
@@ -103,9 +62,6 @@ export class MenuEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
     if (this.mform.invalid) {
@@ -117,10 +73,12 @@ export class MenuEditComponent {
     if (data.menu_id == null)
       data.menu_id = 0;
 
+    let bAdd = data.menu_id == 0 ? true : false;
+
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iMenum) => {
         if (data.menu_id == 0) {
           this.id = v.menu_id;
@@ -131,6 +89,7 @@ export class MenuEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {
@@ -149,14 +108,6 @@ export class MenuEditComponent {
         menu_module_name: action.rec ? action.rec.module_name : '',
       })
     }
-  }
-
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

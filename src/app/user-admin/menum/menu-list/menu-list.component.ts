@@ -42,9 +42,9 @@ export class MenuListComponent extends baseComponent {
   }
 
   deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.acc_name} y/n`))
+    if (!confirm(`Delete ${data.rec.menu_name} y/n`))
       return;
-    this.ms.delete(data.rec.acc_id)
+    this.ms.delete(data.rec.menu_id)
   }
 
 }

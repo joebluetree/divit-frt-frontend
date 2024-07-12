@@ -1,13 +1,10 @@
-import { Location, NgIf, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { AcctmService } from '../../services/acctm.service';
 import { iAcctm } from '../../models/iacctm';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
 import { CustomControls } from '../../../app.config';
-import { iMenum } from '../../../core/models/imenum';
 import { iAccGroupm } from '../../models/iaccgroupm';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-acctm-edit',
@@ -16,23 +13,8 @@ import { iAccGroupm } from '../../models/iaccgroupm';
   standalone: true,
   imports: [...CustomControls]
 })
-export class AcctmEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
+export class AcctmEditComponent extends baseEditComponent {
 
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-  showModel = true;
-  mform: FormGroup;
 
   filter = { acc_row_type: this.type };
 
@@ -45,13 +27,9 @@ export class AcctmEditComponent {
 
 
   constructor(
-    private gs: GlobalService,
-    private service: AcctmService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
-
+    private ms: AcctmService,
   ) {
+    super();
     this.mform = this.fb.group({
       acc_id: [0],
       acc_code: ['', [Validators.required, Validators.maxLength(15)]],
@@ -68,25 +46,7 @@ export class AcctmEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
+    this.init();
     this.getRecord();
   }
 
@@ -94,7 +54,7 @@ export class AcctmEditComponent {
     if (this.id <= 0) {
       return;
     }
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         console.log(rec);
         this.mform.setValue({
@@ -117,10 +77,6 @@ export class AcctmEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -131,13 +87,15 @@ export class AcctmEditComponent {
     if (data.acc_id == null)
       data.acc_id = 0;
 
+    let bAdd = data.acc_id == 0 ? true : false;
+
     data.acc_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iAcctm) => {
         if (data.acc_id == 0) {
           this.id = v.acc_id;
@@ -148,10 +106,8 @@ export class AcctmEditComponent {
           };
           this.gs.updateURL(param);
         };
-        //this.store.dispatch(upsert_row({ record: v, row_type: this.type }));
-
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
-
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
@@ -190,18 +146,6 @@ export class AcctmEditComponent {
     }
   }
 
-  public get url() {
-    return this.gs.url;
-  }
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
-
-
-
-  return2Parent() {
-    this.location.back();
-  }
 
 }
 

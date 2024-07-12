@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { CustomermService } from '../../services/customerm.service';
 import { iCustomerm } from '../../models/icustomerm';
 import { CustomControls } from '../../../app.config';
@@ -14,8 +14,6 @@ import { baseEditComponent } from '../../../shared/baseEditComponent';
 })
 export class CustomerEditComponent extends baseEditComponent {
 
-
-
   filter = { cust_row_type: this.type };
 
   dataList = [
@@ -25,8 +23,7 @@ export class CustomerEditComponent extends baseEditComponent {
   ]
 
   constructor(
-    private service: CustomermService,
-    private fb: FormBuilder,
+    private ms: CustomermService,
   ) {
     super();
     this.mform = this.fb.group({
@@ -57,7 +54,7 @@ export class CustomerEditComponent extends baseEditComponent {
     if (this.id <= 0) {
       return;
     }
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         console.log(rec);
         this.mform.setValue({
@@ -77,8 +74,7 @@ export class CustomerEditComponent extends baseEditComponent {
       },
       error: (e) => {
         alert(e.message);
-      },
-      complete: () => { }
+      }
     })
   }
 
@@ -94,13 +90,14 @@ export class CustomerEditComponent extends baseEditComponent {
     if (data.cust_id == null)
       data.cust_id = 0;
 
+    let bAdd = data.cust_id == 0 ? true : false;
+
     data.cust_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iCustomerm) => {
         if (data.cust_id == 0) {
           this.id = v.cust_id;
@@ -111,15 +108,12 @@ export class CustomerEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
-        // this.store.dispatch(upsert_row({ record: v, row_type: this.type }));
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
-
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
-      },
-      complete: () => { }
-
+      }
     })
   }
 

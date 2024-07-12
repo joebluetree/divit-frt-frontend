@@ -35,13 +35,12 @@ export class ModuleListComponent extends baseComponent {
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
 
-
   }
 
   deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.acc_name} y/n`))
+    if (!confirm(`Delete ${data.rec.module_name} y/n`))
       return;
-    this.ms.delete(data.rec.acc_id)
+    this.ms.delete(data.rec.module_id)
   }
 
 

@@ -3,13 +3,15 @@ import { iMenum } from "../core/models/imenum";
 import { GlobalService } from "../core/services/global.service";
 import { inject } from "@angular/core";
 import { Location } from "@angular/common";
-import { FormGroup } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 
 export abstract class baseEditComponent {
 
   protected route = inject(ActivatedRoute);
   protected location = inject(Location);
   public gs = inject(GlobalService);
+
+  protected fb = inject(FormBuilder);
 
   protected mform: FormGroup;
   protected showModel = true;
@@ -56,6 +58,9 @@ export abstract class baseEditComponent {
 
   }
 
+  public formArray(sName: string): FormArray {
+    return this.mform.get(sName) as FormArray;
+  }
 
   public get url() {
     return this.gs.url;

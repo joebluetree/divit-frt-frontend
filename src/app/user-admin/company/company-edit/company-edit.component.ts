@@ -8,6 +8,7 @@ import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-company-edit',
@@ -16,31 +17,13 @@ import { Location } from '@angular/common';
   standalone: true,
   imports: [...CustomControls]
 })
-export class CompanyEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
+export class CompanyEditComponent extends baseEditComponent {
 
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-  showModel = true;
-  mform: FormGroup;
 
   constructor(
-    private gs: GlobalService,
-    private service: CompanyService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
+    private ms: CompanyService,
   ) {
+    super();
     this.mform = this.fb.group({
       comp_id: [0],
       comp_code: ['', [Validators.required, Validators.maxLength(20)]],
@@ -53,32 +36,14 @@ export class CompanyEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
+    this.init();
     this.getRecord();
   }
 
   getRecord() {
     if (this.id <= 0)
       return;
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.mform.setValue({
           comp_id: rec.comp_id,
@@ -97,10 +62,6 @@ export class CompanyEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -111,12 +72,12 @@ export class CompanyEditComponent {
     if (data.comp_id == null)
       data.comp_id = 0;
 
+    let bAdd = data.comp_id == 0 ? true : false;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iCompanym) => {
         if (data.comp_id == 0) {
           this.id = v.comp_id;
@@ -127,8 +88,8 @@ export class CompanyEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
-
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
@@ -136,10 +97,6 @@ export class CompanyEditComponent {
       complete: () => { }
 
     })
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

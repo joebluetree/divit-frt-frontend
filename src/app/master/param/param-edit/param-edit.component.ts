@@ -1,11 +1,7 @@
-import { Location, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { iParam } from '../../models/iparam';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
 import { CustomControls } from '../../../app.config';
-import { iMenum } from '../../../core/models/imenum';
 import { ParamService } from '../../services/param.service';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
 
@@ -18,15 +14,12 @@ import { baseEditComponent } from '../../../shared/baseEditComponent';
 })
 export class ParamEditComponent extends baseEditComponent {
 
-
   constructor(
-    private service: ParamService,
-    private fb: FormBuilder,
+    private ms: ParamService
   ) {
     super();
     this.buildForm();
   }
-
 
   buildForm() {
     this.mform = this.fb.group({
@@ -40,14 +33,13 @@ export class ParamEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-
     this.getRecord();
   }
 
   getRecord() {
     if (this.id <= 0)
       return;
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.mform.setValue({
           param_id: rec.param_id,
@@ -58,11 +50,9 @@ export class ParamEditComponent extends baseEditComponent {
       },
       error: (e) => {
         alert(e.message);
-      },
-      complete: () => { }
+      }
     })
   }
-
 
   save() {
     if (this.mform.invalid) {
@@ -75,10 +65,13 @@ export class ParamEditComponent extends baseEditComponent {
     if (data.param_id == null)
       data.param_id = 0;
 
+    let bAdd = data.param_id == 0 ? true : false;
+
+
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iParam) => {
         if (data.param_id == 0) {
           this.id = v.param_id;
@@ -89,10 +82,8 @@ export class ParamEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
-        //this.store.dispatch(upsert_row({ record: v, param_type: this.type }));
-
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
-
       },
       error: (e) => {
         this.gs.showAlert([e.error]);

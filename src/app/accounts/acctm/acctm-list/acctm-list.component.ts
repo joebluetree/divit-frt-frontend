@@ -41,6 +41,6 @@ export class AcctmListComponent extends baseComponent {
   deleteRecord(data: any) {
     if (!confirm(`Delete ${data.rec.acc_name} y/n`))
       return;
-    this.ms.delete(data.rec.acc_id)
+    this.ms.delete(data.rec.acc_id);
   }
 }

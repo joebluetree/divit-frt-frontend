@@ -1,15 +1,11 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { iUserm } from '../../models/iuserm';
-import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-
 import { iBranchm } from '../../models/ibranchm';
 import { iUserBranches } from '../../models/iuserbranches';
-import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
   selector: 'app-user-edit',
@@ -18,36 +14,12 @@ import { CustomControls } from '../../../app.config';
   standalone: true,
   imports: [...CustomControls]
 })
-export class UserEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
+export class UserEditComponent extends baseEditComponent {
 
-  menum: iMenum | null;
-
-
-
-
-  showModel = true;
-
-  mform: FormGroup;
-  //theFormArray: any;
   constructor(
-    private gs: GlobalService,
-    private service: UserService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
-
+    private ms: UserService,
   ) {
-    //this.theFormArray = new FormArray([]);
+    super();
     this.mform = this.fb.group({
       user_id: [0],
       user_code: ['', [Validators.required, Validators.maxLength(20)]],
@@ -71,42 +43,17 @@ export class UserEditComponent {
     })
   }
 
-
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
+    this.init();
     this.getRecord();
   }
-
-  get formArray(): FormArray {
-    return this.mform.get("userbranches") as FormArray;
-  }
-
 
   getRecord() {
     if (this.id <= 0)
       return;
 
-    this.service.getRecordCompanyWise(this.gs.user.user_company_id, this.id).subscribe({
+    this.ms.getRecordCompanyWise(this.gs.user.user_company_id, this.id).subscribe({
       next: (rec: any) => {
 
         this.mform.patchValue({
@@ -120,7 +67,7 @@ export class UserEditComponent {
           rec_branch_name: rec.rec_branch_name,
         });
         rec.userbranches.forEach((rec: any) => {
-          this.formArray.push(this.addRow(rec))
+          this.formArray('userbranches').push(this.addRow(rec))
         });
 
       },
@@ -131,9 +78,6 @@ export class UserEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
     if (this.mform.invalid) {
@@ -145,37 +89,34 @@ export class UserEditComponent {
     if (data.user_id == null)
       data.user_id = 0;
 
+    let bAdd = data.user_id == 0 ? true : false;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
 
-    this.service.save(this.id, data).subscribe({
-      next: (rec: iUserm) => {
+    this.ms.save(this.id, data).subscribe({
+      next: (v: iUserm) => {
         if (data.user_id == 0) {
-          this.id = rec.user_id;
+          this.id = v.user_id;
           data.user_id = this.id;
           this.mform.patchValue({ user_id: this.id });
 
-          this.formArray.clear();
-          rec.userbranches.forEach(rec => {
-            this.formArray.push(this.addRow(rec))
+          this.formArray('userbranches').clear();
+          v.userbranches.forEach(rec => {
+            this.formArray('userbranches').push(this.addRow(rec))
           });
-
           const param = {
             id: this.id.toString()
           };
-
           this.gs.updateURL(param);
-
         };
+        this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
-      },
-      complete: () => { }
-
+      }
     })
   }
 
@@ -186,16 +127,6 @@ export class UserEditComponent {
         rec_branch_name: action.rec ? action.rec.branch_name : '',
       })
     }
-  }
-  public get url() {
-    return this.gs.url;
-  }
-  getCompanyId() {
-    return this.gs.user.user_company_id;
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }

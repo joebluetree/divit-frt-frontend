@@ -7,6 +7,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { GlobalService } from '../../../core/services/global.service';
 import { CustomControls } from '../../../app.config';
 import { iMenum } from '../../../core/models/imenum';
+import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 
 @Component({
@@ -16,23 +17,7 @@ import { iMenum } from '../../../core/models/imenum';
   standalone: true,
   imports: [...CustomControls]
 })
-export class AccGroupEditComponent {
-  id = 0;
-  appid = '';
-  menuid = '';
-  title = '';
-  type = '';
-
-  bAdmin = false;
-  bAdd = false;
-  bEdit = false;
-  bView = false;
-  bDelete = false;
-
-  menum: iMenum | null;
-
-  showModel = true;
-  mform: FormGroup;
+export class AccGroupEditComponent extends baseEditComponent {
 
   dataList = [
     { key: 'DIRECT INCOME', value: 'DIRECT INCOME' },
@@ -44,13 +29,9 @@ export class AccGroupEditComponent {
   ]
 
   constructor(
-    private gs: GlobalService,
-    private ms: AccGroupService,
-    private service: AccGroupService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private location: Location,
+    private ms: AccGroupService
   ) {
+    super();
     this.mform = this.fb.group({
       grp_id: [0],
       grp_name: ['', [Validators.required, Validators.maxLength(100)]],
@@ -61,32 +42,14 @@ export class AccGroupEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.route.queryParams.forEach(rec => {
-      this.appid = rec["appid"];
-      this.id = +rec["id"];
-      this.menuid = rec["menuid"];
-      this.type = rec["type"];
-      this.menum = this.gs.getUserRights(this.menuid);
-      if (this.menum) {
-        this.title = this.menum.menu_name;
-        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
-        this.bAdd = this.menum.rights_add == "Y" ? true : false;
-        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
-        this.bView = this.menum.rights_view == "Y" ? true : false;
-        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
-      }
-    })
-
-    if (!this.gs.IsValidAppId(this.appid))
-      return;
-
+    this.init();
     this.getRecord();
   }
 
   getRecord() {
     if (this.id <= 0)
       return;
-    this.service.getRecord(this.id).subscribe({
+    this.ms.getRecord(this.id).subscribe({
       next: (rec) => {
         this.mform.setValue({
           grp_id: rec.grp_id,
@@ -102,9 +65,6 @@ export class AccGroupEditComponent {
     })
   }
 
-  getControl(ctrlName: string) {
-    return this.mform.controls[ctrlName];
-  }
 
   save() {
 
@@ -122,7 +82,7 @@ export class AccGroupEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.service.save(this.id, data).subscribe({
+    this.ms.save(this.id, data).subscribe({
       next: (v: iAccGroupm) => {
         if (data.grp_id == 0) {
           this.id = v.grp_id;
@@ -134,7 +94,6 @@ export class AccGroupEditComponent {
           this.gs.updateURL(param);
         };
         this.ms.UpdateList(v, bAdd);
-
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {
@@ -143,10 +102,6 @@ export class AccGroupEditComponent {
       complete: () => { }
 
     })
-  }
-
-  return2Parent() {
-    this.location.back();
   }
 
 }
