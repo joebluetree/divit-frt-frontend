@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { iMenum } from '../models/imenum';
 
 import ShortUniqueId from 'short-unique-id';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -217,6 +218,21 @@ export class GlobalService {
       global_user_branch_id: this.user.user_branch_id,
     };
   }
+
+
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'global_user_id': this.user.user_id.toString(),
+      'global_user_code': this.user.user_code,
+      'global_user_name': this.user.user_name,
+      'global_user_email': this.user.user_email,
+      'global_user_company_id': this.user.user_company_id.toString(),
+      'global_user_branch_id': this.user.user_branch_id.toString(),
+    });
+
+  }
+
+
 
 
   public readAuthState() {

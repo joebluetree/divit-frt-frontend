@@ -7,7 +7,7 @@ import { baseService } from '../../shared/baseService';
 export class CompanyService extends baseService<iCompanym> {
 
   constructor() {
-    super('comp_id', '/api/company');
+    super('comp_id', 'company_name', '/api/company');
   }
 
   setInitialState() {

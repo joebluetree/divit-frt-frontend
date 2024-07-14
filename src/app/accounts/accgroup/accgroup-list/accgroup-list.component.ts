@@ -17,11 +17,7 @@ export class AccGroupListComponent extends baseComponent {
     super(ms);
   }
 
-  deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.grp_name} y/n`))
-      return;
-    this.ms.delete({ 'id': data.rec.acc_id });
-  }
+
 
   ngOnInit(): void {
 

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class UserService extends baseService<iUserm> {
 
   constructor() {
-    super('user_id', '/api/user');
+    super('user_id', 'user_name', '/api/user');
   }
   setInitialState() {
     return <iUserModel>{

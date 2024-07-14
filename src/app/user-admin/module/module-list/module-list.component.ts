@@ -37,11 +37,7 @@ export class ModuleListComponent extends baseComponent {
 
   }
 
-  deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.module_name} y/n`))
-      return;
-    this.ms.delete(data.rec.module_id)
-  }
+
 
 
 }

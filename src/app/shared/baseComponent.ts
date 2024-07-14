@@ -25,7 +25,6 @@ export abstract class baseComponent {
 
   protected table_data: any[] = [];
 
-  protected abstract deleteRecord(data: any): any;
 
 
   constructor(protected _ms: any) {
@@ -78,6 +77,11 @@ export abstract class baseComponent {
     if (data.action == 'DELETE') {
       this.deleteRecord(data);
     }
+  }
+
+  deleteRecord(data: any) {
+
+    this._ms.delete(data);
   }
 
   return2Parent() {

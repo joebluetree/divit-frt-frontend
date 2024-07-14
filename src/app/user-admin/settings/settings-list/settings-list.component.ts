@@ -21,11 +21,7 @@ export class SettingsListComponent extends baseComponent {
     super(ms);
   }
 
-  deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.caption} y/n`))
-      return;
-    this.ms.delete(data.rec.id)
-  }
+
 
   ngOnInit(): void {
 

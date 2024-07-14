@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { EMPTY } from 'rxjs';
+import { EMPTY, map } from 'rxjs';
 
 import {
   HttpRequest,
@@ -39,9 +39,10 @@ export class httpInterceptor implements HttpInterceptor {
     let _request: HttpRequest<unknown>;
 
 
+
     if (token != '') {
       _headers = request.headers;
-      _headers = _headers.append('Authorization', 'bearer ' + token)
+      _headers = _headers.append('Authorization', 'bearer ' + token);
     }
 
     let isAllowAnonymous = this.anonymousApis.reduce((acc, value) => {
@@ -67,6 +68,8 @@ export class httpInterceptor implements HttpInterceptor {
       _request = request.clone({
         headers: _headers
       });
+
+
     }
 
     this.totalRequest++;

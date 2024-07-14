@@ -7,7 +7,7 @@ import { baseService } from '../../shared/baseService';
 export class MenuService extends baseService<iMenum> {
 
   constructor() {
-    super('menu_id', '/api/menu');
+    super('menu_id', 'menu_name', '/api/menu');
   }
   setInitialState() {
     return <iMenuModel>{

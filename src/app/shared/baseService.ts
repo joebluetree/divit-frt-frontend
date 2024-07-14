@@ -1,6 +1,7 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { GlobalService } from "../core/services/global.service";
+
 
 export abstract class baseService<T> {
 
@@ -13,6 +14,7 @@ export abstract class baseService<T> {
 
   constructor(
     protected pkid: string,
+    protected name: string,
     protected baseEndPoint: string,
   ) {
   }
@@ -92,7 +94,10 @@ export abstract class baseService<T> {
 
   public getList(action: string) {
     let data = { menu_id: this.screen_id, action: action, ...this.state.searchRecord, ...this.state.pageRecord, ...this.gs.getGlobalConstants() };
-    this.http.post<any>(this.gs.getUrl(`${this.baseEndPoint}/GetListAsync`), data).subscribe({
+    const options = {
+      headers: this.gs.getHeaders(),
+    };
+    this.http.post<any>(this.gs.getUrl(`${this.baseEndPoint}/GetListAsync`), data, options).subscribe({
       next: (v: any) => {
         this.state.errorMessage = '';
         this.state.records = v.records;
@@ -108,14 +113,19 @@ export abstract class baseService<T> {
     });
   }
 
-  public getRecord(param: any) {
-    let data = { ...param, ...this.gs.getGlobalConstants() }
-    return this.http.post<T>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), data);
+  public getRecord(data: any) {
+    const options = {
+      headers: this.gs.getHeaders(),
+      params: { ...data }
+    };
+    console.log(options);
+    return this.http.get<T>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
+
   }
 
   public save(id: number, record: T) {
     const options = {
-      Headers: { ...this.gs.getGlobalConstants() },
+      headers: this.gs.getHeaders(),
       params: {
         'id': id,
         'mode': id == 0 ? "add" : "edit"
@@ -125,8 +135,14 @@ export abstract class baseService<T> {
   }
 
   public delete(data: any) {
+    if (!confirm(`Delete ${data.rec[this.name]} y/n`))
+      return;
+    this.deleteRecord(data);
+  }
+
+  public deleteRecord(data: any) {
     const options = {
-      Headers: { ...this.gs.getGlobalConstants() },
+      headers: this.gs.getHeaders(),
       params: { ...data }
     }
     this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options).subscribe({
@@ -140,4 +156,5 @@ export abstract class baseService<T> {
       }
     });
   }
+
 }

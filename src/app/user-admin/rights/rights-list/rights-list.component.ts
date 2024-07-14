@@ -17,11 +17,6 @@ export class RightsListComponent extends baseComponent {
     super(ms);
   }
 
-  deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.user_name} y/n`))
-      return;
-    this.ms.delete(data.rec.ub_id);
-  }
 
   ngOnInit(): void {
 

@@ -7,7 +7,7 @@ import { baseService } from '../../shared/baseService';
 export class SettingsService extends baseService<iSettings> {
 
   constructor() {
-    super('settings_id', '/api/settings');
+    super('settings_id', 'settings_id', '/api/settings');
   }
   setInitialState() {
     return <iSettingsModel>{

@@ -37,11 +37,5 @@ export class CustomerListComponent extends baseComponent {
     ];
   }
 
-  deleteRecord(data: any) {
-    if (!confirm(`Delete ${data.rec.cust_name} y/n`))
-      return;
-    this.ms.delete(data.rec.cust_id);
-  }
-
 
 }

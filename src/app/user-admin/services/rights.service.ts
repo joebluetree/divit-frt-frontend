@@ -7,7 +7,7 @@ import { baseService } from '../../shared/baseService';
 export class RightsService extends baseService<iRights_header> {
 
   constructor() {
-    super('rights_id', '/api/rights');
+    super('rights_id', 'user_name', '/api/rights');
   }
   setInitialState() {
     return <iRightsModel>{

@@ -10,7 +10,7 @@ import { iAcctmModel } from '../models/iacctm';
 export class AccGroupService extends baseService<iAccGroupm> {
 
   constructor() {
-    super('grp_id', '/api/accounts/accgroup');
+    super('grp_id', 'grp_name', '/api/accounts/accgroup');
   }
 
   setInitialState() {
