@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { CompanyService } from '../../services/company.service';
 import { iCompanym } from '../../models/icompanym';
-import { GlobalService } from '../../../core/services/global.service';
-
-import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
 
 @Component({
@@ -18,7 +13,6 @@ import { baseEditComponent } from '../../../shared/baseEditComponent';
   imports: [...CustomControls]
 })
 export class CompanyEditComponent extends baseEditComponent {
-
 
   constructor(
     private ms: CompanyService,
@@ -43,7 +37,8 @@ export class CompanyEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.mform.setValue({
           comp_id: rec.comp_id,
@@ -77,7 +72,11 @@ export class CompanyEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.comp_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iCompanym) => {
         if (data.comp_id == 0) {
           this.id = v.comp_id;

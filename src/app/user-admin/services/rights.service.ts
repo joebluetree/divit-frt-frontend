@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { iRights, iRights_header, iRights_Search, iRightsModel } from '../models/irights';
+import { iRights_header, iRights_Search, iRightsModel } from '../models/irights';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })

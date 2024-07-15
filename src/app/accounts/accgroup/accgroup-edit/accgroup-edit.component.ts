@@ -1,14 +1,9 @@
-import { Location, NgIf, JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { AccGroupService } from '../../services/accgroupm.service';
 import { iAccGroupm } from '../../models/iaccgroupm';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
 import { CustomControls } from '../../../app.config';
-import { iMenum } from '../../../core/models/imenum';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
-
 
 @Component({
   selector: 'app-accgroup-edit',
@@ -49,7 +44,8 @@ export class AccGroupEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord({ 'id': this.id }).subscribe({
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.mform.setValue({
           grp_id: rec.grp_id,
@@ -82,7 +78,11 @@ export class AccGroupEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.grp_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iAccGroupm) => {
         if (data.grp_id == 0) {
           this.id = v.grp_id;
@@ -100,7 +100,6 @@ export class AccGroupEditComponent extends baseEditComponent {
         this.gs.showAlert([e.error]);
       },
       complete: () => { }
-
     })
   }
 

@@ -21,13 +21,12 @@ export class SettingsListComponent extends baseComponent {
     super(ms);
   }
 
-
-
   ngOnInit(): void {
 
     this.init();
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
+
     this.table_data = [
       { col_name: "id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "caption", col_caption: "CAPTION", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

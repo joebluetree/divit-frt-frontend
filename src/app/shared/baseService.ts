@@ -123,13 +123,10 @@ export abstract class baseService<T> {
 
   }
 
-  public save(id: number, record: T) {
+  public save(param: any, record: T) {
     const options = {
       headers: this.gs.getHeaders(),
-      params: {
-        'id': id,
-        'mode': id == 0 ? "add" : "edit"
-      }
+      params: { ...param }
     }
     return this.http.post<T>(this.gs.getUrl(`${this.baseEndPoint}/SaveAsync`), record, options);
   }
@@ -137,7 +134,7 @@ export abstract class baseService<T> {
   public delete(data: any) {
     if (!confirm(`Delete ${data.rec[this.name]} y/n`))
       return;
-    this.deleteRecord(data);
+    this.deleteRecord({ 'id': data.rec[this.pkid] });
   }
 
   public deleteRecord(data: any) {

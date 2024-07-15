@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { ModuleService } from '../../services/module.service';
 import { iModulem } from '../../models/imodulem';
 import { CustomControls } from '../../../app.config';
@@ -35,7 +35,8 @@ export class ModuleEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.mform.setValue({
           module_id: rec.module_id,
@@ -69,7 +70,11 @@ export class ModuleEditComponent extends baseEditComponent {
     data.rec_created_by = this.gs.user.user_code;
 
 
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.module_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iModulem) => {
         if (data.module_id == 0) {
           this.id = v.module_id;

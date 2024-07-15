@@ -1,11 +1,7 @@
-import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { BranchService } from '../../services/branch.service';
 import { iBranchm } from '../../models/ibranchm';
-import { ActivatedRoute } from '@angular/router';
-import { GlobalService } from '../../../core/services/global.service';
-import { iMenum } from '../../models/imenum';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
 
@@ -41,7 +37,8 @@ export class BranchEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.mform.setValue({
           branch_id: rec.branch_id,
@@ -76,8 +73,11 @@ export class BranchEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.branch_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iBranchm) => {
         if (data.branch_id == 0) {
           this.id = v.branch_id;

@@ -39,7 +39,9 @@ export class ParamEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.mform.setValue({
           param_id: rec.param_id,
@@ -71,7 +73,11 @@ export class ParamEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.param_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iParam) => {
         if (data.param_id == 0) {
           this.id = v.param_id;

@@ -21,4 +21,5 @@ export class AcctmService extends baseService<iAcctm> {
       sort_order: ''
     };
   }
+
 }

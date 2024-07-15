@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { iAccGroupm, iAccGroupm_Search, iAccGroupmModel } from '../models/iaccgroupm';
-import { GlobalService } from '../../core/services/global.service';
 import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
-import { iAcctmModel } from '../models/iacctm';
 
 @Injectable({ providedIn: 'root' })
 export class AccGroupService extends baseService<iAccGroupm> {

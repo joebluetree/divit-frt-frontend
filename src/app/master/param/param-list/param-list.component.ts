@@ -25,9 +25,9 @@ export class ParamListComponent extends baseComponent {
   ngOnInit(): void {
 
     this.init();
-    this.ms.init(this.menuid, this.type);
 
     const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
+
     this.table_data = [
       { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

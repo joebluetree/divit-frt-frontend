@@ -54,7 +54,9 @@ export class AcctmEditComponent extends baseEditComponent {
     if (this.id <= 0) {
       return;
     }
-    this.ms.getRecord(this.id).subscribe({
+
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         console.log(rec);
         this.mform.setValue({
@@ -94,8 +96,11 @@ export class AcctmEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.acc_id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iAcctm) => {
         if (data.acc_id == 0) {
           this.id = v.acc_id;
@@ -113,7 +118,6 @@ export class AcctmEditComponent extends baseEditComponent {
         this.gs.showAlert([e.error]);
       },
       complete: () => { }
-
     })
   }
 

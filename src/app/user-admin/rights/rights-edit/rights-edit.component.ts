@@ -63,7 +63,8 @@ export class RightsEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
-    this.ms.getRecord(this.id).subscribe({
+    const param = { 'id': this.id };
+    this.ms.getRecord(param).subscribe({
       next: (rec) => {
         this.loaddata(rec);
       },
@@ -99,8 +100,11 @@ export class RightsEditComponent extends baseEditComponent {
     //data.rec_company_id = this.gs.user.user_company_id;
     //data.rec_created_by = this.gs.user.user_code;
 
-
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': data.id,
+      'mode': 'edit'
+    }
+    this.ms.save(param, data).subscribe({
       next: (rec: iRights_header) => {
         this.loaddata(rec);
         /*

@@ -1,10 +1,5 @@
-import { Location, NgIf } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GlobalService } from '../../../core/services/global.service';
-import { iMenum } from '../../models/imenum';
+import { Component, Input } from '@angular/core';
 import { SettingsService } from '../../services/settings.service';
-
 import { iSettings } from '../../models/isettings';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
@@ -124,7 +119,11 @@ export class SettingsEditComponent extends baseEditComponent {
     //data.rec_company_id = this.gs.user.user_company_id;
     data.rec_edited_by = this.gs.user.user_code;
 
-    this.ms.save(data.id, data).subscribe({
+    const param = {
+      'id': data.id,
+      'mode': "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v) => {
         //this.store.dispatch(upsert_row({ record: data, category: data.category }));
       },

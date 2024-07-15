@@ -52,10 +52,13 @@ export class UserEditComponent extends baseEditComponent {
   getRecord() {
     if (this.id <= 0)
       return;
+    const param = {
+      'comp_id': this.gs.user.user_company_id,
+      'id': this.id
+    }
 
-    this.ms.getRecordCompanyWise(this.gs.user.user_company_id, this.id).subscribe({
+    this.ms.getRecord(param).subscribe({
       next: (rec: any) => {
-
         this.mform.patchValue({
           user_id: rec.user_id,
           user_code: rec.user_code,
@@ -69,7 +72,6 @@ export class UserEditComponent extends baseEditComponent {
         rec.userbranches.forEach((rec: any) => {
           this.formArray('userbranches').push(this.addRow(rec))
         });
-
       },
       error: (e) => {
         alert(e.message);
@@ -94,8 +96,11 @@ export class UserEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-
-    this.ms.save(this.id, data).subscribe({
+    const param = {
+      'id': this.id,
+      'mode': bAdd ? "add" : "edit"
+    }
+    this.ms.save(param, data).subscribe({
       next: (v: iUserm) => {
         if (data.user_id == 0) {
           this.id = v.user_id;
