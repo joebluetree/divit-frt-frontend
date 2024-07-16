@@ -10,7 +10,7 @@ export interface iMenum {
   menu_param: string;
   menu_visible: string;
   menu_order: number;
-
+  rowversion: string;
   rights_selected: string;
   rights_company: string;
   rights_admin: string;

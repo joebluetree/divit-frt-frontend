@@ -41,6 +41,7 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_row_type: [this.type],
       cust_parent_id: [null],
       cust_parent_name: [''],
+      rowversion: [''],
     })
   }
 
@@ -56,7 +57,7 @@ export class CustomerEditComponent extends baseEditComponent {
     }
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iCustomerm) => {
         console.log(rec);
         this.mform.setValue({
           cust_id: rec.cust_id,
@@ -71,6 +72,8 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_row_type: rec.cust_row_type,
           cust_parent_id: rec.cust_parent_id,
           cust_parent_name: rec.cust_parent_name,
+          rowversion: rec.rowversion,
+
         });
       },
       error: (e) => {
@@ -113,6 +116,9 @@ export class CustomerEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

@@ -14,7 +14,7 @@ export interface iCustomerm {
   cust_is_parent: string;
   cust_parent_id: number;
   cust_parent_name: string;
-
+  rowversion: string;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

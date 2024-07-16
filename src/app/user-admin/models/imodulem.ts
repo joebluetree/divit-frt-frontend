@@ -6,6 +6,7 @@ export interface iModulem {
   module_name: string;
   module_is_installed: string;
   module_order: number;
+  rowversion: string;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

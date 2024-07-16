@@ -8,6 +8,7 @@ export interface iUserm {
   user_password: string;
   user_email: string;
   user_is_admin: string;
+  rowversion: string;
   rec_company_id: number;
   rec_branch_id: number;
   rec_branch_name: string;
@@ -16,6 +17,7 @@ export interface iUserm {
   rec_edited_by: string;
   rec_edited_date: string;
   userbranches: iUserBranches[];
+
 }
 
 export interface iUser_Search {

@@ -25,6 +25,7 @@ export class CompanyEditComponent extends baseEditComponent {
       comp_address1: ['', [Validators.required, Validators.maxLength(100)]],
       comp_address2: ['', [Validators.required, Validators.maxLength(100)]],
       comp_address3: ['', [Validators.required, Validators.maxLength(100)]],
+      rowversion: [''],
     })
   }
 
@@ -47,6 +48,7 @@ export class CompanyEditComponent extends baseEditComponent {
           comp_address1: rec.comp_address1,
           comp_address2: rec.comp_address2,
           comp_address3: rec.comp_address3,
+          rowversion: rec.rowversion,
 
         })
       },
@@ -87,6 +89,9 @@ export class CompanyEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

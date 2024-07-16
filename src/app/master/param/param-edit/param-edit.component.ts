@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { iParam } from '../../models/iparam';
+import { iParam, iParamModel } from '../../models/iparam';
 import { CustomControls } from '../../../app.config';
 import { ParamService } from '../../services/param.service';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
@@ -27,6 +27,7 @@ export class ParamEditComponent extends baseEditComponent {
       param_code: ['', [Validators.required, Validators.maxLength(60)]],
       param_name: ['', [Validators.required, Validators.maxLength(60)]],
       param_order: ['', [Validators.required, Validators.minLength(1)]],
+      rowversion: [''],
     })
   }
 
@@ -42,12 +43,13 @@ export class ParamEditComponent extends baseEditComponent {
 
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iParam) => {
         this.mform.setValue({
           param_id: rec.param_id,
           param_code: rec.param_code,
           param_name: rec.param_name,
-          param_order: rec.param_order
+          param_order: rec.param_order,
+          rowversion: rec.rowversion,
         })
       },
       error: (e) => {
@@ -88,6 +90,9 @@ export class ParamEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

@@ -32,6 +32,7 @@ export class AccGroupEditComponent extends baseEditComponent {
       grp_name: ['', [Validators.required, Validators.maxLength(100)]],
       grp_main_group: ['', [Validators.required, Validators.maxLength(20)]],
       grp_order: [0, [Validators.required]],
+      rowversion: [''],
     })
   }
 
@@ -52,6 +53,7 @@ export class AccGroupEditComponent extends baseEditComponent {
           grp_name: rec.grp_name,
           grp_main_group: rec.grp_main_group,
           grp_order: rec.grp_order,
+          rowversion: rec.rowversion,
         })
       },
       error: (e) => {
@@ -93,6 +95,9 @@ export class AccGroupEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

@@ -23,6 +23,7 @@ export class ModuleEditComponent extends baseEditComponent {
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
       module_is_installed: ['Y'],
       module_order: ['', [Validators.required]],
+      rowversion: [''],
     })
   }
 
@@ -42,7 +43,8 @@ export class ModuleEditComponent extends baseEditComponent {
           module_id: rec.module_id,
           module_name: rec.module_name,
           module_is_installed: rec.module_is_installed,
-          module_order: rec.module_order
+          module_order: rec.module_order,
+          rowversion: rec.rowversion,
         })
       },
       error: (e) => {
@@ -85,6 +87,9 @@ export class ModuleEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

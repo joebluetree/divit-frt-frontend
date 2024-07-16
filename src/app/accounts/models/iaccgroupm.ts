@@ -5,7 +5,7 @@ export interface iAccGroupm {
   grp_name: string;
   grp_main_group: string;
   grp_order: number;
-
+  rowversion: string;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

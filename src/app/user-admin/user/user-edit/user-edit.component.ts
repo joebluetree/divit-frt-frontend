@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { iUserm } from '../../models/iuserm';
+import { iUserm, iUserModel } from '../../models/iuserm';
 import { iBranchm } from '../../models/ibranchm';
 import { iUserBranches } from '../../models/iuserbranches';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
+
 
 @Component({
   selector: 'app-user-edit',
@@ -29,6 +30,7 @@ export class UserEditComponent extends baseEditComponent {
       user_is_admin: ['N'],
       rec_branch_id: [0, [Validators.required]],
       rec_branch_name: ['', [Validators.required]],
+      rowversion: [''],
       userbranches: this.fb.array([]),
     })
   }
@@ -58,13 +60,14 @@ export class UserEditComponent extends baseEditComponent {
     }
 
     this.ms.getRecord(param).subscribe({
-      next: (rec: any) => {
+      next: (rec: iUserm) => {
         this.mform.patchValue({
           user_id: rec.user_id,
           user_code: rec.user_code,
           user_name: rec.user_name,
           user_password: rec.user_password,
           user_email: rec.user_email,
+          rowversion: rec.rowversion,
           user_is_admin: rec.user_is_admin,
           rec_branch_id: rec.rec_branch_id,
           rec_branch_name: rec.rec_branch_name,
@@ -105,8 +108,9 @@ export class UserEditComponent extends baseEditComponent {
         if (data.user_id == 0) {
           this.id = v.user_id;
           data.user_id = this.id;
-          this.mform.patchValue({ user_id: this.id });
-
+          this.mform.patchValue({
+            user_id: this.id,
+          });
           this.formArray('userbranches').clear();
           v.userbranches.forEach(rec => {
             this.formArray('userbranches').push(this.addRow(rec))
@@ -116,6 +120,9 @@ export class UserEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

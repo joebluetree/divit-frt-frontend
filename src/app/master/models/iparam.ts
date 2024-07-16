@@ -6,6 +6,7 @@ export interface iParam {
   param_code: string;
   param_name: string;
   param_order: number;
+  rowversion: string;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

@@ -29,6 +29,7 @@ export class MenuEditComponent extends baseEditComponent {
       menu_module_id: [0, [Validators.required]],
       menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],
       menu_order: ['', [Validators.required]],
+      rowversion: [''],
     })
   }
 
@@ -53,7 +54,9 @@ export class MenuEditComponent extends baseEditComponent {
           menu_module_id: rec.menu_module_id,
           menu_module_name: rec.menu_module_name,
           menu_visible: rec.menu_visible,
-          menu_order: rec.menu_order
+          menu_order: rec.menu_order,
+          rowversion: rec.rowversion,
+
         })
       },
       error: (e) => {
@@ -94,6 +97,9 @@ export class MenuEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

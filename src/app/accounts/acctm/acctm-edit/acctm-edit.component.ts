@@ -41,6 +41,7 @@ export class AcctmEditComponent extends baseEditComponent {
       acc_maincode_name: [''],
       acc_grp_id: [null, [Validators.required]],
       acc_grp_name: ['', [Validators.required]],
+      rowversion: [''],
     })
   }
 
@@ -70,6 +71,7 @@ export class AcctmEditComponent extends baseEditComponent {
           acc_row_type: rec.acc_row_type,
           acc_maincode_id: rec.acc_maincode_id,
           acc_maincode_name: rec.acc_maincode_name,
+          rowversion: rec.rowversion,
         });
       },
       error: (e) => {
@@ -111,6 +113,9 @@ export class AcctmEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
+        this.mform.patchValue({
+          rowversion: v.rowversion
+        });
         this.ms.UpdateList(v, bAdd);
         this.gs.showAlert(["Save Complete"]);
       },

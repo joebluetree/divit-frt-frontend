@@ -9,6 +9,7 @@ export interface iBranchm {
   branch_address3: string;
 
 
+  rowversion: string;
   rec_company_id: number;
   rec_branch_id: number;
   rec_branch_name: string;
