@@ -18,7 +18,6 @@ export class LoginComponent {
   loginForm: FormGroup;
 
   constructor(
-    private router: Router,
     private ls: LoginService,
     private gs: GlobalService
   ) {

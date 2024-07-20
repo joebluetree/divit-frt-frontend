@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button class="btn btn-success btn-sm">Return</button>
+</div>
+
+<div class="page-body">
+
+  <div class="container-fluid">
+
+    <form [formGroup]="loginForm">
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Booking Ref</label>
+            <div class="col-sm-8">
+              <app-input formControlName="bookingref" [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm" for="">Container#</label>
+            <div class="col-sm-8">
+              <app-input formControlName="cntrno" [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="page-footer line-bottom">
+  <button class="btn btn-sm btn-success" (click)="search()">Search</button>
+</div>
+
+<div>
+  <pre>
+    <code>
+    {{loginForm.value | json}}
+  </code>
+  </pre>
+</div>
