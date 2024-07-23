@@ -40,7 +40,7 @@ export class BranchEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iBranchm) => {
         this.mform.setValue({
           branch_id: rec.branch_id,
           branch_code: rec.branch_code,

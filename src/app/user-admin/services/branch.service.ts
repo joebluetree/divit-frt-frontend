@@ -4,7 +4,7 @@ import { iBranch_Search, iBranchm, iBranchModel } from '../models/ibranchm';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class BranchService extends baseService<iBranchm> {
+export class BranchService extends baseService {
 
   constructor() {
     super('branch_id', 'branch_name', '/api/branch');

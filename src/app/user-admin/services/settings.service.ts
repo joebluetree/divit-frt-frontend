@@ -4,7 +4,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class SettingsService extends baseService<iSettings> {
+export class SettingsService extends baseService {
 
   constructor() {
     super('settings_id', 'settings_id', '/api/settings');

@@ -38,7 +38,7 @@ export class ModuleEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iModulem) => {
         this.mform.setValue({
           module_id: rec.module_id,
           module_name: rec.module_name,

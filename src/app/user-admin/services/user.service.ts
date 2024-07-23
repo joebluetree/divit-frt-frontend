@@ -6,7 +6,7 @@ import { iUser_Search, iUserm, iUserModel } from '../models/iuserm';
 
 
 @Injectable({ providedIn: 'root' })
-export class UserService extends baseService<iUserm> {
+export class UserService extends baseService {
 
   constructor() {
     super('user_id', 'user_name', '/api/user');

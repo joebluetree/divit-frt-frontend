@@ -47,7 +47,7 @@ export class AccGroupEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iAccGroupm) => {
         this.mform.setValue({
           grp_id: rec.grp_id,
           grp_name: rec.grp_name,

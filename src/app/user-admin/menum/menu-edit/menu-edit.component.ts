@@ -44,7 +44,7 @@ export class MenuEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iMenum) => {
         this.mform.setValue({
           menu_id: rec.menu_id,
           menu_code: rec.menu_code,

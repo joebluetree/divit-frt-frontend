@@ -124,7 +124,7 @@ export class SettingsEditComponent extends baseEditComponent {
       'mode': "edit"
     }
     this.ms.save(param, data).subscribe({
-      next: (v) => {
+      next: (v: iSettings) => {
         //this.store.dispatch(upsert_row({ record: data, category: data.category }));
       },
       error: (e) => {

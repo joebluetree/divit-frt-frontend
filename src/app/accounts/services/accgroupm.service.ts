@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { iAccGroupm, iAccGroupm_Search, iAccGroupmModel } from '../models/iaccgroupm';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../shared/baseService';
+import { baseService2 } from '../../shared/baseService2';
 
 @Injectable({ providedIn: 'root' })
-export class AccGroupService extends baseService<iAccGroupm> {
+export class AccGroupService extends baseService2 {
 
   constructor() {
     super('grp_id', 'grp_name', '/api/accounts/accgroup');
@@ -21,5 +21,7 @@ export class AccGroupService extends baseService<iAccGroupm> {
       sort_order: ''
     };
   }
+
+
 
 }

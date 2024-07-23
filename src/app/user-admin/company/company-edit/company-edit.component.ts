@@ -5,6 +5,7 @@ import { iCompanym } from '../../models/icompanym';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/baseEditComponent';
 
+
 @Component({
   selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
@@ -40,7 +41,7 @@ export class CompanyEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iCompanym) => {
         this.mform.setValue({
           comp_id: rec.comp_id,
           comp_code: rec.comp_code,

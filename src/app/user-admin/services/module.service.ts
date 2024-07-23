@@ -4,7 +4,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class ModuleService extends baseService<iModulem> {
+export class ModuleService extends baseService {
 
   constructor() {
     super('module_id', 'module_name', '/api/module');

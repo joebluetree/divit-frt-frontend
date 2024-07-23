@@ -80,7 +80,6 @@ export abstract class baseComponent {
   }
 
   deleteRecord(data: any) {
-
     this._ms.delete(data);
   }
 

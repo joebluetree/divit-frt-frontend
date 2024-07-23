@@ -58,7 +58,7 @@ export class AcctmEditComponent extends baseEditComponent {
 
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iAcctm) => {
         console.log(rec);
         this.mform.setValue({
           acc_id: rec.acc_id,

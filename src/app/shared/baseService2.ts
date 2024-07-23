@@ -3,7 +3,7 @@ import { inject } from "@angular/core";
 import { GlobalService } from "../core/services/global.service";
 
 
-export abstract class baseService {
+export abstract class baseService2 {
 
   protected http = inject(HttpClient);
   protected gs = inject(GlobalService);
@@ -12,13 +12,15 @@ export abstract class baseService {
   protected state: any;
   protected type = '';
 
-  constructor(
-    protected pkid: string,
-    protected name: string,
-    protected baseEndPoint: string,
+
+
+  constructor(protected pkid: string, protected name: string, protected baseEndPoint: string
   ) {
+
   }
   protected abstract setInitialState(): any;
+
+
 
   public init(_screen_id: string, _type: string = '') {
     this.type = _type;
@@ -113,22 +115,22 @@ export abstract class baseService {
     });
   }
 
-  public getRecord(data: any) {
+  public getRecord(data: any, endPoint: string = '') {
     const options = {
       headers: this.gs.getHeaders(),
       params: { ...data }
     };
-    console.log(options);
-    return this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
-
+    const _url = endPoint || `${this.baseEndPoint}/getRecordAsync`;
+    return this.http.get<any>(this.gs.getUrl(_url), options);
   }
 
-  public save(param: any, record: any) {
+  public save(param: any, record: any, endPoint: string = '') {
     const options = {
       headers: this.gs.getHeaders(),
       params: { ...param }
     }
-    return this.http.post<any>(this.gs.getUrl(`${this.baseEndPoint}/SaveAsync`), record, options);
+    const _url = endPoint || `${this.baseEndPoint}/SaveAsync`;
+    return this.http.post<any>(this.gs.getUrl(_url), record, options);
   }
 
   public delete(data: any) {
@@ -137,15 +139,16 @@ export abstract class baseService {
     this.deleteRecord({ 'id': data.rec[this.pkid] });
   }
 
-  public deleteRecord(data: any) {
+  public deleteRecord(param: any) {
+    //endpoint = 'DeleteAsync'
     const options = {
       headers: this.gs.getHeaders(),
-      params: { ...data }
+      params: { ...param }
     }
     this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options).subscribe({
       next: (v: any) => {
         if (v.status) {
-          this.RemoveRecord(data.id);
+          this.RemoveRecord(param.id);
         }
       },
       error: (err: any) => {

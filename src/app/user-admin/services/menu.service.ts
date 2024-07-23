@@ -4,7 +4,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class MenuService extends baseService<iMenum> {
+export class MenuService extends baseService {
 
   constructor() {
     super('menu_id', 'menu_name', '/api/menu');

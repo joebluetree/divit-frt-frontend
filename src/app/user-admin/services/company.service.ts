@@ -4,7 +4,7 @@ import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class CompanyService extends baseService<iCompanym> {
+export class CompanyService extends baseService {
 
   constructor() {
     super('comp_id', 'company_name', '/api/company');

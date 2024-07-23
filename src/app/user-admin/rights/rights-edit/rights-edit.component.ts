@@ -65,7 +65,7 @@ export class RightsEditComponent extends baseEditComponent {
       return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
-      next: (rec) => {
+      next: (rec: iRights_header) => {
         this.loaddata(rec);
       },
       error: (e) => {

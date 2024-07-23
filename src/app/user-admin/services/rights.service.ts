@@ -4,7 +4,7 @@ import { iRights_header, iRights_Search, iRightsModel } from '../models/irights'
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })
-export class RightsService extends baseService<iRights_header> {
+export class RightsService extends baseService {
 
   constructor() {
     super('rights_id', 'user_name', '/api/rights');
