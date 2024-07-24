@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { Observable, tap } from 'rxjs';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { GlobalService } from '../services/global.service';
 
