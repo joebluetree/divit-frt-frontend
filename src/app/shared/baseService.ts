@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { GlobalService } from "../core/services/global.service";
 

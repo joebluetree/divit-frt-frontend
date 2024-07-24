@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { iCustomer_Search, iCustomerm, iCustomerModel } from '../models/icustomerm';
+import { iCustomer_Search, iCustomerModel } from '../models/icustomerm';
 import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 

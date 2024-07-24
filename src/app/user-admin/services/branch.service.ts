@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { iBranch_Search, iBranchm, iBranchModel } from '../models/ibranchm';
+import { iBranch_Search, iBranchModel } from '../models/ibranchm';
 import { baseService } from '../../shared/baseService';
 
 @Injectable({ providedIn: 'root' })

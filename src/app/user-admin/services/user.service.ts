@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
 import { iUser } from '../../core/models/user';
 import { baseService } from '../../shared/baseService';
-import { iUser_Search, iUserm, iUserModel } from '../models/iuserm';
+import { iUser_Search, iUserModel } from '../models/iuserm';
 
 
 @Injectable({ providedIn: 'root' })

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { iParam, iParam_Search, iParamModel } from '../models/iparam';
+import { iParam_Search, iParamModel } from '../models/iparam';
 import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/baseService';
 
