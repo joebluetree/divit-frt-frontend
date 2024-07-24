@@ -16,6 +16,7 @@ import { ProgressScreenComponent } from './core/progress-screen/progress-screen.
 import { MenuComponent } from './core/menu/menu.component';
 import { ToastComponent } from './core/toast/toast.component';
 import { AuthGuard, AuthGuardLogin } from './core/auth.guard.service';
+import { ModalComponent } from './shared/modal/modal.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -48,6 +49,7 @@ export const CustomControls = [
   ProgressScreenComponent,
   ToastComponent,
   MenuComponent,
+  ModalComponent,
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
