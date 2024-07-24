@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SettingsService } from '../../services/settings.service';
 import { iSettings } from '../../models/isettings';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-settings-edit',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { BranchSearchComponent } from '../branch-search/branch-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { BranchService } from '../../services/branch.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { BranchService } from '../../services/branch.service';
   standalone: true,
   imports: [...CustomControls, BranchSearchComponent]
 })
-export class BranchListComponent extends baseComponent {
+export class BranchListComponent extends baseListComponent {
 
   constructor(public ms: BranchService) {
     super(ms);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iAccGroupm_Search, iAccGroupmModel } from '../models/iaccgroupm';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 
 @Injectable({ providedIn: 'root' })
 export class AccGroupService extends baseService {

@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { AccGroupService } from '../../services/accgroupm.service';
 import { iAccGroupm } from '../../models/iaccgroupm';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-accgroup-edit',

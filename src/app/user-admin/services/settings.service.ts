@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iSettings, iSettings_Search, iSettingsModel } from '../models/isettings';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService extends baseService {

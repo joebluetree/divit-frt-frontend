@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iAcctm_Search, iAcctmModel } from '../models/iacctm';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 
 @Injectable({ providedIn: 'root' })
 export class AcctmService extends baseService {

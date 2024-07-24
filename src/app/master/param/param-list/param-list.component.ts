@@ -8,7 +8,7 @@ import { CustomControls } from '../../../app.config';
 import { iMenum } from '../../../core/models/imenum';
 import { GlobalService } from '../../../core/services/global.service';
 import { ParamService } from '../../services/param.service';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
 @Component({
   selector: 'app-param-list',
@@ -17,7 +17,7 @@ import { baseComponent } from '../../../shared/baseComponent';
   standalone: true,
   imports: [...CustomControls, ParamSearchComponent]
 })
-export class ParamListComponent extends baseComponent {
+export class ParamListComponent extends baseListComponent {
 
   constructor(public ms: ParamService) {
     super(ms);

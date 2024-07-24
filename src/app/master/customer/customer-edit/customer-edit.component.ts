@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { CustomermService } from '../../services/customerm.service';
 import { iCustomerm } from '../../models/icustomerm';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-customer-edit',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { ModuleSearchComponent } from '../module-search/module-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { ModuleService } from '../../services/module.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { ModuleService } from '../../services/module.service';
   standalone: true,
   imports: [...CustomControls, ModuleSearchComponent]
 })
-export class ModuleListComponent extends baseComponent {
+export class ModuleListComponent extends baseListComponent {
 
   constructor(public ms: ModuleService) {
     super(ms);

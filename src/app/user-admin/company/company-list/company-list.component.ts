@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CompanySearchComponent } from '../company-search/company-search.component';
 import { CompanyService } from '../../services/company.service';
 import { CustomControls } from '../../../app.config';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
 @Component({
   selector: 'app-company-list',
@@ -11,7 +11,7 @@ import { baseComponent } from '../../../shared/baseComponent';
   standalone: true,
   imports: [...CustomControls, CompanySearchComponent]
 })
-export class CompanyListComponent extends baseComponent {
+export class CompanyListComponent extends baseListComponent {
 
   constructor(public ms: CompanyService) {
     super(ms);

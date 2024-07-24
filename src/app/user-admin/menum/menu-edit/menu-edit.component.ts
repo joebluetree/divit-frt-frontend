@@ -4,7 +4,7 @@ import { iMenum } from '../../models/imenum';
 import { iModulem } from '../../models/imodulem';
 import { CustomControls } from '../../../app.config';
 import { MenuService } from '../../services/menu.service';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-menu-edit',

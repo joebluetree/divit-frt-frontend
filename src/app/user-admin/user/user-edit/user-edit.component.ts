@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { iUserm, iUserModel } from '../../models/iuserm';
+import { iUserm } from '../../models/iuserm';
 import { iBranchm } from '../../models/ibranchm';
 import { iUserBranches } from '../../models/iuserbranches';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 
 @Component({

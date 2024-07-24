@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iCompany_Search, iCompanyModel } from '../models/icompanym';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyService extends baseService {

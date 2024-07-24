@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
 import { iUser } from '../../core/models/user';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 import { iUser_Search, iUserModel } from '../models/iuserm';
 
 

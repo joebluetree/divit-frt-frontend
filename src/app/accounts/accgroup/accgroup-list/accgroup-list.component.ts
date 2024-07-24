@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { AccGroupService } from '../../services/accgroupm.service';
 import { AccGroupSearchComponent } from '../accgroup-search/accgroup-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
 @Component({
   selector: 'app-accgroup-list',
@@ -11,7 +11,7 @@ import { baseComponent } from '../../../shared/baseComponent';
   standalone: true,
   imports: [...CustomControls, AccGroupSearchComponent]
 })
-export class AccGroupListComponent extends baseComponent {
+export class AccGroupListComponent extends baseListComponent {
 
   constructor(public ms: AccGroupService) {
     super(ms);

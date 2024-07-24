@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SettingsEditComponent } from '../settings-edit/settings-edit.component';
 import { SettingsSearchComponent } from '../settings-search/settings-search.component';
 import { CustomControls } from '../../../app.config';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { SettingsService } from '../../services/settings.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SettingsService } from '../../services/settings.service';
   standalone: true,
   imports: [...CustomControls, SettingsSearchComponent, SettingsEditComponent]
 })
-export class SettingsListComponent extends baseComponent {
+export class SettingsListComponent extends baseListComponent {
   format = 'READ';
 
   selected_row_id = 0;

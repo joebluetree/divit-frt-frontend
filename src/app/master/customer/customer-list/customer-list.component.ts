@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { CustomermService } from '../../services/customerm.service';
 import { CustomerSearchComponent } from '../customer-search/customer-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
 @Component({
   selector: 'app-customer-list',
@@ -11,7 +11,7 @@ import { baseComponent } from '../../../shared/baseComponent';
   standalone: true,
   imports: [...CustomControls, CustomerSearchComponent]
 })
-export class CustomerListComponent extends baseComponent {
+export class CustomerListComponent extends baseListComponent {
 
   constructor(public ms: CustomermService) {
     super(ms);

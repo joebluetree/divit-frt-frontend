@@ -4,7 +4,7 @@ import { AcctmService } from '../../services/acctm.service';
 import { iAcctm } from '../../models/iacctm';
 import { CustomControls } from '../../../app.config';
 import { iAccGroupm } from '../../models/iaccgroupm';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-acctm-edit',

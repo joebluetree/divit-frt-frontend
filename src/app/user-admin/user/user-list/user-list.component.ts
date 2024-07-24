@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { UserService } from '../../services/user.service';
 import { CustomControls } from '../../../app.config';
 import { UserSearchComponent } from '../user-search/user-search.component';
@@ -11,7 +11,7 @@ import { UserSearchComponent } from '../user-search/user-search.component';
   standalone: true,
   imports: [...CustomControls, UserSearchComponent]
 })
-export class UserListComponent extends baseComponent {
+export class UserListComponent extends baseListComponent {
 
   constructor(public ms: UserService) {
     super(ms);

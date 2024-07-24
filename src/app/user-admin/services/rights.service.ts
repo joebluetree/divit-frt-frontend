@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
 import { iRights_Search, iRightsModel } from '../models/irights';
-import { baseService } from '../../shared/baseService';
+import { baseService } from '../../shared/base-class/baseService';
 
 @Injectable({ providedIn: 'root' })
 export class RightsService extends baseService {

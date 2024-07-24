@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RightsSearchComponent } from '../rights-search/rights-search.component';
 import { CustomControls } from '../../../app.config';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { RightsService } from '../../services/rights.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { RightsService } from '../../services/rights.service';
   standalone: true,
   imports: [...CustomControls, RightsSearchComponent]
 })
-export class RightsListComponent extends baseComponent {
+export class RightsListComponent extends baseListComponent {
 
   constructor(public ms: RightsService) {
     super(ms);

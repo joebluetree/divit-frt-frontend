@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuSearchComponent } from '../menu-search/menu-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 import { CustomControls } from '../../../app.config';
 import { MenuService } from '../../services/menu.service';
 
@@ -11,7 +11,7 @@ import { MenuService } from '../../services/menu.service';
   standalone: true,
   imports: [...CustomControls, MenuSearchComponent]
 })
-export class MenuListComponent extends baseComponent {
+export class MenuListComponent extends baseListComponent {
 
   constructor(public ms: MenuService) {
     super(ms);

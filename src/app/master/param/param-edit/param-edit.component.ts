@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { iParam, iParamModel } from '../../models/iparam';
 import { CustomControls } from '../../../app.config';
 import { ParamService } from '../../services/param.service';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-param-edit',

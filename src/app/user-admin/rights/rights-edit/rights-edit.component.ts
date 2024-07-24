@@ -3,7 +3,7 @@ import { RightsService } from '../../services/rights.service';
 import { iRights_header, iRights } from '../../models/irights';
 import { iBranchm } from '../../models/ibranchm';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 
 @Component({

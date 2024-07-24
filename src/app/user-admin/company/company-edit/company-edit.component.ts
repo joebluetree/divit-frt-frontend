@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { CompanyService } from '../../services/company.service';
 import { iCompanym } from '../../models/icompanym';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 
 @Component({

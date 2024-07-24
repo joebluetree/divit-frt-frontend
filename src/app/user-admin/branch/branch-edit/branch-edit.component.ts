@@ -3,7 +3,7 @@ import { Validators } from '@angular/forms';
 import { BranchService } from '../../services/branch.service';
 import { iBranchm } from '../../models/ibranchm';
 import { CustomControls } from '../../../app.config';
-import { baseEditComponent } from '../../../shared/baseEditComponent';
+import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 
 @Component({
   selector: 'app-branch-edit',

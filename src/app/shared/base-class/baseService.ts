@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { GlobalService } from "../core/services/global.service";
+import { GlobalService } from "../../core/services/global.service";
 
 
 export abstract class baseService {

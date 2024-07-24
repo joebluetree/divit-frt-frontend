@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { AcctmService } from '../../services/acctm.service';
 import { AcctmSearchComponent } from '../acctm-search/acctm-search.component';
-import { baseComponent } from '../../../shared/baseComponent';
+import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
 @Component({
   selector: 'app-acctm-list',
@@ -11,7 +11,7 @@ import { baseComponent } from '../../../shared/baseComponent';
   standalone: true,
   imports: [...CustomControls, AcctmSearchComponent],
 })
-export class AcctmListComponent extends baseComponent {
+export class AcctmListComponent extends baseListComponent {
 
   constructor(public ms: AcctmService) {
     super(ms);

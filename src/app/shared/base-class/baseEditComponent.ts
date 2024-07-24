@@ -1,15 +1,22 @@
 import { ActivatedRoute, Router } from "@angular/router";
-import { iMenum } from "../core/models/imenum";
-import { GlobalService } from "../core/services/global.service";
+import { iMenum } from "../../core/models/imenum";
+import { GlobalService } from "../../core/services/global.service";
 import { inject } from "@angular/core";
 import { Location } from "@angular/common";
+import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 
-export abstract class baseComponent {
+export abstract class baseEditComponent {
 
   protected route = inject(ActivatedRoute);
   protected location = inject(Location);
   public gs = inject(GlobalService);
 
+  protected fb = inject(FormBuilder);
+
+  protected mform: FormGroup;
+  protected showModel = true;
+
+  protected id = 0;
   protected appid = '';
   protected menuid = '';
   protected title = '';
@@ -23,19 +30,18 @@ export abstract class baseComponent {
 
   protected menum: iMenum | null;
 
-  protected table_data: any[] = [];
-
-
-
-  constructor(protected _ms: any) {
+  constructor() {
   }
 
   protected init(): void {
 
     this.route.queryParams.forEach((rec: any) => {
+
       this.appid = rec["appid"];
+      this.id = +rec["id"];
       this.menuid = rec["menuid"];
       this.type = rec["type"];
+
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {
         this.title = this.menum.menu_name;
@@ -45,42 +51,26 @@ export abstract class baseComponent {
         this.bView = this.menum.rights_view == "Y" ? true : false;
         this.bDelete = this.menum.rights_delete == "Y" ? true : false;
       }
-    })
-
-    this._ms.init(this.menuid, this.type);
+    });
 
     if (!this.gs.IsValidAppId(this.appid))
       return;
+
   }
 
-  search(_record: any) {
-    this._ms.updateSearchRecord(_record);
-    this.getList('SEARCH');
+  public formArray(sName: string): FormArray {
+    return this.mform.get(sName) as FormArray;
   }
 
-  pageEvents(arg: any) {
-    this.getList(arg.action);
+  public get url() {
+    return this.gs.url;
+  }
+  getCompanyId() {
+    return this.gs.user.user_company_id;
   }
 
-  getList(action: string) {
-    this._ms.getList(action);
-  }
-
-  callback_table(data: any) {
-    if (data.action == 'SORT') {
-      this._ms.sortColumn = data.sort_column;
-      this._ms.sortOrder = data.sort_order;
-    }
-    if (data.action == 'ROW-SELECTED') {
-      this._ms.selectedRow = data.row_id;
-    }
-    if (data.action == 'DELETE') {
-      this.deleteRecord(data);
-    }
-  }
-
-  deleteRecord(data: any) {
-    this._ms.delete(data);
+  getControl(ctrlName: string) {
+    return this.mform.controls[ctrlName];
   }
 
   return2Parent() {
