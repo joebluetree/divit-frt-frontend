@@ -4,6 +4,8 @@ import { CustomermService } from '../../services/customerm.service';
 import { CustomerSearchComponent } from '../customer-search/customer-search.component';
 import { baseListComponent } from '../../../shared/base-class/baseListComponent';
 
+
+
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
@@ -13,9 +15,13 @@ import { baseListComponent } from '../../../shared/base-class/baseListComponent'
 })
 export class CustomerListComponent extends baseListComponent {
 
-  constructor(public ms: CustomermService) {
+  constructor(
+    public ms: CustomermService,
+
+  ) {
     super(ms);
   }
+
 
   ngOnInit(): void {
 
@@ -37,6 +43,7 @@ export class CustomerListComponent extends baseListComponent {
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
   }
+
 
 
 }

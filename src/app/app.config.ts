@@ -16,7 +16,13 @@ import { ProgressScreenComponent } from './core/progress-screen/progress-screen.
 import { MenuComponent } from './core/menu/menu.component';
 import { ToastComponent } from './core/toast/toast.component';
 import { AuthGuard, AuthGuardLogin } from './core/auth.guard.service';
-import { ModalComponent } from './shared/modal/modal.component';
+
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -35,7 +41,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }, provideAnimationsAsync()
   ]
 };
 
@@ -49,11 +55,18 @@ export const CustomControls = [
   ProgressScreenComponent,
   ToastComponent,
   MenuComponent,
-  ModalComponent,
+
+
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
   RouterModule,
+
 ];
 
 

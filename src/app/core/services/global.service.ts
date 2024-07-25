@@ -21,7 +21,6 @@ export class GlobalService {
   private _loadScreenSignal = signal<boolean>(false);
   public readonly loadScreenSignal = computed(() => this._loadScreenSignal());
 
-
   public app_id = '';
   public user: iUser = <iUser>{};
 
@@ -29,12 +28,9 @@ export class GlobalService {
   private autherisedSignal = signal<Boolean>(false);
   private errorSignal = signal<string | null>('');
 
-
   public appStates: { [key: string]: any } = {};
 
-
   public pageSize = 25;
-
 
   constructor(
     private location: Location,
@@ -42,7 +38,6 @@ export class GlobalService {
   ) {
     this.url = "https:/jsonplaceholder.typicode.com";
     this.url = "http://localhost:5153";
-
     this.init();
   }
 
@@ -89,8 +84,6 @@ export class GlobalService {
     return !this.authenticatedSignal();
   }
 
-
-
   getUserName() {
     if (this.user)
       return this.user.user_name;
@@ -98,8 +91,6 @@ export class GlobalService {
       return '';
 
   }
-
-
 
   processModuleList() {
     let list: any[] = [];
@@ -116,7 +107,6 @@ export class GlobalService {
     }, {});
     return list;
   }
-
 
   createModuleList() {
     this.user.user_module_list = this.processModuleList();
@@ -219,7 +209,6 @@ export class GlobalService {
     };
   }
 
-
   public getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'global_user_id': this.user.user_id.toString(),
@@ -231,9 +220,6 @@ export class GlobalService {
     });
 
   }
-
-
-
 
   public readAuthState() {
     let bRet = false;
@@ -264,7 +250,6 @@ export class GlobalService {
     return bRet;
   }
 
-
   public getUserRights(menu_id: string) {
     const rec = this.user.user_menu_list.find(f => f.menu_code == menu_id);
     if (rec == null)
@@ -289,7 +274,6 @@ export class GlobalService {
   logout() {
     this.authenticatedSignal.set(false);
     this.autherisedSignal.set(false);
-    //this.store.dispatch(auth_logout());
     this.router.navigate(['home']);
   }
 
@@ -307,9 +291,6 @@ export class GlobalService {
   }
   public hideProgressScreen() {
     this._loadScreenSignal.set(false);
-
   }
-
-
 
 }

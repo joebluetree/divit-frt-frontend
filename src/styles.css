@@ -1,23 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
-
-
-
 html,
 body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-size: 12px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/*
+Added by Angular Material
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+*/
+
+.table {
+  font-size: 10px;
+}
 
 .table-header {
   color: chocolate;
-  font-weight: bold;
   font-size: 9px;
 }
 
-
+label {
+  font-size: 11px;
+}
 
 .error-text {
   font-size: smaller;
@@ -41,16 +55,20 @@ body {
 .page-header {
   display: flex;
   justify-content: baseline;
-  align-items: center;
-  gap: 6px;
+  align-items: baseline;
+  gap: 4px;
   color: chocolate;
   margin: 65px 2px 0px 1px;
-  padding: 10px;
+  padding: 10px 6px 6px 6px;
 
   border-color: lightgray;
   border-style: solid;
   border-width: 1px 1px 0px 1px;
+}
 
+.page-header h5 {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .page-search {
