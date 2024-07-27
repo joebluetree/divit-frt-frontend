@@ -14,7 +14,7 @@ export abstract class baseEditComponent {
   protected fb = inject(FormBuilder);
 
   protected mform: FormGroup;
-  protected showModel = true;
+  protected showModel = false;
 
   protected id = 0;
   protected appid = '';

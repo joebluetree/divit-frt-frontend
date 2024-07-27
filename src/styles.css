@@ -6,6 +6,10 @@ body {
   box-sizing: border-box;
   font-size: 12px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+
+
+  overflow-x: hidden;
+
 }
 
 /*
@@ -19,6 +23,13 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 */
+
+.router {
+  margin-top: 62px;
+
+}
+
+
 
 .table {
   font-size: 10px;
