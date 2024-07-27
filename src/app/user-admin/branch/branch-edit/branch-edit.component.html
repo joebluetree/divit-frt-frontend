@@ -5,11 +5,10 @@
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
-<div class="page-body">
 
+<form [formGroup]="mform">
+  <div class="page-body">
 
-
-  <form [formGroup]="mform">
     <div class="row">
 
       <div class="col-sm-6">
@@ -54,8 +53,10 @@
 
     </div>
 
-  </form>
-</div>
+  </div>
+
+</form>
+
 
 
 
