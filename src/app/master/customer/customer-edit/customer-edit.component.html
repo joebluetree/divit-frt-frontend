@@ -1,7 +1,7 @@
 <div class="page-header">
   <h5>{{title}}</h5>
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/customerEdit"
-    [queryParams]="{id :0, _id:id+1,menuid:menuid,type:type,appid:appid}">New</button>
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>

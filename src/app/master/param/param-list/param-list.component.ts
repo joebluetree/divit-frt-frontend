@@ -26,7 +26,7 @@ export class ParamListComponent extends baseListComponent {
 
     this.init();
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
+    const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
 
     this.table_data = [
       { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit || this.bView },

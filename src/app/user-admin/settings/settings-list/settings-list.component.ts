@@ -25,7 +25,7 @@ export class SettingsListComponent extends baseListComponent {
 
     this.init();
 
-    const param = { id: 0, menuid: this.menuid, type: this.type, appid: this.appid };
+    const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
 
     this.table_data = [
       { col_name: "id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
