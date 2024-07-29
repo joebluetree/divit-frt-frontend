@@ -39,12 +39,11 @@ export class AccGroupEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    this.getRecord();
+    if (this.mode == 'edit')
+      this.getRecord();
   }
 
   getRecord() {
-    if (this.id <= 0)
-      return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
       next: (rec: iAccGroupm) => {
@@ -75,30 +74,29 @@ export class AccGroupEditComponent extends baseEditComponent {
     if (data.grp_id == null)
       data.grp_id = 0;
 
-    let bAdd = data.grp_id == 0 ? true : false;
-
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
     const param = {
       'id': data.grp_id,
-      'mode': bAdd ? "add" : "edit"
+      'mode': this.mode
     }
     this.ms.save(param, data).subscribe({
       next: (v: iAccGroupm) => {
-        if (data.grp_id == 0) {
+        if (this.mode == 'add') {
           this.id = v.grp_id;
           data.grp_id = this.id;
           this.mform.patchValue({ grp_id: this.id });
           const param = {
-            id: this.id.toString()
+            id: this.id.toString(),
+            mode: 'edit'
           };
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateList(v, bAdd);
+        this.ms.UpdateRecord(v, this.mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

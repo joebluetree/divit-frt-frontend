@@ -17,6 +17,7 @@ export abstract class baseEditComponent {
   protected showModel = false;
 
   protected id = 0;
+  protected mode = '';
   protected appid = '';
   protected menuid = '';
   protected title = '';
@@ -38,6 +39,7 @@ export abstract class baseEditComponent {
     this.route.queryParams.forEach((rec: any) => {
 
       this.appid = rec["appid"];
+      this.mode = rec["mode"];
       this.id = +rec["id"];
       this.menuid = rec["menuid"];
       this.type = rec["type"];

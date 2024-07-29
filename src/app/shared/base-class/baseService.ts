@@ -39,6 +39,19 @@ export abstract class baseService {
     }
   }
 
+  public UpdateRecord(record: any, mode: string) {
+    if (mode == "add")
+      this.state.records.push({ ...record });
+    else {
+      this.state.records = this.state.records.map((_rec: any) => {
+        if (_rec[this.pkid] == record[this.pkid])
+          return record;
+        else
+          return _rec;
+      })
+    }
+  }
+
   public RemoveRecord(id: number) {
     const index = this.state.records.findIndex((obj: any) => obj[this.pkid] === id);
     let rec = this.state.records.find((f: any) => f[this.pkid] == id);
