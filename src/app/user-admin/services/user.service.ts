@@ -24,16 +24,4 @@ export class UserService extends baseService {
   }
 
 
-
-  public getRecordCompanyWise(comp_id: number, id: number) {
-    const options = {
-      params: {
-        'comp_id': comp_id,
-        'id': id
-      }
-    }
-    return this.http.get<iUser>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
-  }
-
-
 }

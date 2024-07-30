@@ -36,8 +36,8 @@ export class ModuleEditComponent extends baseEditComponent {
       this.getRecord();
   }
 
-  newRecord() {
-    this.id = 0;
+  async newRecord() {
+    this.id = await this.ms.getMasterSequence();
     this.mform.patchValue({
       module_id: this.id
     })
