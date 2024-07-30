@@ -34,8 +34,17 @@ export class ParamEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      param_id: this.id
+    })
   }
 
   getRecord() {
@@ -81,7 +90,6 @@ export class ParamEditComponent extends baseEditComponent {
       next: (v: iParam) => {
         if (this.mode = "add") {
           this.id = v.param_id;
-          data.param_id = this.id;
           this.mode = "edit";
           this.mform.patchValue({ param_id: this.id });
           const param = {
@@ -93,7 +101,7 @@ export class ParamEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

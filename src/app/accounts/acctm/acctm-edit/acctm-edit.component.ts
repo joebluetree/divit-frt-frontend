@@ -45,9 +45,19 @@ export class AcctmEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    if (this.mode == 'edit')
+    if (this.mode == "add")
+      this.newRecord();
+    if (this.mode == "edit")
       this.getRecord();
   }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      acc_id: this.id
+    })
+  }
+
 
   getRecord() {
     if (this.id <= 0) {
@@ -86,9 +96,6 @@ export class AcctmEditComponent extends baseEditComponent {
     }
     const data = <iAcctm>this.mform.value;
 
-    if (data.acc_id == null)
-      data.acc_id = 0;
-
     let _mode = this.mode;
 
     data.acc_row_type = this.type;
@@ -104,11 +111,13 @@ export class AcctmEditComponent extends baseEditComponent {
       next: (v: iAcctm) => {
         if (this.mode == "add") {
           this.id = v.acc_id;
-          data.acc_id = this.id;
           this.mode = "edit";
-          this.mform.patchValue({ acc_id: this.id });
+          this.mform.patchValue({
+            acc_id: this.id
+          });
           const param = {
-            id: this.id.toString()
+            id: this.id.toString(),
+            mode: this.mode
           };
           this.gs.updateURL(param);
         };

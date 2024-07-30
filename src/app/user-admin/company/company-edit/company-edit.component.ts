@@ -33,8 +33,17 @@ export class CompanyEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      comp_id: this.id
+    })
   }
 
   getRecord() {
@@ -67,9 +76,6 @@ export class CompanyEditComponent extends baseEditComponent {
     }
     const data = <iCompanym>this.mform.value;
 
-    if (data.comp_id == null)
-      data.comp_id = 0;
-
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -83,7 +89,6 @@ export class CompanyEditComponent extends baseEditComponent {
       next: (v: iCompanym) => {
         if (this.mode == "add") {
           this.id = v.comp_id;
-          data.comp_id = this.id;
           this.mode = "edit";
           this.mform.patchValue({ comp_id: this.id });
           const param = {
@@ -95,7 +100,7 @@ export class CompanyEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

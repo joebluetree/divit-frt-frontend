@@ -32,8 +32,17 @@ export class BranchEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      branch_id: this.id
+    })
   }
 
   getRecord() {
@@ -64,11 +73,7 @@ export class BranchEditComponent extends baseEditComponent {
     }
     const data = <iBranchm>this.mform.value;
 
-    if (data.branch_id == null)
-      data.branch_id = 0;
-
     let _mode = this.mode;
-
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
@@ -81,7 +86,6 @@ export class BranchEditComponent extends baseEditComponent {
       next: (v: iBranchm) => {
         if (this.mode == "add") {
           this.id = v.branch_id;
-          data.branch_id = this.id;
           this.mode = "edit";
           this.mform.patchValue({ branch_id: this.id });
           const param = {
@@ -93,7 +97,7 @@ export class BranchEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

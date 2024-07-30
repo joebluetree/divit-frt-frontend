@@ -37,19 +37,28 @@ export class UserEditComponent extends baseEditComponent {
 
   addRow(rec: iUserBranches) {
     return this.fb.group({
-      ub_id: [rec ? rec.ub_id : 0],
-      ub_user_id: [rec ? rec.ub_user_id : 0],
-      rec_branch_id: [rec ? rec.rec_branch_id : 0],
-      rec_branch_name: [{ value: rec ? rec.rec_branch_name : '', disabled: true }],
-      ub_selected: [rec ? rec.ub_selected : 'N'],
+      ub_id: [rec.ub_id || 0],
+      ub_user_id: [rec.ub_user_id || 0],
+      rec_branch_id: [rec.rec_branch_id || 0],
+      rec_branch_name: [{ value: rec.rec_branch_name || '', disabled: true }],
+      ub_selected: [rec.ub_selected || 'N'],
     })
   }
 
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      user_id: this.id
+    })
   }
 
   getRecord() {
@@ -91,9 +100,6 @@ export class UserEditComponent extends baseEditComponent {
     }
     const data = <iUserm>this.mform.value;
 
-    if (data.user_id == null)
-      data.user_id = 0;
-
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -107,11 +113,8 @@ export class UserEditComponent extends baseEditComponent {
       next: (v: iUserm) => {
         if (this.mode == "add") {
           this.id = v.user_id;
-          data.user_id = this.id;
           this.mode = "edit";
-          this.mform.patchValue({
-            user_id: this.id,
-          });
+          this.mform.patchValue({ user_id: this.id });
           this.formArray('userbranches').clear();
           v.userbranches.forEach(rec => {
             this.formArray('userbranches').push(this.addRow(rec))
@@ -125,7 +128,7 @@ export class UserEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

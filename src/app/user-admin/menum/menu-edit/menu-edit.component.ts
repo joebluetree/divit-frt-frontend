@@ -36,8 +36,17 @@ export class MenuEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      menu_id: this.id
+    })
   }
 
   getRecord() {
@@ -74,9 +83,6 @@ export class MenuEditComponent extends baseEditComponent {
     }
     const data = <iMenum>this.mform.value;
 
-    if (data.menu_id == null)
-      data.menu_id = 0;
-
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -90,7 +96,6 @@ export class MenuEditComponent extends baseEditComponent {
       next: (v: iMenum) => {
         if (this.mode == "add") {
           this.id = v.menu_id;
-          data.menu_id = this.id;
           this.mode = "edit";
           this.mform.patchValue({ menu_id: this.id });
           const param = {
@@ -102,7 +107,7 @@ export class MenuEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

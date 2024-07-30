@@ -39,9 +39,19 @@ export class AccGroupEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    if (this.mode == 'edit')
+    if (this.mode == "add")
+      this.newRecord();
+    if (this.mode == "edit")
       this.getRecord();
   }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      grp_id: this.id
+    })
+  }
+
 
   getRecord() {
     const param = { 'id': this.id };
@@ -71,9 +81,6 @@ export class AccGroupEditComponent extends baseEditComponent {
     }
     const data = <iAccGroupm>this.mform.value;
 
-    if (data.grp_id == null)
-      data.grp_id = 0;
-
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
@@ -87,11 +94,13 @@ export class AccGroupEditComponent extends baseEditComponent {
       next: (v: iAccGroupm) => {
         if (this.mode == 'add') {
           this.id = v.grp_id;
-          data.grp_id = this.id;
-          this.mform.patchValue({ grp_id: this.id });
+          this.mode = "edit";
+          this.mform.patchValue({
+            grp_id: this.id
+          });
           const param = {
             id: this.id.toString(),
-            mode: 'edit'
+            mode: this.mode
           };
           this.gs.updateURL(param);
         };

@@ -30,8 +30,17 @@ export class ModuleEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+    if (this.mode == "add")
+      this.newRecord();
     if (this.mode == "edit")
       this.getRecord();
+  }
+
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      module_id: this.id
+    })
   }
 
   getRecord() {
@@ -62,14 +71,10 @@ export class ModuleEditComponent extends baseEditComponent {
     }
     const data = <iModulem>this.mform.value;
 
-    if (data.module_id == null)
-      data.module_id = 0;
-
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
-
 
     const param = {
       'id': data.module_id,
@@ -79,7 +84,6 @@ export class ModuleEditComponent extends baseEditComponent {
       next: (v: iModulem) => {
         if (this.mode == "add") {
           this.id = v.module_id;
-          data.module_id = this.id;
           this.mode = "edit";
           this.mform.patchValue({ module_id: this.id });
           const param = {
@@ -91,7 +95,7 @@ export class ModuleEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

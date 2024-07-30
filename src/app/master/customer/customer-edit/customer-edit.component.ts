@@ -61,6 +61,9 @@ export class CustomerEditComponent extends baseEditComponent {
 
   async newRecord() {
     this.id = await this.ms.getMasterSequence();
+    this.mform.patchValue({
+      cust_id: this.id
+    })
   }
 
   getRecord() {
@@ -116,7 +119,6 @@ export class CustomerEditComponent extends baseEditComponent {
         if (this.mode == "add") {
           this.id = v.cust_id;
           this.mode = "edit";
-          data.cust_id = this.id;
           this.mform.patchValue({ cust_id: this.id });
           const param = {
             id: this.id.toString(),
