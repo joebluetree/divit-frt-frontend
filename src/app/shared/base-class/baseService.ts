@@ -28,18 +28,18 @@ export abstract class baseService {
     this.gs.appStates[_screen_id] = this.state;
   }
 
-  public _UpdateList(record: any, bAdd: boolean) {
-    if (bAdd)
-      this.state.records.push({ ...record });
-    else {
-      this.state.records = this.state.records.map((_rec: any) => {
-        if (_rec[this.pkid] == record[this.pkid])
-          return record;
-        else
-          return _rec;
-      })
-    }
-  }
+  // public _UpdateList(record: any, bAdd: boolean) {
+  //   if (bAdd)
+  //     this.state.records.push({ ...record });
+  //   else {
+  //     this.state.records = this.state.records.map((_rec: any) => {
+  //       if (_rec[this.pkid] == record[this.pkid])
+  //         return record;
+  //       else
+  //         return _rec;
+  //     })
+  //   }
+  // }
 
   public UpdateRecord(record: any, mode: string) {
     if (mode == "add")
