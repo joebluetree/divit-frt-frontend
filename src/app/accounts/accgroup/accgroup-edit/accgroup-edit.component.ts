@@ -77,6 +77,8 @@ export class AccGroupEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
+    let _mode = this.mode;
+
     const param = {
       'id': data.grp_id,
       'mode': this.mode
@@ -96,7 +98,7 @@ export class AccGroupEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateRecord(v, this.mode);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

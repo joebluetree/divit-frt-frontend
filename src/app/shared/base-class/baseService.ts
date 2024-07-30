@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { GlobalService } from "../../core/services/global.service";
+import { firstValueFrom } from "rxjs";
+
 
 
 export abstract class baseService {
@@ -26,7 +28,7 @@ export abstract class baseService {
     this.gs.appStates[_screen_id] = this.state;
   }
 
-  public UpdateList(record: any, bAdd: boolean) {
+  public _UpdateList(record: any, bAdd: boolean) {
     if (bAdd)
       this.state.records.push({ ...record });
     else {
@@ -133,8 +135,13 @@ export abstract class baseService {
     };
     console.log(options);
     return this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
-
   }
+
+  public async getMasterSequence() {
+    const result = await firstValueFrom(this.http.get<any>(this.gs.getUrl(`/api/search/GetMasterSequenceAsync`)));
+    return result;
+  }
+
 
   public save(param: any, record: any) {
     const options = {

@@ -52,17 +52,22 @@ export class CustomerEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    this.getRecord();
+
+    if (this.mode == "add")
+      this.newRecord();
+    else
+      this.getRecord();
+  }
+
+  async newRecord() {
+    this.id = await this.ms.getMasterSequence();
   }
 
   getRecord() {
-    if (this.id <= 0) {
-      return;
-    }
+
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
       next: (rec: iCustomerm) => {
-        console.log(rec);
         this.mform.setValue({
           cust_id: rec.cust_id,
           cust_code: rec.cust_code,
@@ -95,35 +100,34 @@ export class CustomerEditComponent extends baseEditComponent {
     }
     const data = <iCustomerm>this.mform.value;
 
-    if (data.cust_id == null)
-      data.cust_id = 0;
-
-    let bAdd = data.cust_id == 0 ? true : false;
-
     data.cust_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
+    let _mode = this.mode;
+
     const param = {
       'id': data.cust_id,
-      'mode': bAdd ? "add" : "edit"
+      'mode': this.mode
     }
     this.ms.save(param, data).subscribe({
       next: (v: iCustomerm) => {
-        if (data.cust_id == 0) {
+        if (this.mode == "add") {
           this.id = v.cust_id;
+          this.mode = "edit";
           data.cust_id = this.id;
           this.mform.patchValue({ cust_id: this.id });
           const param = {
-            id: this.id.toString()
+            id: this.id.toString(),
+            mode: this.mode
           };
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateList(v, bAdd);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

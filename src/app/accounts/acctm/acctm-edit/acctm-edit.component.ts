@@ -15,16 +15,13 @@ import { baseEditComponent } from '../../../shared/base-class/baseEditComponent'
 })
 export class AcctmEditComponent extends baseEditComponent {
 
-
   filter = { acc_row_type: this.type };
-
 
   dataList = [
     { key: 'NA', value: 'NA' },
     { key: 'AR', value: 'AR' },
     { key: 'AP', value: 'AP' },
   ]
-
 
   constructor(
     private ms: AcctmService,
@@ -48,7 +45,8 @@ export class AcctmEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    this.getRecord();
+    if (this.mode == 'edit')
+      this.getRecord();
   }
 
   getRecord() {
@@ -91,7 +89,7 @@ export class AcctmEditComponent extends baseEditComponent {
     if (data.acc_id == null)
       data.acc_id = 0;
 
-    let bAdd = data.acc_id == 0 ? true : false;
+    let _mode = this.mode;
 
     data.acc_row_type = this.type;
 
@@ -100,13 +98,14 @@ export class AcctmEditComponent extends baseEditComponent {
 
     const param = {
       'id': data.acc_id,
-      'mode': bAdd ? "add" : "edit"
+      'mode': this.mode
     }
     this.ms.save(param, data).subscribe({
       next: (v: iAcctm) => {
-        if (data.acc_id == 0) {
+        if (this.mode == "add") {
           this.id = v.acc_id;
           data.acc_id = this.id;
+          this.mode = "edit";
           this.mform.patchValue({ acc_id: this.id });
           const param = {
             id: this.id.toString()
@@ -116,7 +115,7 @@ export class AcctmEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateList(v, bAdd);
+        this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

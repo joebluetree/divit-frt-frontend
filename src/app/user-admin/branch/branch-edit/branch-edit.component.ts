@@ -32,12 +32,11 @@ export class BranchEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    this.getRecord();
+    if (this.mode == "edit")
+      this.getRecord();
   }
 
   getRecord() {
-    if (this.id <= 0)
-      return;
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
       next: (rec: iBranchm) => {
@@ -68,7 +67,7 @@ export class BranchEditComponent extends baseEditComponent {
     if (data.branch_id == null)
       data.branch_id = 0;
 
-    let bAdd = data.branch_id == 0 ? true : false;
+    let _mode = this.mode;
 
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -76,23 +75,25 @@ export class BranchEditComponent extends baseEditComponent {
 
     const param = {
       'id': data.branch_id,
-      'mode': bAdd ? "add" : "edit"
+      'mode': this.mode
     }
     this.ms.save(param, data).subscribe({
       next: (v: iBranchm) => {
-        if (data.branch_id == 0) {
+        if (this.mode == "add") {
           this.id = v.branch_id;
           data.branch_id = this.id;
+          this.mode = "edit";
           this.mform.patchValue({ branch_id: this.id });
           const param = {
-            id: this.id.toString()
+            id: this.id.toString(),
+            mode: this.mode
           };
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateList(v, bAdd);
+        this.ms.UpdateRecord(v, this.mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {

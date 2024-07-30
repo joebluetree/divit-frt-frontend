@@ -48,12 +48,12 @@ export class UserEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    this.getRecord();
+    if (this.mode == "edit")
+      this.getRecord();
   }
 
   getRecord() {
-    if (this.id <= 0)
-      return;
+
     const param = {
       'comp_id': this.gs.user.user_company_id,
       'id': this.id
@@ -94,20 +94,21 @@ export class UserEditComponent extends baseEditComponent {
     if (data.user_id == null)
       data.user_id = 0;
 
-    let bAdd = data.user_id == 0 ? true : false;
+    let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
     const param = {
       'id': this.id,
-      'mode': bAdd ? "add" : "edit"
+      'mode': this.mode
     }
     this.ms.save(param, data).subscribe({
       next: (v: iUserm) => {
-        if (data.user_id == 0) {
+        if (this.mode == "add") {
           this.id = v.user_id;
           data.user_id = this.id;
+          this.mode = "edit";
           this.mform.patchValue({
             user_id: this.id,
           });
@@ -116,14 +117,15 @@ export class UserEditComponent extends baseEditComponent {
             this.formArray('userbranches').push(this.addRow(rec))
           });
           const param = {
-            id: this.id.toString()
+            id: this.id.toString(),
+            mode: this.mode
           };
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
           rowversion: v.rowversion
         });
-        this.ms.UpdateList(v, bAdd);
+        this.ms.UpdateRecord(v, this.mode);
         this.gs.showAlert(["Save Complete"]);
       },
       error: (e) => {
