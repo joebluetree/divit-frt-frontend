@@ -60,7 +60,7 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
   async newRecord() {
-    this.id = await this.ms.getMasterSequence();
+    this.id = await this.ms.getSequence({ name: 'master' });
     this.mform.patchValue({
       cust_id: this.id
     })

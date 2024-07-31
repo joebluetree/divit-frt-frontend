@@ -137,8 +137,12 @@ export abstract class baseService {
     return this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
   }
 
-  public async getMasterSequence() {
-    const result = await firstValueFrom(this.http.get<any>(this.gs.getUrl(`/api/search/GetMasterSequenceAsync`)));
+  public async getSequence(param: any) {
+    const options = {
+      headers: this.gs.getHeaders(),
+      params: { ...param }
+    }
+    const result = await firstValueFrom(this.http.get<any>(this.gs.getUrl(`/api/search/GetSequenceAsync`), options));
     return result;
   }
 

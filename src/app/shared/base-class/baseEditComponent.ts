@@ -23,6 +23,8 @@ export abstract class baseEditComponent {
   protected title = '';
   protected type = '';
 
+  protected bExceptionRaised = false;
+
   protected bAdmin = false;
   protected bAdd = false;
   protected bEdit = false;

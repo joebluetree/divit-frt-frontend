@@ -55,7 +55,7 @@ export class UserEditComponent extends baseEditComponent {
   }
 
   async newRecord() {
-    this.id = await this.ms.getMasterSequence();
+    this.id = await this.ms.getSequence({ name: 'master' });
     this.mform.patchValue({
       user_id: this.id
     })

@@ -19,7 +19,7 @@ export class ModuleEditComponent extends baseEditComponent {
   ) {
     super();
     this.mform = this.fb.group({
-      module_id: [0],
+      module_id: [0, [Validators.required]],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
       module_is_installed: ['Y'],
       module_order: ['', [Validators.required]],
@@ -28,6 +28,7 @@ export class ModuleEditComponent extends baseEditComponent {
   }
 
   ngOnInit() {
+
     this.id = 0;
     this.init();
     if (this.mode == "add")
@@ -37,10 +38,16 @@ export class ModuleEditComponent extends baseEditComponent {
   }
 
   async newRecord() {
-    this.id = await this.ms.getMasterSequence();
-    this.mform.patchValue({
-      module_id: this.id
-    })
+    try {
+      this.id = await this.ms.getSequence({ name: 'master' });
+      this.mform.patchValue({
+        module_id: this.id
+      })
+    }
+    catch (error: any) {
+      this.gs.showAlert([error.message]);
+    }
+
   }
 
   getRecord() {
@@ -64,11 +71,26 @@ export class ModuleEditComponent extends baseEditComponent {
   }
 
 
-  save() {
-    if (this.mform.invalid) {
-      alert('Invalid Form')
-      return;
+  allvalid() {
+    let msg = [];
+    if (this.id <= 0) {
+      msg.push('Invalid ID')
     }
+    if (this.mform.invalid) {
+      msg.push('Not all data are entered')
+    }
+    if (msg.length > 0) {
+      this.gs.showAlert(msg);
+      return false;
+    }
+    return true;
+  }
+
+  save() {
+
+    if (!this.allvalid())
+      return;
+
     const data = <iModulem>this.mform.value;
 
     let _mode = this.mode;
