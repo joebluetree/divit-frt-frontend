@@ -47,11 +47,9 @@ export class ModuleEditComponent extends baseEditComponent {
     catch (error: any) {
       this.gs.showAlert([error.message]);
     }
-
   }
 
   getRecord() {
-
     const param = { 'id': this.id };
     this.ms.getRecord(param).subscribe({
       next: (rec: iModulem) => {
@@ -69,7 +67,6 @@ export class ModuleEditComponent extends baseEditComponent {
       complete: () => { }
     })
   }
-
 
   allvalid() {
     let msg = [];
