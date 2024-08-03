@@ -21,7 +21,7 @@ export class TrackEditComponent extends baseEditComponent {
     super();
     this.mform = this.fb.group({
       track_id: [0],
-      track_book_no: [''],
+      track_book_no: ['', [Validators.maxLength(100)]],
       track_cntr_no: ['', [Validators.required, Validators.maxLength(11)]],
       rowversion: [''],
     })
@@ -40,7 +40,7 @@ export class TrackEditComponent extends baseEditComponent {
   async newRecord() {
     this.id = 0;
     this.mform.patchValue({
-      cust_id: this.id
+      track_id: this.id
     })
   }
 

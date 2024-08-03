@@ -4,7 +4,6 @@ export interface iTrackm {
   track_id: number;
   track_book_no: string;
   track_cntr_no: string;
-  track_order: number;
 
   rowversion: string;
   rec_company_id: number;
