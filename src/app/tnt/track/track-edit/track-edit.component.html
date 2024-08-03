@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/tnt/trackEdit"
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<form [formGroup]="mform">
+
+  <div class="page-body">
+
+
+    <div class="row">
+
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Booking#</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="track_book_no" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Container#</label>
+          <div class="col-sm-8">
+            <app-input maxlength="11" formControlName="track_cntr_no" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+
+
+<div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>
