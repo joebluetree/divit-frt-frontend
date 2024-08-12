@@ -40,6 +40,7 @@
 
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <button class="btn btn-sm btn-success" (click)="loadTracking()" [disabled]="mform.invalid">Refresh</button>
 </div>
 
 

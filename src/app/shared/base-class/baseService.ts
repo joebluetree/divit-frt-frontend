@@ -128,13 +128,16 @@ export abstract class baseService {
     });
   }
 
-  public getRecord(data: any) {
+  public getRecord(data: any, url: string = "") {
     const options = {
       headers: this.gs.getHeaders(),
       params: { ...data }
     };
-    console.log(options);
-    return this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/getRecordAsync`), options);
+    let mUrl = url;
+    if (url == "")
+      mUrl = `${this.baseEndPoint}/getRecordAsync`;
+
+    return this.http.get<any>(this.gs.getUrl(mUrl), options);
   }
 
   public async getSequence(param: any) {
@@ -144,6 +147,14 @@ export abstract class baseService {
     }
     const result = await firstValueFrom(this.http.get<any>(this.gs.getUrl(`/api/search/GetSequenceAsync`), options));
     return result;
+  }
+
+  public postData(data: any, url: string = "") {
+    let param = { ...data }
+    const options = {
+      headers: this.gs.getHeaders(),
+    };
+    return this.http.post<any>(this.gs.getUrl(url), param, options);
   }
 
 

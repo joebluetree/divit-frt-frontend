@@ -104,6 +104,33 @@ export class TrackEditComponent extends baseEditComponent {
     })
   }
 
+  loadTracking() {
+
+    if (this.mform.invalid) {
+      alert('Invalid Form')
+      return;
+    }
+    const data = <iTrackm>this.mform.value;
+
+    data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_created_by = this.gs.user.user_code;
+
+
+    const param = {
+      'id': data.track_id,
+      'cntr': data.track_cntr_no,
+    }
+    this.ms.postData(param, "/api/tnt/GetTrackingDetails").subscribe({
+      next: (v: any) => {
+
+      },
+      error: (e) => {
+        this.gs.showAlert([e.error, e.message]);
+      }
+    })
+
+  }
+
 
   // callBack_Customer(action: { id: string, rec: iTrackm }) {
   //   if (action.rec == null) {
