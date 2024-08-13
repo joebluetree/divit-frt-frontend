@@ -164,7 +164,6 @@ export class CustomerEditComponent extends baseEditComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      console.log(result);
     });
   }
 

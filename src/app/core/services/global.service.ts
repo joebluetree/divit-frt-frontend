@@ -129,7 +129,6 @@ export class GlobalService {
   public getUrl(path: string = '') {
     let sep = path.startsWith("/") ? "" : "/";
     const _url = this.url + sep + path;
-    console.log(_url);
     return _url;
   }
 
