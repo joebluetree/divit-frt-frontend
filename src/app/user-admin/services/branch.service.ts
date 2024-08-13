@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class BranchService extends baseService {
 
   constructor() {
-    super('branch_id', 'branch_name', '/api/branch');
+    super('branch_id', 'branch_name');
   }
   setInitialState() {
     return <iBranchModel>{

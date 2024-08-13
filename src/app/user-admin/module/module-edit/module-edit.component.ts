@@ -51,7 +51,7 @@ export class ModuleEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/module/GetRecordAsync').subscribe({
       next: (rec: iModulem) => {
         this.mform.setValue({
           module_id: rec.module_id,
@@ -99,7 +99,7 @@ export class ModuleEditComponent extends baseEditComponent {
       'id': data.module_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/module/SaveAsync').subscribe({
       next: (v: iModulem) => {
         if (this.mode == "add") {
           this.id = v.module_id;

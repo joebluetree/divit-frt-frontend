@@ -6,22 +6,25 @@
 </div>
 
 <div class="page-search">
-  <app-branch-search [input]="ms.getSearchRecord()" (searchResult)="search($event)"></app-branch-search>
+  <app-branch-search [search_url]="'/api/branch/GetListAsync'" [input]="ms.getSearchRecord()"
+    (searchResult)="search($event)"></app-branch-search>
 </div>
 
 <div class="page-pagination">
-  <app-page [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
+  <app-page [search_url]="'/api/branch/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 <div class="page-body">
 
   <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
-    [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder" [row_id_name]="'branch_id'"
-    [selected_id]="ms.selectedRow">
+    [delete_url]="'/api/branch/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [row_id_name]="'branch_id'" [selected_id]="ms.selectedRow">
   </app-table>
 
 </div>
 
 <div class="page-pagination line-bottom">
-  <app-page [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
+  <app-page [search_url]="'/api/branch/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
 </div>

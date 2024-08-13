@@ -52,7 +52,7 @@ export class MenuEditComponent extends baseEditComponent {
   getRecord() {
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/menu/GetRecordAsync').subscribe({
       next: (rec: iMenum) => {
         this.mform.setValue({
           menu_id: rec.menu_id,
@@ -92,7 +92,7 @@ export class MenuEditComponent extends baseEditComponent {
       'id': data.menu_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/menu/SaveAsync').subscribe({
       next: (v: iMenum) => {
         if (this.mode == "add") {
           this.id = v.menu_id;

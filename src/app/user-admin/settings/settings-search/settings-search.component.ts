@@ -21,7 +21,10 @@ export class SettingsSearchComponent {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iSettings_Search>();
+  @Input('search_url') search_url = '';
+  @Output('searchResult') output = new EventEmitter<any>();
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +50,7 @@ export class SettingsSearchComponent {
     if (this.output) {
       this.record.caption = this.mform.value.caption;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

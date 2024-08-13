@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class SettingsService extends baseService {
 
   constructor() {
-    super('settings_id', 'settings_id', '/api/settings');
+    super('settings_id', 'settings_id');
   }
   setInitialState() {
     return <iSettingsModel>{
@@ -22,7 +22,7 @@ export class SettingsService extends baseService {
   }
 
 
-  public ReUpdate(category: string, comp_id: number, branch_id: number, user_code: string) {
+  public ReUpdate(category: string, comp_id: number, branch_id: number, user_code: string, url: string) {
     const params = {
       'category': category,
       'company_id': comp_id,
@@ -32,7 +32,7 @@ export class SettingsService extends baseService {
     const options = {
       params: params
     }
-    return this.http.post<iSettings>(this.gs.getUrl(`${this.baseEndPoint}/ReUpdateAsync`), null, options);
+    return this.http.post<iSettings>(this.gs.getUrl(url), null, options);
 
   }
 

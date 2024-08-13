@@ -9,7 +9,7 @@ import { iUser_Search, iUserModel } from '../models/iuserm';
 export class UserService extends baseService {
 
   constructor() {
-    super('user_id', 'user_name', '/api/user');
+    super('user_id', 'user_name');
   }
   setInitialState() {
     return <iUserModel>{

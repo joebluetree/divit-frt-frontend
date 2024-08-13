@@ -68,7 +68,7 @@ export class UserEditComponent extends baseEditComponent {
       'id': this.id
     }
 
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/user/GetRecordAsync').subscribe({
       next: (rec: iUserm) => {
         this.mform.patchValue({
           user_id: rec.user_id,
@@ -110,7 +110,7 @@ export class UserEditComponent extends baseEditComponent {
       'mode': this.mode
     }
 
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/user/SaveAsync').subscribe({
       next: (v: iUserm) => {
         if (this.mode == "add") {
           //this.id = v.user_id;

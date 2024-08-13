@@ -123,7 +123,7 @@ export class SettingsEditComponent extends baseEditComponent {
       'id': data.id,
       'mode': "edit"
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/settings/SaveAsync').subscribe({
       next: (v: iSettings) => {
         //this.store.dispatch(upsert_row({ record: data, category: data.category }));
       },

@@ -15,7 +15,6 @@ export abstract class baseService {
   constructor(
     protected pkid: string,
     protected name: string,
-    protected baseEndPoint: string = '',
   ) {
   }
   protected abstract setInitialState(): any;
@@ -97,11 +96,7 @@ export abstract class baseService {
     const options = {
       headers: this.gs.getHeaders(),
     };
-    let mUrl = url;
-    if (url == "")
-      mUrl = `${this.baseEndPoint}/GetListAsync`;
-
-    this.http.post<any>(this.gs.getUrl(mUrl), data, options).subscribe({
+    this.http.post<any>(this.gs.getUrl(url), data, options).subscribe({
       next: (v: any) => {
         this.state.errorMessage = '';
         this.state.records = v.records;
@@ -122,10 +117,7 @@ export abstract class baseService {
       headers: this.gs.getHeaders(),
       params: { ...data }
     };
-    let mUrl = url;
-    // if (url == "")
-    //   mUrl = `${this.baseEndPoint}/getRecordAsync`;
-    return this.http.get<any>(this.gs.getUrl(mUrl), options);
+    return this.http.get<any>(this.gs.getUrl(url), options);
   }
 
   public async getSequence(param: any) {
@@ -150,10 +142,7 @@ export abstract class baseService {
       headers: this.gs.getHeaders(),
       params: { ...param }
     }
-    let mUrl = url;
-    // if (url == "")
-    //   mUrl = `${this.baseEndPoint}/SaveAsync`;
-    return this.http.post<any>(this.gs.getUrl(mUrl), record, options);
+    return this.http.post<any>(this.gs.getUrl(url), record, options);
   }
 
   public delete(data: any) {

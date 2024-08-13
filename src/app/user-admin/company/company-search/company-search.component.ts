@@ -17,11 +17,13 @@ export class CompanySearchComponent {
   mform: FormGroup;
   record!: iCompany_Search;
 
+  @Input('search_url') search_url = '';
+
   @Input('input') set input(v: iCompany_Search) {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iCompany_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,
     private gs: GlobalService) {
@@ -45,7 +47,7 @@ export class CompanySearchComponent {
     if (this.output) {
       this.record.comp_name = this.mform.value.comp_name;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

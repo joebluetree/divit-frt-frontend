@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class ModuleService extends baseService {
 
   constructor() {
-    super('module_id', 'module_name', '/api/module');
+    super('module_id', 'module_name');
   }
   setInitialState() {
     return <iModuleModel>{

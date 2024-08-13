@@ -17,11 +17,14 @@ export class MenuSearchComponent {
   mform: FormGroup;
   record!: iMenu_Search;
 
+
+  @Input('search_url') search_url = '';
+
   @Input('input') set input(v: iMenu_Search) {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iMenu_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   dataList = [{ key: 'NA', value: 'ALL' }, { key: 'Y', value: 'YES' }, { key: 'N', value: 'NO' }]
 
@@ -65,7 +68,7 @@ export class MenuSearchComponent {
       this.record.module_name = this.mform.value.module_name;
       this.record.menu_visible = this.mform.value.menu_visible;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

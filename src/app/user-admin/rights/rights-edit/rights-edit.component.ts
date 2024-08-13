@@ -64,7 +64,7 @@ export class RightsEditComponent extends baseEditComponent {
     if (this.id <= 0)
       return;
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/rights/GetRecordAsync').subscribe({
       next: (rec: iRights_header) => {
         this.loaddata(rec);
       },
@@ -104,7 +104,7 @@ export class RightsEditComponent extends baseEditComponent {
       'id': data.id,
       'mode': 'edit'
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/rights/SaveAsync').subscribe({
       next: (rec: iRights_header) => {
         this.loaddata(rec);
         /*

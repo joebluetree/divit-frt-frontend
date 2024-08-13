@@ -42,7 +42,7 @@ export class SettingsListComponent extends baseListComponent {
   }
 
   save() {
-    this.ms.ReUpdate(this.type, this.gs.user.user_company_id, this.gs.user.user_branch_id, this.gs.user.user_code).subscribe({
+    this.ms.ReUpdate(this.type, this.gs.user.user_company_id, this.gs.user.user_branch_id, this.gs.user.user_code, '/api/settings/ReUpdateAsync').subscribe({
       next: (v) => {
         this.gs.showAlert(["Save Complete"]);
       },

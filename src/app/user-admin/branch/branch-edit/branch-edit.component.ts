@@ -47,7 +47,7 @@ export class BranchEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/branch/GetRecordAsync').subscribe({
       next: (rec: iBranchm) => {
         this.mform.setValue({
           branch_id: rec.branch_id,
@@ -82,7 +82,7 @@ export class BranchEditComponent extends baseEditComponent {
       'id': data.branch_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/branch/SaveAsync').subscribe({
       next: (v: iBranchm) => {
         if (this.mode == "add") {
           this.id = v.branch_id;

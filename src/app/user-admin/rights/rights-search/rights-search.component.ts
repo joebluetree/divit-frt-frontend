@@ -20,7 +20,8 @@ export class RightsSearchComponent {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iUserBranches_Search>();
+  @Input('search_url') search_url = '';
+  @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,
     private gs: GlobalService) {
@@ -44,7 +45,7 @@ export class RightsSearchComponent {
     if (this.output) {
       this.record.user_name = this.mform.value.user_name;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

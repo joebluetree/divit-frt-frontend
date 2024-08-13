@@ -6,11 +6,13 @@
 </div>
 
 <div class="page-search">
-  <app-settings-search [input]="ms.getSearchRecord()" (searchResult)="search($event)"></app-settings-search>
+  <app-settings-search [search_url]="'/api/user/GetListAsync'" [search_url]="'/api/settings/GetListAsync'"
+    [input]="ms.getSearchRecord()" (searchResult)="search($event)"></app-settings-search>
 </div>
 
 <div class="page-pagination">
-  <app-page [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
+  <app-page [search_url]="'/api/user/GetListAsync'" [search_url]="'/api/settings/GetListAsync'"
+    [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 
@@ -20,7 +22,8 @@
 
     <ng-container *ngIf="format=='READ'">
       <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
-        [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder" [row_id_name]="'id'" [selected_id]="ms.selectedRow">
+        [delete_url]="'/api/user/DeleteAsync'" [delete_url]="'/api/settings/DeleteAsync'" [sort_column]="ms.sortColumn"
+        [sort_order]="ms.sortOrder" [row_id_name]="'id'" [selected_id]="ms.selectedRow">
       </app-table>
     </ng-container>
 
@@ -49,5 +52,6 @@
 </div>
 
 <div class="page-pagination">
-  <app-page [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
+  <app-page [search_url]="'/api/user/GetListAsync'" [search_url]="'/api/settings/GetListAsync'"
+    [page]="ms.getPageRecord()" (pageEvents)="pageEvents($event)"></app-page>
 </div>

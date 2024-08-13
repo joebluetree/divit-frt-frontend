@@ -20,7 +20,10 @@ export class ModuleSearchComponent {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iModule_Search>();
+  @Input('search_url') search_url = '';
+  @Output('searchResult') output = new EventEmitter<any>();
+
+
 
   dataList = [{ key: 'NA', value: 'ALL' }, { key: 'Y', value: 'YES' }, { key: 'N', value: 'NO' }]
 
@@ -49,7 +52,7 @@ export class ModuleSearchComponent {
       this.record.module_name = this.mform.value.module_name;
       this.record.module_is_installed = this.mform.value.module_is_installed;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 
