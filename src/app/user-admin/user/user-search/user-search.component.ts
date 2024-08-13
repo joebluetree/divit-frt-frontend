@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { iUser_Search } from '../../models/iuserm';
 import { GlobalService } from '../../../core/services/global.service';
