@@ -65,7 +65,7 @@ export class AcctmEditComponent extends baseEditComponent {
     }
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/accounts/acctm/GetRecordAsync').subscribe({
       next: (rec: iAcctm) => {
         console.log(rec);
         this.mform.setValue({
@@ -107,7 +107,7 @@ export class AcctmEditComponent extends baseEditComponent {
       'id': data.acc_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/accounts/acctm/SaveAsync').subscribe({
       next: (v: iAcctm) => {
         if (this.mode == "add") {
           this.id = v.acc_id;

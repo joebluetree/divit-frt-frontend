@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class CustomermService extends baseService {
 
   constructor() {
-    super('cust_id', 'cust_name', '/api/customer');
+    super('cust_id', 'cust_name');
   }
 
   setInitialState() {

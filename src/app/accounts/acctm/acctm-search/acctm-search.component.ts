@@ -16,12 +16,13 @@ export class AcctmSearchComponent {
   mform: FormGroup;
   record!: iAcctm_Search;
 
+  @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iAcctm_Search) {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iAcctm_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder,
     private gs: GlobalService) {
@@ -45,7 +46,7 @@ export class AcctmSearchComponent {
     if (this.output) {
       this.record.acc_name = this.mform.value.acc_name;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

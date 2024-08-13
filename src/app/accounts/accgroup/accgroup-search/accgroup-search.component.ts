@@ -18,11 +18,13 @@ export class AccGroupSearchComponent {
   record!: iAccGroupm_Search;
 
 
+  @Input('search_url') search_url = '';
+
   @Input('input') set input(v: iAccGroupm_Search) {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iAccGroupm_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   dataList = [
     { key: 'NA', value: 'NA' },
@@ -59,7 +61,8 @@ export class AccGroupSearchComponent {
       this.record.grp_name = this.mform.value.grp_name;
       this.record.grp_main_group = this.mform.value.grp_main_group;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
+
     }
   }
 

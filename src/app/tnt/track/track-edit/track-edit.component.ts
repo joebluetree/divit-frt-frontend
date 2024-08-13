@@ -47,7 +47,7 @@ export class TrackEditComponent extends baseEditComponent {
   getRecord() {
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/tnt/GetRecordAsync').subscribe({
       next: (rec: iTrackm) => {
         this.mform.setValue({
           track_id: rec.track_id,
@@ -80,7 +80,7 @@ export class TrackEditComponent extends baseEditComponent {
       'id': data.track_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/tnt/SaveAsync').subscribe({
       next: (v: iTrackm) => {
         if (this.mode == "add") {
           this.id = v.track_id;
@@ -119,6 +119,7 @@ export class TrackEditComponent extends baseEditComponent {
     const param = {
       'id': data.track_id,
       'cntr': data.track_cntr_no,
+      'comp_id': data.rec_company_id
     }
     this.ms.postData(param, "/api/tnt/GetTrackingDetails").subscribe({
       next: (v: any) => {

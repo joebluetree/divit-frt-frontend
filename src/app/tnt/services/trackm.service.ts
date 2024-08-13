@@ -7,7 +7,7 @@ import { iPage } from "ngx-jrt-controls";
 export class TrackmService extends baseService {
 
   constructor() {
-    super('track_id', 'track_cntr_no', '/api/tnt');
+    super('track_id', 'track_cntr_no');
   }
 
   protected override setInitialState() {

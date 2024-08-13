@@ -17,11 +17,12 @@ export class ParamSearchComponent {
   mform: FormGroup;
   record!: iParam_Search;
 
+  @Input('search_url') search_url = '';
+
   @Input('input') set input(v: iParam_Search) {
     this.record = { ...v };
   }
-
-  @Output('searchResult') output = new EventEmitter<iParam_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -47,7 +48,7 @@ export class ParamSearchComponent {
     if (this.output) {
       this.record.param_name = this.mform.value.param_name;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

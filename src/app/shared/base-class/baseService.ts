@@ -3,8 +3,6 @@ import { inject } from "@angular/core";
 import { GlobalService } from "../../core/services/global.service";
 import { firstValueFrom } from "rxjs";
 
-
-
 export abstract class baseService {
 
   protected http = inject(HttpClient);
@@ -17,7 +15,7 @@ export abstract class baseService {
   constructor(
     protected pkid: string,
     protected name: string,
-    protected baseEndPoint: string,
+    protected baseEndPoint: string = '',
   ) {
   }
   protected abstract setInitialState(): any;
@@ -27,19 +25,6 @@ export abstract class baseService {
     this.state = this.gs.appStates[_screen_id] || this.setInitialState();
     this.gs.appStates[_screen_id] = this.state;
   }
-
-  // public _UpdateList(record: any, bAdd: boolean) {
-  //   if (bAdd)
-  //     this.state.records.push({ ...record });
-  //   else {
-  //     this.state.records = this.state.records.map((_rec: any) => {
-  //       if (_rec[this.pkid] == record[this.pkid])
-  //         return record;
-  //       else
-  //         return _rec;
-  //     })
-  //   }
-  // }
 
   public UpdateRecord(record: any, mode: string) {
     if (mode == "add")
@@ -107,12 +92,16 @@ export abstract class baseService {
     return this.state.errorMessage;
   }
 
-  public getList(action: string) {
+  public getList(action: string, url: string = "") {
     let data = { menu_id: this.screen_id, action: action, ...this.state.searchRecord, ...this.state.pageRecord, ...this.gs.getGlobalConstants() };
     const options = {
       headers: this.gs.getHeaders(),
     };
-    this.http.post<any>(this.gs.getUrl(`${this.baseEndPoint}/GetListAsync`), data, options).subscribe({
+    let mUrl = url;
+    if (url == "")
+      mUrl = `${this.baseEndPoint}/GetListAsync`;
+
+    this.http.post<any>(this.gs.getUrl(mUrl), data, options).subscribe({
       next: (v: any) => {
         this.state.errorMessage = '';
         this.state.records = v.records;
@@ -134,9 +123,8 @@ export abstract class baseService {
       params: { ...data }
     };
     let mUrl = url;
-    if (url == "")
-      mUrl = `${this.baseEndPoint}/getRecordAsync`;
-
+    // if (url == "")
+    //   mUrl = `${this.baseEndPoint}/getRecordAsync`;
     return this.http.get<any>(this.gs.getUrl(mUrl), options);
   }
 
@@ -157,27 +145,38 @@ export abstract class baseService {
     return this.http.post<any>(this.gs.getUrl(url), param, options);
   }
 
-
-  public save(param: any, record: any) {
+  public save(param: any, record: any, url: string = "") {
     const options = {
       headers: this.gs.getHeaders(),
       params: { ...param }
     }
-    return this.http.post<any>(this.gs.getUrl(`${this.baseEndPoint}/SaveAsync`), record, options);
+    let mUrl = url;
+    // if (url == "")
+    //   mUrl = `${this.baseEndPoint}/SaveAsync`;
+    return this.http.post<any>(this.gs.getUrl(mUrl), record, options);
   }
 
   public delete(data: any) {
+    if (data.url == '') {
+      alert('No Url Specified');
+      return;
+    }
     if (!confirm(`Delete ${data.rec[this.name]} y/n`))
       return;
-    this.deleteRecord({ 'id': data.rec[this.pkid] });
+    this.deleteRecord({ 'id': data.rec[this.pkid], url: data.url });
   }
 
   public deleteRecord(data: any) {
+    if (data.url == '') {
+      alert('No Url Specified');
+      return;
+    }
     const options = {
       headers: this.gs.getHeaders(),
       params: { ...data }
     }
-    this.http.get<any>(this.gs.getUrl(`${this.baseEndPoint}/DeleteAsync`), options).subscribe({
+    let mUrl = data.url;
+    this.http.get<any>(this.gs.getUrl(mUrl), options).subscribe({
       next: (v: any) => {
         if (v.status) {
           this.RemoveRecord(data.id);

@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class AcctmService extends baseService {
 
   constructor() {
-    super('acc_id', 'acc_name', '/api/accounts/acctm');
+    super('acc_id', 'acc_name');
   }
 
   setInitialState() {

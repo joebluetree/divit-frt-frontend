@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class ParamService extends baseService {
 
   constructor() {
-    super('param_id', 'param_name', '/api/param');
+    super('param_id', 'param_name');
   }
 
   setInitialState() {

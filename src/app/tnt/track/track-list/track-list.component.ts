@@ -4,7 +4,6 @@ import { baseListComponent } from '../../../shared/base-class/baseListComponent'
 import { TrackmService } from '../../services/trackm.service';
 import { TrackSearchComponent } from '../track-search/track-search.component';
 
-
 @Component({
   selector: 'app-track-list',
   templateUrl: './track-list.component.html',
@@ -16,18 +15,11 @@ export class TrackListComponent extends baseListComponent {
 
   constructor(
     public ms: TrackmService,
-
-  ) {
-    super(ms);
-  }
-
+  ) { super(ms); }
 
   ngOnInit(): void {
-
     this.init();
-
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
-
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/tnt/trackEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "track_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
@@ -40,7 +32,5 @@ export class TrackListComponent extends baseListComponent {
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
   }
-
-
 
 }

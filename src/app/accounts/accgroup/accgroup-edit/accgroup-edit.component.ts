@@ -55,7 +55,7 @@ export class AccGroupEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/accounts/accgroup/GetRecordAsync').subscribe({
       next: (rec: iAccGroupm) => {
         this.mform.setValue({
           grp_id: rec.grp_id,
@@ -90,7 +90,7 @@ export class AccGroupEditComponent extends baseEditComponent {
       'id': data.grp_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/accounts/accgroup/SaveAsync').subscribe({
       next: (v: iAccGroupm) => {
         if (this.mode == 'add') {
           this.id = v.grp_id;

@@ -16,11 +16,13 @@ export class TrackSearchComponent {
   mform: FormGroup;
   record!: iTrackm_Search;
 
+  @Input('search_url') search_url = '';
+
   @Input('input') set input(v: iTrackm_Search) {
     this.record = { ...v };
   }
 
-  @Output('searchResult') output = new EventEmitter<iTrackm_Search>();
+  @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(
     private gs: GlobalService,
@@ -48,7 +50,7 @@ export class TrackSearchComponent {
       this.record.track_book_no = this.mform.value.track_book_no;
       this.record.track_cntr_no = this.mform.value.track_cntr_no;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit(this.record);
+      this.output.emit({ record: this.record, url: this.search_url });
     }
   }
 

@@ -7,7 +7,7 @@ import { baseService } from '../../shared/base-class/baseService';
 export class AccGroupService extends baseService {
 
   constructor() {
-    super('grp_id', 'grp_name', '/api/accounts/accgroup');
+    super('grp_id', 'grp_name');
   }
 
   setInitialState() {

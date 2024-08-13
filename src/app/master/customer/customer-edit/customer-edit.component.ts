@@ -69,7 +69,7 @@ export class CustomerEditComponent extends baseEditComponent {
   getRecord() {
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param).subscribe({
+    this.ms.getRecord(param, '/api/customer/GetRecordAsync').subscribe({
       next: (rec: iCustomerm) => {
         this.mform.setValue({
           cust_id: rec.cust_id,
@@ -114,7 +114,7 @@ export class CustomerEditComponent extends baseEditComponent {
       'id': data.cust_id,
       'mode': this.mode
     }
-    this.ms.save(param, data).subscribe({
+    this.ms.save(param, data, '/api/customer/SaveAsync').subscribe({
       next: (v: iCustomerm) => {
         if (this.mode == "add") {
           this.id = v.cust_id;

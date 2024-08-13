@@ -10,6 +10,8 @@ export abstract class baseListComponent {
   protected location = inject(Location);
   public gs = inject(GlobalService);
 
+
+
   protected appid = '';
   protected menuid = '';
   protected title = '';
@@ -27,7 +29,9 @@ export abstract class baseListComponent {
 
 
 
-  constructor(protected _ms: any) {
+  constructor(
+    protected _ms: any
+  ) {
   }
 
   protected init(): void {
@@ -54,16 +58,16 @@ export abstract class baseListComponent {
   }
 
   search(_record: any) {
-    this._ms.updateSearchRecord(_record);
-    this.getList('SEARCH');
+    this._ms.updateSearchRecord(_record.record);
+    this.getList('SEARCH', _record.url);
   }
 
   pageEvents(arg: any) {
-    this.getList(arg.action);
+    this.getList(arg.action, arg.url);
   }
 
-  getList(action: string) {
-    this._ms.getList(action);
+  getList(action: string, url: string = '') {
+    this._ms.getList(action, url);
   }
 
   callback_table(data: any) {
