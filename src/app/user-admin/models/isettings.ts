@@ -8,7 +8,11 @@ export interface iSettings {
   type: string;
   table: string;
   value: string;
+  code: string;
+  name: string;
   order: number;
+
+  rowversion: string;
 
   rec_company_id: number;
   rec_branch_id: number;

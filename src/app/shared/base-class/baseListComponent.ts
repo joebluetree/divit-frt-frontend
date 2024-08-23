@@ -27,6 +27,8 @@ export abstract class baseListComponent {
 
   protected table_data: any[] = [];
 
+  protected url_param: any = {};
+
 
 
   constructor(
@@ -37,6 +39,8 @@ export abstract class baseListComponent {
   protected init(): void {
 
     this.route.queryParams.forEach((rec: any) => {
+
+      this.url_param = { ...rec };
       this.appid = rec["appid"];
       this.menuid = rec["menuid"];
       this.type = rec["type"];
@@ -90,5 +94,6 @@ export abstract class baseListComponent {
   return2Parent() {
     this.location.back();
   }
+
 
 }

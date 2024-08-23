@@ -4,6 +4,8 @@ import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { TrackmService } from '../../services/trackm.service';
 import { iTrackm } from '../../models/itrackm';
+import { iTracking_data } from '../../models/itracking_data';
+import { iParam } from '../../../master/models/iparam';
 
 @Component({
   selector: 'app-track-edit',
@@ -13,8 +15,6 @@ import { iTrackm } from '../../models/itrackm';
   imports: [...CustomControls]
 })
 export class TrackEditComponent extends baseEditComponent {
-
-
   constructor(
     private ms: TrackmService,
   ) {
@@ -23,7 +23,11 @@ export class TrackEditComponent extends baseEditComponent {
       track_id: [0],
       track_book_no: ['', [Validators.maxLength(100)]],
       track_cntr_no: ['', [Validators.required, Validators.maxLength(11)]],
+      track_carrier_id: [0],
+      track_carrier_name: [''],
+      track_carrier_scac: [''],
       rowversion: [''],
+      tracking_data: this.fb.array([]),
     })
   }
 
@@ -31,10 +35,39 @@ export class TrackEditComponent extends baseEditComponent {
     this.id = 0;
     this.init();
 
+    this.showModel = true;
+
     if (this.mode == "add")
       this.newRecord();
     else
       this.getRecord();
+  }
+
+  addRow(rec: iTracking_data) {
+    return this.fb.group({
+      track_id: [rec.tnt_track_id || 0],
+      tnt_trackm_id: [rec.tnt_trackm_id || 0],
+      tnt_trackd_id: [rec.tnt_trackd_id || 0],
+      event_date: [rec.tnt_event_date || ''],
+      tnt_date: [rec.tnt_date || ''],
+      tnt_time: [rec.tnt_time || ''],
+      tnt_event_type: [rec.tnt_event_type || ''],
+      tnt_event_code: [rec.tnt_event_code || ''],
+      tnt_transport_mode: [rec.tnt_transport_mode || ''],
+      tnt_status_code: [rec.tnt_status_code || ''],
+      tnt_status_name: [rec.tnt_status_name || ''],
+      tnt_port_code: [rec.tnt_port_code || ''],
+      tnt_port_name: [rec.tnt_port_name || ''],
+      tnt_location_address: [rec.tnt_location_address || ''],
+
+      tnt_facility_code: [rec.tnt_facility_code || ''],
+      tnt_facility_name: [rec.tnt_facility_name || ''],
+
+      tnt_vessel: [rec.tnt_vessel || ''],
+      tnt_vessel_imon: [rec.tnt_vessel_imon || ''],
+      tnt_voyage: [rec.tnt_voyage || ''],
+      row_type: [rec.row_type || ''],
+    })
   }
 
   async newRecord() {
@@ -49,16 +82,30 @@ export class TrackEditComponent extends baseEditComponent {
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/tnt/GetRecordAsync').subscribe({
       next: (rec: iTrackm) => {
-        this.mform.setValue({
+        this.mform.patchValue({
           track_id: rec.track_id,
           track_book_no: rec.track_book_no,
           track_cntr_no: rec.track_cntr_no,
+
+          track_carrier_id: rec.track_carrier_id,
+          track_carrier_name: rec.track_carrier_name,
+          track_carrier_scac: rec.track_carrier_scac,
+
           rowversion: rec.rowversion,
         });
+
+        console.log(this.mform.value);
+
+        this.formArray('tracking_data').clear();
+        rec.tracking_data.forEach(rec => {
+          this.formArray('tracking_data').push(this.addRow(rec))
+        });
+
       },
       error: (e) => {
         alert(e.message);
       }
+
     })
   }
 
@@ -119,11 +166,12 @@ export class TrackEditComponent extends baseEditComponent {
     const param = {
       'id': data.track_id,
       'cntr': data.track_cntr_no,
+      'carrier_id': data.track_carrier_id,
       'comp_id': data.rec_company_id
     }
     this.ms.postData(param, "/api/tnt/GetTrackingDetails").subscribe({
       next: (v: any) => {
-
+        this.getRecord();
       },
       error: (e) => {
         this.gs.showAlert([e.error, e.message]);
@@ -132,21 +180,16 @@ export class TrackEditComponent extends baseEditComponent {
 
   }
 
+  callBack(action: { id: string, rec: iParam }) {
+    if (action.id == 'track_carrier_name') {
+      this.mform.patchValue({
+        track_carrier_id: action.rec ? action.rec.param_id : 0,
+        track_carrier_name: action.rec ? action.rec.param_name : "",
+      })
+    }
+  }
 
-  // callBack_Customer(action: { id: string, rec: iTrackm }) {
-  //   if (action.rec == null) {
-  //     this.mform.patchValue({
-  //       cust_parent_id: null,
-  //       cust_parent_name: '',
-  //     });
-  //   }
-  //   else {
-  //     this.mform.patchValue({
-  //       cust_parent_id: action.rec.cust_id,
-  //       cust_parent_name: action.rec.cust_name,
-  //     });
-  //   }
-  // }
+
 
 
 

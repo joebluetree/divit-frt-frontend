@@ -52,6 +52,10 @@ label {
   text-decoration: underline;
 }
 
+.hand-cursor {
+  cursor: pointer;
+}
+
 .text-center {
   text-align: center;
 }

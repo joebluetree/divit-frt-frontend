@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { iParam, iParamModel } from '../../models/iparam';
+import { iParam } from '../../models/iparam';
 import { CustomControls } from '../../../app.config';
 import { ParamService } from '../../services/param.service';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
@@ -14,6 +14,13 @@ import { baseEditComponent } from '../../../shared/base-class/baseEditComponent'
 })
 export class ParamEditComponent extends baseEditComponent {
 
+  value1 = "";
+  value2 = "";
+  value3 = "";
+  value4 = "";
+  value5 = "";
+
+
   constructor(
     private ms: ParamService
   ) {
@@ -26,6 +33,11 @@ export class ParamEditComponent extends baseEditComponent {
       param_id: [0],
       param_code: ['', [Validators.required, Validators.maxLength(60)]],
       param_name: ['', [Validators.required, Validators.maxLength(60)]],
+      param_value1: ['', [Validators.maxLength(100)]],
+      param_value2: ['', [Validators.maxLength(100)]],
+      param_value3: ['', [Validators.maxLength(100)]],
+      param_value4: ['', [Validators.maxLength(100)]],
+      param_value5: ['', [Validators.maxLength(100)]],
       param_order: ['', [Validators.required, Validators.minLength(1)]],
       rowversion: [''],
     })
@@ -34,6 +46,12 @@ export class ParamEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
+
+    if (this.type == "SEA CARRIER") {
+      this.value1 = "SCAC Code";
+    }
+
+
     if (this.mode == "add")
       this.newRecord();
     if (this.mode == "edit")
@@ -56,6 +74,11 @@ export class ParamEditComponent extends baseEditComponent {
           param_id: rec.param_id,
           param_code: rec.param_code,
           param_name: rec.param_name,
+          param_value1: rec.param_value1,
+          param_value2: rec.param_value2,
+          param_value3: rec.param_value3,
+          param_value4: rec.param_value4,
+          param_value5: rec.param_value5,
           param_order: rec.param_order,
           rowversion: rec.rowversion,
         })
@@ -110,6 +133,10 @@ export class ParamEditComponent extends baseEditComponent {
       complete: () => { }
 
     })
+  }
+
+  getTitle() {
+    return "SETTINGS / " + this.type + " / " + this.mform.value.param_name;
   }
 
 

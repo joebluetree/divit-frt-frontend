@@ -22,9 +22,9 @@ export class SettingsEditComponent extends baseEditComponent {
 
   format = "";
 
-  code = '';
-  name = '';
-  value = '';
+  //code = '';
+  //name = '';
+  //value = '';
 
   table_name = '';
 
@@ -38,9 +38,9 @@ export class SettingsEditComponent extends baseEditComponent {
   ) {
     super();
     this.mform = this.fb.group({
-      code: ['',],
-      name: ['',],
-      value: ['',],
+      code: [''],
+      name: [''],
+      value: [''],
     })
   }
 
@@ -49,7 +49,7 @@ export class SettingsEditComponent extends baseEditComponent {
 
     this.init();
 
-    const mrec = JSON.parse(this.rec.value.replaceAll("'", '"'));
+    //const mrec = JSON.parse(this.rec.value.replaceAll("'", '"'));
 
     if (this.rec.type == "INT" || this.rec.type == "NUMBER" || this.rec.type == "STRING") {
       this.format = 'input';
@@ -57,9 +57,11 @@ export class SettingsEditComponent extends baseEditComponent {
         this.inputType = 'number';
       if (this.rec.type == "STRING")
         this.inputType = 'text';
-      this.value = mrec.value;
+      //this.value = mrec.value;
       this.mform.patchValue({
-        value: this.value
+        value: this.rec.value,
+        code: this.rec.code,
+        name: this.rec.name
       })
     }
 
@@ -72,32 +74,45 @@ export class SettingsEditComponent extends baseEditComponent {
       this.display_column1 = col[2].trim();
       this.display_column2 = col[3].trim();
 
-      this.value = mrec.value;
-      this.code = mrec.code;
-      this.name = mrec.name;
+      //this.value = this.rec.value;
+      //this.code = this.rec.code;
+      //this.name = this.rec.name;
+
       this.mform.patchValue({
-        value: this.value,
-        code: this.code,
-        name: this.name
+        value: this.rec.value,
+        code: this.rec.code,
+        name: this.rec.name
       })
     }
 
     if (this.rec.type == "BOOLEAN") {
       this.format = 'boolean';
       this.inputType = 'boolean';
-      this.value = mrec.value;
+      //this.value = this.rec.value;
       this.mform.patchValue({
-        value: this.value
+        value: this.rec.value,
+        code: '',
+        name: ''
       })
     }
   }
 
   callBack(action: { id: string, rec: any }) {
 
+    let value = action.rec ? action.rec[this.value_column].toString() : '';
+    let code = action.rec ? action.rec[this.display_column1].toString() : '';
+    let name = action.rec ? action.rec[this.display_column2].toString() : '';
+
+    if (action.rec) {
+      value = action.rec[this.value_column].toString();
+      code = action.rec[this.display_column1].toString();
+      name = action.rec[this.display_column2].toString();
+    }
+
     this.mform.patchValue({
-      value: action.rec ? action.rec[this.value_column] : '',
-      code: action.rec ? action.rec[this.display_column2] : '',
-      name: action.rec ? action.rec[this.display_column2] : '',
+      value: value,
+      code: code,
+      name: name,
     });
   }
 
@@ -106,6 +121,7 @@ export class SettingsEditComponent extends baseEditComponent {
 
     let data = <iSettings>{ ...this.rec };
 
+    /*
     if (this.format == 'input' || this.format == 'boolean') {
       const _value = { 'value': this.mform.value.value }
       data.value = JSON.stringify(_value);
@@ -115,6 +131,11 @@ export class SettingsEditComponent extends baseEditComponent {
       const _value = { 'value': this.mform.value.value, 'code': this.mform.value.code, 'name': this.mform.value.name }
       data.value = JSON.stringify(_value);
     }
+    */
+
+    data.value = this.mform.value.value;
+    data.code = this.mform.value.code;
+    data.name = this.mform.value.name;
 
     //data.rec_company_id = this.gs.user.user_company_id;
     data.rec_edited_by = this.gs.user.user_code;
@@ -123,6 +144,9 @@ export class SettingsEditComponent extends baseEditComponent {
       'id': data.id,
       'mode': "edit"
     }
+
+    console.log(data);
+
     this.ms.save(param, data, '/api/settings/SaveAsync').subscribe({
       next: (v: iSettings) => {
         //this.store.dispatch(upsert_row({ record: data, category: data.category }));

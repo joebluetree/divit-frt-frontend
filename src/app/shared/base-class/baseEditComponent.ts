@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { iMenum } from "../../core/models/imenum";
 import { GlobalService } from "../../core/services/global.service";
 import { inject } from "@angular/core";

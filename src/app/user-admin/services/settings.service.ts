@@ -22,18 +22,11 @@ export class SettingsService extends baseService {
   }
 
 
-  public ReUpdate(category: string, comp_id: number, branch_id: number, user_code: string, url: string) {
-    const params = {
-      'category': category,
-      'company_id': comp_id,
-      'branch_id': branch_id,
-      'user_code': user_code
-    }
+  public ReUpdate(params: any, url: string) {
     const options = {
       params: params
     }
     return this.http.post<iSettings>(this.gs.getUrl(url), null, options);
-
   }
 
 

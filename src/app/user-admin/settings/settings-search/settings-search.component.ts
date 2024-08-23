@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { iSettings_Search } from '../../models/isettings';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
-
 
 @Component({
   selector: 'app-settings-search',
@@ -24,8 +23,6 @@ export class SettingsSearchComponent {
   @Input('search_url') search_url = '';
   @Output('searchResult') output = new EventEmitter<any>();
 
-
-
   constructor(
     private fb: FormBuilder,
     private gs: GlobalService) {
@@ -43,6 +40,8 @@ export class SettingsSearchComponent {
     this.mform.setValue({
       caption: this.record.caption,
     })
+
+    this.search('search');
   }
 
 

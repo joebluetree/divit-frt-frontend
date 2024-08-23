@@ -7,7 +7,7 @@
 
 <form [formGroup]="mform">
 
-  <div class="page-body">
+  <div class="page-body bottom-line">
 
 
     <div class="row">
@@ -28,20 +28,115 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Carrier</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="track_carrier_name" (CallBack)="callBack($event)" [table]="'param'"
+              [subtable]="'SEA CARRIER'" [company_id]="getCompanyId()" [display_column]="'param_name'" [url]="url"
+              required></auto-complete>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+              [disabled]="mform.invalid">Save</button>
+          </div>
+        </div>
+
+        <div class="form-group row mt-1">
+          <div class="col-sm-12">
+            <button *ngIf="mode=='edit'" class="btn btn-sm btn-success" (click)="loadTracking()"
+              [disabled]="mform.invalid">Refresh</button>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="page-body line-bottom">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <table class="table table-sm table-hover table-bordered table-condensed hand-cursor">
+
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>Event-Type</th>
+              <th>Event-Code</th>
+              <th>Transport-Mode</th>
+              <th>Status-Code</th>
+              <th>Status</th>
+              <th>Port</th>
+              <th>Place</th>
+              <th>Location</th>
+              <th>Facility</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Vessel</th>
+              <th>IMO</th>
+              <th>Voyage</th>
+              <th>type</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="tracking_data">
+
+            <tr [ngClass]="{
+            'table-success': iRow.get('row_type')?.value == 'POL' || iRow.get('row_type')?.value == 'POD',
+            'table-info' : iRow.get('row_type')?.value == 'VESSEL'
+          }" *ngFor="let iRow of formArray('tracking_data').controls; let i=index;" [formGroupName]="i">
+              <td> {{iRow.get('tnt_event_type')?.value }}</td>
+              <td> {{iRow.get('tnt_event_code')?.value }}</td>
+              <td> {{iRow.get('tnt_transport_mode')?.value }}</td>
+              <td> {{iRow.get('tnt_status_code')?.value }}</td>
+              <td> {{iRow.get('tnt_status_name')?.value }}</td>
+              <td> {{iRow.get('tnt_port_code')?.value }}</td>
+              <td> {{iRow.get('tnt_port_name')?.value }}</td>
+              <td> {{iRow.get('tnt_location_address')?.value }}</td>
+              <td> {{iRow.get('tnt_facility_name')?.value }}</td>
+              <td> {{iRow.get('tnt_date')?.value }}</td>
+              <td> {{iRow.get('tnt_time')?.value }}</td>
+              <td> {{iRow.get('tnt_vessel')?.value }}</td>
+              <td> {{iRow.get('tnt_vessel_imon')?.value }}</td>
+              <td> {{iRow.get('tnt_voyage')?.value }}</td>
+              <td> {{iRow.get('row_type')?.value }}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
       </div>
 
     </div>
 
   </div>
 
+
+
+
 </form>
 
 
 
-<div class="page-footer line-bottom">
-  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-  <button class="btn btn-sm btn-success" (click)="loadTracking()" [disabled]="mform.invalid">Refresh</button>
-</div>
+
+
+
 
 
 <div *ngIf="showModel">

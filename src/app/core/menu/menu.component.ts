@@ -30,6 +30,7 @@ export class MenuComponent {
     const param = JSON.parse(menu.menu_param.replaceAll("'", '"'));
     param.menuid = menu.menu_code;
     param.appid = this.gs.app_id;
+
     return param;
   }
 

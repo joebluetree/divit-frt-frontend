@@ -5,6 +5,12 @@ export interface iParam {
   param_type: string;
   param_code: string;
   param_name: string;
+  param_value1: string;
+  param_value2: string;
+  param_value3: string;
+  param_value4: string;
+  param_value5: string;
+
   param_order: number;
   rowversion: string;
   rec_company_id: number;
