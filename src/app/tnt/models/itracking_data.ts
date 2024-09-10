@@ -5,24 +5,20 @@ export interface iTracking_data {
   tnt_trackd_id: number;
   tnt_event_date: string;
   tnt_date: string;
-  tnt_time: string;
-  tnt_event_type: string;
-  tnt_event_code: string;
+
+  tnt_container: string;
   tnt_transport_mode: string;
+  tnt_event_type: string;
   tnt_status_code: string;
   tnt_status_name: string;
-
-  tnt_facility_code: string;
-  tnt_facility_name: string;
-
   tnt_port_code: string;
   tnt_port_name: string;
-  tnt_location_address: string;
+  tnt_port_location: string;
   tnt_vessel: string;
   tnt_vessel_imon: string;
   tnt_voyage: string;
 
-  row_type: string;
+  tnt_row_type: string;
 
   rowversion: string;
   rec_company_id: number;

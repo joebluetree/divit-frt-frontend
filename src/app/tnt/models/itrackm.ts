@@ -6,6 +6,9 @@ export interface iTrackm {
   track_book_no: string;
   track_cntr_no: string;
 
+  track_api_type: string;
+  track_request_id: string;
+
   track_pol_code: string;
   track_pol_name: string;
   track_pol_etd: string;

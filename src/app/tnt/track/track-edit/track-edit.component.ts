@@ -26,6 +26,9 @@ export class TrackEditComponent extends baseEditComponent {
       track_carrier_id: [0],
       track_carrier_name: [''],
       track_carrier_scac: [''],
+      track_api_type: [''],
+      track_request_id: [''],
+
       rowversion: [''],
       tracking_data: this.fb.array([]),
     })
@@ -50,23 +53,16 @@ export class TrackEditComponent extends baseEditComponent {
       tnt_trackd_id: [rec.tnt_trackd_id || 0],
       event_date: [rec.tnt_event_date || ''],
       tnt_date: [rec.tnt_date || ''],
-      tnt_time: [rec.tnt_time || ''],
-      tnt_event_type: [rec.tnt_event_type || ''],
-      tnt_event_code: [rec.tnt_event_code || ''],
       tnt_transport_mode: [rec.tnt_transport_mode || ''],
       tnt_status_code: [rec.tnt_status_code || ''],
       tnt_status_name: [rec.tnt_status_name || ''],
       tnt_port_code: [rec.tnt_port_code || ''],
       tnt_port_name: [rec.tnt_port_name || ''],
-      tnt_location_address: [rec.tnt_location_address || ''],
-
-      tnt_facility_code: [rec.tnt_facility_code || ''],
-      tnt_facility_name: [rec.tnt_facility_name || ''],
-
+      tnt_port_location: [rec.tnt_port_location || ''],
       tnt_vessel: [rec.tnt_vessel || ''],
       tnt_vessel_imon: [rec.tnt_vessel_imon || ''],
       tnt_voyage: [rec.tnt_voyage || ''],
-      row_type: [rec.row_type || ''],
+      tnt_row_type: [rec.tnt_row_type || ''],
     })
   }
 
@@ -90,6 +86,9 @@ export class TrackEditComponent extends baseEditComponent {
           track_carrier_id: rec.track_carrier_id,
           track_carrier_name: rec.track_carrier_name,
           track_carrier_scac: rec.track_carrier_scac,
+
+          track_api_type: rec.track_api_type,
+          track_request_id: rec.track_request_id,
 
           rowversion: rec.rowversion,
         });
@@ -140,6 +139,8 @@ export class TrackEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
+          track_api_type: v.track_api_type,
+          track_request_id: v.track_request_id,
           rowversion: v.rowversion
         });
         this.ms.UpdateRecord(v, _mode);
@@ -151,23 +152,22 @@ export class TrackEditComponent extends baseEditComponent {
     })
   }
 
-  loadTracking() {
+  loadTrackingDetails() {
 
     if (this.mform.invalid) {
       alert('Invalid Form')
       return;
     }
     const data = <iTrackm>this.mform.value;
-
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
-
-
     const param = {
       'id': data.track_id,
       'cntr': data.track_cntr_no,
       'carrier_id': data.track_carrier_id,
-      'comp_id': data.rec_company_id
+      'comp_id': data.rec_company_id,
+      'track_api_type': data.track_api_type,
+      'track_request_id': data.track_request_id
     }
     this.ms.postData(param, "/api/tnt/GetTrackingDetails").subscribe({
       next: (v: any) => {
@@ -189,9 +189,4 @@ export class TrackEditComponent extends baseEditComponent {
     }
   }
 
-
-
-
-
 }
-

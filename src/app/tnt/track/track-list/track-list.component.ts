@@ -12,12 +12,12 @@ import { TrackSearchComponent } from '../track-search/track-search.component';
   imports: [...CustomControls, TrackSearchComponent]
 })
 export class TrackListComponent extends baseListComponent {
-
   constructor(
     public ms: TrackmService,
   ) { super(ms); }
 
   ngOnInit(): void {
+
     this.init();
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
@@ -28,6 +28,9 @@ export class TrackListComponent extends baseListComponent {
 
       { col_name: "track_carrier_name", col_caption: "CARRIER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "track_carrier_scac", col_caption: "SCAC", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+
+      { col_name: "track_api_type", col_caption: "API-TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "track_request_id", col_caption: "REQID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
 
       { col_name: "track_pol_code", col_caption: "POL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "track_pol_etd", col_caption: "ETD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
