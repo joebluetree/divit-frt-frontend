@@ -38,7 +38,7 @@ export class TrackEditComponent extends baseEditComponent {
     this.id = 0;
     this.init();
 
-    this.showModel = true;
+    this.showModel = false;
 
     if (this.mode == "add")
       this.newRecord();
@@ -54,6 +54,7 @@ export class TrackEditComponent extends baseEditComponent {
       event_date: [rec.tnt_event_date || ''],
       tnt_date: [rec.tnt_date || ''],
       tnt_transport_mode: [rec.tnt_transport_mode || ''],
+      tnt_event_type: [rec.tnt_event_type || ''],
       tnt_status_code: [rec.tnt_status_code || ''],
       tnt_status_name: [rec.tnt_status_name || ''],
       tnt_port_code: [rec.tnt_port_code || ''],

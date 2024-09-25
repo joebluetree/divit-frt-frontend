@@ -1,8 +1,6 @@
 .wrapper {
-  background-color: snow;
-  margin-top: 64px;
+  margin-top: 50px;
 }
-
 
 img {
   height: 300px;
@@ -11,9 +9,9 @@ img {
 }
 
 .caption {
-  position: fixed;
+  position: relative;
   color: chocolate;
-  top: 120px;
+  top: -200px;
   left: 20px;
   font-size: medium;
   font-weight: bold;

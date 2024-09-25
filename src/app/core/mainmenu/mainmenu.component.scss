@@ -1,0 +1,94 @@
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
+
+h1 {
+  padding: 0 1rem;
+}
+
+h2 {
+  padding: 1rem;
+}
+
+
+.logo {
+  margin: 2px;
+}
+
+.logo a {
+  text-decoration: none;
+}
+
+.title {
+  margin-left: 2px;
+  font-size: 18px;
+  color: white;
+}
+
+.title:hover {
+  color: lightblue;
+  transition: 0.5s;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  height: 6rem;
+  z-index: 2;
+}
+
+.toolbar-color-theme {
+  background-color: #348cd4 !important;
+  color: white !important;
+}
+
+
+mat-sidenav-container {
+  margin-top: 72px;
+  height: calc(100vh - 76px);
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+  transition: width 0.3s ease;
+
+  @media screen and (min-width: 600px) {}
+
+  .entry {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+    gap: 0.5rem;
+    font-size: 13px;
+    color: #6e768e;
+  }
+
+  .entrymenu {
+    font-size: 13px;
+    color: #6e768e;
+  }
+}
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav-content {
+  overflow-x: hidden !important;
+  background-color: #f3f3f3 !important;
+}
+
+// mat-expansion-panel {
+//   background-color: hsla(0, 0%, 91%, 0.795);
+// }
+
+.expanded {
+  width: 250px;
+}
+
+
+
+.mat-expansion-panel {
+  box-shadow: none;
+}
+
+.mat-lsit-item-content {
+  padding: 0px !important;
+}

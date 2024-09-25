@@ -121,7 +121,7 @@ export class GlobalService {
 
   getMenuList(id: number) {
     if (this.user)
-      return this.user.user_menu_list.filter(f => f.menu_module_id == id);
+      return this.user.user_menu_list.filter(f => f.menu_module_id == id && f.menu_visible == 'Y');
     else
       return [];
   }

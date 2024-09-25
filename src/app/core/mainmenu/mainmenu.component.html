@@ -1,0 +1,110 @@
+<mat-toolbar class="toolbar-color-theme">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="logo">
+    <a routerLink="/home">
+      <img src="assets/logo.png" alt="">
+      <span class="title">{{title}}</span>
+    </a>
+  </div>
+
+
+  <span class="toolbar-item-spacer"></span>
+
+  @if( gs.isAutherised()) {
+  <span id="userName">{{gs.getUserName()}}</span>
+  }
+  @if( gs.isAutherised()) {
+  <button class="ms-4 btn btn-sm btn-success" (click)="logout()">Logout</button>
+  } @else {
+  <button class="btn btn-sm btn-success" routerLink="/login">Login</button>
+  }
+
+
+  <button mat-icon-button matTooltip="Notifications">
+    <mat-icon>notifications</mat-icon>
+  </button>
+
+
+  <!-- <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #userAccountMenu [overlapTrigger]="false" yPosition="below">
+    <button mat-menu-item routerLink="#">
+      <mat-icon>settings</mat-icon><span>Settings</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item routerLink="#">
+      <mat-icon>exit_to_app</mat-icon>Logout
+    </button>
+  </mat-menu>
+   -->
+
+</mat-toolbar>
+
+
+<mat-sidenav-container autosize="true">
+
+  <mat-sidenav #sidenav [ngClass]="!isCollapsed ? 'expanded' : 'expanded'" [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'">
+
+    <mat-nav-list>
+
+      <ng-container *ngIf="!isCollapsed">
+        <span class="entry">
+          <span>MAIN</span>
+        </span>
+      </ng-container>
+
+      <a mat-list-item routerLink="/home">
+        <span class="entry">
+          <mat-icon color="grey">home</mat-icon>
+          <span>Home</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/aboutus">
+        <span class="entry">
+          <mat-icon color="grey">description</mat-icon>
+          <span>About Us</span>
+        </span>
+      </a>
+
+
+    </mat-nav-list>
+
+    <mat-nav-list>
+
+      @if( gs.isAutherised()) {
+
+      <ng-container *ngFor="let module of gs.getModuleList()">
+
+        <ng-container>
+          <span class="entry">
+            <span>{{module.module_name}}</span>
+          </span>
+        </ng-container>
+
+        <ng-container *ngFor="let menu of gs.getMenuList(module.module_id)">
+          <a mat-list-item routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
+            <span class="entry">
+              <mat-icon color="accent">arrow_right</mat-icon>
+              <span>{{menu.menu_name}}</span>
+            </span>
+          </a>
+        </ng-container>
+
+      </ng-container>
+
+      }
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -23,6 +23,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -42,7 +49,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }, provideAnimationsAsync()
+    { provide: HTTP_INTERCEPTORS, useClass: httpInterceptor, multi: true }, provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };
 
@@ -56,7 +63,15 @@ export const CustomControls = [
   ProgressScreenComponent,
   ToastComponent,
   MenuComponent,
+  MainmenuComponent,
 
+
+  MatIconModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatMenuModule,
+  MatExpansionModule,
 
   MatDialogModule,
   MatFormFieldModule,
