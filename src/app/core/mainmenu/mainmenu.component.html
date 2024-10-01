@@ -7,9 +7,7 @@
       <img src="assets/logo.png" alt="">
       <span class="title">{{title}}</span>
     </a>
-
   </div>
-
 
   <span class="toolbar-item-spacer"></span>
 
@@ -22,11 +20,9 @@
   <button class="btn btn-sm btn-success" routerLink="/login">Login</button>
   }
 
-
   <button mat-icon-button matTooltip="Notifications">
     <mat-icon>notifications</mat-icon>
   </button>
-
 
   <!-- <button mat-icon-button matTooltip="My Account" [matMenuTriggerFor]="userAccountMenu">
     <mat-icon>account_circle</mat-icon>
@@ -41,9 +37,7 @@
     </button>
   </mat-menu>
    -->
-
 </mat-toolbar>
-
 
 <mat-sidenav-container autosize="true">
 
@@ -104,6 +98,7 @@
               <mat-icon color="accent">arrow_right</mat-icon>
               <span class="entrymenu">{{module.module_name}}</span>
             </mat-expansion-panel-header>
+
             <mat-nav-list class="submenulist">
               <ng-container *ngFor="let menu of gs.getSubMenuList(module.module_id)">
                 <a *ngIf="module.module_id == menu.menu_submenu_id && menu.menu_visible" mat-list-item
@@ -115,11 +110,9 @@
                 </a>
               </ng-container>
             </mat-nav-list>
+
           </mat-expansion-panel>
         </ng-container>
-
-
-
 
       </ng-container>
 
