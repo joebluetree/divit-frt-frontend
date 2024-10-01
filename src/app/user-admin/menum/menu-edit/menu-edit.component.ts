@@ -28,6 +28,8 @@ export class MenuEditComponent extends baseEditComponent {
       menu_visible: ['Y'],
       menu_module_id: [0, [Validators.required]],
       menu_module_name: ['', [Validators.required, Validators.maxLength(60)]],
+      menu_submenu_id: [0],
+      menu_submenu_name: [''],
       menu_order: ['', [Validators.required]],
       rowversion: [''],
     })
@@ -62,6 +64,8 @@ export class MenuEditComponent extends baseEditComponent {
           menu_param: rec.menu_param,
           menu_module_id: rec.menu_module_id,
           menu_module_name: rec.menu_module_name,
+          menu_submenu_id: rec.menu_submenu_id,
+          menu_submenu_name: rec.menu_submenu_name,
           menu_visible: rec.menu_visible,
           menu_order: rec.menu_order,
           rowversion: rec.rowversion,
@@ -126,6 +130,14 @@ export class MenuEditComponent extends baseEditComponent {
         menu_module_name: action.rec ? action.rec.module_name : '',
       })
     }
+
+    if (action.id == 'menu_submenu_name') {
+      this.mform.patchValue({
+        menu_submenu_id: action.rec ? action.rec.module_id : 0,
+        menu_submenu_name: action.rec ? action.rec.module_name : '',
+      })
+    }
+
   }
 
 }

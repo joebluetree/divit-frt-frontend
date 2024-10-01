@@ -32,6 +32,7 @@ export class MenuListComponent extends baseListComponent {
       { col_name: "menu_param", col_caption: "PARAM", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "menu_visible", col_caption: "VISIBLE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "menu_module_name", col_caption: "MODULE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "menu_submenu_name", col_caption: "SUB-MENU", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "menu_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },

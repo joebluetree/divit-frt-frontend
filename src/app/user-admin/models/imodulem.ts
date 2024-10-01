@@ -5,6 +5,8 @@ export interface iModulem {
   module_id: number;
   module_name: string;
   module_is_installed: string;
+  module_parent_id: number;
+  module_parent_name: string;
   module_order: number;
   rowversion: string;
   rec_company_id: number;

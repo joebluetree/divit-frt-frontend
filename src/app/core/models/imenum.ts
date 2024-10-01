@@ -8,6 +8,10 @@ export interface iMenum {
   menu_route: string;
   menu_param: string;
   menu_visible: string;
+
+  menu_submenu_id: number;
+  menu_submenu_name: string;
+
   menu_order: number;
 
   rights_selected: string;

@@ -81,20 +81,45 @@
 
       <ng-container *ngFor="let module of gs.getModuleList()">
 
-        <ng-container>
+        <ng-container *ngIf="!module.module_parent_id">
           <span class="entry">
             <span>{{module.module_name}}</span>
           </span>
+
+          <ng-container *ngFor="let menu of gs.getMenuList(module.module_id)">
+            <a *ngIf="module.module_id == menu.menu_submenu_id && menu.menu_visible" mat-list-item
+              routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
+              <span class="entry">
+                <mat-icon color="accent">arrow_right</mat-icon>
+                <span>{{menu.menu_name}}</span>
+              </span>
+            </a>
+          </ng-container>
+
         </ng-container>
 
-        <ng-container *ngFor="let menu of gs.getMenuList(module.module_id)">
-          <a mat-list-item routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
-            <span class="entry">
+        <ng-container *ngIf="module.module_parent_id">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
               <mat-icon color="accent">arrow_right</mat-icon>
-              <span>{{menu.menu_name}}</span>
-            </span>
-          </a>
+              <span class="entrymenu">{{module.module_name}}</span>
+            </mat-expansion-panel-header>
+            <mat-nav-list>
+              <ng-container *ngFor="let menu of gs.getSubMenuList(module.module_id)">
+                <a *ngIf="module.module_id == menu.menu_submenu_id && menu.menu_visible" mat-list-item
+                  routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
+                  <span class="entry">
+                    <mat-icon color="accent">arrow_right</mat-icon>
+                    <span>{{menu.menu_name}}</span>
+                  </span>
+                </a>
+              </ng-container>
+            </mat-nav-list>
+          </mat-expansion-panel>
         </ng-container>
+
+
+
 
       </ng-container>
 

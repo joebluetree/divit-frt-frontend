@@ -65,6 +65,10 @@ mat-sidenav {
   }
 
   .entrymenu {
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+    gap: 0.5rem;
     font-size: 13px;
     color: #6e768e;
   }
@@ -76,20 +80,14 @@ mat-sidenav-content {
   background-color: #f3f3f3 !important;
 }
 
-// mat-expansion-panel {
-//   background-color: hsla(0, 0%, 91%, 0.795);
-// }
-
 .expanded {
   width: 250px;
 }
 
-
-
-.mat-expansion-panel {
-  box-shadow: none;
+mat-expansion-panel-header {
+  font-weight: normal;
 }
 
-.mat-lsit-item-content {
-  padding: 0px !important;
+mat-expansion-panel {
+  box-shadow: none !important;
 }

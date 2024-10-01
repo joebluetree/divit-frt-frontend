@@ -26,6 +26,7 @@ export class ModuleListComponent extends baseListComponent {
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/admin/moduleEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "module_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "module_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "module_parent_name", col_caption: "PARENT", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "module_is_installed", col_caption: "VISIBLE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "module_order", col_caption: "ORDER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

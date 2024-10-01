@@ -5,6 +5,7 @@ import { GlobalService } from './global.service';
 import { iUser } from '../models/user';
 import { Router } from '@angular/router';
 import { iMenum } from '../models/imenum';
+import { iModulem } from '../models/imodulem';
 
 @Injectable({
   providedIn: 'root'
@@ -70,8 +71,9 @@ export class LoginService {
     this.http.post(this.gs.getUrl('api/auth/BranchLoginAsync'), data).subscribe({
       next: (result: any) => {
         this.gs.user.user_branch_id = result.branch_id;
+        this.gs.user.user_module_list = <iModulem[]>result.module_list;
         this.gs.user.user_menu_list = <iMenum[]>result.menu_list;
-        this.gs.createModuleList();
+        //this.gs.createModuleList();
         this.gs.saveAuthState();
         this.gs.Autherize();
         this.gs.resetState();

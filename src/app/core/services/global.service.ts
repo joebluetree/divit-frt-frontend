@@ -126,6 +126,13 @@ export class GlobalService {
       return [];
   }
 
+  getSubMenuList(id: number) {
+    if (this.user)
+      return this.user.user_menu_list.filter(f => f.menu_submenu_id == id && f.menu_visible == 'Y');
+    else
+      return [];
+  }
+
   public getUrl(path: string = '') {
     let sep = path.startsWith("/") ? "" : "/";
     const _url = this.url + sep + path;

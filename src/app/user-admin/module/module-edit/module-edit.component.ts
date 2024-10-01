@@ -22,6 +22,8 @@ export class ModuleEditComponent extends baseEditComponent {
       module_id: [0, [Validators.required]],
       module_name: ['', [Validators.required, Validators.maxLength(60)]],
       module_is_installed: ['Y'],
+      module_parent_id: [0],
+      module_parent_name: [''],
       module_order: ['', [Validators.required]],
       rowversion: [''],
     })
@@ -57,6 +59,8 @@ export class ModuleEditComponent extends baseEditComponent {
           module_id: rec.module_id,
           module_name: rec.module_name,
           module_is_installed: rec.module_is_installed,
+          module_parent_id: rec.module_parent_id,
+          module_parent_name: rec.module_parent_name,
           module_order: rec.module_order,
           rowversion: rec.rowversion,
         })
@@ -124,5 +128,16 @@ export class ModuleEditComponent extends baseEditComponent {
 
     })
   }
+
+
+  callBack(action: { id: string, rec: iModulem }) {
+    if (action.id == 'module_parent_name') {
+      this.mform.patchValue({
+        module_parent_id: action.rec ? action.rec.module_id : 0,
+        module_parent_name: action.rec ? action.rec.module_name : '',
+      })
+    }
+  }
+
 
 }
