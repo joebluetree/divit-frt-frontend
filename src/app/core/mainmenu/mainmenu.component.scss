@@ -84,10 +84,16 @@ mat-sidenav-content {
   width: 250px;
 }
 
+mat-expansion-panel {
+  box-shadow: none !important;
+}
+
 mat-expansion-panel-header {
   font-weight: normal;
 }
 
-mat-expansion-panel {
-  box-shadow: none !important;
+
+.submenulist {
+  margin: 0px !important;
+  padding: 0px !important;
 }

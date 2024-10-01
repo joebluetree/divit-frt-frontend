@@ -104,7 +104,7 @@
               <mat-icon color="accent">arrow_right</mat-icon>
               <span class="entrymenu">{{module.module_name}}</span>
             </mat-expansion-panel-header>
-            <mat-nav-list>
+            <mat-nav-list class="submenulist">
               <ng-container *ngFor="let menu of gs.getSubMenuList(module.module_id)">
                 <a *ngIf="module.module_id == menu.menu_submenu_id && menu.menu_visible" mat-list-item
                   routerLink="{{menu.menu_route}}" [queryParams]="getParam(menu)">
