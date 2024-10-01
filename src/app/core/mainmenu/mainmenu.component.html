@@ -42,7 +42,7 @@
 <mat-sidenav-container autosize="true">
 
   <mat-sidenav #sidenav [ngClass]="!isCollapsed ? 'expanded' : 'expanded'" [mode]="isMobile ? 'over' : 'side'"
-    [opened]="isMobile ? 'false' : 'true'">
+    [opened]="isMobile ? 'false' : 'true'" *ngIf="gs.isAutherised()">
 
     <mat-nav-list>
 
