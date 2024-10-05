@@ -62,7 +62,6 @@ export class ModuleEditComponent extends baseEditComponent {
           module_parent_id: rec.module_parent_id,
           module_parent_name: rec.module_parent_name,
           module_order: rec.module_order,
-          module_version: rec.module_version,
           rec_version: rec.rec_version,
         })
       },
