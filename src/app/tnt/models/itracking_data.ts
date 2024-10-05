@@ -20,7 +20,7 @@ export interface iTracking_data {
 
   tnt_row_type: string;
 
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

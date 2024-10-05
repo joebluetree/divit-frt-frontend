@@ -8,7 +8,8 @@ export interface iModulem {
   module_parent_id: number;
   module_parent_name: string;
   module_order: number;
-  rowversion: string;
+  module_version: number;
+  rec_version: number;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

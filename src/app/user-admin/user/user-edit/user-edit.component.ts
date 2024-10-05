@@ -30,7 +30,7 @@ export class UserEditComponent extends baseEditComponent {
       user_is_admin: ['N'],
       rec_branch_id: [0, [Validators.required]],
       rec_branch_name: ['', [Validators.required]],
-      rowversion: [''],
+      rec_version: [0],
       userbranches: this.fb.array([]),
     })
   }
@@ -76,7 +76,7 @@ export class UserEditComponent extends baseEditComponent {
           user_name: rec.user_name,
           user_password: rec.user_password,
           user_email: rec.user_email,
-          rowversion: rec.rowversion,
+          rec_version: rec.rec_version,
           user_is_admin: rec.user_is_admin,
           rec_branch_id: rec.rec_branch_id,
           rec_branch_name: rec.rec_branch_name,
@@ -127,7 +127,7 @@ export class UserEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);

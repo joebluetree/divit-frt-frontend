@@ -25,7 +25,7 @@ export class ModuleEditComponent extends baseEditComponent {
       module_parent_id: [0],
       module_parent_name: [''],
       module_order: ['', [Validators.required]],
-      rowversion: [''],
+      rec_version: [0],
     })
   }
 
@@ -62,7 +62,8 @@ export class ModuleEditComponent extends baseEditComponent {
           module_parent_id: rec.module_parent_id,
           module_parent_name: rec.module_parent_name,
           module_order: rec.module_order,
-          rowversion: rec.rowversion,
+          module_version: rec.module_version,
+          rec_version: rec.rec_version,
         })
       },
       error: (e) => {
@@ -116,7 +117,7 @@ export class ModuleEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -141,3 +142,4 @@ export class ModuleEditComponent extends baseEditComponent {
 
 
 }
+

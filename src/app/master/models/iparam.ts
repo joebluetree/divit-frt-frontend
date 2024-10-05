@@ -12,7 +12,7 @@ export interface iParam {
   param_value5: string;
 
   param_order: number;
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

@@ -12,7 +12,7 @@ export interface iSettings {
   name: string;
   order: number;
 
-  rowversion: string;
+  rec_version: number;
 
   rec_company_id: number;
   rec_branch_id: number;

@@ -31,7 +31,7 @@ export class MenuEditComponent extends baseEditComponent {
       menu_submenu_id: [0],
       menu_submenu_name: [''],
       menu_order: ['', [Validators.required]],
-      rowversion: [''],
+      rec_version: [0],
     })
   }
 
@@ -68,7 +68,7 @@ export class MenuEditComponent extends baseEditComponent {
           menu_submenu_name: rec.menu_submenu_name,
           menu_visible: rec.menu_visible,
           menu_order: rec.menu_order,
-          rowversion: rec.rowversion,
+          rec_version: rec.rec_version,
 
         })
       },
@@ -109,7 +109,7 @@ export class MenuEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);

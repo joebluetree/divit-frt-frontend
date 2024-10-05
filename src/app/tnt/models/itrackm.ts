@@ -26,7 +26,7 @@ export interface iTrackm {
   track_carrier_scac: string;
 
 
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
   rec_created_by: string;
   rec_created_date: string;

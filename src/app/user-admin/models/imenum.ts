@@ -14,7 +14,7 @@ export interface iMenum {
   menu_submenu_name: string;
 
   menu_order: number;
-  rowversion: string;
+  rec_version: number;
   rights_selected: string;
   rights_company: string;
   rights_admin: string;

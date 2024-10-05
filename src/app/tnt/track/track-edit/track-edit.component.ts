@@ -29,7 +29,7 @@ export class TrackEditComponent extends baseEditComponent {
       track_api_type: [''],
       track_request_id: [''],
 
-      rowversion: [''],
+      rec_version: [0],
       tracking_data: this.fb.array([]),
     })
   }
@@ -91,7 +91,7 @@ export class TrackEditComponent extends baseEditComponent {
           track_api_type: rec.track_api_type,
           track_request_id: rec.track_request_id,
 
-          rowversion: rec.rowversion,
+          rec_version: rec.rec_version,
         });
 
         console.log(this.mform.value);
@@ -142,7 +142,7 @@ export class TrackEditComponent extends baseEditComponent {
         this.mform.patchValue({
           track_api_type: v.track_api_type,
           track_request_id: v.track_request_id,
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);

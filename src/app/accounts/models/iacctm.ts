@@ -17,7 +17,7 @@ export interface iAcctm {
   acc_grp_id: number;
   acc_grp_name: number;
 
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
 
   rec_created_by: string;

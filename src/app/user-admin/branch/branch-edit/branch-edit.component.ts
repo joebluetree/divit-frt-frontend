@@ -25,7 +25,7 @@ export class BranchEditComponent extends baseEditComponent {
       branch_address1: ['', [Validators.required, Validators.maxLength(100)]],
       branch_address2: ['', [Validators.required, Validators.maxLength(100)]],
       branch_address3: ['', [Validators.required, Validators.maxLength(100)]],
-      rowversion: [''],
+      rec_version: [0],
     })
   }
 
@@ -56,7 +56,7 @@ export class BranchEditComponent extends baseEditComponent {
           branch_address1: rec.branch_address1,
           branch_address2: rec.branch_address2,
           branch_address3: rec.branch_address3,
-          rowversion: rec.rowversion,
+          rec_version: rec.rec_version,
         })
       },
       error: (e) => {
@@ -95,7 +95,7 @@ export class BranchEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);

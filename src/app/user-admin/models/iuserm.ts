@@ -8,7 +8,7 @@ export interface iUserm {
   user_password: string;
   user_email: string;
   user_is_admin: string;
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
   rec_branch_id: number;
   rec_branch_name: string;

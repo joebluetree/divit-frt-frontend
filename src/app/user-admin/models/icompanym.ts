@@ -8,7 +8,7 @@ export interface iCompanym {
   comp_address2: string;
   comp_address3: string;
 
-  rowversion: string;
+  rec_version: number;
   rec_company_id: number;
   rec_branch_id: number;
   rec_created_by: string;

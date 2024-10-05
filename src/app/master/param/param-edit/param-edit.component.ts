@@ -39,7 +39,7 @@ export class ParamEditComponent extends baseEditComponent {
       param_value4: ['', [Validators.maxLength(100)]],
       param_value5: ['', [Validators.maxLength(100)]],
       param_order: ['', [Validators.required, Validators.minLength(1)]],
-      rowversion: [''],
+      rec_version: [0],
     })
   }
 
@@ -80,7 +80,7 @@ export class ParamEditComponent extends baseEditComponent {
           param_value4: rec.param_value4,
           param_value5: rec.param_value5,
           param_order: rec.param_order,
-          rowversion: rec.rowversion,
+          rec_version: rec.rec_version,
         })
       },
       error: (e) => {
@@ -122,7 +122,7 @@ export class ParamEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rowversion: v.rowversion
+          rec_version: v.rec_version
         });
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
