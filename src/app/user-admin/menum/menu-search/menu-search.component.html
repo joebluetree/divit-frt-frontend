@@ -13,7 +13,8 @@
         <label class="col-sm-4 form-label form-label-sm" for="">Module</label>
         <div class="col-sm-8">
           <auto-complete maxlength="60" formControlName="module_name" (CallBack)="callBack($event)" [table]="'modulem'"
-            [company_id]="getCompanyId()" [display_column]="'module_name'" [url]="url"></auto-complete>
+            [company_id]="getCompanyId()" [url]="url"
+            display_column="[{'caption':'code','value':'module_id'},{'caption':'name','value':'module_name'}]"></auto-complete>
         </div>
       </div>
 

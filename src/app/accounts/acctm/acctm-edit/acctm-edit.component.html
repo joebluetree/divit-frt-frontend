@@ -52,7 +52,8 @@
           <label class="col-sm-4 form-label form-lable-sm" for="">A/c Group</label>
           <div class="col-sm-8">
             <auto-complete formControlName="acc_grp_name" (CallBack)="callBack_AccGroup($event)" [table]="'accgroupm'"
-              [company_id]="getCompanyId()" [display_column]="'grp_name'" [url]="url" [filter]="{}"
+              [company_id]="getCompanyId()" [url]="url" [filter]="{}"
+              display_column="[{'caption':'code','value':'grp_id'},{'caption':'name','value':'grp_name'}]"
               required></auto-complete>
           </div>
         </div>

@@ -32,6 +32,7 @@ export class SettingsEditComponent extends baseEditComponent {
   display_column1 = '';
   display_column2 = '';
 
+  list_data = "";
 
   constructor(
     private ms: SettingsService,
@@ -77,6 +78,12 @@ export class SettingsEditComponent extends baseEditComponent {
       //this.value = this.rec.value;
       //this.code = this.rec.code;
       //this.name = this.rec.name;
+
+      this.list_data = `[
+        { 'caption': 'code', 'value': '${this.display_column1}' },
+        { 'caption': 'name', 'value': '${this.display_column2}' }
+      ]`;
+
 
       this.mform.patchValue({
         value: this.rec.value,
