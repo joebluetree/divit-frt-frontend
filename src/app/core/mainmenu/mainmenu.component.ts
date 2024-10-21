@@ -5,6 +5,7 @@ import { CustomControls } from '../../app.config';
 import { Route, Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 import { iMenum } from '../models/imenum';
+import { ReturnStatement } from '@angular/compiler';
 
 
 @Component({
@@ -46,6 +47,10 @@ export class MainmenuComponent {
   }
 
   toggleMenu() {
+
+    if (!this.gs.isAutherised())
+      return false;
+
     if (this.isMobile) {
       this.sidenav.toggle();
       //this.isCollapsed = false;
@@ -55,6 +60,7 @@ export class MainmenuComponent {
       this.sidenav.toggle();
       this.isCollapsed = !this.isCollapsed;
     }
+    return true;
   }
 
   isOk(module: any, menu: any) {

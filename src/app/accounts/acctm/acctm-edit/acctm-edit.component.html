@@ -65,7 +65,8 @@
           <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
           <div class="col-sm-8">
             <auto-complete formControlName="acc_maincode_name" (CallBack)="callBack_Acctm($event)"
-              [table]="'acctm_maincode'" [company_id]="getCompanyId()" [display_column]="'acc_name'" [url]="url"
+              [table]="'acctm_maincode'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'code','value':'acc_id'},{'caption':'name','value':'acc_name'}]"
               [filter]="{acc_row_type : 'MAIN-CODE'}"></auto-complete>
           </div>
         </div>
