@@ -22,8 +22,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Parent</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="module_parent_name" (CallBack)="callBack($event)" [table]="'modulem'"
-              [company_id]="getCompanyId()" [url]="url" id="module_parent_name"
+            <auto-complete formControlName="module_parent_name" id="module_parent_name" (CallBack)="callBack($event)"
+              [table]="'modulem'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'module_id'},{'caption':'name','value':'module_name'}]"></auto-complete>
           </div>
         </div>

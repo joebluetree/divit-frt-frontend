@@ -44,8 +44,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Module</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="menu_module_name" (CallBack)="callBack($event)" [table]="'modulem'"
-              [company_id]="getCompanyId()" [url]="url"
+            <auto-complete formControlName="menu_module_name" id="menu_module_name" (CallBack)="callBack($event)"
+              [table]="'modulem'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'module_id'},{'caption':'name','value':'module_name'}]"
               required></auto-complete>
           </div>
@@ -55,8 +55,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Sub Menu</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="menu_submenu_name" (CallBack)="callBack($event)" [table]="'submenu'"
-              [company_id]="getCompanyId()" [url]="url"
+            <auto-complete formControlName="menu_submenu_name" id="menu_submenu_name" (CallBack)="callBack($event)"
+              [table]="'submenu'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'module_id'},{'caption':'name','value':'module_name'}]"></auto-complete>
           </div>
         </div>

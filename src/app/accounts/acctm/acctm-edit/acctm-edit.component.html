@@ -51,8 +51,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">A/c Group</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="acc_grp_name" (CallBack)="callBack_AccGroup($event)" [table]="'accgroupm'"
-              [company_id]="getCompanyId()" [url]="url" [filter]="{}"
+            <auto-complete formControlName="acc_grp_name" id="acc_grp_name" (CallBack)="callBack_AccGroup($event)"
+              [table]="'accgroupm'" [company_id]="getCompanyId()" [url]="url" [filter]="{}"
               display_column="[{'caption':'code','value':'grp_id'},{'caption':'name','value':'grp_name'}]"
               required></auto-complete>
           </div>
@@ -64,8 +64,8 @@
         <div class="form-group row" *ngIf="type == 'ACC-CODE'">
           <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="acc_maincode_name" (CallBack)="callBack_Acctm($event)"
-              [table]="'acctm_maincode'" [company_id]="getCompanyId()" [url]="url"
+            <auto-complete formControlName="acc_maincode_name" id="acc_maincode_name"
+              (CallBack)="callBack_Acctm($event)" [table]="'acctm_maincode'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'acc_id'},{'caption':'name','value':'acc_name'}]"
               [filter]="{acc_row_type : 'MAIN-CODE'}"></auto-complete>
           </div>

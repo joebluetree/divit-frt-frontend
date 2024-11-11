@@ -134,6 +134,7 @@ export class AcctmEditComponent extends baseEditComponent {
   }
 
   callBack_AccGroup(action: { id: string, rec: iAccGroupm }) {
+    console.log('action ', action);
     if (action.rec == null) {
       this.mform.patchValue({
         acc_grp_id: null,
@@ -148,6 +149,7 @@ export class AcctmEditComponent extends baseEditComponent {
     }
   }
   callBack_Acctm(action: { id: string, rec: iAcctm }) {
+
     if (action.rec == null) {
       this.mform.patchValue({
         acc_maincode_id: null,

@@ -65,8 +65,9 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="cust_parent_name" (CallBack)="callBack_Customer($event)"
-              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+            <auto-complete formControlName="cust_parent_name" id="cust_parent_name"
+              (CallBack)="callBack_Customer($event)" [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              [filter]="{cust_is_parent : 'Y'}"
               display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
           </div>
         </div>

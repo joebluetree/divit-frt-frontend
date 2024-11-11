@@ -73,6 +73,8 @@ export class MenuSearchComponent {
   }
 
   callBack(action: { id: string, rec: iModulem }) {
+
+    console.log(action);
     if (action.id == 'module_name') {
       if (action.rec) {
         this.mform.patchValue({

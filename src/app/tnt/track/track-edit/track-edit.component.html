@@ -31,8 +31,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Carrier</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="track_carrier_name" (CallBack)="callBack($event)" [table]="'param'"
-              [subtable]="'SEA CARRIER'" [company_id]="getCompanyId()" [url]="url"
+            <auto-complete formControlName="track_carrier_name" id="track_carrier_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'SEA CARRIER'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'param_id'},{'caption':'name','value':'param_name'}]"
               required></auto-complete>
           </div>
