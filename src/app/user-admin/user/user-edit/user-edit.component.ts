@@ -28,8 +28,8 @@ export class UserEditComponent extends baseEditComponent {
       user_password: ['', [Validators.required, Validators.maxLength(20)]],
       user_email: ['', [Validators.required, Validators.maxLength(60)]],
       user_is_admin: ['N'],
-      rec_branch_id: [0, [Validators.required]],
-      rec_branch_name: ['', [Validators.required]],
+      rec_branch_id: [0],
+      rec_branch_name: [''],
       rec_version: [0],
       userbranches: this.fb.array([]),
     })

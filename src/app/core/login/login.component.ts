@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { CustomControls } from '../../app.config';
 import { GlobalService } from '../services/global.service';

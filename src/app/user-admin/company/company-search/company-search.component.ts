@@ -10,11 +10,12 @@ import { GlobalService } from '../../../core/services/global.service';
   templateUrl: './company-search.component.html',
   styleUrls: ['./company-search.component.css'],
   standalone: true,
-  imports: [...CustomControls, CompanySearchComponent]
+  imports: [...CustomControls]
 })
 export class CompanySearchComponent {
 
   mform: FormGroup;
+
   record!: iCompany_Search;
 
   @Input('search_url') search_url = '';

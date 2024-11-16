@@ -30,7 +30,7 @@ export class GlobalService {
 
   public appStates: { [key: string]: any } = {};
 
-  public pageSize = 25;
+  public pageSize = 10;
 
   constructor(
     private location: Location,
