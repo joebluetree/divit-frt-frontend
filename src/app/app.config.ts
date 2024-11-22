@@ -62,9 +62,6 @@ export const CustomControls = [
   TableComponent,
   ProgressScreenComponent,
   ToastComponent,
-  MenuComponent,
-  MainmenuComponent,
-
 
   MatIconModule,
   MatToolbarModule,

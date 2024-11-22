@@ -40,7 +40,7 @@ export class CompanySearchComponent {
 
   ngOnInit(): void {
     this.mform.setValue({
-      comp_name: this.record.comp_name,
+      comp_name: this.record!.comp_name,
     })
   }
 

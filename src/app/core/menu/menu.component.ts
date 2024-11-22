@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
 import { LoginService } from '../services/login.service';
 import { iMenum } from '../models/imenum';

@@ -32,6 +32,7 @@ export class UserEditComponent extends baseEditComponent {
       rec_branch_name: [''],
       rec_version: [0],
       userbranches: this.fb.array([]),
+
     })
   }
 

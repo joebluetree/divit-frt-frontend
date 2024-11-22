@@ -66,6 +66,17 @@ export abstract class baseEditComponent {
     return this.mform.get(sName) as FormArray;
   }
 
+  formArrayRecord(sName: string, index: number) {
+    const _formGroup = this.formArray(sName);
+    if (index >= 0 && index < _formGroup.length) {
+      const row = _formGroup.at(index);
+      return row;
+    } else {
+      return null;
+    }
+  }
+
+
   public get url() {
     return this.gs.url;
   }

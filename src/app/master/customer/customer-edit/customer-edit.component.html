@@ -18,7 +18,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" id="cust_code" name="cust_code"
+              required></app-input>
           </div>
         </div>
 
@@ -65,10 +66,16 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="cust_parent_name" id="cust_parent_name"
-              (CallBack)="callBack_Customer($event)" [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
-              [filter]="{cust_is_parent : 'Y'}"
+            <auto-complete formControlName="cust_parent_name" id="cust_parent_name" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
               display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
+          <div class="col-sm-8">
+            <app-input formControlName="cust_credit_limit" type="number" [dec]="2"></app-input>
           </div>
         </div>
 
@@ -78,6 +85,97 @@
     </div>
 
   </div>
+
+  <div class="page-body">
+
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>ID</th>
+              <th>TITLE</th>
+              <th>NAME</th>
+              <th>DESIGNATION</th>
+              <th>EMAIL</th>
+              <th>TEL</th>
+              <th>MOBILE</th>
+              <th>COUNTRY</th>
+              <th>REMARKS</th>
+              <th>ADD</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="cust_contacts">
+            <tr *ngFor="let iRow of formArray('cust_contacts').controls; let i=index;" [formGroupName]="i">
+              <td>
+                <label>{{iRow.get('cont_id')?.value}}</label>
+              </td>
+
+              <td>
+                <app-combobox maxlength="10" formControlName="cont_title" [rowIndex]="i" name="cont_title"
+                  [dataSource]="titleList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_name" [rowIndex]="i" name="cont_name"
+                  case="UPPER"></app-input>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_designation" [rowIndex]="i" name="cont_designation"
+                  case="UPPER"></app-input>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_email" [rowIndex]="i" name="cont_email"
+                  case="UPPER"></app-input>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_tel" [rowIndex]="i" name="cont_tel"
+                  case="UPPER"></app-input>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_mobile" [rowIndex]="i" name="cont_mobile"
+                  case="UPPER"></app-input>
+              </td>
+              <td>
+                <auto-complete formControlName="cont_country_code" [rowIndex]="i" name="cont_country_code"
+                  (CallBack)="callBack($event)" table="param" subtable="country" [company_id]="getCompanyId()"
+                  [url]="url"
+                  display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="cont_remarks" [rowIndex]="i" name="cont_remarks"
+                  case="UPPER"></app-input>
+              </td>
+
+              <td align="centre" (click)="addContact()" class="link">
+                <i class="fa fa-plus"></i>
+              </td>
+
+              <td align="centre" (click)="deleteRow(i)" class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <div class="row" *ngIf="formArray('cust_contacts').length <= 0">
+      <div class="col-sm-12 text-center">
+        <button class="btn btn-sm btn-info" (click)="addContact()" [disabled]="mform.invalid">Add Contact</button>
+      </div>
+    </div>
+
+  </div>
+
 
 </form>
 

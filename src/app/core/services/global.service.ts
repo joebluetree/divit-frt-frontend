@@ -299,4 +299,25 @@ export class GlobalService {
     this._loadScreenSignal.set(false);
   }
 
+
+  public roundNumber(_number: number, _precision: number = 2): number | string {
+    try {
+      // Check if the input number is a valid number
+      if (typeof _number !== 'number' || isNaN(_number)) {
+        throw new Error('Invalid input: _number must be a valid number.');
+      }
+      // Check if the precision is a valid number and is a non-negative integer
+      if (typeof _precision !== 'number' || isNaN(_precision) || _precision < 0 || !Number.isInteger(_precision)) {
+        throw new Error('Invalid input: _precision must be a non-negative integer.');
+      }
+      // Round the number to the specified precision
+      const roundedNumber = _number.toFixed(_precision);
+      return parseFloat(roundedNumber);  // Use parseFloat to convert string back to number
+    } catch (error: any) {
+      // Return the error message for invalid input cases
+      return `Error: ${error.message}`;
+    }
+  }
+
+
 }

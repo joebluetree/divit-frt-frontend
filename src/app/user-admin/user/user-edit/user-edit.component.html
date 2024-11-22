@@ -75,8 +75,8 @@
 
           <thead class="table-success">
             <tr class="table-header">
-              <th>Selected</th>
-              <th>Branch</th>
+              <th>SELECTED</th>
+              <th>BRANCH</th>
             </tr>
           </thead>
 
@@ -84,10 +84,11 @@
 
             <tr *ngFor="let iRow of formArray('userbranches').controls; let i=index;" [formGroupName]="i">
               <td>
-                <app-checkbox formControlName="ub_selected"></app-checkbox>
+                <app-checkbox formControlName="ub_selected" label="selected"></app-checkbox>
               </td>
               <td>
-                <input formControlName="rec_branch_name" class="form-control form-control-sm">
+                <app-input type="text" formControlName="rec_branch_name"></app-input>
+
               </td>
             </tr>
 

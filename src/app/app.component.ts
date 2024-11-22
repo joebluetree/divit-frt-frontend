@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from './core/services/global.service';
 import { CustomControls } from './app.config';
+import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [...CustomControls],
+  imports: [...CustomControls, MainmenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -4,7 +4,6 @@ import { CustomControls } from '../../../app.config';
 import { iUser_Search } from '../../models/iuserm';
 import { GlobalService } from '../../../core/services/global.service';
 
-
 @Component({
   selector: 'app-user-search',
   templateUrl: './user-search.component.html',
@@ -24,8 +23,6 @@ export class UserSearchComponent {
   @Input('search_url') search_url = '';
   @Output('searchResult') output = new EventEmitter<any>();
 
-
-
   dataList = [{ key: 'NA', value: 'ALL' }, { key: 'Y', value: 'YES' }, { key: 'N', value: 'NO' }]
 
   constructor(private fb: FormBuilder,
@@ -38,7 +35,6 @@ export class UserSearchComponent {
       user_name: [''],
       user_is_admin: ['NA'],
     })
-
   }
 
   ngOnInit(): void {

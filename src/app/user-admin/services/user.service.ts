@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { iUser } from '../../core/models/user';
 import { baseService } from '../../shared/base-class/baseService';
 import { iUser_Search, iUserModel } from '../models/iuserm';
-
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends baseService {
@@ -22,6 +20,5 @@ export class UserService extends baseService {
       sort_order: ''
     };
   }
-
 
 }
