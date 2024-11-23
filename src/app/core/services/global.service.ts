@@ -319,5 +319,19 @@ export class GlobalService {
     }
   }
 
+  public roundNumber2(num: number, precision: number = 0): number {
+    try {
+
+      let _number = parseFloat(num.toString());
+      const roundedNumber = _number.toFixed(precision);
+      return parseFloat(roundedNumber);
+
+    } catch (error: any) {
+      throw new Error(`Error: ${error.message}`);
+    }
+
+  }
+
+
 
 }
