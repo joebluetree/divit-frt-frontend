@@ -223,6 +223,7 @@ export class GlobalService {
       'global_user_email': this.user.user_email,
       'global_user_company_id': this.user.user_company_id.toString(),
       'global_user_branch_id': this.user.user_branch_id.toString(),
+      'global_dec_places': 3,
     });
 
   }

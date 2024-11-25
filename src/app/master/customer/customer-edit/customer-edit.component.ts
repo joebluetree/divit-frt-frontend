@@ -73,7 +73,7 @@ export class CustomerEditComponent extends baseEditComponent {
     this.mform.patchValue({
       cust_id: this.id
     })
-    this.addContact();
+
   }
 
   addRow(rec: iContactm) {
@@ -188,7 +188,7 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
   callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
-    if (action.name == 'cont_cust_name') {
+    if (action.id == 'cust_parent_name') {
       if (action.rec) {
         this.mform.patchValue({
           cust_parent_id: action.rec.cust_id,
