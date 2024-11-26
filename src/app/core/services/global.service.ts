@@ -204,7 +204,7 @@ export class GlobalService {
       return '';
   }
 
-  public getGlobalConstants() {
+  public get globalConstants() {
     return {
       global_user_id: this.user.user_id,
       global_user_code: this.user.user_code,
@@ -212,6 +212,8 @@ export class GlobalService {
       global_user_email: this.user.user_email,
       global_user_company_id: this.user.user_company_id,
       global_user_branch_id: this.user.user_branch_id,
+      global_dec_places: 2,
+      global_date_format: 'dd/mm/yyyy',
     };
   }
 
@@ -223,7 +225,8 @@ export class GlobalService {
       'global_user_email': this.user.user_email,
       'global_user_company_id': this.user.user_company_id.toString(),
       'global_user_branch_id': this.user.user_branch_id.toString(),
-      'global_dec_places': 3,
+      'global_dec_places': 2,
+      'global_date_format': 'dd/mm/yyyy',
     });
 
   }

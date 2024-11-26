@@ -51,6 +51,7 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_parent_id: [null],
       cust_parent_name: [''],
       cust_credit_limit: [0],
+      cust_est_dt: [''],
 
       cust_contacts: this.fb.array([]),
       rec_version: [0],
@@ -128,6 +129,7 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_parent_id: rec.cust_parent_id,
           cust_parent_name: rec.cust_parent_name,
           cust_credit_limit: rec.cust_credit_limit,
+          cust_est_dt: rec.cust_est_dt,
           rec_version: rec.rec_version,
 
         });

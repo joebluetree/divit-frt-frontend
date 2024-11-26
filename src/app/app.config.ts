@@ -11,7 +11,7 @@ import { CustomRouteReuseStrategy } from './core/customReuseStrategy';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { httpInterceptor } from './core/http.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AutoCompleteComponent, CheckboxComponent, ComboboxComponent, InputComponent, PageComponent, TableComponent } from 'ngx-jrt-controls';
+import { AutoCompleteComponent, CheckboxComponent, ComboboxComponent, DateComponent, InputComponent, PageComponent, TableComponent } from 'ngx-jrt-controls';
 import { ProgressScreenComponent } from './core/progress-screen/progress-screen.component';
 import { MenuComponent } from './core/menu/menu.component';
 import { ToastComponent } from './core/toast/toast.component';
@@ -56,6 +56,7 @@ export const appConfig: ApplicationConfig = {
 export const CustomControls = [
   AutoCompleteComponent,
   InputComponent,
+  DateComponent,
   ComboboxComponent,
   CheckboxComponent,
   PageComponent,

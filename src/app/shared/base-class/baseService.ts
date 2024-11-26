@@ -92,7 +92,7 @@ export abstract class baseService {
   }
 
   public getList(action: string, url: string = "") {
-    let data = { menu_id: this.screen_id, action: action, ...this.state.searchRecord, ...this.state.pageRecord, ...this.gs.getGlobalConstants() };
+    let data = { menu_id: this.screen_id, action: action, ...this.state.searchRecord, ...this.state.pageRecord, ...this.gs.globalConstants };
     const options = {
       headers: this.gs.getHeaders(),
     };

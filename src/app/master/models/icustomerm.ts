@@ -39,6 +39,7 @@ export interface iCustomerm {
   cust_parent_id: number;
   cust_parent_name: string;
   cust_credit_limit: number;
+  cust_est_dt: string;
   cust_contacts: iContactm[];
   rec_version: number;
   rec_company_id: number;
