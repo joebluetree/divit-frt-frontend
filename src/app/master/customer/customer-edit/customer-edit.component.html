@@ -75,7 +75,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
           <div class="col-sm-8">
-            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"></app-input>
+            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"
+              (blur)="onBlur($event)"> </app-input>
           </div>
         </div>
 
@@ -150,7 +151,7 @@
               <td>
                 <auto-complete formControlName="cont_country_code" [rowIndex]="i" name="cont_country_code"
                   (CallBack)="callBack($event)" table="param" subtable="country" [company_id]="getCompanyId()"
-                  [url]="url"
+                  [url]="url" case="upper"
                   display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </td>
               <td>

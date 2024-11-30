@@ -238,6 +238,11 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
 
+  onBlur(action: any) {
+    console.log(action);
+  }
+
+
 
 }
 

@@ -26,6 +26,9 @@ export abstract class baseService {
   }
 
   public UpdateRecord(record: any, mode: string) {
+    if (!this.state)
+      return;
+
     if (mode == "add")
       this.state.records.push({ ...record });
     else {
