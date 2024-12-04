@@ -50,7 +50,7 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_row_type: [this.type],
       cust_parent_id: [null],
       cust_parent_name: [''],
-      cust_credit_limit: [0],
+      cust_credit_limit: [null],
       cust_est_dt: [''],
 
       cust_contacts: this.fb.array([]),

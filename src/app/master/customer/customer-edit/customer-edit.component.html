@@ -75,8 +75,11 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
           <div class="col-sm-8">
-            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"
-              (blur)="onBlur($event)"> </app-input>
+            <app-input formControlName="cust_credit_limit" type="number" [dec]="0" align="right"
+              (blur)="onBlur($event)">
+            </app-input>
+
+
           </div>
         </div>
 
