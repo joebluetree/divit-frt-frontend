@@ -19,7 +19,7 @@
           <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
           <div class="col-sm-8">
             <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" id="cust_code" name="cust_code"
-              required></app-input>
+              [disable]="true" required></app-input>
           </div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
           <div class="col-sm-8">
-            <app-input formControlName="cust_credit_limit" type="number" [dec]="0" align="right"
+            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"
               (blur)="onBlur($event)">
             </app-input>
 
@@ -189,8 +189,6 @@
 
 
 </form>
-
-
 
 
 <div class="page-footer line-bottom">
