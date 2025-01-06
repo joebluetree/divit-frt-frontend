@@ -39,9 +39,11 @@ export const routes: Routes = [
   { path: 'login', loadComponent: () => import('./core/login/login.component').then(c => c.LoginComponent), canActivate: [AuthGuardLogin] },
   { path: 'loginBranch', loadComponent: () => import('./core/login-branch/login-branch.component').then(c => c.LoginBranchComponent), canActivate: [AuthGuardLogin] },
   { path: 'accounts', loadChildren: () => import('./accounts/routes').then(m => m.routes), canActivate: [AuthGuard] },
+  { path: 'marketing', loadChildren: () => import('./marketing/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'masters', loadChildren: () => import('./master/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: () => import('./user-admin/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'tnt', loadChildren: () => import('./tnt/routes').then(m => m.routes), canActivate: [AuthGuard] },
+  
 ];
 
 export const appConfig: ApplicationConfig = {

@@ -1,0 +1,47 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="" >From</label>
+        <div class="col-sm-8">
+          <app-date formControlName="qtnm_from_date" [format]="gs.globalConstants.global_date_format" placeholder="mm/dd/yyyy"></app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-8">
+          <app-date type="text" formControlName="qtnm_to_date" placeholder="mm/dd/yyyy"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Quote To</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="qtnm_to_name"> </app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Quote #</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="qtnm_no"> </app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Place Of Delivery</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="qtnm_pld_name"> </app-input>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -213,7 +213,7 @@ export class GlobalService {
       global_user_company_id: this.user.user_company_id,
       global_user_branch_id: this.user.user_branch_id,
       global_dec_places: 2,
-      global_date_format: 'dd/mm/yyyy',
+      global_date_format: 'mm/dd/yyyy',
     };
   }
 
@@ -226,7 +226,7 @@ export class GlobalService {
       'global_user_company_id': this.user.user_company_id.toString(),
       'global_user_branch_id': this.user.user_branch_id.toString(),
       'global_dec_places': 2,
-      'global_date_format': 'dd/mm/yyyy',
+      'global_date_format': 'mm/dd/yyyy',
     });
 
   }
