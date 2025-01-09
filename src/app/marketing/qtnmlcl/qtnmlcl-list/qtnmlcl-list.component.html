@@ -19,7 +19,7 @@
 
   <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
     [delete_url]="'/api/marketing/qtnmlcl/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
-    [row_id_name]="'qtnm_pkid'" [selected_id]="ms.selectedRow">
+    [row_id_name]="'qtnm_id'" [selected_id]="ms.selectedRow">
   </app-table>
 
 </div>

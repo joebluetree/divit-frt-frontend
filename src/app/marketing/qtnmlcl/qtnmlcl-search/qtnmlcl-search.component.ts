@@ -33,8 +33,8 @@ export class QtnmLclSearchComponent {
     this.mform = this.fb.group({
       qtnm_from_date: [''],
       qtnm_to_date: [''],
-      qtnm_no: [''],
       qtnm_to_name: [''],
+      qtnm_no: [''],
       qtnm_pld_name: [''],
 
     })
@@ -45,8 +45,8 @@ export class QtnmLclSearchComponent {
     this.mform.setValue({
       qtnm_from_date: this.record.qtnm_from_date,
       qtnm_to_date: this.record.qtnm_to_date,
-      qtnm_no: this.record.qtnm_no,
       qtnm_to_name: this.record.qtnm_to_name,
+      qtnm_no: this.record.qtnm_no,
       qtnm_pld_name: this.record.qtnm_pld_name
     })
   }
@@ -66,8 +66,8 @@ export class QtnmLclSearchComponent {
     if (this.output) {
       this.record.qtnm_from_date = this.mform.value.qtnm_from_date;
       this.record.qtnm_to_date = this.mform.value.qtnm_to_date;
-      this.record.qtnm_no = this.mform.value.qtnm_no;
       this.record.qtnm_to_name = this.mform.value.qtnm_to_name,
+      this.record.qtnm_no = this.mform.value.qtnm_no;
       this.record.qtnm_pld_name = this.mform.value.qtnm_pld_name
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit({ record: this.record, url: this.search_url });

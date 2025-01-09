@@ -7,7 +7,7 @@ import { iQtnm_lcl_Search, iQtnm_lclModel } from '../models/iqtnmlcl';
 export class QtnmLclService extends baseService {
 
   constructor() {
-    super('qtnm_pkid', 'qtnm_cfno');
+    super('qtnm_id', 'qtnm_no');
   }
 
   setInitialState() {

@@ -1,11 +1,11 @@
 import { iPage } from "ngx-jrt-controls";
 
 export interface iQtnd_lcl {
-  qtnd_pkid: number,
-  qtnd_qtnm_pkid: number,
+  qtnd_id: number,
+  qtnd_qtnm_id: number,
   qtnd_acc_id: number,
+  qtnd_acc_code: string,
   qtnd_acc_name: string,
-  qtnd_desc: string,
   qtnd_amt: number,
   qtnd_per: string,
   qtnd_order: number,
@@ -21,11 +21,12 @@ export interface iQtnd_lcl {
 }
 
 export interface iQtnm_lcl {
-  qtnm_pkid: number;
+  qtnm_id: number;
   qtnm_cfno: number;
-  // qtnm_type: string;
+  qtnm_type: string;
   qtnm_no: string;
   qtnm_to_id: number;
+  qtnm_to_code: string;
   qtnm_to_name: string;
   qtnm_to_addr1: string;
   qtnm_to_addr2: string;
@@ -45,17 +46,20 @@ export interface iQtnm_lcl {
   qtnm_cbm: number;
   qtnm_cft: number;
   qtnm_por_id: number;
+  qtnm_por_code: string;
   qtnm_por_name: string;
   qtnm_pol_id: number;
+  qtnm_pol_code: string;
   qtnm_pol_name: string;
   qtnm_pod_id: number;
+  qtnm_pod_code: string;
   qtnm_pod_name: string;
   qtnm_pld_name: string;
   qtnm_plfd_name: string;
   qtnm_trans_time: string;
   qtnm_routing: string;
   qtnm_amt: number;
-  qtnm_qtnd_lcl: iQtnd_lcl[];
+  qtnd_lcl: iQtnd_lcl[];
 
   rec_version: number;
   rec_company_id: number;
@@ -68,6 +72,7 @@ export interface iQtnm_lcl {
 
 export interface iQtnm_lcl_Search {
   qtnm_no: string;
+  qtnm_to_id: number;
   qtnm_to_name: string;
   qtnm_pld_name: string;
   qtnm_date: string;
