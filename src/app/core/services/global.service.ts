@@ -304,7 +304,7 @@ export class GlobalService {
   }
 
 
-  public roundNumber(_number: number, _precision: number = 2): number | string {
+  public roundNumber(_number: number, _precision: number = 2): number  {
     try {
       // Check if the input number is a valid number
       if (typeof _number !== 'number' || isNaN(_number)) {
@@ -319,7 +319,7 @@ export class GlobalService {
       return parseFloat(roundedNumber);  // Use parseFloat to convert string back to number
     } catch (error: any) {
       // Return the error message for invalid input cases
-      return `Error: ${error.message}`;
+      return 0;
     }
   }
 
