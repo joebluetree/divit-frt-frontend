@@ -336,6 +336,27 @@ export class GlobalService {
 
   }
 
+  public getToday(){
+    return this.getNewdate(0);
+  }
+
+  private getNewdate(_days: number) {
+    var nDate = new Date();
+    if (_days > 0)
+      nDate.setDate(nDate.getDate() + _days);
+    if (_days < 0)
+      nDate.setDate(nDate.getDate() - Math.abs(_days));
+
+    let yy = nDate.getFullYear();
+    let mm = nDate.getMonth() + 1;
+    let dd = nDate.getDate();
+
+    let sRet = yy.toString();
+    sRet += "-" + (mm <= 9 ? "0" + mm.toString() : mm.toString());
+    sRet += "-" + (dd <= 9 ? "0" + dd.toString() : dd.toString());
+    return sRet;
+  }
+
 
 
 }

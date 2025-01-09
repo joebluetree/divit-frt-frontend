@@ -19,9 +19,13 @@ export class QtnmLclEditComponent extends baseEditComponent {
   constructor(
     private ms: QtnmLclService,
     public dialog: MatDialog
+
   ) {
+    
     super();
     this.showModel = true;
+    let date = this.gs.getToday();
+    let user = this.gs.getUserName();
     this.mform = this.fb.group({
       qtnm_id: [0],
       qtnm_cfno: [0],
@@ -33,8 +37,8 @@ export class QtnmLclEditComponent extends baseEditComponent {
       qtnm_to_addr2: [''],
       qtnm_to_addr3: [''],
       qtnm_to_addr4: [''],
-      qtnm_date: [''],
-      qtnm_quot_by: [''],
+      qtnm_date: [date],
+      qtnm_quot_by: [user],
       qtnm_valid_date: [''],
       qtnm_salesman_id: [0],
       qtnm_salesman_name: [''],
@@ -86,6 +90,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
   }
 
   addRow(rec: iQtnd_lcl) {
+
+    let a = this.gs.getToday();
+
     const _rec = this.fb.group({
       qtnd_id: [rec?.qtnd_id || 0],
       qtnd_qtnm_id: [rec?.qtnd_qtnm_id || 0],
@@ -339,7 +346,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
       cft: 0.0283168
     };
     const changedValue = convertionValue[cUnit];
-    return changedValue*value;
+    return changedValue * value;
   }
 
   findUnit(action: any) {
@@ -364,37 +371,34 @@ export class QtnmLclEditComponent extends baseEditComponent {
         qtnm_lbs: this.gs.roundNumber(nlbs, this.iDec),
       });
     }
-    if (action.name == 'qtnm_lbs') {      
+    if (action.name == 'qtnm_lbs') {
       let nkgs = this.ConvertUnit(nqtnm_lbs, 'lbs');
       this.mform.patchValue({
         qtnm_kgs: this.gs.roundNumber(nkgs, this.iDec),
       });
     }
-    if (action.name == 'qtnm_cbm') {      
+    if (action.name == 'qtnm_cbm') {
       let ncft = this.ConvertUnit(nqtnm_cbm, 'cbm');
       this.mform.patchValue({
-        qtnm_cft: this.gs.roundNumber(ncft,this.iDec),
+        qtnm_cft: this.gs.roundNumber(ncft, this.iDec),
       });
     }
-    if (action.name == 'qtnm_cft') {      
+    if (action.name == 'qtnm_cft') {
       let ncbm = this.ConvertUnit(nqtnm_cft, 'cft');
       this.mform.patchValue({
-        qtnm_cbm: this.gs.roundNumber(ncbm,this.iDec),
+        qtnm_cbm: this.gs.roundNumber(ncbm, this.iDec),
       });
     }
-    if(action.name == 'qtnd_amt'){
+    if (action.name == 'qtnd_amt') {
       this.findGrandTotal();
     }
   }
-  
+
   findGrandTotal() {
     const invoice = <iQtnd_lcl[]>this.formArray('qtnd_lcl').value;
     const amt = invoice.reduce((total, row) => {
       return total + row.qtnd_amt || 0; // here changed
     }, 0);
-
-    // amt = this.gs.roundNumber( amt, this.gs.globalConstants.global_dec_places);
-
     this.mform.patchValue({
       qtnm_amt: amt
     });
