@@ -52,23 +52,14 @@ export class QtnmLclSearchComponent {
   }
  
   search(_action: string) {
-    // const fromDate = this.mform.value.qtnm_date_from;
-    // const toDate = this.mform.value.qtnm_date_to;
-  
-    // if (!fromDate || !toDate) {
-    //   console.error('Both From and To dates are required.');
-    //   return;
-    // }
-  
-    // // Convert dates to JavaScript Date objects for comparison
-    // const fromDateObj = new Date(fromDate);
-    // const toDateObj = new Date(toDate);
     if (this.output) {
+      this.record.qtnm_type = this.mform.value.qtnm_type;
       this.record.qtnm_from_date = this.mform.value.qtnm_from_date;
       this.record.qtnm_to_date = this.mform.value.qtnm_to_date;
       this.record.qtnm_to_name = this.mform.value.qtnm_to_name,
       this.record.qtnm_no = this.mform.value.qtnm_no;
       this.record.qtnm_pld_name = this.mform.value.qtnm_pld_name
+      this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit({ record: this.record, url: this.search_url });
     }

@@ -71,15 +71,15 @@ export interface iQtnm_lcl {
 }
 
 export interface iQtnm_lcl_Search {
+  qtnm_type: string;
   qtnm_no: string;
   qtnm_to_id: number;
   qtnm_to_name: string;
   qtnm_pld_name: string;
-  qtnm_date: string;
   qtnm_from_date: string;
   qtnm_to_date: string;
   rec_company_id: number;
-  // rec_branch_id: number;
+  rec_branch_id: number;
 }
 
 export interface iQtnm_lclModel {

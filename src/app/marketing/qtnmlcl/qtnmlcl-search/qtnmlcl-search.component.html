@@ -12,7 +12,7 @@
       <div class="form-group row">
         <label class="col-sm-4 form-label form-label-sm" for="">To</label>
         <div class="col-sm-8">
-          <app-date type="text" formControlName="qtnm_to_date" placeholder="mm/dd/yyyy"> </app-date>
+          <app-date type="text" formControlName="qtnm_to_date" [format]="gs.globalConstants.global_date_format" placeholder="mm/dd/yyyy"> </app-date>
         </div>
       </div>
       <div class="form-group row">
