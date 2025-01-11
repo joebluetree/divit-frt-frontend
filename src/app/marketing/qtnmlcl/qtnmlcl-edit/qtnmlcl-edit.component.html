@@ -18,7 +18,6 @@
           <div class="col-sm-8">
             <app-input maxlength="15" formControlName="qtnm_no" [case]="'UPPER'" id="qtnm_no" name="qtnm_no"
               [disable]="true"></app-input>
-            <!--  -->
           </div>
         </div>
       </div>
@@ -73,7 +72,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote Date</label>
           <div class="col-sm-8">
-            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" placeholder="mm-dd-yyyy"></app-date>
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format"
+              placeholder="mm-dd-yyyy"></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -86,8 +86,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
           <div class="col-sm-8">
-            <app-date maxlength="100" formControlName="qtnm_valid_date"
-              [format]="gs.globalConstants.global_date_format"  placeholder="mm-dd-yyyy"></app-date>
+            <app-date maxlength="100" formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format"
+              placeholder="mm-dd-yyyy"></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -127,33 +127,29 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="form-group row">
-          <label class="col-sm-2 form-label form-lable-sm">KGS</label>
-          <div class="col-sm-4">
-            <app-input formControlName="qtnm_kgs" type="number" name="qtnm_kgs" [dec]="iDec" (blur)="findUnit($event)"
-              ></app-input>
-          </div>
-          <!-- (blur)="findTotal($event) -->
 
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">KGS</label>
+          <div class="col-sm-3">
+            <app-input formControlName="qtnm_kgs" type="number" name="qtnm_kgs" [dec]="iDec"
+              (blur)="findUnit($event)"></app-input>
+          </div>
           <label class="col-sm-2 form-label form-lable-sm">LBS</label>
-          <div class="col-sm-4">
-            <app-input formControlName="qtnm_lbs" type="number" name="qtnm_lbs" [dec]="iDec" (blur)="findUnit($event)"
-              ></app-input>
+          <div class="col-sm-3">
+            <app-input formControlName="qtnm_lbs" type="number" name="qtnm_lbs" [dec]="iDec"
+              (blur)="findUnit($event)"></app-input>
           </div>
         </div>
-
         <div class="form-group row">
-          <label class="col-sm-2 form-label form-lable-sm">CBM</label>
-          <div class="col-sm-4">
-            <app-input formControlName="qtnm_cbm" type="number" name="qtnm_cbm" [dec]="iDec" (blur)="findUnit($event)"
-              ></app-input>
+          <label class="col-sm-4 form-label form-lable-sm">CBM</label>
+          <div class="col-sm-3">
+            <app-input formControlName="qtnm_cbm" type="number" name="qtnm_cbm" [dec]="iDec"
+              (blur)="findUnit($event)"></app-input>
           </div>
-
-
           <label class="col-sm-2 form-label form-lable-sm">CFT</label>
-          <div class="col-sm-4">
-            <app-input formControlName="qtnm_cft" type="number" name="qtnm_cft" [dec]="iDec" (blur)="findUnit($event)"
-              ></app-input>
+          <div class="col-sm-3">
+            <app-input formControlName="qtnm_cft" type="number" name="qtnm_cft" [dec]="iDec"
+              (blur)="findUnit($event)"></app-input>
           </div>
         </div>
       </div>
@@ -236,7 +232,7 @@
       </div>
     </div>
   </div>
-  
+
   <!--body-->
   <div class="page-body">
     <div class="row">
@@ -247,7 +243,7 @@
             <tr class="table-header">
               <th *ngIf="showModel">ID</th>
               <th>CODE</th>
-              <th>NAME</th>
+              <th>DESCRIPTION</th>
               <th>AMOUNT</th>
               <th>PER</th>
               <th *ngIf="showModel">ORDER </th>
@@ -272,7 +268,7 @@
               </td>
               <td>
                 <app-input formControlName="qtnd_amt" [rowIndex]="i" name="qtnd_amt"
-                  [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findUnit($event)" ></app-input>
+                  [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findUnit($event)"></app-input>
               </td>
               <td>
                 <app-input formControlName="qtnd_per" [rowIndex]="i" name="qtnd_per" maxlength="50"
@@ -299,29 +295,7 @@
         <button class="btn btn-sm btn-info" (click)="addQuote()">Add Quote</button>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col-md-12">
-        <button class="btn btn-sm btn-success" (click)="addQuote()">Add</button>
-      </div>
-    </div> -->
   </div>
-  <!-- <div class="page-body">
-
-    <div class="row">
-
-      <div class="col-sm-6">
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Total</label>
-          <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="qtnm_amt" id="qtnm_amt" [disable]="true"></app-input>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
 </form>
 
 

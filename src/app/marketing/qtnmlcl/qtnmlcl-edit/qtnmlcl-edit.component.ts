@@ -21,9 +21,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
     public dialog: MatDialog
 
   ) {
-    
+
     super();
-    this.showModel = true;
+    this.showModel = false;
     let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({
