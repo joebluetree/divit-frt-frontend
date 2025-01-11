@@ -31,7 +31,6 @@ export interface iQtnd_fcl {
   rec_created_date: string;
   rec_edited_by: string;
   rec_edited_date: string;
-
 }
 
 export interface iQtnm 

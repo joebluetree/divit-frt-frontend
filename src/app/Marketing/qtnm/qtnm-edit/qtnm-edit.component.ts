@@ -132,7 +132,7 @@ export class QtnmEditComponent extends baseEditComponent {
   getRecord() {
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/Marketing/Qtnm/GetRecordAsync').subscribe({
+    this.ms.getRecord(param, '/api/Marketing/Qtnmfcl/GetRecordAsync').subscribe({
       next: (rec: iQtnm) => {
         this.mform.patchValue({
           qtnm_id: rec.qtnm_id,
@@ -182,7 +182,7 @@ export class QtnmEditComponent extends baseEditComponent {
       'id': data.qtnm_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/Marketing/Qtnm/SaveAsync').subscribe({
+    this.ms.save(param, data, '/api/Marketing/Qtnmfcl/SaveAsync').subscribe({
       next: (v: iQtnm) => {
         if (this.mode == "add") {
           this.id = v.qtnm_id;
