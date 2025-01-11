@@ -55,7 +55,7 @@ export class QtnmEditComponent extends baseEditComponent {
       qtnm_salesman_name: [''],  //, [Validators.required, Validators.maxLength(100)]
       qtnm_move_type: [''],
       qtnm_commodity: [''],
-      qtnm_qtnd_fcl: this.fb.array([]),
+      qtnm_fcl: this.fb.array([]),
       rec_version: [0],
     })
   }
@@ -108,23 +108,23 @@ export class QtnmEditComponent extends baseEditComponent {
   }
 
   addFclDetails(iRow: iQtnd_fcl = <iQtnd_fcl>{}) {
-    this.formArray('qtnm_qtnd_fcl')?.push(this.addRow(iRow));
+    this.formArray('qtnm_fcl')?.push(this.addRow(iRow));
   }
 
   deleteRow(idx: number) {
-    this.formArray('qtnm_qtnd_fcl').removeAt(idx);
+    this.formArray('qtnm_fcl').removeAt(idx);
   }
 
   editFcldetails(idx: number) {
     this.data_fcl = {
       mode: 'edit',
-      record: <iQtnd_fcl>this.formArrayRecord('qtnm_qtnd_fcl', idx)?.value,
+      record: <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value,
       index: idx
     }
   }
 
   fillFclDetails(ifcl_list: iQtnd_fcl[]) {
-    this.formArray('qtnm_qtnd_fcl').clear();
+    this.formArray('qtnm_fcl').clear();
     ifcl_list.forEach((rec_qtnd_fcl: iQtnd_fcl) => {
       this.addFclDetails(rec_qtnd_fcl);
     });
@@ -156,7 +156,7 @@ export class QtnmEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
 
         });
-        this.fillFclDetails(rec.qtnm_qtnd_fcl);
+        this.fillFclDetails(rec.qtnm_fcl);
         console.log(rec);
       },
       error: (e) => {
@@ -201,7 +201,7 @@ export class QtnmEditComponent extends baseEditComponent {
 
           rec_version: v.rec_version
         });
-        this.fillFclDetails(v.qtnm_qtnd_fcl);
+        this.fillFclDetails(v.qtnm_fcl);
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -248,7 +248,7 @@ export class QtnmEditComponent extends baseEditComponent {
     if (action.mode == "new")
       this.addFclDetails(<iQtnd_fcl>action.record);
     else {
-      this.formArrayRecord('qtnm_qtnd_fcl', action.index)?.patchValue({
+      this.formArrayRecord('qtnm_fcl', action.index)?.patchValue({
         ...action.record
       })
     }

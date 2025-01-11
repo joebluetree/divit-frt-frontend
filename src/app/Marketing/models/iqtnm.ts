@@ -69,7 +69,7 @@ export interface iQtnm
   qtnm_trans_time: string;
   qtnm_routing: string ;
   qtnm_amt: number;
-  qtnm_qtnd_fcl: iQtnd_fcl[];
+  qtnm_fcl: iQtnd_fcl[];
 
   rec_version: number;
   rec_company_id: number;

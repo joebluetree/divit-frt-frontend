@@ -61,7 +61,7 @@ export class QtndEditComponent {
       qtnd_haulage: [null],
       qtnd_ifs: [null],
       qtnd_tot_amt: [null],  //[Validators.required]
-      qtnd_order:[null]
+      qtnd_order: [null]
     })
   }
 

@@ -19,7 +19,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">QuoteType</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'" ></app-input>
+            <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -102,11 +102,9 @@
       </div>
     </div>
   </div>
-
   <div class="page-body">
     <app-qtnd-edit [input]="data_fcl" (output)="fclOutput($event)"></app-qtnd-edit>
   </div>
-
   <div class="page-body">
     <div class="row">
       <div class="col-sm-12">
@@ -134,13 +132,13 @@
             </tr>
           </thead>
 
-          <tbody formArrayName="qtnm_qtnd_fcl">
-            <tr *ngFor="let iRow of formArray('qtnm_qtnd_fcl').controls; let i=index;" [formGroupName]="i">
-             
-              <td *ngIf="showModel" >
+          <tbody formArrayName="qtnm_fcl">
+            <tr *ngFor="let iRow of formArray('qtnm_fcl').controls; let i=index;" [formGroupName]="i">
+
+              <td *ngIf="showModel">
                 <label>{{iRow.get('qtnd_id')?.value}}</label>
               </td>
-              <td *ngIf="showModel" >
+              <td *ngIf="showModel">
                 <label>{{iRow.get('qtnd_order')?.value}}</label>
               </td>
 
@@ -206,16 +204,11 @@
                 <i class="fa fa-trash"></i>
               </td>
             </tr>
-
           </tbody>
         </table>
-
       </div>
-
     </div>
-
-
-    <div class="row" *ngIf="formArray('qtnm_qtnd_fcl').length <= 0">
+    <div class="row" *ngIf="formArray('qtnm_fcl').length <= 0">
       <div class="col-sm-12 text-center">
         <button class="btn btn-sm btn-info" (click)="addFclDetails()" [disabled]="mform.invalid">Add Details</button>
       </div>
