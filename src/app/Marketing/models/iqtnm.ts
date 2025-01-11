@@ -3,7 +3,7 @@ import { iPage } from "ngx-jrt-controls";
 export type data_fcl  = { mode : string,  record : iQtnd_fcl , index : number  };
 
 export interface iQtnd_fcl {
-  qtnd_pkid: number;
+  qtnd_id: number;
   qtnd_qtnm_id: number;
   qtnd_pol_id: number;
   qtnd_pol_name: string;
@@ -23,6 +23,7 @@ export interface iQtnd_fcl {
   qtnd_haulage: number;
   qtnd_ifs: number;
   qtnd_tot_amt: number;
+  qtnd_order: number;
 
   rec_version: number;
   rec_company_id: number;

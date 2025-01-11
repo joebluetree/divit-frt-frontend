@@ -83,7 +83,7 @@ export class QtnmEditComponent extends baseEditComponent {
 
   addRow(rec: iQtnd_fcl) {
     return this.fb.group({
-      qtnd_pkid: [rec?.qtnd_pkid || 0],
+      qtnd_id: [rec?.qtnd_id || 0],
       qtnd_qtnm_id: [rec?.qtnd_qtnm_id || 0],
       qtnd_pol_id: [rec?.qtnd_pol_id || 0],
       qtnd_pol_name: [rec?.qtnd_pol_name || ""],
@@ -103,6 +103,7 @@ export class QtnmEditComponent extends baseEditComponent {
       qtnd_haulage: [rec?.qtnd_haulage || 0],
       qtnd_ifs: [rec?.qtnd_ifs || 0],
       qtnd_tot_amt: [rec?.qtnd_tot_amt || 0],
+      qtnd_order: [rec?.qtnd_order || 0],
     });
   }
 

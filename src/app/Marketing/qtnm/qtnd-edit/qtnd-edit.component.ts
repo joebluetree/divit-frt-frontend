@@ -41,7 +41,7 @@ export class QtndEditComponent {
 
   buildForm() {
     this.mform = this.fb.group({
-      qtnd_pkid: [null],
+      qtnd_id: [null],
       qtnd_qtnm_id: [null],
       qtnd_pol_id: [null],  //, [Validators.required]
       qtnd_pol_name: [''],  //, [Validators.required, Validators.maxLength(100)]
@@ -61,6 +61,7 @@ export class QtndEditComponent {
       qtnd_haulage: [null],
       qtnd_ifs: [null],
       qtnd_tot_amt: [null],  //[Validators.required]
+      qtnd_order:[null]
     })
   }
 
@@ -73,7 +74,7 @@ export class QtndEditComponent {
 
   fillData() {
     this.mform.setValue({
-      qtnd_pkid: this.record?.qtnd_pkid || 0,
+      qtnd_id: this.record?.qtnd_id || 0,
       qtnd_qtnm_id: this.record?.qtnd_qtnm_id || 0,
       qtnd_pol_id: this.record?.qtnd_pol_id || 0,
       qtnd_pol_name: this.record?.qtnd_pol_name || '',
@@ -93,6 +94,7 @@ export class QtndEditComponent {
       qtnd_haulage: this.record?.qtnd_haulage || 0,
       qtnd_ifs: this.record?.qtnd_ifs || 0,
       qtnd_tot_amt: this.record?.qtnd_tot_amt || 0,
+      qtnd_order: this.record?.qtnd_order || 0,
     })
   }
 
@@ -113,7 +115,7 @@ export class QtndEditComponent {
       return;
     }
     if (this.output) {
-      this.record.qtnd_pkid = this.mform.value.qtnd_pkid;
+      this.record.qtnd_id = this.mform.value.qtnd_id;
       this.record.qtnd_qtnm_id = this.mform.value.qtnd_qtnm_id;
       this.record.qtnd_pol_id = this.mform.value.qtnd_pol_id;
       this.record.qtnd_pol_name = this.mform.value.qtnd_pol_name;
@@ -133,6 +135,7 @@ export class QtndEditComponent {
       this.record.qtnd_haulage = this.mform.value.qtnd_haulage;
       this.record.qtnd_ifs = this.mform.value.qtnd_ifs;
       this.record.qtnd_tot_amt = this.mform.value.qtnd_tot_amt;
+      this.record.qtnd_order = this.mform.value.qtnd_order;
 
       this.record.rec_company_id = this.gs.user.user_company_id;
 

@@ -55,37 +55,69 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">T/T</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnd_trans_time" [case]="'UPPER'" required></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">ROUTING</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnd_routing" [case]="'UPPER'" required></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">CNTR.TYPE</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnd_cntr_type" [case]="'UPPER'" required></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">ETD </label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnd_etd" [case]="'UPPER'"></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">CUTT.OFF</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnd_cutoff" [case]="'UPPER'"></app-input>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">OF</label>
           <div class="col-sm-8">
@@ -93,6 +125,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">PSS</label>
           <div class="col-sm-8">
@@ -100,6 +134,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">BAF</label>
           <div class="col-sm-8">
@@ -107,6 +143,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">ISPS</label>
           <div class="col-sm-8">
@@ -114,6 +152,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">HAULAGE</label>
           <div class="col-sm-8">
@@ -121,6 +161,8 @@
               type="number" [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">IFS</label>
           <div class="col-sm-8">
@@ -128,6 +170,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+        </div>
+        <div class="col-sm-2">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">TOTAL</label>
           <div class="col-sm-8">
@@ -135,22 +179,25 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm"></label>
+            <div class="col-sm-8">
+            </div>
+          </div>
+        </div>
       <div class="col-sm-6">
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <label for=""></label>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <label for=""></label>
-          </div>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-12">
-            <label for=""></label>
-          </div>
-        </div>
         <div class="form-group row">
           <div class="col-sm-6">
             <button class="btn btn-sm btn-success me-2" (click)="search('search')" [disabled]="mform.invalid">{{ mode

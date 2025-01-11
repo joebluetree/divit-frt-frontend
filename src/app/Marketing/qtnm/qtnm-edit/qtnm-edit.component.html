@@ -62,7 +62,8 @@
             <app-input maxlength="100" formControlName="qtnm_to_addr4" [case]="'UPPER'"></app-input>
           </div>
         </div>
-
+      </div>
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote Date</label>
           <div class="col-sm-8">
@@ -113,6 +114,7 @@
           <thead class="table-success">
             <tr class="table-header">
               <th *ngIf="showModel">ID</th>
+              <th *ngIf="showModel">ORDER</th>
               <th>POL</th>
               <th>POD</th>
               <th>CARRIER</th>
@@ -136,7 +138,10 @@
             <tr *ngFor="let iRow of formArray('qtnm_qtnd_fcl').controls; let i=index;" [formGroupName]="i">
              
               <td *ngIf="showModel" >
-                <label>{{iRow.get('qtnd_pkid')?.value}}</label>
+                <label>{{iRow.get('qtnd_id')?.value}}</label>
+              </td>
+              <td *ngIf="showModel" >
+                <label>{{iRow.get('qtnd_order')?.value}}</label>
               </td>
 
               <td>
@@ -212,7 +217,7 @@
 
     <div class="row" *ngIf="formArray('qtnm_qtnd_fcl').length <= 0">
       <div class="col-sm-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addFclDetails()" [disabled]="mform.invalid">Add Contact</button>
+        <button class="btn btn-sm btn-info" (click)="addFclDetails()" [disabled]="mform.invalid">Add Details</button>
       </div>
     </div>
   </div>
