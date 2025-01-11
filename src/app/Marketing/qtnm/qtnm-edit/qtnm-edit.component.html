@@ -19,7 +19,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">QuoteType</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'"></app-input>
+            <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'" [disable]="true"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -70,7 +70,12 @@
             <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
-
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Quote By</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_quot_by" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
           <div class="col-sm-8">
@@ -111,6 +116,7 @@
         <table class="table table-sm table-hover table-bordered table-striped table-condensed">
           <thead class="table-success">
             <tr class="table-header">
+              <th>EDIT</th>
               <th *ngIf="showModel">ID</th>
               <th *ngIf="showModel">ORDER</th>
               <th>POL</th>
@@ -134,6 +140,9 @@
 
           <tbody formArrayName="qtnm_fcl">
             <tr *ngFor="let iRow of formArray('qtnm_fcl').controls; let i=index;" [formGroupName]="i">
+              <td align="centre" (click)="editFcldetails(i)" class="link">
+                <i class="fa fa-pencil"></i>
+              </td>
 
               <td *ngIf="showModel">
                 <label>{{iRow.get('qtnd_id')?.value}}</label>
