@@ -4,8 +4,6 @@ import { baseListComponent } from '../../../shared/base-class/baseListComponent'
 import { QtnmSearchComponent } from '../qtnm-search/qtnm-search.component';
 import { QtnmService } from '../../services/qtnm.service';
 
-
-
 @Component({
   selector: 'app-qtnm-list',
   templateUrl: './qtnm-list.component.html',
@@ -20,7 +18,6 @@ export class QtnmListComponent extends baseListComponent {
   ) {
     super(ms);
   }
-
 
   ngOnInit(): void {
     this.init();
@@ -42,5 +39,4 @@ export class QtnmListComponent extends baseListComponent {
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
   }
-
 }

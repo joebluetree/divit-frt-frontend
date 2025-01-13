@@ -132,7 +132,6 @@ export class QtnmEditComponent extends baseEditComponent {
   }
 
   getRecord() {
-
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/Marketing/Qtnmfcl/GetRecordAsync').subscribe({
       next: (rec: iQtnm) => {
@@ -253,7 +252,6 @@ export class QtnmEditComponent extends baseEditComponent {
     }
   }
 
-
   fclOutput(action: any) {
     if (action.mode == "new")
       this.addFclDetails(<iQtnd_fcl>action.record);
@@ -263,7 +261,6 @@ export class QtnmEditComponent extends baseEditComponent {
       })
     }
   }
-
 
   openHistory(): void {
     const dialogRef = this.dialog.open(HistoryComponent, {

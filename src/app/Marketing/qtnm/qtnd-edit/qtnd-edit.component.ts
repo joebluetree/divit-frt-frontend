@@ -4,8 +4,6 @@ import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
 import { data_fcl, iQtnd_fcl } from '../../models/iqtnm';
 
-
-
 @Component({
   selector: 'app-qtnd-edit',
   templateUrl: './qtnd-edit.component.html',
@@ -29,10 +27,9 @@ export class QtndEditComponent {
       this.newRecord();
     else
       this.fillData();
-
   }
-  @Output('output') output = new EventEmitter<any>();
 
+  @Output('output') output = new EventEmitter<any>();
   constructor(
     public gs: GlobalService,
     private fb: FormBuilder,) {
@@ -106,6 +103,7 @@ export class QtndEditComponent {
     this.mode = 'new';
     this.mform.reset();
     //this.mform.markAsPristine();
+    this.mform.markAsUntouched;
 
   }
 

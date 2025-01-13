@@ -21,7 +21,6 @@ export class QtnmSearchComponent {
   @Input('input') set input(v: iQtnm_Search) {
     this.record = { ...v };
   }
-
   @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(
@@ -35,7 +34,6 @@ export class QtnmSearchComponent {
     this.mform = this.fb.group({
       qtnm_no: [''],
     })
-
   }
 
   ngOnInit(): void {

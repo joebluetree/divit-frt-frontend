@@ -16,12 +16,12 @@
             <app-input maxlength="15" formControlName="qtnm_no" [disable]="true"></app-input>
           </div>
         </div>
-        <div class="form-group row">
+        <!-- <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">QuoteType</label>
           <div class="col-sm-8">
             <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'" [disable]="true"></app-input>
           </div>
-        </div>
+        </div> -->
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote To</label>
           <div class="col-sm-8">
@@ -217,11 +217,11 @@
         </table>
       </div>
     </div>
-    <div class="row" *ngIf="formArray('qtnm_fcl').length <= 0">
+    <!-- <div class="row" *ngIf="formArray('qtnm_fcl').length <= 0">
       <div class="col-sm-12 text-center">
         <button class="btn btn-sm btn-info" (click)="addFclDetails()" [disabled]="mform.invalid">Add Details</button>
       </div>
-    </div>
+    </div> -->
   </div>
 </form>
 <div class="page-footer line-bottom">

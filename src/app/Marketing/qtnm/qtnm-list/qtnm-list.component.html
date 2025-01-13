@@ -16,12 +16,10 @@
 </div>
 
 <div class="page-body">
-
   <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
     [delete_url]="'/api/Marketing/Qtnmfcl/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
     [row_id_name]="'qtnm_id'" [selected_id]="ms.selectedRow">
   </app-table>
-
 </div>
 
 <div class="page-pagination line-bottom">
