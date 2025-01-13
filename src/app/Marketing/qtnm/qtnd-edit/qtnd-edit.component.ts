@@ -44,7 +44,7 @@ export class QtndEditComponent {
       qtnd_pol_name: [''],  //, [Validators.required, Validators.maxLength(100)]
       qtnd_pod_id: [null],   //, [Validators.required]
       qtnd_pod_name: [''],
-      qtnd_carrier_id: [null],
+      qtnd_carrier_id: [0],
       qtnd_carrier_name: [''],
       qtnd_trans_time: [''],
       qtnd_routing: [''],
