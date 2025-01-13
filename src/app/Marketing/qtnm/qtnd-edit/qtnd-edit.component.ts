@@ -102,8 +102,8 @@ export class QtndEditComponent {
   newRecord() {
     this.mode = 'new';
     this.mform.reset();
-    //this.mform.markAsPristine();
-    this.mform.markAsUntouched;
+    this.mform.markAsPristine();
+    //this.mform.markAsUntouched;
 
   }
 

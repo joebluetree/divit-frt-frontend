@@ -9,7 +9,7 @@
 <form [formGroup]="mform">
   <div class="page-body">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote#</label>
           <div class="col-sm-8">
@@ -63,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote Date</label>
           <div class="col-sm-8">
@@ -105,6 +105,45 @@
           </div>
         </div>
       </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-date ></app-date>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="page-body">
@@ -117,7 +156,7 @@
           <thead class="table-success">
             <tr class="table-header">
               <th>EDIT</th>
-              <th *ngIf="showModel">ID</th>
+              <th>ID</th>
               <th *ngIf="showModel">ORDER</th>
               <th>POL</th>
               <th>POD</th>
@@ -144,7 +183,7 @@
                 <i class="fa fa-pencil"></i>
               </td>
 
-              <td *ngIf="showModel">
+              <td>
                 <label>{{iRow.get('qtnd_id')?.value}}</label>
               </td>
               <td *ngIf="showModel">
