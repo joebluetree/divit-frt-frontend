@@ -41,6 +41,7 @@ export interface iQtnm
   qtnm_type: string ;
   qtnm_no: string ;
   qtnm_to_id: number;
+  qtnm_to_code: string ;
   qtnm_to_name: string ;
   qtnm_to_addr1: string ;
   qtnm_to_addr2: string ;

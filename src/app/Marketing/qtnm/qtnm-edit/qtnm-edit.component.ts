@@ -43,6 +43,7 @@ export class QtnmEditComponent extends baseEditComponent {
       qtnm_type: [null], // [Validators.required, Validators.maxLength(15)]
       qtnm_no: [''], //, [Validators.maxLength(15)]
       qtnm_to_id: [0],
+      qtnm_to_code: [''],
       qtnm_to_name: [''],
       qtnm_to_addr1: [''],  //, [Validators.required, Validators.maxLength(100)]
       qtnm_to_addr2: [''],  //, [Validators.required, Validators.maxLength(100)]
@@ -141,6 +142,7 @@ export class QtnmEditComponent extends baseEditComponent {
           qtnm_type: rec.qtnm_type,
           qtnm_no: rec.qtnm_no,
           qtnm_to_id: rec.qtnm_to_id,
+          qtnm_to_code: rec.qtnm_to_code,
           qtnm_to_name: rec.qtnm_to_name,
           qtnm_to_addr1: rec.qtnm_to_addr1,
           qtnm_to_addr2: rec.qtnm_to_addr2,
@@ -217,13 +219,21 @@ export class QtnmEditComponent extends baseEditComponent {
       if (action.rec) {
         this.mform.patchValue({
           qtnm_to_id: action.rec.cust_id,
+          qtnm_to_code: action.rec.cust_code,
           qtnm_to_name: action.rec.cust_name,
+          qtnm_to_addr1:action.rec.cust_address1,
+          qtnm_to_addr2:action.rec.cust_address2,
+          qtnm_to_addr3:action.rec.cust_address3,
         });
       }
       else {
         this.mform.patchValue({
           qtnm_to_id: 0,
           qtnm_to_name: '',
+          qtnm_to_code: '',
+          qtnm_to_addr1: '',
+          qtnm_to_addr2: '',
+          qtnm_to_addr3: '',
         });
       }
     }
