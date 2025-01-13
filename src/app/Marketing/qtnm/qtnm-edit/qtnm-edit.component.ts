@@ -221,9 +221,9 @@ export class QtnmEditComponent extends baseEditComponent {
           qtnm_to_id: action.rec.cust_id,
           qtnm_to_code: action.rec.cust_code,
           qtnm_to_name: action.rec.cust_name,
-          qtnm_to_addr1:action.rec.cust_address1,
-          qtnm_to_addr2:action.rec.cust_address2,
-          qtnm_to_addr3:action.rec.cust_address3,
+          qtnm_to_addr1: action.rec.cust_address1,
+          qtnm_to_addr2: action.rec.cust_address2,
+          qtnm_to_addr3: action.rec.cust_address3,
         });
       }
       else {
