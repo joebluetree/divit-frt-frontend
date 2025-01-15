@@ -28,18 +28,21 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Quote to</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
           <div class="col-sm-8">
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format"
+              placeholder="mm-dd-yyyy"></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Quote to</label>
+          <div class="col-sm-3">
             <auto-complete formControlName="qtnm_to_code" id="qtnm_to_code" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]">
             </auto-complete>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_to_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
@@ -67,29 +70,20 @@
             <app-input maxlength="100" formControlName="qtnm_to_addr4" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Quote Date</label>
-          <div class="col-sm-8">
-            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format"
-              placeholder="mm-dd-yyyy"></app-date>
-          </div>
-        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote by</label>
-          <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="qtnm_quot_by" [case]="'UPPER'" id="qtnm_code"
+          <div class="col-sm-3">
+            <app-input maxlength="30" formControlName="qtnm_quot_by" [case]="'UPPER'" id="qtnm_code"
               name="qtnm_code"></app-input>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
-          <div class="col-sm-8">
+          <label class="col-sm-2 form-label form-lable-sm" for="">Validity</label>
+          <div class="col-sm-3">
             <app-date maxlength="100" formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format"
               placeholder="mm-dd-yyyy"></app-date>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Sales Rep.</label>
           <div class="col-sm-8">
@@ -105,29 +99,16 @@
             <app-input maxlength="100" formControlName="qtnm_move_type" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <!--body-->
-
-  <div class="page-body">
-    <div class="row">
-      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Commodity</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Package</label>
-          <div class="col-sm-8">
+          <label class="col-sm-2 form-label form-lable-sm">Package</label>
+          <div class="col-sm-3">
             <app-input maxlength="100" formControlName="qtnm_package" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">KGS</label>
           <div class="col-sm-3">
@@ -155,62 +136,51 @@
       </div>
     </div>
   </div>
+  <!--body-->
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Place Of Receipt</label>
-          <div class="col-sm-8">
+          <label class="col-sm-4 form-label form-lable-sm" for="">POR</label>
+          <div class="col-sm-3">
             <auto-complete formControlName="qtnm_por_code" id="qtnm_por_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_por_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Port Of Loading</label>
-          <div class="col-sm-8">
+          <label class="col-sm-4 form-label form-lable-sm" for="">POL</label>
+          <div class="col-sm-3">
             <auto-complete formControlName="qtnm_pol_code" id="qtnm_pol_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_pol_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Discharge Port</label>
-          <div class="col-sm-8">
+          <label class="col-sm-4 form-label form-lable-sm" for="">POD</label>
+          <div class="col-sm-3">
             <auto-complete formControlName="qtnm_pod_code" id="qtnm_pod_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_pod_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Place Of Delivery</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="qtnm_pld_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Final Destination</label>
           <div class="col-sm-8">
