@@ -6,10 +6,13 @@ export interface iQtnd_fcl {
   qtnd_id: number;
   qtnd_qtnm_id: number;
   qtnd_pol_id: number;
+  qtnd_pol_code: string;
   qtnd_pol_name: string;
   qtnd_pod_id: number;
+  qtnd_pod_code: string;
   qtnd_pod_name: string;
   qtnd_carrier_id: number;
+  qtnd_carrier_code: string;
   qtnd_carrier_name: string;
   qtnd_trans_time: string;
   qtnd_routing: string;

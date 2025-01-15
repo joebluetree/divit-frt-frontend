@@ -37,6 +37,7 @@ export class QtnmEditComponent extends baseEditComponent {
     super();
     this.setInvoicedData('new', <iQtnd_fcl>{}, -1);
     this.showModel = false;
+    let user = this.gs.getUserName();
     this.mform = this.fb.group({
       qtnm_id: [0],
       qtnm_cfno: [0],
@@ -50,7 +51,7 @@ export class QtnmEditComponent extends baseEditComponent {
       qtnm_to_addr3: [''],
       qtnm_to_addr4: [''],
       qtnm_date: [''],
-      qtnm_quot_by: [''],
+      qtnm_quot_by: [user],
       qtnm_valid_date: [''],
       qtnm_salesman_id: [0],  //, [Validators.required]
       qtnm_salesman_name: [''],  //, [Validators.required, Validators.maxLength(100)]
@@ -228,8 +229,8 @@ export class QtnmEditComponent extends baseEditComponent {
       else {
         this.mform.patchValue({
           qtnm_to_id: 0,
-          qtnm_to_name: '',
           qtnm_to_code: '',
+          qtnm_to_name: '',
           qtnm_to_addr1: '',
           qtnm_to_addr2: '',
           qtnm_to_addr3: '',

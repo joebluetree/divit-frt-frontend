@@ -4,54 +4,43 @@
       <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-label-sm" for="">POL</label>
-          <div class="col-sm-8">
-            <auto-complete formControlName="qtnd_pol_name" name="qtnd_pol_name" id="qtnd_pol_name"
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_pol_code" name="qtnd_pol_name" id="qtnd_pol_name"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
               case="upper"
               display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
             </auto-complete>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnd_pol_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-label-sm" for="">POD</label>
-          <div class="col-sm-8">
-            <auto-complete formControlName="qtnd_pod_name" name="qtnd_pod_name" id="qtnd_pod_name"
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_pod_code" name="qtnd_pod_name" id="qtnd_pod_name"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
               case="upper"
               display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
             </auto-complete>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnd_pod_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-label-sm" for="">CARRIER</label>
-          <div class="col-sm-8">
-            <auto-complete formControlName="qtnd_carrier_name" name="qtnd_carrier_name" id="qtnd_carrier_name"
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_carrier_code" name="qtnd_carrier_name" id="qtnd_carrier_name"
               (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
               [url]="url" case="upper"
               display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
             </auto-complete>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
+          <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnd_carrier_name" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">T/T</label>
           <div class="col-sm-8">
@@ -70,6 +59,8 @@
             <app-input maxlength="6" formControlName="qtnd_cntr_type" [case]="'UPPER'" ></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">ETD </label>
           <div class="col-sm-8">
@@ -89,8 +80,6 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">PSS</label>
           <div class="col-sm-8">
@@ -112,6 +101,8 @@
               [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">HAULAGE</label>
           <div class="col-sm-8">

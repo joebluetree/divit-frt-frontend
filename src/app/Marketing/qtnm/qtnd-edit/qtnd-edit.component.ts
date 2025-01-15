@@ -41,10 +41,13 @@ export class QtndEditComponent {
       qtnd_id: [null],
       qtnd_qtnm_id: [null],
       qtnd_pol_id: [null],  //, [Validators.required]
+      qtnd_pol_code: [''],
       qtnd_pol_name: [''],  //, [Validators.required, Validators.maxLength(100)]
       qtnd_pod_id: [null],   //, [Validators.required]
+      qtnd_pod_code: [''],
       qtnd_pod_name: [''],
       qtnd_carrier_id: [0],
+      qtnd_carrier_code: [''],
       qtnd_carrier_name: [''],
       qtnd_trans_time: [''],
       qtnd_routing: [''],
@@ -74,10 +77,13 @@ export class QtndEditComponent {
       qtnd_id: this.record?.qtnd_id || 0,
       qtnd_qtnm_id: this.record?.qtnd_qtnm_id || 0,
       qtnd_pol_id: this.record?.qtnd_pol_id || 0,
+      qtnd_pol_code: this.record?.qtnd_pol_code || '',
       qtnd_pol_name: this.record?.qtnd_pol_name || '',
       qtnd_pod_id: this.record?.qtnd_pod_id || 0,
+      qtnd_pod_code: this.record?.qtnd_pod_code || '',
       qtnd_pod_name: this.record?.qtnd_pod_name || '',
       qtnd_carrier_id: this.record?.qtnd_carrier_id || 0,
+      qtnd_carrier_code: this.record?.qtnd_carrier_code || '',
       qtnd_carrier_name: this.record?.qtnd_carrier_name || '',
       qtnd_trans_time: this.record?.qtnd_trans_time || '',
       qtnd_routing: this.record?.qtnd_routing || '',
@@ -116,10 +122,13 @@ export class QtndEditComponent {
       this.record.qtnd_id = this.mform.value.qtnd_id;
       this.record.qtnd_qtnm_id = this.mform.value.qtnd_qtnm_id;
       this.record.qtnd_pol_id = this.mform.value.qtnd_pol_id;
+      this.record.qtnd_pol_code = this.mform.value.qtnd_pol_code;
       this.record.qtnd_pol_name = this.mform.value.qtnd_pol_name;
       this.record.qtnd_pod_id = this.mform.value.qtnd_pod_id;
+      this.record.qtnd_pod_code = this.mform.value.qtnd_pod_code;
       this.record.qtnd_pod_name = this.mform.value.qtnd_pod_name;
       this.record.qtnd_carrier_id = this.mform.value.qtnd_carrier_id;
+      this.record.qtnd_carrier_code = this.mform.value.qtnd_carrier_code;
       this.record.qtnd_carrier_name = this.mform.value.qtnd_carrier_name;
       this.record.qtnd_trans_time = this.mform.value.qtnd_trans_time;
       this.record.qtnd_routing = this.mform.value.qtnd_routing;
@@ -171,12 +180,14 @@ export class QtndEditComponent {
       if (action.rec) {
         this.mform.patchValue({
           qtnd_pol_id: action.rec.param_id,
+          qtnd_pol_code: action.rec.param_code,
           qtnd_pol_name: action.rec.param_name,
         });
       }
       else {
         this.mform.patchValue({
           qtnd_pol_id: 0,
+          qtnd_pol_code: '',
           qtnd_pol_name: '',
         });
       }
@@ -186,12 +197,14 @@ export class QtndEditComponent {
       if (action.rec) {
         this.mform.patchValue({
           qtnd_pod_id: action.rec.param_id,
+          qtnd_pod_code: action.rec.param_code,
           qtnd_pod_name: action.rec.param_name,
         });
       }
       else {
         this.mform.patchValue({
           qtnd_pod_id: 0,
+          qtnd_pod_code: '',
           qtnd_pod_name: '',
         });
       }
@@ -201,12 +214,14 @@ export class QtndEditComponent {
       if (action.rec) {
         this.mform.patchValue({
           qtnd_carrier_id: action.rec.param_id,
+          qtnd_carrier_code: action.rec.param_code,
           qtnd_carrier_name: action.rec.param_name,
         });
       }
       else {
         this.mform.patchValue({
           qtnd_carrier_id: 0,
+          qtnd_carrier_code: '',
           qtnd_carrier_name: '',
         });
       }

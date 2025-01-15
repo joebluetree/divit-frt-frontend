@@ -12,25 +12,22 @@
       <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote#</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <app-input maxlength="15" formControlName="qtnm_no" [disable]="true"></app-input>
           </div>
-        </div>
-        <!-- <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">QuoteType</label>
-          <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="qtnm_type" [case]="'UPPER'" [disable]="true"></app-input>
+          <label class="col-sm-2 form-label form-lable-sm" for="">Date</label>
+          <div class="col-sm-3">
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" required></app-date>
           </div>
-        </div> -->
+        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Quote To</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="qtnm_to_name" id="qtnm_to_name" (CallBack)="callBack($event)"
+            <auto-complete formControlName="qtnm_to_code" id="qtnm_to_name" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
               display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
           </div>
         </div>
-
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
           <div class="col-sm-8">
@@ -64,12 +61,6 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Quote Date</label>
-          <div class="col-sm-8">
-            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" required></app-date>
-          </div>
-        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Quote By</label>
           <div class="col-sm-8">
@@ -106,43 +97,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
 
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-          <div class="col-sm-8">
-            <app-date ></app-date>
-          </div>
-        </div>
       </div>
     </div>
   </div>
