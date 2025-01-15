@@ -83,6 +83,7 @@ export interface iQtnm {
 export interface iQtnm_Search {
   qtnm_no: string;
   rec_company_id: number;
+  rec_branch_id: number;
 }
 
 export interface iQtnmModel {

@@ -46,6 +46,7 @@ export class QtnmSearchComponent {
     if (this.output) {
       this.record.qtnm_no = this.mform.value.qtnm_no;
       this.record.rec_company_id = this.gs.user.user_company_id;
+      this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.output.emit({ record: this.record, url: this.search_url });
     }
   }
