@@ -33,7 +33,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
 
     super();
     this.setQuoteData('new', <iQtnd_air>{}, 0);
-    this.showModel = true;
+    this.showModel = false;
     let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({
