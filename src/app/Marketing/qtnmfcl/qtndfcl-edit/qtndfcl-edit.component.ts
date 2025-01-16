@@ -2,16 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
-import { data_fcl, iQtnd_fcl } from '../../models/iqtnm';
+import { data_fcl, iQtnd_fcl } from '../../models/iqtnmfcl';
 
 @Component({
-  selector: 'app-qtnd-edit',
-  templateUrl: './qtnd-edit.component.html',
-  styleUrls: ['./qtnd-edit.component.css'],
+  selector: 'app-qtndfcl-edit',
+  templateUrl: './qtndfcl-edit.component.html',
+  styleUrls: ['./qtndfcl-edit.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class QtndEditComponent {
+export class QtndFclEditComponent {
 
   mform: FormGroup;
   record!: iQtnd_fcl;
@@ -40,10 +40,10 @@ export class QtndEditComponent {
     this.mform = this.fb.group({
       qtnd_id: [null],
       qtnd_qtnm_id: [null],
-      qtnd_pol_id: [null],  //, [Validators.required]
+      qtnd_pol_id: [null],  
       qtnd_pol_code: [''],
-      qtnd_pol_name: [''],  //, [Validators.required, Validators.maxLength(100)]
-      qtnd_pod_id: [null],   //, [Validators.required]
+      qtnd_pol_name: [''], 
+      qtnd_pod_id: [null],  
       qtnd_pod_code: [''],
       qtnd_pod_name: [''],
       qtnd_carrier_id: [0],
@@ -60,8 +60,7 @@ export class QtndEditComponent {
       qtnd_isps: [null],
       qtnd_haulage: [null],
       qtnd_ifs: [null],
-      qtnd_tot_amt: [null],  //[Validators.required]
-      qtnd_order: [null]
+      qtnd_tot_amt: [null], 
     })
   }
 
@@ -151,7 +150,8 @@ export class QtndEditComponent {
     this.newRecord();
   }
 
-  //
+  //Adding the 
+
   findTotal(action: any) {
     console.log(action);
     if (!action.isChanged) {

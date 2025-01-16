@@ -1,24 +1,24 @@
-import { iQtnm_Search } from '../../models/iqtnm';
+import { iQtnmFcl_Search } from '../../models/iqtnmfcl';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalService } from '../../../core/services/global.service';
 
 @Component({
-  selector: 'app-qtnm-search',
-  templateUrl: './qtnm-search.component.html',
-  styleUrls: ['./qtnm-search.component.css'],
+  selector: 'app-qtnmfcl-search',
+  templateUrl: './qtnmfcl-search.component.html',
+  styleUrls: ['./qtnmfcl-search.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class QtnmSearchComponent {
+export class QtnmFclSearchComponent {
 
   mform: FormGroup;
-  record!: iQtnm_Search;
+  record!: iQtnmFcl_Search;
 
   @Input('search_url') search_url = '';
 
-  @Input('input') set input(v: iQtnm_Search) {
+  @Input('input') set input(v: iQtnmFcl_Search) {
     this.record = { ...v };
   }
   @Output('searchResult') output = new EventEmitter<any>();

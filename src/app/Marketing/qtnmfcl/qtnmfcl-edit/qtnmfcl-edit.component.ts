@@ -4,34 +4,22 @@ import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
-import { QtnmService } from '../../services/qtnm.service';
-import { data_fcl, iQtnd_fcl, iQtnm } from '../../models/iqtnm';
-import { QtndEditComponent } from '../qtnd-edit/qtnd-edit.component';
+import { QtnmFclService } from '../../services/qtnmfcl.service';
+import { data_fcl, iQtnd_fcl, iQtnmfcl } from '../../models/iqtnmfcl';
+import { QtndFclEditComponent } from '../qtndfcl-edit/qtndfcl-edit.component';
 
 @Component({
-  selector: 'app-qtnm-edit',
-  templateUrl: './qtnm-edit.component.html',
-  styleUrls: ['./qtnm-edit.component.css'],
+  selector: 'app-qtnmfcl-edit',
+  templateUrl: './qtnmfcl-edit.component.html',
+  styleUrls: ['./qtnmfcl-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls, QtndEditComponent]
+  imports: [...CustomControls, QtndFclEditComponent]
 })
-export class QtnmEditComponent extends baseEditComponent {
+export class QtnmFclEditComponent extends baseEditComponent {
   data_fcl: data_fcl;
 
-  // dataList = [
-  //   { key: 'NA', value: 'NA' },
-  //   { key: 'AR', value: 'AR' },
-  //   { key: 'AP', value: 'AP' },
-  // ]
-
-  // titleList = [
-  //   { key: 'NA', value: 'NA' },
-  //   { key: 'MR', value: 'MR' },
-  //   { key: 'MRS', value: 'MRS' },
-  // ]
-
   constructor(
-    private ms: QtnmService,
+    private ms: QtnmFclService,
     public dialog: MatDialog
   ) {
     super();
@@ -41,20 +29,20 @@ export class QtnmEditComponent extends baseEditComponent {
     this.mform = this.fb.group({
       qtnm_id: [0],
       qtnm_cfno: [0],
-      qtnm_type: [null], // [Validators.required, Validators.maxLength(15)]
-      qtnm_no: [''], //, [Validators.maxLength(15)]
+      qtnm_type: [null], 
+      qtnm_no: [''], 
       qtnm_to_id: [0],
       qtnm_to_code: [''],
       qtnm_to_name: [''],
-      qtnm_to_addr1: [''],  //, [Validators.required, Validators.maxLength(100)]
-      qtnm_to_addr2: [''],  //, [Validators.required, Validators.maxLength(100)]
+      qtnm_to_addr1: [''],  
+      qtnm_to_addr2: [''],  
       qtnm_to_addr3: [''],
       qtnm_to_addr4: [''],
       qtnm_date: [''],
       qtnm_quot_by: [user],
       qtnm_valid_date: [''],
-      qtnm_salesman_id: [0],  //, [Validators.required]
-      qtnm_salesman_name: [''],  //, [Validators.required, Validators.maxLength(100)]
+      qtnm_salesman_id: [0],  
+      qtnm_salesman_name: [''],  
       qtnm_move_type: [''],
       qtnm_commodity: [''],
       qtnm_fcl: this.fb.array([]),
@@ -135,7 +123,7 @@ export class QtnmEditComponent extends baseEditComponent {
   getRecord() {
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/Marketing/Qtnmfcl/GetRecordAsync').subscribe({
-      next: (rec: iQtnm) => {
+      next: (rec: iQtnmfcl) => {
         this.mform.patchValue({
           qtnm_id: rec.qtnm_id,
           qtnm_cfno: rec.qtnm_cfno,
@@ -172,7 +160,7 @@ export class QtnmEditComponent extends baseEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iQtnm>this.mform.value;
+    const data = <iQtnmfcl>this.mform.value;
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -186,7 +174,7 @@ export class QtnmEditComponent extends baseEditComponent {
       'mode': this.mode
     }
     this.ms.save(param, data, '/api/Marketing/Qtnmfcl/SaveAsync').subscribe({
-      next: (v: iQtnm) => {
+      next: (v: iQtnmfcl) => {
         if (this.mode == "add") {
           this.id = v.qtnm_id;
           this.mode = "edit";

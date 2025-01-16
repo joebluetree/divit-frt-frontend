@@ -1,6 +1,6 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/marketing/qtnmEdit"
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/marketing/qtnmfclEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
@@ -99,7 +99,7 @@
     </div>
   </div>
   <div class="page-body">
-    <app-qtnd-edit [input]="data_fcl" (output)="fclOutput($event)"></app-qtnd-edit>
+    <app-qtndfcl-edit [input]="data_fcl" (output)="fclOutput($event)"></app-qtndfcl-edit>
   </div>
   <div class="page-body">
     <div class="row">

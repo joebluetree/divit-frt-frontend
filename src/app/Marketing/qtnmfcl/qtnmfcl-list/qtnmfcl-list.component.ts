@@ -1,20 +1,20 @@
 import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseListComponent } from '../../../shared/base-class/baseListComponent';
-import { QtnmSearchComponent } from '../qtnm-search/qtnm-search.component';
-import { QtnmService } from '../../services/qtnm.service';
+import { QtnmFclSearchComponent } from '../qtnmfcl-search/qtnmfcl-search.component';
+import { QtnmFclService } from '../../services/qtnmfcl.service';
 
 @Component({
-  selector: 'app-qtnm-list',
-  templateUrl: './qtnm-list.component.html',
-  styleUrls: ['./qtnm-list.component.css'],
+  selector: 'app-qtnmfcl-list',
+  templateUrl: './qtnmfcl-list.component.html',
+  styleUrls: ['./qtnmfcl-list.component.css'],
   standalone: true,
-  imports: [...CustomControls, QtnmSearchComponent]
+  imports: [...CustomControls, QtnmFclSearchComponent]
 })
-export class QtnmListComponent extends baseListComponent {
+export class QtnmFclListComponent extends baseListComponent {
 
   constructor(
-    public ms: QtnmService,
+    public ms: QtnmFclService,
   ) {
     super(ms);
   }
@@ -23,7 +23,7 @@ export class QtnmListComponent extends baseListComponent {
     this.init();
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/marketing/qtnmEdit', col_param: param, col_show: this.bEdit || this.bView },
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/marketing/qtnmfclEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "qtnm_no", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_date", col_caption: "DATE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

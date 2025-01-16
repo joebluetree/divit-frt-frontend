@@ -37,7 +37,7 @@ export interface iQtnd_fcl {
   rec_edited_date: string;
 }
 
-export interface iQtnm {
+export interface iQtnmfcl {
   qtnm_id: number;
   qtnm_cfno: number;
   qtnm_type: string;
@@ -83,17 +83,17 @@ export interface iQtnm {
   rec_edited_date: string;
 }
 
-export interface iQtnm_Search {
+export interface iQtnmFcl_Search {
   qtnm_no: string;
   rec_company_id: number;
   rec_branch_id: number;
 }
 
-export interface iQtnmModel {
+export interface iQtnmFclModel {
   selected_row_id: number;
-  records: iQtnm[],
+  records: iQtnmfcl[],
   errorMessage: string,
-  searchRecord: iQtnm_Search,
+  searchRecord: iQtnmFcl_Search,
   pageRecord: iPage,
   sort_column: string;
   sort_order: string;
