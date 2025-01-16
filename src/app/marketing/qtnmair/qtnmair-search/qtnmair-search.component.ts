@@ -3,33 +3,35 @@ import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angul
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
 import { iQtnm_lcl_Search } from '../../models/iqtnmlcl';
+import { iQtnm_air_Search } from '../../models/iqtnmair';
 
 @Component({
-  selector: 'app-qtnmlcl-search',
-  templateUrl: './qtnmlcl-search.component.html',
-  styleUrls: ['./qtnmlcl-search.component.css'],
+  selector: 'app-qtnmair-search',
+  templateUrl: './qtnmair-search.component.html',
+  styleUrls: ['./qtnmair-search.component.css'],
   standalone: true, 
   imports: [...CustomControls]
 })
 
 //Name : Sourav V
-//Created Date : 04/01/2025
-//Remark : this component manages searching of qtnm-lcl records
+//Created Date : 03/01/2025
+//Remark : this component manages searching of qtnm-air records
 
-export class QtnmLclSearchComponent {
+export class QtnmAirSearchComponent {
 
   mform: FormGroup;
-  record!: iQtnm_lcl_Search;
+  record!: iQtnm_air_Search;
 
   @Input('search_url') search_url = '';
 
-  @Input('input') set input(v: iQtnm_lcl_Search) {
+  @Input('input') set input(v: iQtnm_air_Search) {
     this.record = { ...v };
   }
 
   @Output('searchResult') output = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     public gs: GlobalService) {
     this.buildForm();
   }
@@ -40,7 +42,6 @@ export class QtnmLclSearchComponent {
       qtnm_to_date: [''],
       qtnm_to_name: [''],
       qtnm_no: [''],
-      qtnm_pld_name: [''],
 
     })
 
@@ -52,7 +53,6 @@ export class QtnmLclSearchComponent {
       qtnm_to_date: this.record.qtnm_to_date,
       qtnm_to_name: this.record.qtnm_to_name,
       qtnm_no: this.record.qtnm_no,
-      qtnm_pld_name: this.record.qtnm_pld_name
     })
   }
  
@@ -63,7 +63,6 @@ export class QtnmLclSearchComponent {
       this.record.qtnm_to_date = this.mform.value.qtnm_to_date;
       this.record.qtnm_to_name = this.mform.value.qtnm_to_name,
       this.record.qtnm_no = this.mform.value.qtnm_no;
-      this.record.qtnm_pld_name = this.mform.value.qtnm_pld_name
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit({ record: this.record, url: this.search_url });
