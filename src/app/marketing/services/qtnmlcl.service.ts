@@ -4,6 +4,11 @@ import { baseService } from '../../shared/base-class/baseService';
 import { iQtnm_lcl_Search, iQtnm_lclModel } from '../models/iqtnmlcl';
 
 @Injectable({ providedIn: 'root' })
+
+//Name : Sourav V
+//Created Date : 04/01/2025
+//Remark : this component manages qtnm-lcl data and set initial state of records (page,row) and searching. 
+
 export class QtnmLclService extends baseService {
 
   constructor() {

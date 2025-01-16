@@ -12,6 +12,11 @@ import { QtnmAirService } from '../../services/qtnmair.service';
   standalone: true,
   imports: [...CustomControls, QtnmAirSearchComponent],
 })
+
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : this file display relevant details(data) of each qtnm-air records
+
 export class QtnmAirListComponent extends baseListComponent {
 
   constructor(public ms: QtnmAirService) {
@@ -31,7 +36,7 @@ export class QtnmAirListComponent extends baseListComponent {
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pol_name", col_caption: "POL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "qtnm_move_type", col_caption: "MOVE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_move_type", col_caption: "MOVE TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_commodity", col_caption: "COMMODITY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },

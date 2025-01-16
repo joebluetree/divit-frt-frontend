@@ -11,6 +11,11 @@ import { QtnmLclSearchComponent } from '../qtnmlcl-search/qtnmlcl-search.compone
   standalone: true,
   imports: [...CustomControls, QtnmLclSearchComponent],
 })
+
+//Name : Sourav V
+//Created Date : 04/01/2025
+//Remark : this component display relevant details of each qtnm-lcl records
+
 export class QtnmLclListComponent extends baseListComponent {
 
   constructor(public ms: QtnmLclService) {
@@ -30,8 +35,8 @@ export class QtnmLclListComponent extends baseListComponent {
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pol_name", col_caption: "POL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "qtnm_pld_name", col_caption: "DELIVERY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "qtnm_move_type", col_caption: "MOVE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_pld_name", col_caption: "PLACE OF DELIVERY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_move_type", col_caption: "MOVE TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_kgs", col_caption: "KGS", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_cbm", col_caption: "CBM", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

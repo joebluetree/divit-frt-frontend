@@ -1,5 +1,9 @@
 import { iPage } from "ngx-jrt-controls";
 
+//Name : Sourav V
+//Created Date : 04/01/2025
+//Remark : all data variable used in qtnm-lcl component is exported as separte interface according to its purpose (editing,search) 
+
 export interface iQtnd_lcl {
   qtnd_id: number,
   qtnd_qtnm_id: number,

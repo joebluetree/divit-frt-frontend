@@ -39,7 +39,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnm_to_code" id="qtnm_to_code" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]">
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -89,7 +89,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="qtnm_salesman_name" id="qtnm_salesman_name" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'param_id'},{'caption':'name','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
 
@@ -145,7 +145,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnm_por_code" id="qtnm_por_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_por_name" [case]="'UPPER'"></app-input>
@@ -156,7 +156,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnm_pol_code" id="qtnm_pol_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_pol_name" [case]="'UPPER'"></app-input>
@@ -167,7 +167,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnm_pod_code" id="qtnm_pod_code" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <div class="col-sm-5">
             <app-input maxlength="100" formControlName="qtnm_pod_name" [case]="'UPPER'"></app-input>
@@ -231,7 +231,7 @@
                 <auto-complete formControlName="qtnd_acc_code" id="qtnd_acc_code-{{i}}" name="qtnd_acc_code"
                   fieldName="qtnd_acc_code" [rowIndex]="i" (CallBack)="callBack($event)" [table]="'acctm'"
                   [company_id]="getCompanyId()" [url]="url"
-                  display_column="[{'caption':'ID','value':'acc_id'},{'caption':'CODE','value':'acc_code'},{'caption':'name','value':'acc_name'}]"></auto-complete>
+                  display_column="[{'caption':'ID','value':'acc_id'},{'caption':'CODE','value':'acc_code'},{'caption':'NAME','value':'acc_name'}]"></auto-complete>
               </td>
               <td>
                 <app-input formControlName="qtnd_acc_name" [rowIndex]="i" name="qtnd_acc_name" case="UPPER"></app-input>
@@ -241,8 +241,7 @@
                   [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findUnit($event)"></app-input>
               </td>
               <td>
-                <app-input formControlName="qtnd_per" [rowIndex]="i" name="qtnd_per" maxlength="50"
-                  id="qtnd_per"></app-input>
+                <app-input formControlName="qtnd_per" [rowIndex]="i" name="qtnd_per" maxlength="50" case="UPPER"></app-input>
               </td>
               <td *ngIf="showModel">
                 <label>{{iRow.get('qtnd_order')?.value}}</label>

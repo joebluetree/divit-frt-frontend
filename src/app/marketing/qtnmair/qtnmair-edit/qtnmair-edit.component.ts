@@ -16,6 +16,11 @@ import { QtnmAirdEditComponent } from '../qtnmaird-edit/qtnmaird-edit.component'
   standalone: true,
   imports: [...CustomControls, QtnmAirdEditComponent]
 })
+
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : this component manages creation,editing and saving of qtnm-air records
+
 export class QtnmAirEditComponent extends baseEditComponent {
 
   data_qtnmair: data_qtnmair;
@@ -28,7 +33,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
 
     super();
     this.setQuoteData('new', <iQtnd_air>{}, 0);
-    this.showModel = false;
+    this.showModel = true;
     let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({

@@ -1,5 +1,9 @@
 import { iPage } from "ngx-jrt-controls";
 
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : all data variable used in qtnm-air component is exported as separte interface according to its purpose (editing,search)
+
 export type data_qtnmair  = { mode : string,  record : iQtnd_air , index : number  };
 
 export interface iQtnd_air {

@@ -12,6 +12,11 @@ import { iQtnm_air_Search } from '../../models/iqtnmair';
   standalone: true, 
   imports: [...CustomControls]
 })
+
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : this component manages searching of qtnm-air records
+
 export class QtnmAirSearchComponent {
 
   mform: FormGroup;
@@ -25,7 +30,8 @@ export class QtnmAirSearchComponent {
 
   @Output('searchResult') output = new EventEmitter<any>();
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     public gs: GlobalService) {
     this.buildForm();
   }

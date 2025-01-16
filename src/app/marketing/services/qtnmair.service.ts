@@ -4,6 +4,11 @@ import { baseService } from '../../shared/base-class/baseService';
 import { iQtnm_air_Search, iQtnm_airModel } from '../models/iqtnmair';
 
 @Injectable({ providedIn: 'root' })
+
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : this component manages qtnm-air data and set initial state of records (page,row) and searching. 
+
 export class QtnmAirService extends baseService {
 
   constructor() {

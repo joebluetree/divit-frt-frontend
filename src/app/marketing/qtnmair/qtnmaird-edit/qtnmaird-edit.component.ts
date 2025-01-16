@@ -12,6 +12,11 @@ import { data_qtnmair, iQtnd_air, iQtnm_airModel } from '../../models/iqtnmair';
   standalone: true, 
   imports: [...CustomControls]
 })
+
+//Name : Sourav V
+//Created Date : 03/01/2025
+//Remark : this component manages creation,editing and saving of qtnm-air(detail table) records
+
 export class QtnmAirdEditComponent {
 
   mform: FormGroup;

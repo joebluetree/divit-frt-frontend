@@ -39,7 +39,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnm_to_code" id="qtnm_to_code" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]">
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -91,7 +91,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="qtnm_salesman_name" id="qtnm_salesman_name" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'code','value':'param_id'},{'caption':'name','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
 
@@ -146,8 +146,7 @@
             </tr>
           </thead>
           <tbody formArrayName="qtnd_air">
-            <tr *ngFor="let iRow of formArray('qtnd_air').controls; let i=index;" [formGroupName]="i"
-              (click)="editQuotes(i)">
+            <tr *ngFor="let iRow of formArray('qtnd_air').controls; let i=index;" [formGroupName]="i">
               <td align="centre" (click)="editQuotes(i)" class="link">
                 <i class="fa fa-pencil"></i>
               </td>

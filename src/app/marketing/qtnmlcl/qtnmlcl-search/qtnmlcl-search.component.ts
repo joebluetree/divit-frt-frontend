@@ -11,6 +11,11 @@ import { iQtnm_lcl_Search } from '../../models/iqtnmlcl';
   standalone: true, 
   imports: [...CustomControls]
 })
+
+//Name : Sourav V
+//Created Date : 04/01/2025
+//Remark : this component manages searching of qtnm-lcl records
+
 export class QtnmLclSearchComponent {
 
   mform: FormGroup;
