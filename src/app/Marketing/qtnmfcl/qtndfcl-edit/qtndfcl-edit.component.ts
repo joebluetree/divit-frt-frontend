@@ -66,6 +66,7 @@ export class QtndFclEditComponent {
       qtnd_haulage: [null],
       qtnd_ifs: [null],
       qtnd_tot_amt: [null], 
+      qtnd_order: [null], 
     })
   }
 
@@ -180,7 +181,7 @@ export class QtndFclEditComponent {
   }
 
   callBack(action: any) {
-    if (action.id == 'qtnd_pol_name') {
+    if (action.id == 'qtnd_pol_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
@@ -197,7 +198,7 @@ export class QtndFclEditComponent {
         });
       }
     }
-    if (action.id == 'qtnd_pod_name') {
+    if (action.id == 'qtnd_pod_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
@@ -214,7 +215,7 @@ export class QtndFclEditComponent {
         });
       }
     }
-    if (action.id == 'qtnd_carrier_name') {
+    if (action.id == 'qtnd_carrier_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
