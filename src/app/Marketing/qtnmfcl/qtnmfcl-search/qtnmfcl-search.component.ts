@@ -11,6 +11,11 @@ import { GlobalService } from '../../../core/services/global.service';
   standalone: true,
   imports: [...CustomControls]
 })
+
+  //Name : Alen Cherian
+  //Date : 03/01/2025
+  //Command : Search the Fcl Components. 
+
 export class QtnmFclSearchComponent {
 
   mform: FormGroup;
@@ -24,7 +29,7 @@ export class QtnmFclSearchComponent {
   @Output('searchResult') output = new EventEmitter<any>();
 
   constructor(
-    private gs: GlobalService,
+    public gs: GlobalService,
     private fb: FormBuilder,
   ) {
     this.buildForm();
@@ -33,18 +38,24 @@ export class QtnmFclSearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       qtnm_no: [''],
+      qtnm_from_date: [''],
+      qtnm_to_date: [''],
     })
   }
 
   ngOnInit(): void {
     this.mform.setValue({
       qtnm_no: this.record.qtnm_no,
+      qtnm_from_date: this.record.qtnm_from_date,
+      qtnm_to_date: this.record.qtnm_to_date,
     })
   }
 
   search(_action: string) {
     if (this.output) {
       this.record.qtnm_no = this.mform.value.qtnm_no;
+      this.record.qtnm_from_date = this.mform.value.qtnm_from_date;
+      this.record.qtnm_to_date = this.mform.value.qtnm_to_date;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.output.emit({ record: this.record, url: this.search_url });

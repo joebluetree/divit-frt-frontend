@@ -11,10 +11,16 @@ import { QtnmFclService } from '../../services/qtnmfcl.service';
   standalone: true,
   imports: [...CustomControls, QtnmFclSearchComponent]
 })
+
+  //Name : Alen Cherian
+  //Date : 03/01/2025
+  //Command : Create the Fcl to list. 
+
 export class QtnmFclListComponent extends baseListComponent {
 
   constructor(
     public ms: QtnmFclService,
+    
   ) {
     super(ms);
   }
@@ -25,17 +31,17 @@ export class QtnmFclListComponent extends baseListComponent {
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/marketing/qtnmfclEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "qtnm_no", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "qtnm_date", col_caption: "DATE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_date", col_caption: "DATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_quot_by", col_caption: "QOUTE BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pol_name", col_caption: "POL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_move_type", col_caption: "MOVE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_commodity", col_caption: "COMMODITY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      // { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      // { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      // { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      // { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
   }

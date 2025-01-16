@@ -25,7 +25,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="qtnm_to_code" id="qtnm_to_name" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
-              display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
           </div>
         </div>
         <div class="form-group row">
@@ -92,7 +92,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Commodity</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
           </div>
         </div>
       </div>

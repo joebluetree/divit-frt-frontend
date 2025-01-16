@@ -1,7 +1,11 @@
 import { iPage } from "ngx-jrt-controls";
 
-export type data_fcl = { mode: string, record: iQtnd_fcl, index: number };
+    //Name : Alen Cherian
+    //Date : 03/01/2025
+    //Command :  Create angular frontend model for Quotation Fcl.
 
+
+export type data_fcl = { mode: string, record: iQtnd_fcl, index: number };
 export interface iQtnd_fcl {
   qtnd_id: number;
   qtnd_qtnm_id: number;
@@ -85,6 +89,8 @@ export interface iQtnmfcl {
 
 export interface iQtnmFcl_Search {
   qtnm_no: string;
+  qtnm_from_date: string;
+  qtnm_to_date: string;
   rec_company_id: number;
   rec_branch_id: number;
 }

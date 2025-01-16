@@ -11,6 +11,11 @@ import { data_fcl, iQtnd_fcl } from '../../models/iqtnmfcl';
   standalone: true,
   imports: [...CustomControls]
 })
+
+    //Name : Alen Cherian
+    //Date : 03/01/2025
+    //Command : Create the Fcl Details Components. 
+
 export class QtndFclEditComponent {
 
   mform: FormGroup;
@@ -150,7 +155,7 @@ export class QtndFclEditComponent {
     this.newRecord();
   }
 
-  //Adding the 
+  //The function for total amount of Logistics Charges and Surcharges
 
   findTotal(action: any) {
     console.log(action);
