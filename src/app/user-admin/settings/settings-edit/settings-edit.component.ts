@@ -140,7 +140,7 @@ export class SettingsEditComponent extends baseEditComponent {
     }
     */
 
-    data.value = this.mform.value.value;
+    data.value = this.mform.value.value.toString();
     data.code = this.mform.value.code;
     data.name = this.mform.value.name;
 
