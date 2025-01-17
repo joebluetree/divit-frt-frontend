@@ -81,10 +81,13 @@ export class QtnmFclEditComponent extends baseEditComponent {
       qtnd_id: [rec?.qtnd_id || 0],
       qtnd_qtnm_id: [rec?.qtnd_qtnm_id || 0],
       qtnd_pol_id: [rec?.qtnd_pol_id || 0],
+      qtnd_pol_code: [rec?.qtnd_pol_code || ""],
       qtnd_pol_name: [rec?.qtnd_pol_name || ""],
       qtnd_pod_id: [rec?.qtnd_pod_id || 0],
+      qtnd_pod_code: [rec?.qtnd_pod_code || ""],
       qtnd_pod_name: [rec?.qtnd_pod_name || ""],
       qtnd_carrier_id: [rec?.qtnd_carrier_id || 0],
+      qtnd_carrier_code: [rec?.qtnd_carrier_code || ""],
       qtnd_carrier_name: [rec?.qtnd_carrier_name || ""],
       qtnd_trans_time: [rec?.qtnd_trans_time || ""],
       qtnd_routing: [rec?.qtnd_routing || ""],
@@ -111,6 +114,9 @@ export class QtnmFclEditComponent extends baseEditComponent {
   }
 
   editFcldetails(idx: number) {
+
+    console.log( <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value);
+
     this.data_fcl = {
       mode: 'edit',
       record: <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value,

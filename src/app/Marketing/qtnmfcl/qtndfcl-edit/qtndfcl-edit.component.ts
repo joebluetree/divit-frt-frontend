@@ -12,9 +12,9 @@ import { data_fcl, iQtnd_fcl } from '../../models/iqtnmfcl';
   imports: [...CustomControls]
 })
 
-    //Name : Alen Cherian
-    //Date : 03/01/2025
-    //Command : Create the Fcl Details Components. 
+//Name : Alen Cherian
+//Date : 03/01/2025
+//Command : Create the Fcl Details Components. 
 
 export class QtndFclEditComponent {
 
@@ -45,10 +45,10 @@ export class QtndFclEditComponent {
     this.mform = this.fb.group({
       qtnd_id: [null],
       qtnd_qtnm_id: [null],
-      qtnd_pol_id: [null],  
+      qtnd_pol_id: [0],
       qtnd_pol_code: [''],
-      qtnd_pol_name: [''], 
-      qtnd_pod_id: [null],  
+      qtnd_pol_name: [''],
+      qtnd_pod_id: [0],
       qtnd_pod_code: [''],
       qtnd_pod_name: [''],
       qtnd_carrier_id: [0],
@@ -65,8 +65,8 @@ export class QtndFclEditComponent {
       qtnd_isps: [null],
       qtnd_haulage: [null],
       qtnd_ifs: [null],
-      qtnd_tot_amt: [null], 
-      qtnd_order: [null], 
+      qtnd_tot_amt: [null],
+      qtnd_order: [null],
     })
   }
 
@@ -113,7 +113,7 @@ export class QtndFclEditComponent {
   newRecord() {
     this.mode = 'new';
     this.mform.reset();
-    this.mform.markAsPristine();
+    //this.mform.markAsPristine();
     //this.mform.markAsUntouched;
 
   }
@@ -123,6 +123,7 @@ export class QtndFclEditComponent {
       alert('form not valid');
       return;
     }
+
     if (this.output) {
       this.record.qtnd_id = this.mform.value.qtnd_id;
       this.record.qtnd_qtnm_id = this.mform.value.qtnd_qtnm_id;
@@ -148,7 +149,6 @@ export class QtndFclEditComponent {
       this.record.qtnd_ifs = this.mform.value.qtnd_ifs;
       this.record.qtnd_tot_amt = this.mform.value.qtnd_tot_amt;
       this.record.qtnd_order = this.mform.value.qtnd_order;
-
       this.record.rec_company_id = this.gs.user.user_company_id;
 
       this.output.emit({ record: this.record, mode: this.mode, index: this.index });
@@ -233,7 +233,6 @@ export class QtndFclEditComponent {
       }
     }
   }
-
 }
 
 

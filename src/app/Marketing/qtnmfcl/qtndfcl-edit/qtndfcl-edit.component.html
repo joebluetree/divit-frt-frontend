@@ -7,8 +7,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnd_pol_code" name="qtnd_pol_code" id="qtnd_pol_code"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
-              case="upper"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -20,8 +19,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnd_pod_code" name="qtnd_pod_code" id="qtnd_pod_code"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
-              case="upper"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -33,8 +31,8 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnd_carrier_code" name="qtnd_carrier_code" id="qtnd_carrier_code"
               (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
-              [url]="url" case="upper"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+              [url]="url"
+              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
             </auto-complete>
           </div>
           <div class="col-sm-5">

@@ -6,6 +6,7 @@ import { iPage } from "ngx-jrt-controls";
 
 
 export type data_fcl = { mode: string, record: iQtnd_fcl, index: number };
+
 export interface iQtnd_fcl {
   qtnd_id: number;
   qtnd_qtnm_id: number;
