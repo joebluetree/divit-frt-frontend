@@ -1,0 +1,146 @@
+<form [formGroup]="mform">
+  <div>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">POL</label>
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_pol_code" name="qtnd_pol_code" id="qtnd_pol_code"
+              (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
+            </auto-complete>
+          </div>
+          <div class="col-sm-5">
+            <app-input maxlength="100" formControlName="qtnd_pol_name" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">POD</label>
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_pod_code" name="qtnd_pod_code" id="qtnd_pod_code"
+              (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
+            </auto-complete>
+          </div>
+          <div class="col-sm-5">
+            <app-input maxlength="100" formControlName="qtnd_pod_name" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">CARRIER</label>
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnd_carrier_code" name="qtnd_carrier_code" id="qtnd_carrier_code"
+              (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
+              [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-5">
+            <app-input maxlength="100" formControlName="qtnd_carrier_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">T/T</label>
+          <div class="col-sm-8">
+            <app-input maxlength="15" formControlName="qtnd_trans_time" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">ROUTING</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_routing" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">CNTR.TYPE</label>
+          <div class="col-sm-8">
+            <app-input maxlength="6" formControlName="qtnd_cntr_type" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">ETD </label>
+          <div class="col-sm-8">
+            <app-input maxlength="25" formControlName="qtnd_etd" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">CUTT.OFF</label>
+          <div class="col-sm-8">
+            <app-input maxlength="25" formControlName="qtnd_cutoff" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">OF</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_of" name="qtnd_of" id="qtnd_of" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">PSS</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_pss" name="qtnd_pss" id="qtnd_pss" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">BAF</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_baf" name="qtnd_baf" id="qtnd_baf" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">ISPS</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_isps" name="qtnd_isps" id="qtnd_isps" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">HAULAGE</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_haulage" name="qtnd_haulage" id="qtnd_haulage"
+              type="number" [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">IFS</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnd_ifs" name="qtnd_ifs" id="qtnd_ifs" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">TOTAL</label>
+          <div class="col-sm-8">
+            <app-input maxlength="15" formControlName="qtnd_tot_amt" [disable]="true"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label class="col-sm-4 form-label form-lable-sm"></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-6">
+            <label class="col-sm-4 form-label form-lable-sm"></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <button class="btn btn-sm btn-success me-2" (click)="search('search')" [disabled]="mform.invalid">{{ mode
+              === 'new' ? 'Add' : 'Update'}}</button>
+            <button class="btn btn-success btn-sm " (click)="newRecord()">New</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

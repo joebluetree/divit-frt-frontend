@@ -43,7 +43,7 @@ export const routes: Routes = [
   { path: 'masters', loadChildren: () => import('./master/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: () => import('./user-admin/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'tnt', loadChildren: () => import('./tnt/routes').then(m => m.routes), canActivate: [AuthGuard] },
-  
+  { path: 'marketing', loadChildren: () => import('./Marketing/routes').then(m => m.routes), canActivate: [AuthGuard] },
 ];
 
 export const appConfig: ApplicationConfig = {
