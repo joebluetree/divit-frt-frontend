@@ -8,7 +8,7 @@ import { iQtnd_lcl, iQtnm_lcl } from '../../models/iqtnmlcl';
 
 //Name : Sourav V
 //Created Date : 04/01/2025
-//Remark : this component manages creation,editing and saving of qtnm-lcl(parent table) records 
+//Remark : this component manages creation,editing and saving of qtnm-lcl(parent table) records
 
 @Component({
   selector: 'app-qtnmlcl-edit',
