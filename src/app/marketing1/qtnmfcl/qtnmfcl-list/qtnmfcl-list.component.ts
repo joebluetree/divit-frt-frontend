@@ -12,15 +12,15 @@ import { QtnmFclService } from '../../services/qtnmfcl.service';
   imports: [...CustomControls, QtnmFclSearchComponent]
 })
 
-  //Name : Alen Cherian
-  //Date : 03/01/2025
-  //Command : Create the Fcl to list. 
+//Name : Alen Cherian
+//Date : 03/01/2025
+//Command : Create the Fcl to list.
 
 export class QtnmFclListComponent extends baseListComponent {
 
   constructor(
     public ms: QtnmFclService,
-    
+
   ) {
     super(ms);
   }

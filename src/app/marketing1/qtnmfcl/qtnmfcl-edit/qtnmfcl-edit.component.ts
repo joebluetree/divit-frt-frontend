@@ -16,9 +16,9 @@ import { QtndFclEditComponent } from '../qtndfcl-edit/qtndfcl-edit.component';
   imports: [...CustomControls, QtndFclEditComponent]
 })
 
-  //Name : Alen Cherian
-  //Date : 03/01/2025
-  //Command : Create the Fcl Components. 
+//Name : Alen Cherian
+//Date : 03/01/2025
+//Command : Create the Fcl Components.
 
 export class QtnmFclEditComponent extends baseEditComponent {
   data_fcl: data_fcl;
@@ -34,20 +34,20 @@ export class QtnmFclEditComponent extends baseEditComponent {
     this.mform = this.fb.group({
       qtnm_id: [0],
       qtnm_cfno: [0],
-      qtnm_type: [null], 
-      qtnm_no: [''], 
+      qtnm_type: [null],
+      qtnm_no: [''],
       qtnm_to_id: [0],
       qtnm_to_code: [''],
       qtnm_to_name: [''],
-      qtnm_to_addr1: [''],  
-      qtnm_to_addr2: [''],  
+      qtnm_to_addr1: [''],
+      qtnm_to_addr2: [''],
       qtnm_to_addr3: [''],
       qtnm_to_addr4: [''],
       qtnm_date: [''],
       qtnm_quot_by: [user],
       qtnm_valid_date: [''],
-      qtnm_salesman_id: [0],  
-      qtnm_salesman_name: [''],  
+      qtnm_salesman_id: [0],
+      qtnm_salesman_name: [''],
       qtnm_move_type: [''],
       qtnm_commodity: [''],
       qtnm_fcl: this.fb.array([]),
@@ -115,7 +115,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
 
   editFcldetails(idx: number) {
 
-    console.log( <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value);
+    console.log(<iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value);
 
     this.data_fcl = {
       mode: 'edit',

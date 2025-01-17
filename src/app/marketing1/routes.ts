@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
 
-  //Name : Alen Cherian
-  //Date : 03/01/2025
-  //Command : Create the routes for define the path of the components 
+//Name : Alen Cherian
+//Date : 03/01/2025
+//Command : Create the routes for define the path of the components
 
 export const routes: Routes = [
   { path: 'qtnmfclList', loadComponent: () => import('./qtnmfcl/qtnmfcl-list/qtnmfcl-list.component').then(c => c.QtnmFclListComponent) },
@@ -13,6 +13,6 @@ export const routes: Routes = [
   { path: 'qtnmairList', loadComponent: () => import('./qtnmair/qtnmair-list/qtnmair-list.component').then(c => c.QtnmAirListComponent) },
   { path: 'qtnmairEdit', loadComponent: () => import('./qtnmair/qtnmair-edit/qtnmair-edit.component').then(c => c.QtnmAirEditComponent) },
 
-  
+
 ]
 
