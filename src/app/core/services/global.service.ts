@@ -213,7 +213,7 @@ export class GlobalService {
       global_user_company_id: this.user.user_company_id,
       global_user_branch_id: this.user.user_branch_id,
       global_dec_places: 2,
-      global_date_format: 'dd/mm/yyyy',
+      global_date_format: 'mm/dd/yyyy',
     };
   }
 
@@ -226,7 +226,7 @@ export class GlobalService {
       'global_user_company_id': this.user.user_company_id.toString(),
       'global_user_branch_id': this.user.user_branch_id.toString(),
       'global_dec_places': 2,
-      'global_date_format': 'dd/mm/yyyy',
+      'global_date_format': 'mm/dd/yyyy',
     });
 
   }
@@ -334,6 +334,27 @@ export class GlobalService {
       throw new Error(`Error: ${error.message}`);
     }
 
+  }
+
+  public getToday(){
+    return this.getNewdate(0);
+  }
+
+  private getNewdate(_days: number) {
+    var nDate = new Date();
+    if (_days > 0)
+      nDate.setDate(nDate.getDate() + _days);
+    if (_days < 0)
+      nDate.setDate(nDate.getDate() - Math.abs(_days));
+
+    let yy = nDate.getFullYear();
+    let mm = nDate.getMonth() + 1;
+    let dd = nDate.getDate();
+
+    let sRet = yy.toString();
+    sRet += "-" + (mm <= 9 ? "0" + mm.toString() : mm.toString());
+    sRet += "-" + (dd <= 9 ? "0" + dd.toString() : dd.toString());
+    return sRet;
   }
 
 

@@ -1,0 +1,230 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/marketing/qtnmairEdit"
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<form [formGroup]="mform">
+
+  <div class="page-body">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Quote #</label>
+          <div class="col-sm-8">
+            <app-input maxlength="15" formControlName="qtnm_no" [case]="'UPPER'" id="qtnm_no" name="qtnm_no"
+              [disable]="true"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+          <div class="col-sm-8">
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format"
+              placeholder="mm-dd-yyyy"></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Quote to</label>
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnm_to_code" id="qtnm_to_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-5">
+            <app-input maxlength="100" formControlName="qtnm_to_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Address</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_to_addr1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_to_addr2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_to_addr3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_to_addr4" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Quote by</label>
+          <div class="col-sm-8">
+            <app-input maxlength="30" formControlName="qtnm_quot_by" [case]="'UPPER'" id="qtnm_code"
+              name="qtnm_code"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
+          <div class="col-sm-8">
+            <app-date maxlength="100" formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format"
+              placeholder="mm-dd-yyyy"></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Sales Rep.</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="qtnm_salesman_name" id="qtnm_salesman_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Move Type</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_move_type" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Commodity</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--body-->
+  <div class="page-body">
+    <app-qtnmaird-edit [input]="data_qtnmair" (output)="output($event)"></app-qtnmaird-edit>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>EDIT</th>
+              <th *ngIf="showModel">ID</th>
+              <th>POL</th>
+              <th>POD</th>
+              <th>CARRIER</th>
+              <th>T/T</th>
+              <th>ROUTING</th>
+              <th>ETD</th>
+              <th>MINIMUM</th>
+              <th>+45K</th>
+              <th>+100K</th>
+              <th>+300K</th>
+              <th>+500K</th>
+              <th>+1000K</th>
+              <th>FSC</th>
+              <th>WAR</th>
+              <th>SFC</th>
+              <th>HAC</th>
+              <th *ngIf="showModel">ORDER</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="qtnd_air">
+            <tr *ngFor="let iRow of formArray('qtnd_air').controls; let i=index;" [formGroupName]="i">
+              <td align="centre" (click)="editQuotes(i)" class="link">
+                <i class="fa fa-pencil"></i>
+              </td>
+              <td *ngIf="showModel">
+                <label>{{iRow.get('qtnd_id')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_pol_name')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_pod_name')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_carrier_name')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_trans_time')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_routing')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_etd')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_min')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_45k')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_100k')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_300k')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_500k')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_1000k')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_fsc')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_war')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_sfc')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('qtnd_hac')?.value}}</label>
+              </td>
+
+              <td *ngIf="showModel">
+                <label>{{iRow.get('qtnd_order')?.value}}</label>
+              </td>
+              <td align="centre" (click)="deleteRow(i)" class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<div class="page-footer line-bottom ">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>
