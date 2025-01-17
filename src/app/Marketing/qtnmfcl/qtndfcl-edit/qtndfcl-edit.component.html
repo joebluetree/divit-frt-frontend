@@ -7,7 +7,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnd_pol_code" name="qtnd_pol_code" id="qtnd_pol_code"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -19,7 +19,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="qtnd_pod_code" name="qtnd_pod_code" id="qtnd_pod_code"
               (CallBack)="callBack($event)" table="param" subtable="sea-port" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required>
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -32,7 +32,7 @@
             <auto-complete formControlName="qtnd_carrier_code" name="qtnd_carrier_code" id="qtnd_carrier_code"
               (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
               [url]="url"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
             </auto-complete>
           </div>
           <div class="col-sm-5">
@@ -121,19 +121,20 @@
             <app-input maxlength="15" formControlName="qtnd_tot_amt" [disable]="true"></app-input>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
+        <div class="form-group row">
+          <div class="col-sm-6">
+            <label class="col-sm-4 form-label form-lable-sm"></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-6">
+            <label class="col-sm-4 form-label form-lable-sm"></label>
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm"></label>
           <div class="col-sm-8">
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="form-group row">
-          <div class="col-sm-6">
             <button class="btn btn-sm btn-success me-2" (click)="search('search')" [disabled]="mform.invalid">{{ mode
               === 'new' ? 'Add' : 'Update'}}</button>
             <button class="btn btn-success btn-sm " (click)="newRecord()">New</button>

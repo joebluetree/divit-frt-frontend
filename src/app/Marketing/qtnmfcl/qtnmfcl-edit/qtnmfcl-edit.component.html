@@ -78,8 +78,8 @@
           <div class="col-sm-8">
             <auto-complete formControlName="qtnm_salesman_name" name="qtnm_salesman_name" id="qtnm_salesman_name"
               (CallBack)="callBack($event)" table="param" subtable="salesman" [company_id]="getCompanyId()" [url]="url"
-              case="upper"
-              display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              case="upper" required
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
         <div class="form-group row">
@@ -208,11 +208,6 @@
         </table>
       </div>
     </div>
-    <!-- <div class="row" *ngIf="formArray('qtnm_fcl').length <= 0">
-      <div class="col-sm-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addFclDetails()" [disabled]="mform.invalid">Add Details</button>
-      </div>
-    </div> -->
   </div>
 </form>
 <div class="page-footer line-bottom">
