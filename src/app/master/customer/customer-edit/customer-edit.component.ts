@@ -120,7 +120,7 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_code: rec.cust_code,
           cust_short_name: rec.cust_short_name,
           cust_name: rec.cust_name,
-          cust_display_name: rec.cust_display_name,
+          cust_display_name: rec.cust_official_name,
           cust_address1: rec.cust_address1,
           cust_address2: rec.cust_address2,
           cust_address3: rec.cust_address3,
