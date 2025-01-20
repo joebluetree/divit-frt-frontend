@@ -24,8 +24,8 @@ import { HistoryComponent } from '../../../shared/history/history.component';
 export class MailServermEditComponent extends baseEditComponent {
 
   dataList = [ 
-    { key: 'YES', value: 'Y' }, 
-    { key: 'NO', value: 'N' }
+    { key: 'Y', value: 'YES' }, 
+    { key: 'N', value: 'NO' }
   ]
 
 
@@ -41,9 +41,9 @@ export class MailServermEditComponent extends baseEditComponent {
       mail_name: [null],
       mail_smtp_name: [''],
       mail_smtp_port: [''],
-      mail_is_ssl: ['Y'],
-      mail_is_auth: ['Y'],
-      mail_is_spa: ['Y'],
+      mail_is_ssl: ['NO'],
+      mail_is_auth: ['NO'],
+      mail_is_spa: ['NO'],
       mail_bulk_tot: [0],
       mail_bulk_sub: [0],
       mail_smtp_username: [''],
