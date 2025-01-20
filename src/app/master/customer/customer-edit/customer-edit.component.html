@@ -19,10 +19,10 @@
           <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
           <div class="col-sm-8">
             <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" id="cust_code" name="cust_code"
-            [disable]="true" required></app-input>
+              required></app-input>
           </div>
         </div>
-        
+
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Short Name</label>
           <div class="col-sm-8">
@@ -43,7 +43,14 @@
             <app-input maxlength="100" formControlName="cust_official_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
-
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_parent_name" id="cust_parent_name" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+              display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Address</label>
           <div class="col-sm-8">
@@ -59,121 +66,263 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm"></label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_address3" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_address3" [case]="'UPPER'"></app-input>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">City</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_city" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_city" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">State</label>
-          <div class="col-sm-4">
-            <auto-complete formControlName="cust_state_id" id="cust_state_id" (CallBack)="callBack($event)"
-              [table]="'param'" [subtable]="'state'" [company_id]="getCompanyId()" [url]="url" 
-              display_column="[{'caption':'CODE','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-          </div>
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="cust_state_name" [case]="'UPPER'" required></app-input>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_state_name" id="cust_state_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'state'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Country</label>
-          <div class="col-sm-4">
-            <auto-complete formControlName="cust_country_id" id="cust_country_id" (CallBack)="callBack($event)"
-              [table]="'param'" [subtable]="'country'" [company_id]="getCompanyId()" [url]="url" 
-              display_column="[{'caption':'CODE','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-          </div>
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="cust_country_name" [case]="'UPPER'" required></app-input>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_country_name" id="cust_country_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'country'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Zip Code</label>
+          <div class="col-sm-6">
+            <app-input maxlength="100" formControlName="cust_zip_code" [case]="'UPPER'"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <button class="btn btn-success btn-sm" (click)="setAddress()">Set Address</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Contact Name</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_zip_code" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_contact" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Contact</label>
+          <label class="col-sm-4 form-label form-lable-sm">Designation</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_contact" [case]="'UPPER'" required></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Title</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_title" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_title" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Tel</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_tel" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_tel" [case]="'UPPER'"></app-input>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Fax</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_zip_code" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_zip_code" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Mobile</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_contact" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_contact" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Web</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_title" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_title" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Email</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_tel" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="cust_tel" [case]="'UPPER'"></app-input>
           </div>
         </div>
-
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
+          <label class="col-sm-4 form-label form-lable-sm">Refer By</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="cust_parent_name" id="cust_parent_name" (CallBack)="callBack($event)"
-              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
-              display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+            <app-input maxlength="100" formControlName="cust_refer_by" [case]="'UPPER'"></app-input>
           </div>
         </div>
-
-
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Sales.Rep</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_salesman_name" id="cust_salesman_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Handled.By</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_handled_name" id="cust_handled_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Location</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_location" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"
               (blur)="onBlur($event)">
             </app-input>
-
-
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Est-Date</label>
-          <div class="col-sm-8">
+          <label class="col-sm-2 form-label form-lable-sm">Est-Date</label>
+          <div class="col-sm-3">
             <app-date formControlName="cust_est_dt" [format]="gs.globalConstants.global_date_format"></app-date>
           </div>
         </div>
-
-
       </div>
-
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <h6>Category</h6>
+      <div style="height: 5px;"></div>
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_shipper"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Shipper</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_consignee"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Consignee</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_importer"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Importer</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_exporter"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Exporter</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_cha"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Custom Broker</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_forwarder"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Domestic Forwarder</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_oagent"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Overseas Agent</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_acarrier"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Air Carrier</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_scarrier"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Sea Carrier</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_trucker"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Trucker</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_warehouse"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Warehouse</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_sterminal"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Terminal Sea/Rail</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_aterminal"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Terminal Air</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_shipvendor"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Shipping Vendor</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_gvendor"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">General Vendor</label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_employee"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Employee</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_contract"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Contractor</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_miscell"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Miscellaneous</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_tbd"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">TBD</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-1">
+            <app-checkbox formControlName="cust_is_bank"></app-checkbox>
+          </div>
+          <label class="form-label form-label-sm col-sm-11">Bank/ Financial Institute</label>
+        </div>
+      </div>
     </div>
 
   </div>

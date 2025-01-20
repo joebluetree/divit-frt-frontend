@@ -41,17 +41,56 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_short_name: ['', [Validators.maxLength(15)]],
       cust_name: ['', [Validators.required, Validators.maxLength(100)]],
 
-      cust_display_name: ['', [Validators.required, Validators.maxLength(100)]],
+      cust_official_name: ['', [Validators.required, Validators.maxLength(100)]],
       cust_address1: ['', [Validators.required, Validators.maxLength(100)]],
       cust_address2: ['', [Validators.required, Validators.maxLength(100)]],
       cust_address3: [''],
-
+      cust_city: [''],
+      cust_state_id: [0],
+      cust_state_name: [''],
+      cust_country_id: [0],
+      cust_country_name: [''],
+      cust_zip_code: [''],
+      cust_contact: [''],
+      cust_title: [''],
+      cust_tel: [''],
+      cust_fax: [''],
+      cust_mobile: [''],
+      cust_web: [''],
+      cust_email: [''],
+      cust_refer_by: [''],
+      cust_salesman_id: [0],
+      cust_salesman_name: [''],
+      cust_handled_id: [0],
+      cust_handled_name: [''],
+      cust_location: [''],
       cust_type: [''],
       cust_row_type: [this.type],
       cust_parent_id: [null],
       cust_parent_name: [''],
       cust_credit_limit: [0],
       cust_est_dt: [''],
+
+      cust_is_shipper: [''],
+      cust_is_consignee: [''],
+      cust_is_importer: [''],
+      cust_is_exporter: [''],
+      cust_is_cha: [''],
+      cust_is_forwarder: [''],
+      cust_is_oagent: [''],
+      cust_is_acarrier: [''],
+      cust_is_scarrier: [''],
+      cust_is_trucker: [''],
+      cust_is_warehouse: [''],
+      cust_is_sterminal: [''],
+      cust_is_aterminal: [''],
+      cust_is_shipvendor: [''],
+      cust_is_gvendor: [''],
+      cust_is_employee: [''],
+      cust_is_contract: [''],
+      cust_is_miscell: [''],
+      cust_is_tbd: [''],
+      cust_is_bank: [''],
 
       cust_contacts: this.fb.array([]),
       rec_version: [0],
@@ -109,6 +148,40 @@ export class CustomerEditComponent extends baseEditComponent {
     });
 
   }
+  // set the address in city,state,zip code,country order
+  setAddress(){
+    const city = this.mform.get('cust_city')?.value || '';
+    const state = this.mform.get('cust_state_name')?.value || '';
+    const zip_code = this.mform.get('cust_zip_code')?.value || '';
+    const country = this.mform.get('cust_country_name')?.value || '';
+    let newAddress3 = "";
+    
+    if(city.length>0){
+      newAddress3 += city+' ';
+      if(state.length>0||country.length>0)
+        newAddress3 += ',';
+    }
+    if(state.length>0){
+      newAddress3 += state +' ';
+      if(zip_code.length ==0 && country.length>0)
+        newAddress3 += ',';
+    }
+    if(zip_code.length>0){
+      newAddress3 += zip_code;
+      if(country.length>0)
+        newAddress3 += ',';
+    }
+    if(country.length>0){
+      newAddress3 += country;
+    }
+    if(newAddress3.length === 0){
+      newAddress3 = city || state || zip_code || country ;
+    }    
+  
+    this.mform.patchValue({
+      cust_address3: newAddress3
+    });
+  }
 
   getRecord() {
 
@@ -120,16 +193,58 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_code: rec.cust_code,
           cust_short_name: rec.cust_short_name,
           cust_name: rec.cust_name,
-          cust_display_name: rec.cust_official_name,
+          cust_official_name: rec.cust_official_name,
           cust_address1: rec.cust_address1,
           cust_address2: rec.cust_address2,
           cust_address3: rec.cust_address3,
+          cust_city: rec.cust_city,
+          cust_state_id: rec.cust_state_id,
+          cust_state_name: rec.cust_state_name,
+          cust_country_id: rec.cust_country_id,
+          cust_country_name: rec.cust_country_name,
+          cust_zip_code: rec.cust_zip_code,
+          cust_contact: rec.cust_contact,
+          cust_title: rec.cust_title,
+          cust_tel: rec.cust_tel,
+          cust_fax: rec.cust_fax,
+          cust_mobile: rec.cust_mobile,
+          cust_web: rec.cust_web,
+          cust_email: rec.cust_email,
+          cust_refer_by: rec.cust_refer_by,
+          cust_salesman_id: rec.cust_salesman_id,
+          cust_salesman_name: rec.cust_salesman_name,
+          cust_handled_id: rec.cust_handled_id,
+          cust_handled_name: rec.cust_handled_name,
+          cust_location: rec.cust_location,
+
           cust_type: rec.cust_type,
           cust_row_type: rec.cust_row_type,
           cust_parent_id: rec.cust_parent_id,
           cust_parent_name: rec.cust_parent_name,
           cust_credit_limit: rec.cust_credit_limit,
           cust_est_dt: rec.cust_est_dt,
+
+          cust_is_shipper: rec.cust_is_shipper,
+          cust_is_consignee: rec.cust_is_consignee,
+          cust_is_importer: rec.cust_is_importer,
+          cust_is_exporter: rec.cust_is_exporter,
+          cust_is_cha: rec.cust_is_cha,
+          cust_is_forwarder: rec.cust_is_forwarder,
+          cust_is_oagent: rec.cust_is_oagent,
+          cust_is_acarrier: rec.cust_is_acarrier,
+          cust_is_scarrier: rec.cust_is_scarrier,
+          cust_is_trucker: rec.cust_is_trucker,
+          cust_is_warehouse: rec.cust_is_warehouse,
+          cust_is_aterminal: rec.cust_is_aterminal,
+          cust_is_sterminal: rec.cust_is_sterminal,
+          cust_is_shipvendor: rec.cust_is_shipvendor,
+          cust_is_gvendor: rec.cust_is_gvendor,
+          cust_is_employee: rec.cust_is_employee,
+          cust_is_contract: rec.cust_is_contract,
+          cust_is_miscell: rec.cust_is_miscell,
+          cust_is_tbd: rec.cust_is_tbd,
+          cust_is_bank: rec.cust_is_bank,
+
           rec_version: rec.rec_version,
 
         });
@@ -189,7 +304,7 @@ export class CustomerEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
+  callBack(action: any) {
     if (action.id == 'cust_parent_name') {
       if (action.rec) {
         this.mform.patchValue({
@@ -201,6 +316,62 @@ export class CustomerEditComponent extends baseEditComponent {
         this.mform.patchValue({
           cust_parent_id: null,
           cust_parent_name: '',
+        });
+      }
+    }
+    if (action.id == 'cust_state_name') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_state_id: action.rec.param_id,
+          cust_state_name: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_state_id: 0,
+          cust_state_name: '',
+        });
+      }
+    }
+    if (action.id == 'cust_country_name') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_country_id: action.rec.param_id,
+          cust_country_name: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_country_id: 0,
+          cust_country_name: '',
+        });
+      }
+    }
+    if (action.id == 'cust_salesman_name') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_salesman_id: action.rec.param_id,
+          cust_salesman_name: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_salesman_id: 0,
+          cust_salesman_name: '',
+        });
+      }
+    }
+    if (action.id == 'cust_handled_name') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_handled_id: action.rec.param_id,
+          cust_handled_name: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_handled_id: 0,
+          cust_handled_name: '',
         });
       }
     }
@@ -246,3 +417,7 @@ export class CustomerEditComponent extends baseEditComponent {
 
 }
 
+    // // if(!(city == "" && state == "" && zip_code == "" && country == "" )){
+    // if(city || state || zip_code || country ){
+    //   newAddress3 = `${city} ${','+state} ${zip_code} ${','+country}`;
+    // }

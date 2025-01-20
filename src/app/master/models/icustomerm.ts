@@ -36,16 +36,14 @@ export interface iCustomerm {
   cust_address3: string;
   cust_city: string;
   cust_state_id: number;
-  cust_state_code: string;
   cust_state_name: string;
   cust_country_id: number;
-  cust_country_code: string;
   cust_country_name: string;
   cust_zip_code: string;
   cust_contact: string;
   cust_title: string;
   cust_tel: string;
-  cust_tfax: string;
+  cust_fax: string;
   cust_mobile: string;
   cust_web: string;
   cust_email: string;
@@ -62,6 +60,28 @@ export interface iCustomerm {
   cust_parent_name: string;
   cust_credit_limit: number;
   cust_est_dt: string;
+
+  cust_is_shipper: string;
+  cust_is_consignee: string;
+  cust_is_importer: string;
+  cust_is_exporter: string;
+  cust_is_cha: string;
+  cust_is_forwarder: string;
+  cust_is_oagent: string;
+  cust_is_acarrier: string;
+  cust_is_scarrier: string;
+  cust_is_trucker: string;
+  cust_is_warehouse: string;
+  cust_is_sterminal: string;
+  cust_is_aterminal: string;
+  cust_is_shipvendor: string;
+  cust_is_gvendor: string;
+  cust_is_employee: string;
+  cust_is_contract: string;
+  cust_is_miscell: string;
+  cust_is_tbd: string;
+  cust_is_bank: string;
+
   cust_contacts: iContactm[];
   rec_version: number;
   rec_company_id: number;
