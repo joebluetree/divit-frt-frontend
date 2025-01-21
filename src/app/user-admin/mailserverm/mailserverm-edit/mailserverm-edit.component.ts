@@ -20,8 +20,8 @@ import { HistoryComponent } from '../../../shared/history/history.component';
 
 export class MailServermEditComponent extends baseEditComponent {
 
-  dataList = [ 
-    { key: 'Y', value: 'YES' }, 
+  dataList = [
+    { key: 'Y', value: 'YES' },
     { key: 'N', value: 'NO' }
   ]
 
@@ -29,17 +29,17 @@ export class MailServermEditComponent extends baseEditComponent {
     private ms: MailServermService,
   ) {
     super();
-    this.showModel = true;
+    this.showModel = false;
     this.mform = this.fb.group({
       mail_id: [0],
       mail_name: [''],
       mail_smtp_name: [''],
-      mail_smtp_port: [''],
-      mail_is_ssl: ['N'],
-      mail_is_auth: ['N'],
-      mail_is_spa: ['N'],
-      mail_bulk_tot: [0],
-      mail_bulk_sub: [0],
+      mail_smtp_port: ['587'],
+      mail_is_ssl: ['Y'],
+      mail_is_auth: ['Y'],
+      mail_is_spa: ['Y'],
+      mail_bulk_tot: [1000],
+      mail_bulk_sub: [100],
       mail_smtp_username: [''],
       mail_smtp_pwd: [''],
       rec_version: [0],
