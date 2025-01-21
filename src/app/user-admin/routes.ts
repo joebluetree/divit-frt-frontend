@@ -13,4 +13,6 @@ export const routes: Routes = [
   { path: 'rightsList', loadComponent: () => import('./rights/rights-list/rights-list.component').then(c => c.RightsListComponent) },
   { path: 'rightsEdit', loadComponent: () => import('./rights/rights-edit/rights-edit.component').then(c => c.RightsEditComponent) },
   { path: 'settingsList', loadComponent: () => import('./settings/settings-list/settings-list.component').then(c => c.SettingsListComponent) },
+  { path: 'mailservermList', loadComponent: () => import('./mailserverm/mailserverm-list/mailserverm-list.component').then(c => c.MailServermListComponent) },
+  { path: 'mailservermEdit', loadComponent: () => import('./mailserverm/mailserverm-edit/mailserverm-edit.component').then(c => c.MailServermEditComponent) },
 ]
