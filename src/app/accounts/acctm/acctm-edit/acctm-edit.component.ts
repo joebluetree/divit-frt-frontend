@@ -106,6 +106,7 @@ export class AcctmEditComponent extends baseEditComponent {
       'id': data.acc_id,
       'mode': this.mode
     }
+    console.log(data);
     this.ms.save(param, data, '/api/accounts/acctm/SaveAsync').subscribe({
       next: (v: iAcctm) => {
         if (this.mode == "add") {

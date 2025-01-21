@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { iParam } from '../../models/iparam';
 import { CustomControls } from '../../../app.config';
-import { ParamService } from '../../services/param.service';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MailServermService } from '../../services/mailserverm.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,17 +25,14 @@ export class MailServermEditComponent extends baseEditComponent {
     { key: 'N', value: 'NO' }
   ]
 
-
   constructor(
     private ms: MailServermService,
-    public dialog: MatDialog
   ) {
     super();
     this.showModel = false;
-    let user = this.gs.getUserName();
     this.mform = this.fb.group({
       mail_id: [0],
-      mail_name: [null],
+      mail_name: [''],
       mail_smtp_name: [''],
       mail_smtp_port: [''],
       mail_is_ssl: ['NO'],
@@ -55,14 +49,13 @@ export class MailServermEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-
     if (this.mode == "add")
       this.newRecord();
-    else
+    if (this.mode == "edit")
       this.getRecord();
   }
 
-  async newRecord() {
+  newRecord() {
     this.id = 0;
     this.mform.patchValue({
       mail_id: this.id
@@ -71,10 +64,14 @@ export class MailServermEditComponent extends baseEditComponent {
 
 
   getRecord() {
+    if (this.id <= 0) {
+      return;
+    }
+
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/mailserver/GetRecordAsync').subscribe({
       next: (rec: iMail_Serverm) => {
-        this.mform.patchValue({
+        this.mform.setValue({
           mail_id: rec.mail_id,
           mail_name: rec.mail_name,
           mail_smtp_name: rec.mail_smtp_name,
@@ -87,13 +84,13 @@ export class MailServermEditComponent extends baseEditComponent {
           mail_smtp_username: rec.mail_smtp_username,
           mail_smtp_pwd: rec.mail_smtp_pwd,
           rec_version: rec.rec_version,
-
         });
         console.log(rec);
       },
       error: (e) => {
         alert(e.message);
-      }
+      },
+      complete: () => { }
     })
   }
 
@@ -103,17 +100,18 @@ export class MailServermEditComponent extends baseEditComponent {
       return;
     }
     const data = <iMail_Serverm>this.mform.value;
+
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
 
-    console.log(data);
-
     const param = {
       'id': data.mail_id,
       'mode': this.mode
     }
+    console.log(param);
+    console.log(data);
     this.ms.save(param, data, '/api/mailserver/SaveAsync').subscribe({
       next: (v: iMail_Serverm) => {
         if (this.mode == "add") {
@@ -127,7 +125,7 @@ export class MailServermEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          mail_id: v.mail_id,
+          // mail_id: v.mail_id,
           rec_version: v.rec_version
         });
         console.log(data);
@@ -136,21 +134,22 @@ export class MailServermEditComponent extends baseEditComponent {
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
-      }
+      },
+      complete: () => { }
     })
   }
 
-  openHistory(): void {
-    const dialogRef = this.dialog.open(HistoryComponent, {
-      hasBackdrop: false,
-      width: '250px',
-      data: { title: 'History', message: 'Edit Details' }
-    });
+  // openHistory(): void {
+  //   const dialogRef = this.dialog.open(HistoryComponent, {
+  //     hasBackdrop: false,
+  //     width: '250px',
+  //     data: { title: 'History', message: 'Edit Details' }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //   });
+  // }
 
   onBlur(action: any) {
     console.log('onBlur Action', action);
