@@ -29,15 +29,15 @@ export class MailServermEditComponent extends baseEditComponent {
     private ms: MailServermService,
   ) {
     super();
-    this.showModel = false;
+    this.showModel = true;
     this.mform = this.fb.group({
       mail_id: [0],
       mail_name: [''],
       mail_smtp_name: [''],
       mail_smtp_port: [''],
-      mail_is_ssl: ['NO'],
-      mail_is_auth: ['NO'],
-      mail_is_spa: ['NO'],
+      mail_is_ssl: ['N'],
+      mail_is_auth: ['N'],
+      mail_is_spa: ['N'],
       mail_bulk_tot: [0],
       mail_bulk_sub: [0],
       mail_smtp_username: [''],
@@ -71,7 +71,7 @@ export class MailServermEditComponent extends baseEditComponent {
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/mailserver/GetRecordAsync').subscribe({
       next: (rec: iMail_Serverm) => {
-        this.mform.setValue({
+        this.mform.patchValue({
           mail_id: rec.mail_id,
           mail_name: rec.mail_name,
           mail_smtp_name: rec.mail_smtp_name,
