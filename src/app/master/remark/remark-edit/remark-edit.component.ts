@@ -1,27 +1,30 @@
 import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { CustomermService } from '../../services/customerm.service';
-import { iContactm, iCustomerm } from '../../models/icustomerm';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
-import { iRemarkd, iRemarkm } from '../../models/iremarkm';
+import { data_remark, iRemarkd, iRemarkm } from '../../models/iremarkm';
+import { RemarkdEditComponent } from '../remarkd-edit/remarkd-edit.component';
+import { RemarkmService } from '../../services/remarkm.service';
 
 @Component({
   selector: 'app-remark-edit',
   templateUrl: './remark-edit.component.html',
   styleUrls: ['./remark-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls]
+  imports: [...CustomControls, RemarkdEditComponent]
 })
 export class RemarkEditComponent extends baseEditComponent {
+   
+  data_remark: data_remark;
 
   constructor(
-    private ms: CustomermService,
+    private ms: RemarkmService,
     public dialog: MatDialog
   ) {
     super();
+    this.setDetailsData('new', <iRemarkd>{}, -1);
+    this.showModel = false;
     this.mform = this.fb.group({
       rem_id: [0],
       rem_name: [''],
@@ -30,42 +33,57 @@ export class RemarkEditComponent extends baseEditComponent {
     })
   }
 
+  setDetailsData(_mode: string, _record: iRemarkd, index: number) {
+      this.data_remark = { mode: _mode, record: _record, index: index }
+    }
+
   ngOnInit() {
     this.id = 0;
     this.init();
     if (this.mode == "add")
       this.newRecord();
-    else
+    if (this.mode == "edit")
       this.getRecord();
   }
 
-  async newRecord() {
+  newRecord() {
+    this.id = 0;
     this.mform.patchValue({
       rem_id: this.id
     })
-
+     this.addDetails();
   }
 
   addRow(rec: iRemarkd) {
-    return this.fb.group({
+    const _rec = this.fb.group({
       remd_id: [rec?.remd_id || 0],
       remd_remarkm_id: [rec?.remd_remarkm_id || 0],
       remd_desc1: [rec?.remd_desc1 || ""],
       remd_order: [rec?.remd_order || 0],
     });
+    return _rec
   }
 
   addDetails(iRow: iRemarkd = <iRemarkd>{}) {
     this.formArray('rem_remarks')?.push(this.addRow(iRow));
   }
 
-  deleteRow(idx: number) {
+  deleteDetails(idx: number) {
     this.formArray('rem_remarks').removeAt(idx);
   }
 
+    editDetails(idx: number) {
+      console.log(<iRemarkd>this.formArrayRecord('rem_remarks', idx)?.value);
+      this.data_remark = {
+        mode: 'edit',
+        record: <iRemarkd>this.formArrayRecord('rem_remarks', idx)?.value,
+        index: idx
+      }
+    }
+
   fillDetails(iremark_list: iRemarkd[]) {
     this.formArray('rem_remarks').clear();
-    iremark_list.forEach((rec_remark: iRemarkd) => {
+    iremark_list.forEach(rec_remark => {
       this.addDetails(rec_remark);
     });
   }
@@ -81,6 +99,7 @@ export class RemarkEditComponent extends baseEditComponent {
 
         });
         this.fillDetails(rec.rem_remarks);
+        console.log(rec);
       },
       error: (e) => {
         alert(e.message);
@@ -129,11 +148,18 @@ export class RemarkEditComponent extends baseEditComponent {
     })
   }
 
+    detailOutput(action: any) {
+      if (action.mode == "new")
+        this.addDetails(<iRemarkd>action.record);
+      else {
+        this.formArrayRecord('rem_remarks', action.index)?.patchValue({
+          ...action.record
+        })
+      }
+    }
+
   onBlur(action: any) {
     console.log('onBlur Action', action);
   }
-
-
-
 }
 

@@ -62,7 +62,6 @@ export class QtnmFclEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-
     if (this.mode == "add")
       this.newRecord();
     else
@@ -114,9 +113,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
   }
 
   editFcldetails(idx: number) {
-
     console.log(<iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value);
-
     this.data_fcl = {
       mode: 'edit',
       record: <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value,

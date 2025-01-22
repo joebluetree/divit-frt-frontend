@@ -6,7 +6,6 @@
 </div>
 
 <form [formGroup]="mform">
-
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6">
@@ -19,62 +18,55 @@
       </div>
     </div>
   </div>
+  <div class="page-body">
+    <app-remarkd-edit [input]="data_remark" (output)="detailOutput($event)"></app-remarkd-edit>
+  </div>
 
   <div class="page-body">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-md-12">
         <table class="table table-sm table-hover table-bordered table-striped table-condensed">
           <thead class="table-success">
             <tr class="table-header">
-              <th>ID</th>
-              <th>Description</th>
-              <th>ORDER</th>
-              <th>ADD</th>
+              <th>Edit</th>
+              <th *ngIf="showModel">ID</th>
+              <th *ngIf="showModel">ORDER</th>
+              <th>DESCRIPTION</th>
               <th>DELETE</th>
             </tr>
           </thead>
 
           <tbody formArrayName="rem_remarks">
             <tr *ngFor="let iRow of formArray('rem_remarks').controls; let i=index;" [formGroupName]="i">
-              <td>
+              
+              <td align="centre" (click)="editDetails(i)">
+                <i class="fa fa-pencil"></i>
+              </td>
+
+              <td *ngIf="showModel">
                 <label>{{iRow.get('remd_id')?.value}}</label>
               </td>
-
-              <td>
-                <app-input maxlength="100" formControlName="remd_desc1" [rowIndex]="i" name="remd_desc1"
-                  case="UPPER"></app-input>
+              <td *ngIf="showModel">
+                <label>{{iRow.get('remd_order')?.value}}</label>
               </td>
               <td>
-                <app-input maxlength="100" formControlName="remd_order" [rowIndex]="i" name="remd_order"
-                  case="UPPER"></app-input>
+                <label>{{iRow.get('remd_desc1')?.value}}</label>
               </td>
-
-              <td align="centre" (click)="addDetails()" class="link">
-                <i class="fa fa-plus"></i>
-              </td>
-
-              <td align="centre" (click)="deleteRow(i)" class="link">
+              <td align="centre" (click)="deleteDetails(i)" class="link">
                 <i class="fa fa-trash"></i>
               </td>
-
             </tr>
           </tbody>
         </table>
-
-      </div>
-
-    </div>
-
-
-    <div class="row" *ngIf="formArray('cust_contacts').length <= 0">
-      <div class="col-sm-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addDetails()" [disabled]="mform.invalid">Add Contact</button>
       </div>
     </div>
 
+    <!-- <div class="row" *ngIf="formArray('ordm_details').length <= 0">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-sm btn-info" (click)="addOrderdetails()">Add Invoice details</button>
+      </div>
+    </div> -->
   </div>
-
-
 </form>
 
 

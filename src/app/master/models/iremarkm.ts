@@ -1,4 +1,5 @@
 import { iPage } from "ngx-jrt-controls";
+export type data_remark = { mode: string, record: iRemarkd, index: number };
 
 export interface iRemarkd {
   remd_id: number,
