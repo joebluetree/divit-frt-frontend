@@ -68,7 +68,11 @@ export class RemarkEditComponent extends baseEditComponent {
   }
 
   deleteDetails(idx: number) {
+    const nidx = idx + 1;
+    const confirmDelete = window.confirm("Delete " + nidx + " y/n");
+    if (confirmDelete) {
     this.formArray('rem_remarks').removeAt(idx);
+    }
   }
 
     editDetails(idx: number) {
