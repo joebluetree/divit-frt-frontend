@@ -83,7 +83,7 @@ export class RemarkdEditComponent {
       alert('form not valid');
       return;
     }
-    
+
     if (this.output) {
       this.record.remd_id = this.mform.value.remd_id;
       this.record.remd_remarkm_id = this.mform.value.remd_remarkm_id;

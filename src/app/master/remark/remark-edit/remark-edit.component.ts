@@ -51,7 +51,6 @@ export class RemarkEditComponent extends baseEditComponent {
     this.mform.patchValue({
       rem_id: this.id
     })
-     this.addDetails();
   }
 
   addRow(rec: iRemarkd) {
