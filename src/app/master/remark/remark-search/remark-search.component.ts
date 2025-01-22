@@ -1,24 +1,24 @@
-import { iCustomer_Search } from '../../models/icustomerm';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalService } from '../../../core/services/global.service';
+import { iRemarkm_Search } from '../../models/iremarkm';
 
 @Component({
-  selector: 'app-customer-search',
-  templateUrl: './customer-search.component.html',
-  styleUrls: ['./customer-search.component.css'],
+  selector: 'app-remark-search',
+  templateUrl: './remark-search.component.html',
+  styleUrls: ['./remark-search.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class CustomerSearchComponent {
+export class RemarkSearchComponent {
 
   mform: FormGroup;
-  record!: iCustomer_Search;
+  record!: iRemarkm_Search;
 
   @Input('search_url') search_url = '';
 
-  @Input('input') set input(v: iCustomer_Search) {
+  @Input('input') set input(v: iRemarkm_Search) {
     this.record = { ...v };
   }
 
@@ -33,20 +33,20 @@ export class CustomerSearchComponent {
 
   buildForm() {
     this.mform = this.fb.group({
-      cust_name: [''],
+      rem_name: [''],
     })
 
   }
 
   ngOnInit(): void {
     this.mform.setValue({
-      cust_name: this.record.cust_name,
+      rem_name: this.record.rem_name,
     })
   }
 
   search(_action: string) {
     if (this.output) {
-      this.record.cust_name = this.mform.value.cust_name;
+      this.record.rem_name = this.mform.value.rem_name;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit({ record: this.record, url: this.search_url });
     }
