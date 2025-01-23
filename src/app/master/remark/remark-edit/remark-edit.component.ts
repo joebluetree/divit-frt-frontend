@@ -24,7 +24,7 @@ export class RemarkEditComponent extends baseEditComponent {
   ) {
     super();
     this.setDetailsData('new', <iRemarkd>{}, -1);
-    this.showModel = false;
+    this.showModel = true;
     this.mform = this.fb.group({
       rem_id: [0],
       rem_name: [''],

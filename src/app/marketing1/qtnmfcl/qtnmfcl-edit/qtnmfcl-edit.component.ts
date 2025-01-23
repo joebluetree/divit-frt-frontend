@@ -109,7 +109,11 @@ export class QtnmFclEditComponent extends baseEditComponent {
   }
 
   deleteRow(idx: number) {
+    const nidx = idx + 1;
+    const confirmDelete = window.confirm("Delete " + nidx + " y/n");
+    if (confirmDelete) {
     this.formArray('qtnm_fcl').removeAt(idx);
+    }
   }
 
   editFcldetails(idx: number) {
