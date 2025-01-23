@@ -126,25 +126,25 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Fax</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_zip_code" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="cust_fax" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Mobile</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_contact" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="cust_mobile" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Web</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_title" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="cust_web" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Email</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_tel" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="cust_email" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -170,9 +170,11 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Location</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">Location</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_location" [case]="'UPPER'"></app-input>
+            <auto-complete formControlName="cust_location" id="cust_location" (CallBack)="callBack($event)"
+              [table]="'branchm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'branch_code'},{'caption':'NAME','value':'branch_name'}]"></auto-complete>
           </div>
         </div>
 
@@ -191,6 +193,7 @@
       </div>
     </div>
   </div>
+
   <div class="page-body">
     <div class="row">
       <h6>Category</h6>
@@ -200,31 +203,31 @@
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_shipper"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Shipper</label>
+          <label class="form-label form-label-sm col-sm-11">Shipper (S)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_consignee"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Consignee</label>
+          <label class="form-label form-label-sm col-sm-11">Consignee (C)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_importer"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Importer</label>
+          <label class="form-label form-label-sm col-sm-11">Importer (I)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_exporter"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Exporter</label>
+          <label class="form-label form-label-sm col-sm-11">Exporter (X)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_cha"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Custom Broker</label>
+          <label class="form-label form-label-sm col-sm-11">Custom Broker (B)</label>
         </div>
       </div>
       <div class="col-sm-3">
@@ -232,31 +235,31 @@
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_forwarder"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Domestic Forwarder</label>
+          <label class="form-label form-label-sm col-sm-11">Domestic Forwarder (F)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_oagent"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Overseas Agent</label>
+          <label class="form-label form-label-sm col-sm-11">Overseas Agent (A)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_acarrier"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Air Carrier</label>
+          <label class="form-label form-label-sm col-sm-11">Air Carrier (L)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_scarrier"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Sea Carrier</label>
+          <label class="form-label form-label-sm col-sm-11">Sea Carrier (R)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_trucker"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Trucker</label>
+          <label class="form-label form-label-sm col-sm-11">Trucker (T)</label>
         </div>
       </div>
       <div class="col-sm-3">
@@ -264,31 +267,31 @@
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_warehouse"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Warehouse</label>
+          <label class="form-label form-label-sm col-sm-11">Warehouse (W)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_sterminal"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Terminal Sea/Rail</label>
+          <label class="form-label form-label-sm col-sm-11">Terminal Sea/Rail (N)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_aterminal"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Terminal Air</label>
+          <label class="form-label form-label-sm col-sm-11">Terminal Air (P)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_shipvendor"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Shipping Vendor</label>
+          <label class="form-label form-label-sm col-sm-11">Shipping Vendor (H)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_gvendor"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">General Vendor</label>
+          <label class="form-label form-label-sm col-sm-11">General Vendor (V)</label>
         </div>
       </div>
       <div class="col-sm-3">
@@ -296,35 +299,296 @@
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_employee"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Employee</label>
+          <label class="form-label form-label-sm col-sm-11">Employee (E)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_contract"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Contractor</label>
+          <label class="form-label form-label-sm col-sm-11">Contractor (O)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_miscell"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Miscellaneous</label>
+          <label class="form-label form-label-sm col-sm-11">Miscellaneous (M)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_tbd"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">TBD</label>
+          <label class="form-label form-label-sm col-sm-11">TBD (D)</label>
         </div>
         <div class="form-group row">
           <div class="col-sm-1">
             <app-checkbox formControlName="cust_is_bank"></app-checkbox>
           </div>
-          <label class="form-label form-label-sm col-sm-11">Bank/ Financial Institute</label>
+          <label class="form-label form-label-sm col-sm-11">Bank/ Financial Institute (K)</label>
         </div>
       </div>
     </div>
 
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Client Type</label>
+          <div class="col-sm-8">
+            <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+              formControlName="cust_nomination"></app-combobox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Vendor Priority</label>
+          <div class="col-sm-8">
+            <app-combobox [dataSource]="priorityList" [valueColumn]="'key'" [displayColumn]="'value'"
+              formControlName="cust_priority"></app-combobox>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Criteria/Min.Profit</label>
+          <div class="col-sm-4">
+            <app-combobox [dataSource]="profitList" [valueColumn]="'key'" [displayColumn]="'value'"
+              formControlName="cust_criteria"></app-combobox>
+          </div>
+          <div class="col-sm-4">
+            <app-input formControlName="cust_min_profit" type="number"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-12 form-label form-lable-sm" for="">Firm Code</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-12 form-label form-lable-sm" for="">EIN/IRS/SS#</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-12 form-label form-lable-sm" for="">Credit Day</label>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-sm-5">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="cust_firm_code" [case]="'UPPER'"></app-input>
+                </div>
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="cust_einirsno" [case]="'UPPER'"></app-input>
+                </div>
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="cust_days" [case]="'UPPER'"></app-input>
+                </div>
+              </div>
+              <div class="col-sm-7">
+                <div class="form-group row">
+                  <div class="col-sm-1">
+                    <app-checkbox formControlName="cust_is_splacc"></app-checkbox>
+                  </div>
+                  <label class="form-label form-label-sm col-sm-11">Credit/Special Accounts</label>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-1">
+                    <app-checkbox formControlName="cust_is_actual_vendor"></app-checkbox>
+                  </div>
+                  <label class="form-label form-label-sm col-sm-11">Vendor</label>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-1">
+                    <app-checkbox formControlName="cust_is_blackacc"></app-checkbox>
+                  </div>
+                  <label class="form-label form-label-sm col-sm-11">Black Account</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="form-label form-label-sm col-sm-4">C-TPAT Certified</label>
+          <div class="col-sm-2">
+            <app-checkbox formControlName="cust_is_ctpat"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>          
+          <label class="col-sm-2 form-label form-lable-sm" for="">C-TPAT#</label>
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="cust_ctpat_no" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Memo</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_splacc_memo" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="form-label form-label-sm col-sm-4">Include in Marketing Mail</label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="cust_marketing_mail"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">CHB</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="cust_chb_code" id="cust_chb_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Address</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_address1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_address2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_address3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Group</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_group" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Contact</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_contact" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Tel</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_tel" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Fax</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_fax" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Email</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_chb_email" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <label class="form-label form-label-sm col-sm-4">POA For Customs On File</label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="cust_poa_customs_yn" id="cust_poa_customs_yn" ></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Brokers</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_brokers" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="form-label form-label-sm col-sm-4">POA For ISF On File</label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="cust_poa_isf_yn"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>          
+        </div>
+      </div>
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="cust_punch_from">Purch/From</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_punch_from" id="cust_punch_from" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Bond No</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="cust_bond_no" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">BondExp/Date</label>
+          <div class="col-sm-8">
+            <app-date formControlName="cust_bond_expdt" [format]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Branch</label>
+          <div class="col-sm-8">
+            <app-combobox [dataSource]="branchList" [valueColumn]="'key'" [displayColumn]="'value'"
+              formControlName="cust_priority"></app-combobox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="form-label form-label-sm col-sm-4">Protected Record</label>
+          <div class="col-sm-2">
+            <app-checkbox formControlName="cust_protected"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+          <label class="col-sm-2 form-label form-lable-sm" for="">Currency</label>
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="cust_cur_code" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="page-body">

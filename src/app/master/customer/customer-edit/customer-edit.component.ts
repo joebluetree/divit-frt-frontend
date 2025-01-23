@@ -16,14 +16,33 @@ import { HistoryComponent } from '../../../shared/history/history.component';
 })
 export class CustomerEditComponent extends baseEditComponent {
 
-  filter = { cust_row_type: this.type };
-
   dataList = [
     { key: 'NA', value: 'NA' },
     { key: 'AR', value: 'AR' },
     { key: 'AP', value: 'AP' },
   ]
-
+  priorityList = [
+    { key: 'NA', value: 'NA' },
+    { key: '1', value: '1' },
+    { key: '2', value: '2' },
+    { key: '3', value: '3' },
+    { key: '4', value: '4' },
+    { key: '5', value: '5' },
+  ]
+  profitList = [
+    { key: 'NIL', value: 'NIL' },
+    { key: 'PROFIT =', value: 'PROFIT =' },
+    { key: 'PROFIT <', value: 'PROFIT <' },
+    { key: 'PROFIT >', value: 'PROFIT >' },
+    { key: 'PROFIT PER =', value: 'PROFIT PER =' },
+    { key: 'PROFIT PER<', value: 'PROFIT PER<' },
+    { key: 'PROFIT PER>', value: 'PROFIT PER>' },
+  ]
+  branchList = [
+    { key: 'ALL', value: 'ALL' },
+    { key: '', value: '' },
+    { key: 'MRS', value: 'MRS' },
+  ]
   titleList = [
     { key: 'NA', value: 'NA' },
     { key: 'MR', value: 'MR' },
@@ -92,6 +111,43 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_is_tbd: [''],
       cust_is_bank: [''],
 
+      cust_nomination: [''],
+      cust_priority: [''],
+      cust_criteria: [''],
+      cust_min_profit: [],
+      cust_firm_code: [''],
+      cust_einirsno: [''],
+      cust_days: [],
+      cust_is_splacc: [''],
+      cust_is_actual_vendor: [''],
+      cust_is_blackacc: [''],
+      cust_splacc_memo: [''],
+      cust_is_ctpat: [''],
+      cust_ctpat_no: [''],
+      cust_marketing_mail: [''],
+
+      cust_chb_id: [0],
+      cust_chb_code: [''],
+      cust_chb_name: [''],
+      cust_chb_address1: [''],
+      cust_chb_address2: [''],
+      cust_chb_address3: [''],
+      cust_chb_group: [''],
+      cust_chb_contact: [''],
+      cust_chb_tel: [''],
+      cust_chb_fax: [''],
+      cust_chb_email: [''],
+      cust_poa_customs_yn: [''],
+      cust_poa_isf_yn: [''],
+      cust_brokers: [''],
+      cust_bond_yn: [''],
+      cust_punch_from: [''],
+      cust_bond_no: [''],
+      cust_bond_expdt: [''],
+      cust_branch: [''],
+      cust_protected: [''],
+      cust_cur_code: [''],
+
       cust_contacts: this.fb.array([]),
       rec_version: [0],
 
@@ -149,35 +205,35 @@ export class CustomerEditComponent extends baseEditComponent {
 
   }
   // set the address in city,state,zip code,country order
-  setAddress(){
+  setAddress() {
     const city = this.mform.get('cust_city')?.value || '';
     const state = this.mform.get('cust_state_name')?.value || '';
     const zip_code = this.mform.get('cust_zip_code')?.value || '';
     const country = this.mform.get('cust_country_name')?.value || '';
     let newAddress3 = "";
-    
-    if(city.length>0){
-      newAddress3 += city+' ';
-      if(state.length>0||country.length>0)
+
+    if (city.length > 0) {
+      newAddress3 += city + ' ';
+      if (state.length > 0 || country.length > 0)
         newAddress3 += ',';
     }
-    if(state.length>0){
-      newAddress3 += state +' ';
-      if(zip_code.length ==0 && country.length>0)
+    if (state.length > 0) {
+      newAddress3 += state + ' ';
+      if (zip_code.length == 0 && country.length > 0)
         newAddress3 += ',';
     }
-    if(zip_code.length>0){
+    if (zip_code.length > 0) {
       newAddress3 += zip_code;
-      if(country.length>0)
+      if (country.length > 0)
         newAddress3 += ',';
     }
-    if(country.length>0){
+    if (country.length > 0) {
       newAddress3 += country;
     }
-    if(newAddress3.length === 0){
-      newAddress3 = city || state || zip_code || country ;
-    }    
-  
+    if (newAddress3.length === 0) {
+      newAddress3 = city || state || zip_code || country;
+    }
+
     this.mform.patchValue({
       cust_address3: newAddress3
     });
@@ -244,6 +300,43 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_is_miscell: rec.cust_is_miscell,
           cust_is_tbd: rec.cust_is_tbd,
           cust_is_bank: rec.cust_is_bank,
+
+          cust_nomination: rec.cust_nomination,
+          cust_priority: rec.cust_priority,
+          cust_criteria: rec.cust_criteria,
+          cust_min_profit: rec.cust_min_profit,
+          cust_firm_code: rec.cust_firm_code,
+          cust_einirsno: rec.cust_einirsno,
+          cust_days: rec.cust_days,
+          cust_is_splacc: rec.cust_is_splacc,
+          cust_is_actual_vendor: rec.cust_is_actual_vendor,
+          cust_is_blackacc: rec.cust_is_blackacc,
+          cust_splacc_memo: rec.cust_splacc_memo,
+          cust_is_ctpat: rec.cust_is_ctpat,
+          cust_ctpat_no: rec.cust_ctpat_no,
+          cust_marketing_mail: rec.cust_marketing_mail,
+
+          cust_chb_id: rec.cust_chb_id,
+          cust_chb_code: rec.cust_chb_code,
+          cust_chb_name: rec.cust_chb_name,
+          cust_chb_address1: rec.cust_chb_address1,
+          cust_chb_address2: rec.cust_chb_address2,
+          cust_chb_address3: rec.cust_chb_address3,
+          cust_chb_group: rec.cust_chb_group,
+          cust_chb_contact: rec.cust_chb_contact,
+          cust_chb_tel: rec.cust_chb_tel,
+          cust_chb_fax: rec.cust_chb_fax,
+          cust_chb_email: rec.cust_chb_email,
+          cust_poa_customs_yn: rec.cust_poa_customs_yn,
+          cust_poa_isf_yn: rec.cust_poa_isf_yn,
+          cust_brokers: rec.cust_brokers,
+          cust_bond_yn: rec.cust_bond_yn,
+          cust_punch_from: rec.cust_punch_from,
+          cust_bond_no: rec.cust_bond_no,
+          cust_bond_expdt: rec.cust_bond_expdt,
+          cust_branch: rec.cust_branch,
+          cust_protected: rec.cust_protected,
+          cust_cur_code: rec.cust_cur_code,
 
           rec_version: rec.rec_version,
 
@@ -375,6 +468,46 @@ export class CustomerEditComponent extends baseEditComponent {
         });
       }
     }
+    if (action.id == 'cust_location') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_location: action.rec.branch_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_location: '',
+        });
+      }
+    }
+    if (action.id == 'cust_chb_code') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_chb_id: action.rec.cust_id,
+          cust_chb_code: action.rec.cust_code,
+          cust_chb_name: action.rec.cust_name,
+          cust_chb_address1: action.rec.cust_address1,
+          cust_chb_address2: action.rec.cust_address2,
+          cust_chb_contact: action.rec.cust_contact,
+          cust_chb_tel: action.rec.cust_tel,
+          cust_chb_fax: action.rec.cust_fax,
+          cust_chb_email: action.rec.cust_email,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_chb_id: null,
+          cust_chb_code: '',
+          cust_chb_name: '',
+          cust_chb_address1: '',
+          cust_chb_address2: '',
+          cust_chb_contact: '',
+          cust_chb_tel: '',
+          cust_chb_fax: '',
+          cust_chb_email: '',
+        });
+      }
+    }
     if (action.name == 'cont_country_code') {
       if (action.rec) {
         this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
@@ -416,8 +549,3 @@ export class CustomerEditComponent extends baseEditComponent {
 
 
 }
-
-    // // if(!(city == "" && state == "" && zip_code == "" && country == "" )){
-    // if(city || state || zip_code || country ){
-    //   newAddress3 = `${city} ${','+state} ${zip_code} ${','+country}`;
-    // }
