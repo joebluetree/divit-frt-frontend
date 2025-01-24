@@ -18,8 +18,11 @@ export class CustomerEditComponent extends baseEditComponent {
 
   dataList = [
     { key: 'NA', value: 'NA' },
-    { key: 'AR', value: 'AR' },
-    { key: 'AP', value: 'AP' },
+    { key: 'PROSPECT', value: 'PROSPECT' },
+    { key: 'NOMINATION', value: 'NOMINATION' },
+    { key: 'MUTUAL', value: 'MUTUAL' },
+    { key: 'FREEHAND', value: 'FREEHAND' },
+    { key: 'AGENT', value: 'AGENT' },
   ]
   priorityList = [
     { key: 'NA', value: 'NA' },
@@ -38,10 +41,9 @@ export class CustomerEditComponent extends baseEditComponent {
     { key: 'PROFIT PER<', value: 'PROFIT PER<' },
     { key: 'PROFIT PER>', value: 'PROFIT PER>' },
   ]
-  branchList = [
-    { key: 'ALL', value: 'ALL' },
-    { key: '', value: '' },
-    { key: 'MRS', value: 'MRS' },
+  groupList = [
+    { key: 'LOCAL CREDITORS', value: 'LOCAL CREDITORS' },
+    { key: 'LOCAL DEBTORS', value: 'LOCAL DEBTORS' },
   ]
   titleList = [
     { key: 'NA', value: 'NA' },
@@ -54,6 +56,7 @@ export class CustomerEditComponent extends baseEditComponent {
     public dialog: MatDialog
   ) {
     super();
+    this.showModel = false;
     this.mform = this.fb.group({
       cust_id: [0],
       cust_code: ['', [Validators.required, Validators.maxLength(15)]],
@@ -70,8 +73,9 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_country_id: [0],
       cust_country_name: [''],
       cust_zip_code: [''],
+      cust_title: ['NA'],
       cust_contact: [''],
-      cust_title: [''],
+      cust_designation: [''],
       cust_tel: [''],
       cust_fax: [''],
       cust_mobile: [''],
@@ -90,41 +94,41 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_credit_limit: [0],
       cust_est_dt: [''],
 
-      cust_is_shipper: [''],
-      cust_is_consignee: [''],
-      cust_is_importer: [''],
-      cust_is_exporter: [''],
-      cust_is_cha: [''],
-      cust_is_forwarder: [''],
-      cust_is_oagent: [''],
-      cust_is_acarrier: [''],
-      cust_is_scarrier: [''],
-      cust_is_trucker: [''],
-      cust_is_warehouse: [''],
-      cust_is_sterminal: [''],
-      cust_is_aterminal: [''],
-      cust_is_shipvendor: [''],
-      cust_is_gvendor: [''],
-      cust_is_employee: [''],
-      cust_is_contract: [''],
-      cust_is_miscell: [''],
-      cust_is_tbd: [''],
-      cust_is_bank: [''],
+      cust_is_shipper: ['N'],
+      cust_is_consignee: ['N'],
+      cust_is_importer: ['N'],
+      cust_is_exporter: ['N'],
+      cust_is_cha: ['N'],
+      cust_is_forwarder: ['N'],
+      cust_is_oagent: ['N'],
+      cust_is_acarrier: ['N'],
+      cust_is_scarrier: ['N'],
+      cust_is_trucker: ['N'],
+      cust_is_warehouse: ['N'],
+      cust_is_sterminal: ['N'],
+      cust_is_aterminal: ['N'],
+      cust_is_shipvendor: ['N'],
+      cust_is_gvendor: ['N'],
+      cust_is_employee: ['N'],
+      cust_is_contract: ['N'],
+      cust_is_miscell: ['N'],
+      cust_is_tbd: ['N'],
+      cust_is_bank: ['N'],
 
-      cust_nomination: [''],
-      cust_priority: [''],
-      cust_criteria: [''],
-      cust_min_profit: [],
+      cust_nomination: ['NA'],
+      cust_priority: ['NA'],
+      cust_criteria: ['NIL'],
+      cust_min_profit: [0],
       cust_firm_code: [''],
       cust_einirsno: [''],
-      cust_days: [],
-      cust_is_splacc: [''],
-      cust_is_actual_vendor: [''],
-      cust_is_blackacc: [''],
+      cust_days: [0],
+      cust_is_splacc: ['N'],
+      cust_is_actual_vendor: ['N'],
+      cust_is_blackacc: ['N'],
       cust_splacc_memo: [''],
-      cust_is_ctpat: [''],
+      cust_is_ctpat: ['N'],
       cust_ctpat_no: [''],
-      cust_marketing_mail: [''],
+      cust_marketing_mail: ['N'],
 
       cust_chb_id: [0],
       cust_chb_code: [''],
@@ -137,10 +141,10 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_chb_tel: [''],
       cust_chb_fax: [''],
       cust_chb_email: [''],
-      cust_poa_customs_yn: [''],
-      cust_poa_isf_yn: [''],
+      cust_poa_customs_yn: ['N'],
+      cust_poa_isf_yn: ['N'],
       cust_brokers: [''],
-      cust_bond_yn: [''],
+      cust_bond_yn: ['N'],
       cust_punch_from: [''],
       cust_bond_no: [''],
       cust_bond_expdt: [''],
@@ -178,6 +182,8 @@ export class CustomerEditComponent extends baseEditComponent {
       cont_parent_id: [rec?.cont_parent_id || 0],
       cont_title: [rec?.cont_title || "NA"],
       cont_name: [rec?.cont_name || ""],
+      cont_group_id: [rec?.cont_group_id || 0],
+      cont_group_name: [rec?.cont_group_name || ""],
       cont_designation: [rec?.cont_designation || ""],
       cont_email: [rec?.cont_email || ""],
       cont_tel: [rec?.cont_tel || ""],
@@ -259,8 +265,9 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_country_id: rec.cust_country_id,
           cust_country_name: rec.cust_country_name,
           cust_zip_code: rec.cust_zip_code,
-          cust_contact: rec.cust_contact,
           cust_title: rec.cust_title,
+          cust_contact: rec.cust_contact,
+          cust_designation: rec.cust_designation,
           cust_tel: rec.cust_tel,
           cust_fax: rec.cust_fax,
           cust_mobile: rec.cust_mobile,
@@ -348,10 +355,6 @@ export class CustomerEditComponent extends baseEditComponent {
       }
     })
   }
-
-
-
-
 
 
   save() {
@@ -488,6 +491,7 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_chb_name: action.rec.cust_name,
           cust_chb_address1: action.rec.cust_address1,
           cust_chb_address2: action.rec.cust_address2,
+          cust_chb_address3: action.rec.cust_address3,
           cust_chb_contact: action.rec.cust_contact,
           cust_chb_tel: action.rec.cust_tel,
           cust_chb_fax: action.rec.cust_fax,
@@ -501,10 +505,23 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_chb_name: '',
           cust_chb_address1: '',
           cust_chb_address2: '',
+          cust_chb_address3: '',
           cust_chb_contact: '',
           cust_chb_tel: '',
           cust_chb_fax: '',
           cust_chb_email: '',
+        });
+      }
+    }
+    if (action.id == 'cust_branch') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_branch: action.rec.branch_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_branch: '',
         });
       }
     }
@@ -521,6 +538,20 @@ export class CustomerEditComponent extends baseEditComponent {
           cont_country_id: null,
           cont_country_code: '',
           cont_country_name: '',
+        });
+      }
+    }
+    if (action.name == 'cont_group_name') {
+      if (action.rec) {
+        this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
+          cont_group_id: action.rec.param_id,
+          cont_group_name: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cont_group_id: null,
+          cont_group_name: '',
         });
       }
     }

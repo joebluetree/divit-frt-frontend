@@ -5,6 +5,8 @@ export interface iContactm {
   cont_parent_id: number,
   cont_title: string,
   cont_name: string,
+  cont_group_id: number,
+  cont_group_name: string,
   cont_designation: string,
   cont_email: string,
   cont_tel: string,
@@ -40,8 +42,9 @@ export interface iCustomerm {
   cust_country_id: number;
   cust_country_name: string;
   cust_zip_code: string;
-  cust_contact: string;
   cust_title: string;
+  cust_contact: string;
+  cust_designation: string;
   cust_tel: string;
   cust_fax: string;
   cust_mobile: string;
