@@ -34,7 +34,7 @@ export interface iWiretransm {
   wtim_req_type: string;
   wtim_from_name: string;
   wtim_date: string;
-  wtim_sender_ref: number;
+  wtim_sender_ref: string;
   wtim_your_ref: string;
   wtim_is_urgent: string;
   wtim_is_review: string;

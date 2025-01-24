@@ -1,59 +1,49 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { CustomermService } from '../../services/customerm.service';
-import { iContactm, iCustomerm } from '../../models/icustomerm';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
+import { WiretransmService } from '../../services/wiretransm.service';
+import { iWiretransd, iWiretransm } from '../../models/iwiretransm';
 
 @Component({
-  selector: 'app-customer-edit',
-  templateUrl: './customer-edit.component.html',
-  styleUrls: ['./customer-edit.component.css'],
+  selector: 'app-wiretransm-edit',
+  templateUrl: './wiretransm-edit.component.html',
+  styleUrls: ['./wiretransm-edit.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class CustomerEditComponent extends baseEditComponent {
-
-  filter = { cust_row_type: this.type };
-
-  dataList = [
-    { key: 'NA', value: 'NA' },
-    { key: 'AR', value: 'AR' },
-    { key: 'AP', value: 'AP' },
-  ]
-
-  titleList = [
-    { key: 'NA', value: 'NA' },
-    { key: 'MR', value: 'MR' },
-    { key: 'MRS', value: 'MRS' },
-  ]
+export class WiretransmEditComponent extends baseEditComponent {
 
   constructor(
-    private ms: CustomermService,
-    public dialog: MatDialog
+    private ms: WiretransmService,
   ) {
     super();
+    this.showModel = false;
     this.mform = this.fb.group({
-      cust_id: [0],
-      cust_code: ['', [Validators.required, Validators.maxLength(15)]],
-      cust_short_name: ['', [Validators.maxLength(15)]],
-      cust_name: ['', [Validators.required, Validators.maxLength(100)]],
+      wtim_id: [0],
+      wtim_slno: [0],
+      wtim_refno: [''],
+      wtim_to_name: [''],
+      wtim_cust_id: [0],
+      wtim_cust_code: [''],
+      wtim_cust_name: [''],
+      wtim_cust_fax: [''],
+      wtim_cust_tel: [''],
+      wtim_acc_no: [''],
+      wtim_req_type: [''],
+      wtim_from_name: [''],
+      wtim_date: [''],
+      wtim_sender_ref: [''],
+      wtim_is_review: [''],
+      wtim_is_urgent: [''],
+      wtim_is_comment: [''],
+      wtim_is_reply: [''],
+      wtim_is_recycle: [''],
+      wtim_remarks: [''],
 
-      cust_display_name: ['', [Validators.required, Validators.maxLength(100)]],
-      cust_address1: ['', [Validators.required, Validators.maxLength(100)]],
-      cust_address2: ['', [Validators.required, Validators.maxLength(100)]],
-      cust_address3: [''],
-
-      cust_type: [''],
-      cust_row_type: [this.type],
-      cust_parent_id: [null],
-      cust_parent_name: [''],
-      cust_credit_limit: [0],
-      cust_est_dt: [''],
-
-      cust_contacts: this.fb.array([]),
+      wtim_details: this.fb.array([]),
       rec_version: [0],
 
     })
@@ -70,70 +60,74 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
   async newRecord() {
-    this.id = await this.ms.getSequence({ name: 'master' });
+    this.id = 0;
     this.mform.patchValue({
-      cust_id: this.id
+      wtim_id: this.id
     })
-
   }
 
-  addRow(rec: iContactm) {
+  addRow(rec: iWiretransd) {
     return this.fb.group({
-      cont_id: [rec?.cont_id || 0],
-      cont_parent_id: [rec?.cont_parent_id || 0],
-      cont_title: [rec?.cont_title || "NA"],
-      cont_name: [rec?.cont_name || ""],
-      cont_designation: [rec?.cont_designation || ""],
-      cont_email: [rec?.cont_email || ""],
-      cont_tel: [rec?.cont_tel || ""],
-      cont_mobile: [rec?.cont_mobile || ""],
-      cont_remarks: [rec?.cont_remarks || ""],
-      cont_country_id: [rec?.cont_country_id || 0],
-      cont_country_code: [rec?.cont_country_code || ""],
-      cont_country_name: [rec?.cont_country_name || ""],
+      wtid_id: [rec?.wtid_id || 0],
+      wtid_wtim_id: [rec?.wtid_wtim_id || 0],
+      wtid_benef_id: [rec?.wtid_benef_id || 0],
+      wtid_benef_name: [rec?.wtid_benef_name || ""],
+      wtid_benef_ref: [rec?.wtid_benef_ref || ""],
+      wtid_bank_id: [rec?.wtid_bank_id || 0],
+      wtid_bank_name: [rec?.wtid_bank_name || ""],
+      wtid_trns_amt: [rec?.wtid_trns_amt || ""],
+      wtid_order: [rec?.wtid_order || 0],
     });
   }
 
-  addContact(iRow: iContactm = <iContactm>{}) {
-    this.formArray('cust_contacts')?.push(this.addRow(iRow));
+  addDetails(iRow: iWiretransd = <iWiretransd>{}) {
+    this.formArray('wtim_details')?.push(this.addRow(iRow));
   }
 
   deleteRow(idx: number) {
-    this.formArray('cust_contacts').removeAt(idx);
+    const nidx = idx + 1;
+    const confirmDelete = window.confirm("Delete " + nidx + " y/n");
+    if (confirmDelete) {
+      this.formArray('wtim_details').removeAt(idx);
+    }
   }
 
-  fillContacts(icontact_list: iContactm[]) {
-    this.formArray('cust_contacts').clear();
-    icontact_list.forEach((rec_contact: iContactm) => {
-      this.addContact(rec_contact);
+  fillDetails(idetails_list: iWiretransd[]) {
+    this.formArray('wtim_details').clear();
+    idetails_list.forEach((rec_details: iWiretransd) => {
+      this.addDetails(rec_details);
     });
-
   }
 
   getRecord() {
-
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/customer/GetRecordAsync').subscribe({
-      next: (rec: iCustomerm) => {
+    this.ms.getRecord(param, '/api/wiretransm/GetRecordAsync').subscribe({
+      next: (rec: iWiretransm) => {
         this.mform.patchValue({
-          cust_id: rec.cust_id,
-          cust_code: rec.cust_code,
-          cust_short_name: rec.cust_short_name,
-          cust_name: rec.cust_name,
-          cust_display_name: rec.cust_display_name,
-          cust_address1: rec.cust_address1,
-          cust_address2: rec.cust_address2,
-          cust_address3: rec.cust_address3,
-          cust_type: rec.cust_type,
-          cust_row_type: rec.cust_row_type,
-          cust_parent_id: rec.cust_parent_id,
-          cust_parent_name: rec.cust_parent_name,
-          cust_credit_limit: rec.cust_credit_limit,
-          cust_est_dt: rec.cust_est_dt,
-          rec_version: rec.rec_version,
+          wtim_id: rec.wtim_id,
+          wtim_slno: rec.wtim_slno,
+          wtim_refno: rec.wtim_refno,
+          wtim_to_name: rec.wtim_to_name,
+          wtim_cust_id: rec.wtim_cust_id,
+          wtim_cust_code: rec.wtim_cust_code,
+          wtim_cust_name: rec.wtim_cust_name,
+          wtim_cust_fax: rec.wtim_cust_fax,
+          wtim_cust_tel: rec.wtim_cust_tel,
+          wtim_acc_no: rec.wtim_acc_no,
+          wtim_req_type: rec.wtim_req_type,
+          wtim_from_name: rec.wtim_from_name,
+          wtim_date: rec.wtim_date,
+          wtim_sender_ref: rec.wtim_sender_ref,
+          wtim_your_ref: rec.wtim_your_ref,
+          wtim_is_urgent: rec.wtim_is_urgent,
+          wtim_is_review: rec.wtim_is_review,
+          wtim_is_comment: rec.wtim_is_comment,
+          wtim_is_recycle: rec.wtim_is_recycle,
+          wtim_remarks: rec.wtim_remarks,
 
+          rec_version: rec.rec_version,
         });
-        this.fillContacts(rec.cust_contacts);
+        this.fillDetails(rec.wtim_details);
       },
       error: (e) => {
         alert(e.message);
@@ -141,35 +135,29 @@ export class CustomerEditComponent extends baseEditComponent {
     })
   }
 
-
-
-
-
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
       return;
     }
-    const data = <iCustomerm>this.mform.value;
-
-    data.cust_row_type = this.type;
+    const data = <iWiretransm>this.mform.value;
 
     data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
 
     let _mode = this.mode;
 
     const param = {
-      'id': data.cust_id,
+      'id': data.wtim_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/customer/SaveAsync').subscribe({
-      next: (v: iCustomerm) => {
+    this.ms.save(param, data, '/api/wiretransm/SaveAsync').subscribe({
+      next: (v: iWiretransm) => {
         if (this.mode == "add") {
-          this.id = v.cust_id;
+          this.id = v.wtim_id;
           this.mode = "edit";
-          this.mform.patchValue({ cust_id: this.id });
+          this.mform.patchValue({ wtim_id: this.id });
           const param = {
             id: this.id.toString(),
             mode: this.mode
@@ -179,7 +167,7 @@ export class CustomerEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version
         });
-        this.fillContacts(v.cust_contacts);
+        this.fillDetails(v.wtim_details);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
@@ -190,59 +178,59 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
   callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
-    if (action.id == 'cust_parent_name') {
+    if (action.id == 'wtim_cust_code') {
       if (action.rec) {
         this.mform.patchValue({
-          cust_parent_id: action.rec.cust_id,
-          cust_parent_name: action.rec.cust_name,
+          wtim_cust_id: action.rec.cust_id,
+          wtim_cust_code:action.rec.cust_code,
+          wtim_cust_name: action.rec.cust_name,
+          wtim_cust_fax: action.rec.cust_address1,
+          wtim_cust_tel: action.rec.cust_address2,
+          // wtim_cust_fax: action.rec.cust_contacts.cont_tel,
         });
       }
       else {
         this.mform.patchValue({
-          cust_parent_id: null,
-          cust_parent_name: '',
+          wtim_cust_id: null,
+          wtim_cust_code: '',
+          wtim_cust_name: '',
+          wtim_cust_fax: '',
+          wtim_cust_tel: '',
         });
       }
     }
-    if (action.name == 'cont_country_code') {
+    if (action.name == 'wtid_benef_name') {
       if (action.rec) {
-        this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
-          cont_country_id: action.rec.param_id,
-          cont_country_code: action.rec.param_code,
-          cont_country_name: action.rec.param_name,
+        this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
+          wtid_benef_id: action.rec.cust_id,
+          wtid_benef_name: action.rec.cust_name,
         });
       }
       else {
         this.mform.patchValue({
-          cont_country_id: null,
-          cont_country_code: '',
-          cont_country_name: '',
+          wtid_benef_id: null,
+          wtid_benef_name: '',
+        });
+      }
+    }
+    if (action.name == 'wtid_bank_name') {
+      if (action.rec) {
+        this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
+          wtid_bank_id: action.rec.cust_id,
+          wtid_bank_name: action.rec.cust_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          wtid_bank_id: null,
+          wtid_bank_name: '',
         });
       }
     }
   }
-
-
-
-
-  openHistory(): void {
-    const dialogRef = this.dialog.open(HistoryComponent, {
-      hasBackdrop: false,
-      width: '250px',
-      data: { title: 'History', message: 'Edit Details' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
 
   onBlur(action: any) {
     console.log('onBlur Action', action);
   }
-
-
-
 }
 

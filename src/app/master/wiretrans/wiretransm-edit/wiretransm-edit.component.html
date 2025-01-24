@@ -1,32 +1,26 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/customerEdit"
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/wiretransmEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
-  <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
 <form [formGroup]="mform">
-
   <div class="page-body">
-
-
     <div class="row">
-
       <div class="col-sm-6">
-
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Code</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">RefNo</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="cust_code" [case]="'UPPER'" id="cust_code" name="cust_code"
+            <app-input maxlength="15" formControlName="wtim_refno" [case]="'UPPER'" id="wtim_refno" name="wtim_refno"
             [disable]="true" required></app-input>
           </div>
         </div>
         
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Short Name</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">To</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="cust_short_name" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="15" formControlName="wtim_to_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
 
@@ -36,165 +30,198 @@
             <app-input maxlength="100" formControlName="cust_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
-
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Display Name</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">Company</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_display_name" [case]="'UPPER'" required></app-input>
+            <auto-complete formControlName="wtim_cust_code" id="wtim_cust_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Address</label>
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_address1" [case]="'UPPER'" required></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_address2" [case]="'UPPER'" required></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="cust_address3" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="wtim_cust_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
 
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Main Code</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">Fax</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="cust_parent_name" id="cust_parent_name" (CallBack)="callBack($event)"
-              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
-              display_column="[{'caption':'code','value':'cust_id'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+            <app-input maxlength="100" formControlName="wtim_cust_fax" [case]="'UPPER'" required></app-input>
           </div>
         </div>
-
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
+          <label class="col-sm-4 form-label form-lable-sm">Tel</label>
           <div class="col-sm-8">
-            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="right"
-              (blur)="onBlur($event)">
-            </app-input>
-
-
+            <app-input maxlength="100" formControlName="wtim_cust_tel" [case]="'UPPER'" required></app-input>
           </div>
         </div>
-
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Est-Date</label>
+          <label class="col-sm-4 form-label form-lable-sm">A/c No</label>
           <div class="col-sm-8">
-            <app-date formControlName="cust_est_dt" [format]="gs.globalConstants.global_date_format"></app-date>
+            <app-input maxlength="100" formControlName="wtim_acc_no" [case]="'UPPER'" required></app-input>
           </div>
         </div>
-
-
       </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Request.Type
+          </label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="wtim_req_type" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
 
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">From</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="wtim_from_name" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Date</label>
+          <div class="col-sm-8">
+            <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">SenderRef#</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="wtim_sender_ref" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">YourRef#</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="wtim_your_ref" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
-
   <div class="page-body">
-
     <div class="row">
-
       <div class="col-sm-12">
-
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="wtim_is_urgent" name="wtim_is_urgent" ></app-checkbox>
+             <label class="col-sm-4 form-label form-lable-sm" for="">Urgent</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="wtim_is_review" name="wtim_is_review" ></app-checkbox>
+             <label class="col-sm-4 form-label form-lable-sm" for="">Review</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="wtim_is_comment" name="wtim_is_comment" ></app-checkbox>
+             <label class="col-sm-4 form-label form-lable-sm" for="">Comment</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="wtim_is_reply" name="wtim_is_reply" ></app-checkbox>
+             <label class="col-sm-4 form-label form-lable-sm" for="">Reply</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+          <div class="col-sm-8">
+            <app-checkbox formControlName="wtim_is_recycle" name="wtim_is_recycle" ></app-checkbox>
+             <label class="col-sm-4 form-label form-lable-sm" for="">Recycle</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-12">
         <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-
           <thead class="table-success">
             <tr class="table-header">
-              <th>ID</th>
-              <th>TITLE</th>
-              <th>NAME</th>
-              <th>DESIGNATION</th>
-              <th>EMAIL</th>
-              <th>TEL</th>
-              <th>MOBILE</th>
-              <th>COUNTRY</th>
-              <th>REMARKS</th>
+              <th *ngIf="showModel">ID</th>
+              <th>BENEFICIARY</th>
+              <th>BANK</th>
+              <th>REFERENCE</th>
+              <th>AMOUNT</th>
               <th>ADD</th>
               <th>DELETE</th>
             </tr>
           </thead>
 
-          <tbody formArrayName="cust_contacts">
-            <tr *ngFor="let iRow of formArray('cust_contacts').controls; let i=index;" [formGroupName]="i">
-              <td>
-                <label>{{iRow.get('cont_id')?.value}}</label>
+          <tbody formArrayName="wtim_details">
+            <tr *ngFor="let iRow of formArray('wtim_details').controls; let i=index;" [formGroupName]="i">
+              <td *ngIf="showModel">
+                <label>{{iRow.get('wtid_id')?.value}}</label>
               </td>
 
               <td>
-                <app-combobox maxlength="10" formControlName="cont_title" [rowIndex]="i" name="cont_title"
-                  [dataSource]="titleList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+                <auto-complete formControlName="wtid_benef_name" id="wtid_benef_name" name="wtid_benef_name" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </td>
               <td>
-                <app-input maxlength="100" formControlName="cont_name" [rowIndex]="i" name="cont_name"
+                <auto-complete formControlName="wtid_bank_name" id="wtid_bank_name" name="wtid_bank_name" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+              </td>
+              <td>
+                <app-input maxlength="100" formControlName="wtid_benef_ref" [rowIndex]="i" name="wtid_benef_ref"
                   case="UPPER"></app-input>
               </td>
               <td>
-                <app-input maxlength="100" formControlName="cont_designation" [rowIndex]="i" name="cont_designation"
-                  case="UPPER"></app-input>
+                <app-input maxlength="100" formControlName="wtid_trns_amt" [rowIndex]="i" name="wtid_trns_amt" 
+                [dec]="gs.globalConstants.global_dec_places" type="number" case="UPPER"></app-input>
               </td>
               <td>
-                <app-input maxlength="100" formControlName="cont_email" [rowIndex]="i" name="cont_email"
-                  case="UPPER"></app-input>
-              </td>
-              <td>
-                <app-input maxlength="100" formControlName="cont_tel" [rowIndex]="i" name="cont_tel"
-                  case="UPPER"></app-input>
-              </td>
-              <td>
-                <app-input maxlength="100" formControlName="cont_mobile" [rowIndex]="i" name="cont_mobile"
-                  case="UPPER"></app-input>
-              </td>
-              <td>
-                <auto-complete formControlName="cont_country_code" [rowIndex]="i" name="cont_country_code"
-                  (CallBack)="callBack($event)" table="param" subtable="country" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </td>
-              <td>
-                <app-input maxlength="100" formControlName="cont_remarks" [rowIndex]="i" name="cont_remarks"
-                  case="UPPER"></app-input>
-              </td>
-
-              <td align="centre" (click)="addContact()" class="link">
+              <td align="centre" (click)="addDetails()" class="link">
                 <i class="fa fa-plus"></i>
               </td>
 
               <td align="centre" (click)="deleteRow(i)" class="link">
                 <i class="fa fa-trash"></i>
               </td>
-
             </tr>
           </tbody>
         </table>
-
       </div>
-
     </div>
-
-
-    <div class="row" *ngIf="formArray('cust_contacts').length <= 0">
+    <div class="row" *ngIf="formArray('wtim_details').length <= 0">
       <div class="col-sm-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addContact()" [disabled]="mform.invalid">Add Contact</button>
+        <button class="btn btn-sm btn-info" (click)="addDetails()" [disabled]="mform.invalid">Add Contact</button>
       </div>
     </div>
-
   </div>
-
-
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Remarks</label>
+          <div class="col-sm-8">
+            <app-input maxlength="15" formControlName="wtim_remarks" [case]="'UPPER'" id="wtim_refno"
+             name="wtim_remarks" ></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
-
 
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
 </div>
-
 
 <div *ngIf="showModel">
   <pre>
