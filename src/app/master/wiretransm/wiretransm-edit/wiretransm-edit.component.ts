@@ -36,6 +36,7 @@ export class WiretransmEditComponent extends baseEditComponent {
       wtim_from_name: [''],
       wtim_date: [''],
       wtim_sender_ref: [''],
+      wtim_your_ref: [''],
       wtim_is_review: [''],
       wtim_is_urgent: [''],
       wtim_is_comment: [''],
@@ -122,6 +123,7 @@ export class WiretransmEditComponent extends baseEditComponent {
           wtim_is_urgent: rec.wtim_is_urgent,
           wtim_is_review: rec.wtim_is_review,
           wtim_is_comment: rec.wtim_is_comment,
+          wtim_is_reply: rec.wtim_is_reply,
           wtim_is_recycle: rec.wtim_is_recycle,
           wtim_remarks: rec.wtim_remarks,
 

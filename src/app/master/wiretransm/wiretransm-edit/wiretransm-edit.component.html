@@ -80,14 +80,12 @@
             <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
-
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">SenderRef#</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="wtim_sender_ref" [case]="'UPPER'"></app-input>
           </div>
         </div>
-
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">YourRef#</label>
           <div class="col-sm-8">
@@ -125,6 +123,7 @@
           <thead class="table-success">
             <tr class="table-header">
               <th *ngIf="showModel">ID</th>
+              <th *ngIf="showModel">ORDER</th>
               <th>BENEFICIARY</th>
               <th>BANK</th>
               <th>REFERENCE</th>
@@ -137,6 +136,9 @@
             <tr *ngFor="let iRow of formArray('wtim_details').controls; let i=index;" [formGroupName]="i">
               <td *ngIf="showModel">
                 <label>{{iRow.get('wtid_id')?.value}}</label>
+              </td>
+              <td *ngIf="showModel">
+                <label>{{iRow.get('wtid_order')?.value}}</label>
               </td>
               <td>
                 <auto-complete formControlName="wtid_benef_name" [rowIndex]="i" id="wtid_benef_name" name="wtid_benef_name" (CallBack)="callBack($event)"
