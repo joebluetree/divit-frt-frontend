@@ -7,6 +7,6 @@ export const routes: Routes = [
   { path: 'paramEdit', loadComponent: () => import('./param/param-edit/param-edit.component').then(c => c.ParamEditComponent) },
   { path: 'remarkList', loadComponent: () => import('./remark/remark-list/remark-list.component').then(c => c.RemarkListComponent) },
   { path: 'remarkEdit', loadComponent: () => import('./remark/remark-edit/remark-edit.component').then(c => c.RemarkEditComponent) },
-  { path: 'wiretransmList', loadComponent: () => import('./wiretrans/wiretransm-list/wiretransm-list.component').then(c => c.WiretransmListComponent) },
-  { path: 'wiretransmEdit', loadComponent: () => import('./wiretrans/wiretransm-edit/wiretransm-edit.component').then(c => c.WiretransmEditComponent) },
+  { path: 'wiretransmList', loadComponent: () => import('./wiretransm/wiretransm-list/wiretransm-list.component').then(c => c.WiretransmListComponent) },
+  { path: 'wiretransmEdit', loadComponent: () => import('./wiretransm/wiretransm-edit/wiretransm-edit.component').then(c => c.WiretransmEditComponent) },
 ]
