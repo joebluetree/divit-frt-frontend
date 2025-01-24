@@ -20,7 +20,7 @@ export class WiretransmEditComponent extends baseEditComponent {
     private ms: WiretransmService,
   ) {
     super();
-    this.showModel = false;
+    this.showModel = true;
     this.mform = this.fb.group({
       wtim_id: [0],
       wtim_slno: [0],
@@ -75,7 +75,7 @@ export class WiretransmEditComponent extends baseEditComponent {
       wtid_benef_ref: [rec?.wtid_benef_ref || ""],
       wtid_bank_id: [rec?.wtid_bank_id || 0],
       wtid_bank_name: [rec?.wtid_bank_name || ""],
-      wtid_trns_amt: [rec?.wtid_trns_amt || ""],
+      wtid_trns_amt: [rec?.wtid_trns_amt || 0],
       wtid_order: [rec?.wtid_order || 0],
     });
   }
@@ -199,7 +199,7 @@ export class WiretransmEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.name == 'wtid_benef_name') {
+    if (action.id == 'wtid_benef_name') {
       if (action.rec) {
         this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
           wtid_benef_id: action.rec.cust_id,
@@ -213,7 +213,7 @@ export class WiretransmEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.name == 'wtid_bank_name') {
+    if (action.id == 'wtid_bank_name') {
       if (action.rec) {
         this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
           wtid_bank_id: action.rec.cust_id,

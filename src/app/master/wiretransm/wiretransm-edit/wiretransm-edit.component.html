@@ -139,12 +139,12 @@
                 <label>{{iRow.get('wtid_id')?.value}}</label>
               </td>
               <td>
-                <auto-complete formControlName="wtid_benef_name" id="wtid_benef_name" name="wtid_benef_name" (CallBack)="callBack($event)"
+                <auto-complete formControlName="wtid_benef_name" [rowIndex]="i" id="wtid_benef_name" name="wtid_benef_name" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" required
               display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </td>
               <td>
-                <auto-complete formControlName="wtid_bank_name" id="wtid_bank_name" name="wtid_bank_name" (CallBack)="callBack($event)"
+                <auto-complete formControlName="wtid_bank_name" [rowIndex]="i" id="wtid_bank_name" name="wtid_bank_name" (CallBack)="callBack($event)"
               [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" required
               display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </td>
