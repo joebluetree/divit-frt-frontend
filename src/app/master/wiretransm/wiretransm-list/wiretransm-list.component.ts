@@ -15,10 +15,7 @@ import { WiretransmService } from '../../services/wiretransm.service';
 })
 export class WiretransmListComponent extends baseListComponent {
 
-  constructor(
-    public ms: WiretransmService,
-
-  ) {
+  constructor(public ms: WiretransmService) {
     super(ms);
   }
 

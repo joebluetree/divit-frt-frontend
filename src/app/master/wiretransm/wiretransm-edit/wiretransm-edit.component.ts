@@ -18,7 +18,9 @@ export class WiretransmEditComponent extends baseEditComponent {
 
   constructor(
     private ms: WiretransmService,
+
   ) {
+
     super();
     this.showModel = true;
     this.mform = this.fb.group({
@@ -56,11 +58,11 @@ export class WiretransmEditComponent extends baseEditComponent {
 
     if (this.mode == "add")
       this.newRecord();
-    else
+    if (this.mode == "edit")
       this.getRecord();
   }
 
-  async newRecord() {
+  newRecord() {
     this.id = 0;
     this.mform.patchValue({
       wtim_id: this.id
@@ -68,7 +70,7 @@ export class WiretransmEditComponent extends baseEditComponent {
   }
 
   addRow(rec: iWiretransd) {
-    return this.fb.group({
+    const _rec = this.fb.group({
       wtid_id: [rec?.wtid_id || 0],
       wtid_wtim_id: [rec?.wtid_wtim_id || 0],
       wtid_benef_id: [rec?.wtid_benef_id || 0],
@@ -79,6 +81,7 @@ export class WiretransmEditComponent extends baseEditComponent {
       wtid_trns_amt: [rec?.wtid_trns_amt || 0],
       wtid_order: [rec?.wtid_order || 0],
     });
+    return _rec
   }
 
   addDetails(iRow: iWiretransd = <iWiretransd>{}) {
@@ -95,7 +98,7 @@ export class WiretransmEditComponent extends baseEditComponent {
 
   fillDetails(idetails_list: iWiretransd[]) {
     this.formArray('wtim_details').clear();
-    idetails_list.forEach((rec_details: iWiretransd) => {
+    idetails_list.forEach(rec_details => {
       this.addDetails(rec_details);
     });
   }
@@ -130,6 +133,7 @@ export class WiretransmEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
         });
         this.fillDetails(rec.wtim_details);
+        console.log(rec);
       },
       error: (e) => {
         alert(e.message);
@@ -167,7 +171,8 @@ export class WiretransmEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
         this.mform.patchValue({
-          rec_version: v.rec_version
+          rec_version: v.rec_version,
+          wtim_refno: v.wtim_refno,
         });
         this.fillDetails(v.wtim_details);
         this.ms.UpdateRecord(v, _mode);
@@ -175,11 +180,12 @@ export class WiretransmEditComponent extends baseEditComponent {
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
-      }
+      },
+      complete: () => { }
     })
   }
 
-  callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
+  callBack(action:any) {
     if (action.id == 'wtim_cust_code') {
       if (action.rec) {
         this.mform.patchValue({

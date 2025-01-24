@@ -13,7 +13,7 @@ import { iWiretransm_Search, iWiretransModel } from '../models/iwiretransm';
 export class WiretransmService extends baseService {
 
   constructor() {
-    super('qtnm_id', 'qtnm_no');
+    super('wtim_id', 'wtim_refno');
   }
 
   setInitialState() {
