@@ -20,7 +20,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">To</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="wtim_to_name" [case]="'UPPER'" ></app-input>
+            <app-input maxlength="15" formControlName="wtim_to_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -77,7 +77,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Date</label>
           <div class="col-sm-8">
-            <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format" ></app-date>
+            <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
         <div class="form-group row">
