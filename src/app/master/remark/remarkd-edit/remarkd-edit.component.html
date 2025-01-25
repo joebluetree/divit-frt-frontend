@@ -1,0 +1,24 @@
+<form [formGroup]="mform">
+  <div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Description</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="remd_desc1" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <button class="btn btn-sm btn-success me-2" (click)="search('search')" [disabled]="mform.invalid">{{ mode
+              === 'new' ? 'Add' : 'Edit'}}</button>
+            <button class="btn btn-success btn-sm " (click)="newRecord()">New</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

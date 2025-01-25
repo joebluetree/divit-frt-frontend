@@ -1,0 +1,82 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/remarkEdit"
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<form [formGroup]="mform">
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="rem_name" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <app-remarkd-edit [input]="data_remark" (output)="detailOutput($event)"></app-remarkd-edit>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>Edit</th>
+              <th *ngIf="showModel">ID</th>
+              <th *ngIf="showModel">ORDER</th>
+              <th>DESCRIPTION</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="rem_remarks">
+            <tr *ngFor="let iRow of formArray('rem_remarks').controls; let i=index;" [formGroupName]="i">
+              
+              <td align="centre" (click)="editDetails(i)">
+                <i class="fa fa-pencil"></i>
+              </td>
+
+              <td *ngIf="showModel">
+                <label>{{iRow.get('remd_id')?.value}}</label>
+              </td>
+              <td *ngIf="showModel">
+                <label>{{iRow.get('remd_order')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('remd_desc1')?.value}}</label>
+              </td>
+              <td align="centre" (click)="deleteDetails(i)" class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- <div class="row" *ngIf="formArray('ordm_details').length <= 0">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-sm btn-info" (click)="addOrderdetails()">Add Invoice details</button>
+      </div>
+    </div> -->
+  </div>
+</form>
+
+
+<div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

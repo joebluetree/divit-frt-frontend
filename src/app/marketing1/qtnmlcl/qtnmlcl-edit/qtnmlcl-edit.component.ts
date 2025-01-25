@@ -190,9 +190,6 @@ export class QtnmLclEditComponent extends baseEditComponent {
 
 
 
-
-
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
