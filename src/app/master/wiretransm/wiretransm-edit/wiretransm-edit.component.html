@@ -20,7 +20,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">To</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="wtim_to_name" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="15" formControlName="wtim_to_name" [case]="'UPPER'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -35,7 +35,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for=""></label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="wtim_cust_name" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="wtim_cust_name" [case]="'UPPER'" ></app-input>
           </div>
         </div>
 
@@ -51,33 +51,33 @@
             <app-input maxlength="100" formControlName="wtim_cust_tel" [case]="'UPPER'" ></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">A/c No</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="wtim_acc_no" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="wtim_acc_no" [case]="'UPPER'" ></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Request.Type
           </label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="wtim_req_type" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="wtim_req_type" [case]="'UPPER'" ></app-input>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">From</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="wtim_from_name" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="wtim_from_name" [case]="'UPPER'" ></app-input>
           </div>
         </div>
 
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Date</label>
           <div class="col-sm-8">
-            <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format" required></app-date>
+            <app-date formControlName="wtim_date" [format]="gs.globalConstants.global_date_format" ></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -142,12 +142,12 @@
               </td>
               <td>
                 <auto-complete formControlName="wtid_benef_name" [rowIndex]="i" id="wtid_benef_name" name="wtid_benef_name" (CallBack)="callBack($event)"
-              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" required
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" 
               display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </td>
               <td>
                 <auto-complete formControlName="wtid_bank_name" [rowIndex]="i" id="wtid_bank_name" name="wtid_bank_name" (CallBack)="callBack($event)"
-              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" required
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" 
               display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </td>
               <td>
@@ -173,15 +173,15 @@
     </div>
     <div class="row" *ngIf="formArray('wtim_details').length <= 0">
       <div class="col-sm-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addDetails()" [disabled]="mform.invalid">Add Details</button>
+        <button class="btn btn-sm btn-info" (click)="addDetails()">Add Details</button>
       </div>
     </div>
   </div>
   <div class="page-body">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-3 form-label form-lable-sm" for="">Remarks</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">Remarks</label>
           <div class="col-sm-8">
             <app-input maxlength="15" formControlName="wtim_remarks" [case]="'UPPER'" id="wtim_refno"
              name="wtim_remarks" ></app-input>

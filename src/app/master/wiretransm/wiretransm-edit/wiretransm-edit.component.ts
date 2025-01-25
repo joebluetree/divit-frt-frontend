@@ -58,7 +58,7 @@ export class WiretransmEditComponent extends baseEditComponent {
 
     if (this.mode == "add")
       this.newRecord();
-    if (this.mode == "edit")
+    else
       this.getRecord();
   }
 
@@ -67,6 +67,7 @@ export class WiretransmEditComponent extends baseEditComponent {
     this.mform.patchValue({
       wtim_id: this.id
     })
+    this.addDetails();
   }
 
   addRow(rec: iWiretransd) {
@@ -98,7 +99,7 @@ export class WiretransmEditComponent extends baseEditComponent {
 
   fillDetails(idetails_list: iWiretransd[]) {
     this.formArray('wtim_details').clear();
-    idetails_list.forEach(rec_details => {
+    idetails_list.forEach((rec_details: iWiretransd) => {
       this.addDetails(rec_details);
     });
   }
@@ -158,6 +159,7 @@ export class WiretransmEditComponent extends baseEditComponent {
       'id': data.wtim_id,
       'mode': this.mode
     }
+    console.log(data);
     this.ms.save(param, data, '/api/wiretransm/SaveAsync').subscribe({
       next: (v: iWiretransm) => {
         if (this.mode == "add") {
@@ -194,7 +196,6 @@ export class WiretransmEditComponent extends baseEditComponent {
           wtim_cust_name: action.rec.cust_name,
           wtim_cust_fax: action.rec.cust_address1,
           wtim_cust_tel: action.rec.cust_address2,
-          // wtim_cust_fax: action.rec.cust_contacts.cont_tel,
         });
       }
       else {
