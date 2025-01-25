@@ -184,13 +184,13 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Credit-Limit</label>
           <div class="col-sm-3">
-            <app-input formControlName="cust_credit_limit" type="number" [dec]="2" align="text-center"
+            <app-input formControlName="cust_credit_limit" type="number" [dec]="gs.globalConstants.global_dec_places" [align]="'center'"
               (blur)="onBlur($event)">
             </app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm" for="">Credit Days</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="cust_days" type="number" class="centre-align" ></app-input>
+            <app-input maxlength="100" formControlName="cust_days" type="number" [align]="'center'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -509,7 +509,7 @@
               formControlName="cust_criteria"></app-combobox>
           </div>
           <div class="col-sm-4">
-            <app-input formControlName="cust_min_profit" type="number"></app-input>
+            <app-input formControlName="cust_min_profit" type="number" [dec]="gs.globalConstants.global_dec_places" ></app-input>
           </div>
         </div>
         <div class="form-group row">
