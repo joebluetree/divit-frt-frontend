@@ -6,12 +6,12 @@
         <label class="col-sm-4 form-label form-lable-sm">From</label>
         <div class="col-sm-3">
           <app-date maxlength="100" formControlName="qtnm_from_date" [format]="gs.globalConstants.global_date_format"
-            placeholder="DD/MM/YYYY"></app-date>
+          [placeholder]="gs.globalConstants.global_date_format"></app-date>
         </div>
         <label class="col-sm-2 form-label form-lable-sm">To</label>
         <div class="col-sm-3">
           <app-date maxlength="100" formControlName="qtnm_to_date" [format]="gs.globalConstants.global_date_format"
-            placeholder="DD/MM/YYYY"></app-date>
+          [placeholder]="gs.globalConstants.global_date_format" ></app-date>
         </div>
       </div>
       <div class="form-group row">
