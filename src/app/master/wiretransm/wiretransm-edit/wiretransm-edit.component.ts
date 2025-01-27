@@ -22,7 +22,7 @@ export class WiretransmEditComponent extends baseEditComponent {
   ) {
 
     super();
-    this.showModel = true;
+    this.showModel = false;
     this.mform = this.fb.group({
       wtim_id: [0],
       wtim_slno: [0],
@@ -194,8 +194,8 @@ export class WiretransmEditComponent extends baseEditComponent {
           wtim_cust_id: action.rec.cust_id,
           wtim_cust_code:action.rec.cust_code,
           wtim_cust_name: action.rec.cust_name,
-          wtim_cust_fax: action.rec.cust_address1,
-          wtim_cust_tel: action.rec.cust_address2,
+          wtim_cust_fax: action.rec.cust_fax,
+          wtim_cust_tel: action.rec.cust_tel,
         });
       }
       else {
