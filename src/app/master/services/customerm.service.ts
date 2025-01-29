@@ -14,7 +14,7 @@ export class CustomermService extends baseService {
     return <iCustomerModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iCustomer_Search>{ cust_name: '', cust_row_type: this.type, rec_company_id: 0 },
+      searchRecord: <iCustomer_Search>{ cust_date_type: '',cust_from_date: '',cust_to_date: '',cust_created_by: '',cust_edited_by: '',cust_code: '',cust_name: '',cust_firm_code: '',cust_is_blackacc: '', cust_row_type: this.type, rec_company_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',
