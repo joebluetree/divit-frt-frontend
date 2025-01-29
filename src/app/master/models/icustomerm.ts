@@ -133,7 +133,15 @@ export interface iCustomerm {
 
 export interface iCustomer_Search {
   cust_row_type: string;
+  cust_date_type: string;
+  cust_from_date: string;
+  cust_to_date: string;
+  cust_created_by: string;
+  cust_edited_by: string;
+  cust_code: string;
   cust_name: string;
+  cust_firm_code: string;
+  cust_is_blackacc: string;
   rec_company_id: number;
 }
 

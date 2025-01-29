@@ -525,6 +525,18 @@ export class CustomerEditComponent extends baseEditComponent {
         });
       }
     }
+    if (action.id == 'cust_cur_code') {
+      if (action.rec) {
+        this.mform.patchValue({
+          cust_cur_code: action.rec.param_name,
+        });
+      }
+      else {
+        this.mform.patchValue({
+          cust_cur_code: '',
+        });
+      }
+    }
     if (action.name == 'cont_country_code') {
       if (action.rec) {
         this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
