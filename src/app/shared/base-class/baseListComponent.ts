@@ -22,6 +22,7 @@ export abstract class baseListComponent {
   protected bEdit = false;
   protected bView = false;
   protected bDelete = false;
+  protected showModel = true;
 
   protected menum: iMenum | null;
 
