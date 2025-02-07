@@ -30,7 +30,8 @@ export class QtnmFclListComponent extends baseListComponent {
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/marketing/qtnmfclEdit', col_param: param, col_show: this.bEdit || this.bView },
-      { col_name: "qtnm_no", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel },
+      { col_name: "qtnm_no", col_caption: "QUOTE NO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_date", col_caption: "DATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_quot_by", col_caption: "QOUTE BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

@@ -17,7 +17,7 @@
           </div>
           <label class="col-sm-2 form-label form-lable-sm" for="">Date</label>
           <div class="col-sm-3">
-            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" required></app-date>
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -70,7 +70,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
           <div class="col-sm-8">
-            <app-date formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format"></app-date>
+            <app-date formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -108,7 +108,7 @@
           <thead class="table-success">
             <tr class="table-header">
               <th>EDIT</th>
-              <th>ID</th>
+              <th *ngIf="showModel">ID</th>
               <th *ngIf="showModel">ORDER</th>
               <th>POL</th>
               <th>POD</th>
@@ -135,7 +135,7 @@
                 <i class="fa fa-pencil"></i>
               </td>
 
-              <td>
+              <td *ngIf="showModel">
                 <label>{{iRow.get('qtnd_id')?.value}}</label>
               </td>
               <td *ngIf="showModel">

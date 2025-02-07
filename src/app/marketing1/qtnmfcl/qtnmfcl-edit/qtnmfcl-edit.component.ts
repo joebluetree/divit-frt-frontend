@@ -30,6 +30,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
     super();
     this.setInvoicedData('new', <iQtnd_fcl>{}, -1);
     this.showModel = false;
+    let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({
       qtnm_id: [0],
@@ -43,7 +44,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
       qtnm_to_addr2: [''],
       qtnm_to_addr3: [''],
       qtnm_to_addr4: [''],
-      qtnm_date: [''],
+      qtnm_date: [date],
       qtnm_quot_by: [user],
       qtnm_valid_date: [''],
       qtnm_salesman_id: [0],
