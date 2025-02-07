@@ -39,16 +39,11 @@ export class ModuleEditComponent extends baseEditComponent {
       this.getRecord();
   }
 
-  async newRecord() {
-    try {
-      this.id = await this.ms.getSequence({ name: 'master' });
-      this.mform.patchValue({
-        module_id: this.id
-      })
-    }
-    catch (error: any) {
-      this.gs.showAlert([error.message]);
-    }
+  newRecord() {
+    this.id = 0;
+    this.mform.patchValue({
+      module_id: this.id
+    })
   }
 
   getRecord() {
@@ -74,9 +69,9 @@ export class ModuleEditComponent extends baseEditComponent {
 
   allvalid() {
     let msg = [];
-    if (this.id <= 0) {
-      msg.push('Invalid ID')
-    }
+    // if (this.id <= 0) {
+    //   msg.push('Invalid ID')
+    // }
     if (this.mform.invalid) {
       msg.push('Not all data are entered')
     }
