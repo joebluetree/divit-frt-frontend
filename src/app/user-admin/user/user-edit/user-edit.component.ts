@@ -55,8 +55,8 @@ export class UserEditComponent extends baseEditComponent {
       this.getRecord();
   }
 
-  async newRecord() {
-    this.id = await this.ms.getSequence({ name: 'master' });
+  newRecord() {
+    this.id = 0;
     this.mform.patchValue({
       user_id: this.id
     })
@@ -114,9 +114,9 @@ export class UserEditComponent extends baseEditComponent {
     this.ms.save(param, data, '/api/user/SaveAsync').subscribe({
       next: (v: iUserm) => {
         if (this.mode == "add") {
-          //this.id = v.user_id;
+          this.id = v.user_id;
           this.mode = "edit";
-          //this.mform.patchValue({ user_id: this.id });
+          this.mform.patchValue({ user_id: this.id });
           this.formArray('userbranches').clear();
           v.userbranches.forEach(rec => {
             this.formArray('userbranches').push(this.addRow(rec))
@@ -135,7 +135,8 @@ export class UserEditComponent extends baseEditComponent {
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
-      }
+      },
+      complete: () => { }
     })
   }
 
