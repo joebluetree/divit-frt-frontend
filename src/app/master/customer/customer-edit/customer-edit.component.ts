@@ -4,8 +4,6 @@ import { CustomermService } from '../../services/customerm.service';
 import { iContactm, iCustomerm } from '../../models/icustomerm';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
-import { MatDialog } from '@angular/material/dialog';
-import { HistoryComponent } from '../../../shared/history/history.component';
 
 @Component({
   selector: 'app-customer-edit',
@@ -53,7 +51,6 @@ export class CustomerEditComponent extends baseEditComponent {
 
   constructor(
     private ms: CustomermService,
-    public dialog: MatDialog
   ) {
     super();
     this.showModel = false;
@@ -570,25 +567,8 @@ export class CustomerEditComponent extends baseEditComponent {
   }
 
 
-
-
-  openHistory(): void {
-    const dialogRef = this.dialog.open(HistoryComponent, {
-      hasBackdrop: false,
-      width: '250px',
-      data: { title: 'History', message: 'Edit Details' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-
   onBlur(action: any) {
     console.log('onBlur Action', action);
   }
-
-
 
 }
