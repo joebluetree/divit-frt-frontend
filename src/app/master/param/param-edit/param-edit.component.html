@@ -1,9 +1,9 @@
 <div class="page-header">
   <h5>{{title}}</h5>
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/paramEdit"
-    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
-
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>    
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+  <app-history [inputdata]="{table: 'mast_param', id:id}"></app-history>
 </div>
 
 <form [formGroup]="mform">
