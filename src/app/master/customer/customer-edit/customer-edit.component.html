@@ -173,9 +173,9 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="cust_location">Location</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="cust_location_name">Location</label>
           <div class="col-sm-8">
-            <auto-complete formControlName="cust_location" id="cust_location" (CallBack)="callBack($event)"
+            <auto-complete formControlName="cust_location_name" id="cust_location_name" (CallBack)="callBack($event)"
               [table]="'branchm'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'CODE','value':'branch_code'},{'caption':'NAME','value':'branch_name'}]"></auto-complete>
           </div>
@@ -580,11 +580,11 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="cust_branch">Default Branch</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="cust_branch_name">Default Branch</label>
           <div class="col-sm-4">
-            <auto-complete formControlName="cust_branch" id="cust_branch" (CallBack)="callBack($event)"
+            <auto-complete formControlName="cust_branch_name" id="cust_branch_name" (CallBack)="callBack($event)"
               [table]="'branchm'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'CODE','value':'branch_id'},{'caption':'NAME','value':'branch_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'branch_code'},{'caption':'NAME','value':'branch_name'}]"></auto-complete>
           </div>
           <div class="col-sm-4">
             <app-checkbox formControlName="cust_protected"></app-checkbox>
@@ -592,11 +592,11 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="cust_cur_code">Currency</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="cust_cur_name">Currency</label>
           <div class="col-sm-4">
-            <auto-complete formControlName="cust_cur_code" id="cust_cur_code" (CallBack)="callBack($event)"
+            <auto-complete formControlName="cust_cur_name" id="cust_cur_name" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'currency'" [company_id]="getCompanyId()" [url]="url"
-              display_column="[{'caption':'CODE','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
       </div>
@@ -664,7 +664,7 @@
                   case="UPPER"></app-input>
               </td>
               <td>
-                <auto-complete formControlName="cont_country_code" [rowIndex]="i" name="cont_country_code"
+                <auto-complete formControlName="cont_country_name" [rowIndex]="i" name="cont_country_name"
                   (CallBack)="callBack($event)" table="param" subtable="country" [company_id]="getCompanyId()"
                   [url]="url" case="upper"
                   display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>

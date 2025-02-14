@@ -55,7 +55,8 @@ export interface iCustomerm {
   cust_salesman_name: string;
   cust_handled_id: number;
   cust_handled_name: string; 
-  cust_location: string;
+  cust_location_id: number;
+  cust_location_name: string;
 
   cust_row_type: string;
   cust_is_parent: string;
@@ -118,9 +119,11 @@ export interface iCustomerm {
   cust_punch_from: string;
   cust_bond_no: string;
   cust_bond_expdt: string;
-  cust_branch: string;
+  cust_branch_id: number;
+  cust_branch_name: string;
   cust_protected: string;
-  cust_cur_code: string;
+  cust_cur_id: number;
+  cust_cur_name: string;
 
   cust_contacts: iContactm[];
   rec_version: number;
