@@ -14,7 +14,7 @@ export class HistoryComponent {
 
   data: any;
 
-  @Input('input') set input(v: any) {
+  @Input('inputdata') set inputdata(v: any) {
     this.data = v;
   }
 
@@ -24,7 +24,7 @@ export class HistoryComponent {
 
   openHistory(): void {
     const dialogRef = this.dialog.open(HistorymListComponent, {
-      hasBackdrop: false,
+      hasBackdrop: true,
       width: '1500px',
       data: this.data
     });

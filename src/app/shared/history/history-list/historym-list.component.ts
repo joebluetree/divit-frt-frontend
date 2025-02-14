@@ -44,6 +44,31 @@ export class HistorymListComponent extends baseListComponent {
     ];
   }
 
+  protected override init(): void {
+
+    this.route.queryParams.forEach((rec: any) => {
+      this.url_param = { ...rec };
+      this.appid = rec["appid"];
+      this.menuid = "HISTORY";
+      this.type = "HISTORY-DATA";
+      this.menum = this.gs.getUserRights(this.menuid);
+      if (this.menum) {
+        this.title = this.menum.menu_name;
+        this.bAdmin = this.menum.rights_admin == "Y" ? true : false;
+        this.bAdd = this.menum.rights_add == "Y" ? true : false;
+        this.bEdit = this.menum.rights_edit == "Y" ? true : false;
+        this.bView = this.menum.rights_view == "Y" ? true : false;
+        this.bDelete = this.menum.rights_delete == "Y" ? true : false;
+      }
+    })
+
+    this._ms.init(this.menuid, this.type);
+
+    if (!this.gs.IsValidAppId(this.appid))
+      return;
+
+  }
+
 
   ngAfterViewInit(): void {
     this.childComponent.customSearch(this.data);

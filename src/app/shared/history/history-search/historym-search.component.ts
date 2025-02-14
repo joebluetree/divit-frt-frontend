@@ -29,7 +29,6 @@ export class HistorymSearchComponent {
     this.buildForm();
   }
 
-
   buildForm() {
     this.mform = this.fb.group({
       log_table: [''],
@@ -41,6 +40,8 @@ export class HistorymSearchComponent {
   }
 
   ngOnInit(): void {
+
+    console.log(this.record);
     this.mform.setValue({
       log_table: this.record.log_table,
       log_table_row_id: this.record.log_table_row_id,
@@ -48,6 +49,7 @@ export class HistorymSearchComponent {
       log_from_date: this.record.log_from_date,
       log_to_date: this.record.log_to_date,
     })
+
   }
 
   customSearch(data: any) {
@@ -56,9 +58,7 @@ export class HistorymSearchComponent {
       log_table_row_id: data.id,
       log_desc: '',
     })
-
     this.search('search');
-
   }
 
   search(_action: string) {

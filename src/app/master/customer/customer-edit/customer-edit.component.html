@@ -3,7 +3,7 @@
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/masters/customerEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
-  <app-history [input]="{table: 'mast_customerm', id:id}"></app-history>
+  <app-history [inputdata]="{table: 'mast_customerm', id:id}"></app-history>
 
 </div>
 
