@@ -1,7 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CustomControls } from '../../app.config';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { MatDialog } from '@angular/material/dialog';
+import { HistorymListComponent } from './history-list/historym-list.component';
 
 @Component({
   selector: 'app-history',
@@ -12,17 +12,22 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class HistoryComponent {
 
-  constructor(
-    public dialogRef: MatDialogRef<HistoryComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string; message: string }
-  ) { }
+  data: any;
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  @Input('input') set input(v: any) {
+    this.data = v;
   }
 
-  onCancelClick(): void {
-    this.dialogRef.close();
+  constructor(
+    public dialog: MatDialog
+  ) { }
+
+  openHistory(): void {
+    const dialogRef = this.dialog.open(HistorymListComponent, {
+      hasBackdrop: false,
+      width: '1500px',
+      data: this.data
+    });
   }
 
 }
