@@ -3,6 +3,7 @@
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/accgroupEdit"
     [queryParams]="{id :0,mode:'add', _id:id+1,menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+  <app-history [inputdata]="{table: 'acc_groupm', id:id}"></app-history>
 </div>
 
 <form [formGroup]="mform">
