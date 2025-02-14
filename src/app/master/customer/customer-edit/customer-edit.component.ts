@@ -83,7 +83,8 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_salesman_name: [''],
       cust_handled_id: [0],
       cust_handled_name: [''],
-      cust_location: [''],
+      cust_location_id: [0],
+      cust_location_name: [''],
       cust_type: [''],
       cust_row_type: [this.type],
       cust_parent_id: [null],
@@ -145,9 +146,11 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_punch_from: [''],
       cust_bond_no: [''],
       cust_bond_expdt: [''],
-      cust_branch: [''],
+      cust_branch_id: [0],
+      cust_branch_name: [''],
       cust_protected: [''],
-      cust_cur_code: [''],
+      cust_cur_id: [0],
+      cust_cur_name: [''],
 
       cust_contacts: this.fb.array([]),
       rec_version: [0],
@@ -275,7 +278,8 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_salesman_name: rec.cust_salesman_name,
           cust_handled_id: rec.cust_handled_id,
           cust_handled_name: rec.cust_handled_name,
-          cust_location: rec.cust_location,
+          cust_location_id: rec.cust_location_id,
+          cust_location_name: rec.cust_location_name,
 
           cust_type: rec.cust_type,
           cust_row_type: rec.cust_row_type,
@@ -338,9 +342,10 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_punch_from: rec.cust_punch_from,
           cust_bond_no: rec.cust_bond_no,
           cust_bond_expdt: rec.cust_bond_expdt,
-          cust_branch: rec.cust_branch,
+          cust_branch_id: rec.cust_branch_id,
+          cust_branch_name: rec.cust_branch_name,
           cust_protected: rec.cust_protected,
-          cust_cur_code: rec.cust_cur_code,
+          cust_cur_code_id: rec.cust_cur_name,
 
           rec_version: rec.rec_version,
 
@@ -468,15 +473,17 @@ export class CustomerEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'cust_location') {
+    if (action.id == 'cust_location_name') {
       if (action.rec) {
         this.mform.patchValue({
-          cust_location: action.rec.branch_name,
+          cust_location_id: action.rec.branch_id,
+          cust_location_name: action.rec.branch_name,
         });
       }
       else {
         this.mform.patchValue({
-          cust_location: '',
+          cust_location_id: 0,
+          cust_location_name: '',
         });
       }
     }
@@ -510,31 +517,35 @@ export class CustomerEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'cust_branch') {
+    if (action.id == 'cust_branch_name') {
       if (action.rec) {
         this.mform.patchValue({
-          cust_branch: action.rec.branch_name,
+          cust_branch_id: action.rec.branch_id,
+          cust_branch_name: action.rec.branch_name,
         });
       }
       else {
         this.mform.patchValue({
-          cust_branch: '',
+          cust_branch_id: 0,
+          cust_branch_name: '',
         });
       }
     }
-    if (action.id == 'cust_cur_code') {
+    if (action.id == 'cust_cur_name') {
       if (action.rec) {
         this.mform.patchValue({
-          cust_cur_code: action.rec.param_name,
+          cust_cur_id: action.rec.param_id,
+          cust_cur_name: action.rec.param_name,
         });
       }
       else {
         this.mform.patchValue({
-          cust_cur_code: '',
+          cust_cur_id: 0,
+          cust_cur_name: '',
         });
       }
     }
-    if (action.name == 'cont_country_code') {
+    if (action.name == 'cont_country_name') {
       if (action.rec) {
         this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
           cont_country_id: action.rec.param_id,
