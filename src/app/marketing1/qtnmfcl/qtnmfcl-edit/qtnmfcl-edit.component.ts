@@ -51,7 +51,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
       qtnm_salesman_name: [''],
       qtnm_move_type: [''],
       qtnm_commodity: [''],
-      qtnm_fcl: this.fb.array([]),
+      qtnd_fcl: this.fb.array([]),
       rec_version: [0],
     })
   }
@@ -106,28 +106,28 @@ export class QtnmFclEditComponent extends baseEditComponent {
   }
 
   addFclDetails(iRow: iQtnd_fcl = <iQtnd_fcl>{}) {
-    this.formArray('qtnm_fcl')?.push(this.addRow(iRow));
+    this.formArray('qtnd_fcl')?.push(this.addRow(iRow));
   }
 
   deleteRow(idx: number) {
     const nidx = idx + 1;
     const confirmDelete = window.confirm("Delete " + nidx + " y/n");
     if (confirmDelete) {
-    this.formArray('qtnm_fcl').removeAt(idx);
+    this.formArray('qtnd_fcl').removeAt(idx);
     }
   }
 
   editFcldetails(idx: number) {
-    console.log(<iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value);
+    console.log(<iQtnd_fcl>this.formArrayRecord('qtnd_fcl', idx)?.value);
     this.data_fcl = {
       mode: 'edit',
-      record: <iQtnd_fcl>this.formArrayRecord('qtnm_fcl', idx)?.value,
+      record: <iQtnd_fcl>this.formArrayRecord('qtnd_fcl', idx)?.value,
       index: idx
     }
   }
 
   fillFclDetails(ifcl_list: iQtnd_fcl[]) {
-    this.formArray('qtnm_fcl').clear();
+    this.formArray('qtnd_fcl').clear();
     ifcl_list.forEach((rec_qtnd_fcl: iQtnd_fcl) => {
       this.addFclDetails(rec_qtnd_fcl);
     });
@@ -159,7 +159,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
 
         });
-        this.fillFclDetails(rec.qtnm_fcl);
+        this.fillFclDetails(rec.qtnd_fcl);
         console.log(rec);
       },
       error: (e) => {
@@ -204,7 +204,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
 
           rec_version: v.rec_version
         });
-        this.fillFclDetails(v.qtnm_fcl);
+        this.fillFclDetails(v.qtnd_fcl);
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -258,7 +258,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
     if (action.mode == "new")
       this.addFclDetails(<iQtnd_fcl>action.record);
     else {
-      this.formArrayRecord('qtnm_fcl', action.index)?.patchValue({
+      this.formArrayRecord('qtnd_fcl', action.index)?.patchValue({
         ...action.record
       })
     }
