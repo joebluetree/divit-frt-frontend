@@ -163,7 +163,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
         console.log(rec);
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       }
     })
   }

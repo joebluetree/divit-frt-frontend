@@ -66,7 +66,7 @@ export class AccGroupEditComponent extends baseEditComponent {
         })
       },
       error: (e) => {
-        this.gs.showAlert([e.message]);
+        this.gs.showError(e);
       },
       complete: () => { }
     })

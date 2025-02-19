@@ -183,7 +183,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
         this.fillQuotes(rec.qtnd_lcl);
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       }
     })
   }

@@ -357,6 +357,14 @@ export class GlobalService {
     return sRet;
   }
 
-
+  public showError(errorObj: any) {       // to show error and message together of error
+    const errorMsg = [
+      // `STATUS : ${errorObj.status+' - '+errorObj.statusText}`,
+      `MESSAGE : ${errorObj.message}`,
+      `ERROR : ${errorObj.error}`
+    ];
+  
+    this.showAlert(errorMsg); // Show as alert
+  }
 
 }
