@@ -3,6 +3,7 @@
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/admin/mailservermEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+  <app-history [inputdata]="{table: 'mast_mail_serverm', id:id}"></app-history>
 </div>
 <form [formGroup]="mform">
   <div class="page-body">

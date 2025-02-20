@@ -114,7 +114,7 @@ export class QtndFclEditComponent {
     this.mode = 'new';
     this.mform.reset();
     //this.mform.markAsPristine();
-    //this.mform.markAsUntouched;
+    //this.mform.markAsUntouched();
 
   }
 
