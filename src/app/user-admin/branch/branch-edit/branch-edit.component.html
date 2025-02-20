@@ -1,6 +1,6 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/admin/companyEdit"
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/admin/branchEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
   <app-history [inputdata]="{table: 'mast_branchm', id:id}"></app-history>

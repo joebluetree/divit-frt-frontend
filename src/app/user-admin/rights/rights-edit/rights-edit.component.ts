@@ -69,7 +69,7 @@ export class RightsEditComponent extends baseEditComponent {
         this.loaddata(rec);
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       }
     })
   }

@@ -353,7 +353,7 @@ export class CustomerEditComponent extends baseEditComponent {
         this.fillContacts(rec.cust_contacts);
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       }
     })
   }

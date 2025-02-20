@@ -73,7 +73,7 @@ export class MenuEditComponent extends baseEditComponent {
         })
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       },
       complete: () => { }
     })

@@ -170,7 +170,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
         this.fillQuotes(rec.qtnd_air);
       },
       error: (e) => {
-        alert(e.message);
+        this.gs.showError(e);
       }
     })
   }
