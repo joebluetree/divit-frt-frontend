@@ -1,0 +1,167 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/marketing/qtnmfclEdit"
+    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
+  <!-- <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button> -->
+   <app-history [inputdata]="{table: 'mark_qtnm', id:id}"></app-history>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<form [formGroup]="mform">
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Ref No#</label>
+          <div class="col-sm-3">
+            <app-input maxlength="15" formControlName="mbl_refno" [disable]="true"></app-input>
+          </div>
+          <label class="col-sm-2 form-label form-lable-sm" for="">Date</label>
+          <div class="col-sm-3">
+            <app-date formControlName="mbl_ref_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" required></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Stage</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_shipment_stage_name" name="mbl_shipment_stage_name" id="mbl_shipment_stage_name"
+              (CallBack)="callBack($event)" table="param" subtable="AIR-MOVE-STATUS" [company_id]="getCompanyId()" [url]="url"
+              case="upper" required
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Mawb#</label>
+          <div class="col-sm-8">
+            <app-input maxlength="15" formControlName="mbl_no" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Master Agent</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_agent_name" id="mbl_agent_name" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Status</label>
+          <div class="col-sm-8">
+            <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+            formControlName="mbl_frt_status_name"></app-combobox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">POL</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_pol_name" name="mbl_pol_name" id="mbl_pol_name"
+            (CallBack)="callBack($event)" table="param" subtable="AIR-PORT" [company_id]="getCompanyId()" [url]="url"
+            case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">ETD</label>
+          <div class="col-sm-8">
+            <app-date formControlName="mbl_pol_etd" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">POD</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_pod_name" name="mbl_pod_name" id="mbl_pod_name"
+            (CallBack)="callBack($event)" table="param" subtable="AIR-PORT" [company_id]="getCompanyId()" [url]="url"
+            case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">ETA</label>
+          <div class="col-sm-8">
+            <app-date formControlName="mbl_pod_eta" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Country</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_country_name" name="mbl_country_name" id="mbl_country_name" (CallBack)="callBack($event)" 
+            table="param" subtable="COUNTRY" [company_id]="getCompanyId()" [url]="url" case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Carrier</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_liner_name" name="mbl_liner_name" id="mbl_liner_name" (CallBack)="callBack($event)" 
+            table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()" [url]="url" case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Currency</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_currency_code" name="mbl_currency_code" id="mbl_currency_code" (CallBack)="callBack($event)" 
+            table="param" subtable="CURRENCY" [company_id]="getCompanyId()" [url]="url" case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Handled By</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_handled_name" name="mbl_handled_name" id="mbl_handled_name" (CallBack)="callBack($event)" 
+            table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url" case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Salesman</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="mbl_salesman_name" name="mbl_salesman_name" id="mbl_salesman_name" (CallBack)="callBack($event)" 
+            table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url" case="upper" required
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Quote By</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_quot_by" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
+          <div class="col-sm-8">
+            <app-date formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Move Type</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_move_type" [case]="'UPPER'" required></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Commodity</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div>
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>
