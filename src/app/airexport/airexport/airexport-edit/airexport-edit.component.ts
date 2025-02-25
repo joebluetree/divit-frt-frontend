@@ -91,7 +91,7 @@ export class AirExportEditComponent extends baseEditComponent {
   async newRecord() {
     this.id = 0;
     this.mform.patchValue({
-      qtnm_id: this.id
+      mbl_id: this.id
     })
   }
 
@@ -173,7 +173,7 @@ export class AirExportEditComponent extends baseEditComponent {
         if (this.mode == "add") {
           this.id = v.mbl_id;
           this.mode = "edit";
-          this.mform.patchValue({ qtnm_id: this.id });
+          this.mform.patchValue({ mbl_id: this.id });
           const param = {
             id: this.id.toString(),
             mode: this.mode

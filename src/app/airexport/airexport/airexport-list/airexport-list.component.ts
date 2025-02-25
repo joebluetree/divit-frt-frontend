@@ -14,7 +14,7 @@ import { AirExportService } from '../../services/airexport.service';
 
 //Name : Alen Cherian
 //Date : 03/01/2025
-//Command : Create the Fcl to list.
+//Command : Create the Air Export to list.
 
 export class AirExportListComponent extends baseListComponent {
 
@@ -39,7 +39,7 @@ export class AirExportListComponent extends baseListComponent {
       { col_name: "mbl_pol_etd", col_caption: "ETD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "mbl_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "mbl_pod_eta", col_caption: "ETA", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "mbl_handled_name", col_caption: "MOVE TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "mbl_handled_name", col_caption: "HANDLED BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
