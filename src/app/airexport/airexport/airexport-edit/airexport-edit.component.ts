@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
 import { AirExportService } from '../../services/airexport.service';
 import { iAirexport } from '../../models/iairexport';
+import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexporth-list.component';
+import { AirExporthService } from '../../services/airexporth.service';
 
 
 @Component({
@@ -12,7 +14,7 @@ import { iAirexport } from '../../models/iairexport';
   templateUrl: './airexport-edit.component.html',
   styleUrls: ['./airexport-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls, AirExportEditComponent]
+  imports: [...CustomControls, ]
 })
 
 //Name : Alen Cherian
@@ -26,9 +28,11 @@ export class AirExportEditComponent extends baseEditComponent {
     { key: 'COLLECT', value: 'COLLECT' },
     { key: 'TBA', value: 'TBA' },
   ]
+  isSaved: boolean = false;
 
   constructor(
     private ms: AirExportService,
+    public bs: AirExporthService,
     public dialog: MatDialog
   ) {
     super();
@@ -189,9 +193,11 @@ export class AirExportEditComponent extends baseEditComponent {
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
+        this.isSaved = true;
       },
       error: (e) => {
         this.gs.showAlert([e.error]);
+        this.isSaved = false;
       }
     })
   }
