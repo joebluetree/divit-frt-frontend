@@ -36,6 +36,11 @@ export class AirExporthEditComponent extends baseEditComponent {
     { key: 'MUTUAL', value: 'MUTUAL' },
     { key: 'NOMINATION', value: 'NOMINATION' },
   ]
+  dataList2 = [
+    { key: 'SHIPPER', value: 'SHIPPER' },
+    { key: 'CONSIGNEE', value: 'CONSIGNEE' },
+    { key: 'CONSIGNOR', value: 'CONSIGNOR' },
+  ]
 
   constructor(
     private ms: AirExportService,
@@ -118,6 +123,24 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_rate: [0],
       hbl_total: [0],
 
+      hbl_toagent1: [''],
+      hbl_rate1: [0],
+      hbl_total1: [0],
+      hbl_printsc1: ['N'],
+      hbl_printsc2: ['N'],
+      hbl_group: [''],
+
+      hbl_remark1: [''],
+      hbl_remark2: [''],
+      hbl_remark3: [''],
+      hbl_by1: [''],
+      hbl_by1_carrier: [''],
+      hbl_by2: [''],
+      hbl_by2_carrier: [''],
+      hbl_issued_date: [''],
+      hbl_delivery_date: [''],
+      hbl_issued_by: [''],
+
       rec_version: [0],
     })
   }
@@ -136,6 +159,19 @@ export class AirExporthEditComponent extends baseEditComponent {
     this.mform.patchValue({
       hbl_id: this.id
     })
+  }
+
+  getGroup(hbl_group: string | undefined){
+    if(hbl_group){
+      const details = hbl_group.split(',');
+      this.mform.patchValue({
+        hbl_toagent1: details[0] || '',
+        hbl_rate1: details[1] || 0,
+        hbl_total1: details[2] || 0,
+        hbl_printsc1: details[3] || '',
+        hbl_printsc2: details[4] || '',
+      });
+    }
   }
 
   getRecord() {
@@ -212,9 +248,22 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_rate: rec.hbl_rate,
           hbl_total: rec.hbl_total,
 
+          hbl_remark1: rec.hbl_remark1,
+          hbl_remark2: rec.hbl_remark2,
+          hbl_remark3: rec.hbl_remark3,
+          hbl_by1: rec.hbl_by1,
+          hbl_by1_carrier: rec.hbl_by1_carrier,
+          hbl_by2: rec.hbl_by2,
+          hbl_by2_carrier: rec.hbl_by2_carrier,
+          hbl_issued_date: rec.hbl_issued_date,
+          hbl_delivery_date: rec.hbl_delivery_date,
+          hbl_issued_by: rec.hbl_issued_by,
+
           rec_version: rec.rec_version,
 
         });
+        this.getGroup(rec.hbl_group ?? '');
+        console.log(rec.hbl_group);
         console.log(rec);
       },
       error: (e) => {
@@ -230,6 +279,8 @@ export class AirExporthEditComponent extends baseEditComponent {
     }
     const data = <iAirexporth>this.mform.value;
     let _mode = this.mode;
+
+    data.hbl_group = `${data.hbl_toagent1},${data.hbl_rate1},${data.hbl_total1},${data.hbl_printsc1},${data.hbl_printsc2}`;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -259,6 +310,7 @@ export class AirExporthEditComponent extends baseEditComponent {
 
           rec_version: v.rec_version
         });
+        this.getGroup(v.hbl_group ?? '');
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -285,8 +337,9 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_total: amount,
         })
       }
-
   }
+
+
 
 
   callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
@@ -306,7 +359,7 @@ export class AirExporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'hbl_shipper_name') {
+    if (action.id == 'hbl_shipper_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
@@ -331,7 +384,7 @@ export class AirExporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'hbl_consignee_id') {
+    if (action.id == 'hbl_consigned_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({

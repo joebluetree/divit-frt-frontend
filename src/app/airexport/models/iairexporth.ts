@@ -79,6 +79,24 @@ export interface iAirexporth {
   hbl_rate?: number;
   hbl_total?: number;
 
+  hbl_toagent1?: string;
+  hbl_rate1?: number;
+  hbl_total1?: number;
+  hbl_printsc1?: string;
+  hbl_printsc2?: string;
+  hbl_group?: string;
+
+  hbl_remark1?: string;
+  hbl_remark2?:string;
+  hbl_remark3?: string;
+  hbl_by1?: string;
+  hbl_by1_carrier?: string;
+  hbl_by2?: string;
+  hbl_by2_carrier?: string;
+  hbl_issued_date?: string;
+  hbl_delivery_date?: string;
+  hbl_issued_by?: string;
+
   rec_version: number;
   rec_company_id: number;
   rec_branch_id: number;
