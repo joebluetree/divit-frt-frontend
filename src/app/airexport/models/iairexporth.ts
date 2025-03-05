@@ -79,12 +79,42 @@ export interface iAirexporth {
   hbl_rate?: number;
   hbl_total?: number;
 
-  hbl_toagent1?: string;
-  hbl_rate1?: number;
-  hbl_total1?: number;
-  hbl_printsc1?: string;
-  hbl_printsc2?: string;
-  hbl_group?: string;
+
+  hbl_charges1: string;
+  hbl_toagent1: string;
+  hbl_rate1: number;
+  hbl_total1: number;
+  hbl_printsc1: string;
+  hbl_printsc2: string;
+
+  hbl_charges2: string;
+  hbl_toagent2: string;
+  hbl_rate2: number;
+  hbl_total2: number;
+  hbl_printsc3: string;
+  hbl_printsc4: string;
+
+  hbl_charges3: string;
+  hbl_toagent3: string;
+  hbl_rate3: number;
+  hbl_total3: number;
+  hbl_printsc5: string;
+  hbl_printsc6: string;
+
+  hbl_charges4: string;
+  hbl_toagent4: string;
+  hbl_rate4: number;
+  hbl_total4: number;
+  hbl_printsc7: string;
+  hbl_printsc8: string;
+
+  hbl_charges5: string;
+  hbl_toagent5: string;
+  hbl_rate5: number;
+  hbl_total5: number;
+  hbl_printsc9: string;
+  hbl_printsc10: string;
+  // hbl_group?: string;
 
   hbl_remark1?: string;
   hbl_remark2?:string;

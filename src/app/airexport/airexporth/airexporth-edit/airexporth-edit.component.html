@@ -411,35 +411,35 @@
 
   <div class="page-body">
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-10">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">to Agent</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="hbl_toagent1" [case]="'UPPER'"></app-input>
-          </div>
+          <label class="col-sm-4 form-label form-lable-sm">Other Charges To Agent</label>
+          <label class="col-sm-2 form-label form-lable-sm">Rate</label>
+          <label class="col-sm-2 form-label form-lable-sm">Total</label>
+          <label class="col-sm-2 form-label form-lable-sm">Print SC</label>
         </div>
+      </div>
+      <div class="col-sm-10" *ngFor="let i of [1, 2, 3, 4, 5]">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">rate</label>
-          <div class="col-sm-8">
-            <app-input formControlName="hbl_rate1" type="number"></app-input>
+          <div class="col-sm-4">
+            <app-input maxlength="100" [formControlName]="'hbl_toagent' + i" [case]="'UPPER'"></app-input>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">total</label>
-          <div class="col-sm-8">
-            <app-input formControlName="hbl_total1" type="number"></app-input>
+          <div class="col-sm-2">
+            <app-input [formControlName]="'hbl_rate' + i" [attr.id]="'hbl_rate' + i"  name="'hbl_rate' + i" type="number" 
+            (blur)="getTotal('hbl_rate' + i)" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">print sc</label>
-          <div class="col-sm-8">
-            <app-checkbox formControlName="hbl_printsc1"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc2"></app-checkbox>
+          <div class="col-sm-2">
+            <app-input [formControlName]="'hbl_total' + i" type="number" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-checkbox [formControlName]="'hbl_printsc' + ((i * 2) - 1)" class="me-2"></app-checkbox>
+            <app-checkbox [formControlName]="'hbl_printsc' + (i * 2)"></app-checkbox>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <div class="page-body">
     <div class="row">
