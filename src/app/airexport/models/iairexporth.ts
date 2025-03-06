@@ -114,7 +114,27 @@ export interface iAirexporth {
   hbl_total5: number;
   hbl_printsc9: string;
   hbl_printsc10: string;
-  // hbl_group?: string;
+
+  hbl_charges1_carrier?:string;
+  hbl_tocarrier1?: string;
+  hbl_carrate1?: number;
+  hbl_cartotal1?: number;
+  hbl_carprintsc1?: string;
+  hbl_carprintsc2?: string;
+
+  hbl_charges2_carrier?:string;
+  hbl_tocarrier2?: string;
+  hbl_carrate2?: number;
+  hbl_cartotal2?: number;
+  hbl_carprintsc3?: string;
+  hbl_carprintsc4?: string;
+
+  hbl_charges3_carrier: string;
+  hbl_tocarrier3?: string;
+  hbl_carrate3?: number;
+  hbl_cartotal3?: number;
+  hbl_carprintsc5?: string;
+  hbl_carprintsc6?: string;
 
   hbl_remark1?: string;
   hbl_remark2?:string;
@@ -126,6 +146,57 @@ export interface iAirexporth {
   hbl_issued_date?: string;
   hbl_delivery_date?: string;
   hbl_issued_by?: string;
+
+  desc_parent_id: number;
+  desc_parent_type: string;
+  desc_ctr?: number;
+
+  desc_id1?: number;
+  desc_id2?: number;
+  desc_id3?: number;
+  desc_id4?: number;
+  desc_id5?: number;
+  desc_id6?: number;
+  desc_id7?: number;
+  desc_id8?: number;
+  desc_id9?: number;
+  desc_id10?: number;
+  desc_id11?: number;
+  desc_id12?: number;
+  desc_id13?: number;
+  desc_id14?: number;
+  desc_id15?: number;
+  desc_id16?: number;
+  desc_id17?: number;
+
+  desc_mark1?: string;
+  desc_mark2?: string;
+  desc_mark3?: string;
+  desc_mark4?: string;
+  desc_mark5?: string;
+  desc_mark6?: string;
+  desc_mark7?: string;
+  desc_mark8?: string;
+  desc_mark9?: string;
+  desc_mark10?: string;
+
+  desc_description1?: string;
+  desc_description2?: string;
+  desc_description3?: string;
+  desc_description4?: string;
+  desc_description5?: string;
+  desc_description6?: string;
+  desc_description7?: string;
+  desc_description8?: string;
+  desc_description9?: string;
+  desc_description10?: string;
+  desc_description11?: string;
+  desc_description12?: string;
+  desc_description13?: string;
+  desc_description14?: string;
+  desc_description15?: string;
+  desc_description16?: string;
+  desc_description17?: string;
 
   rec_version: number;
   rec_company_id: number;

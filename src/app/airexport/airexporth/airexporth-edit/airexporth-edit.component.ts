@@ -153,11 +153,33 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_printsc9: ['N'],
       hbl_printsc10: ['N'],
 
+      hbl_tocarrier1: [''],
+      hbl_carrate1: [0],
+      hbl_cartotal1: [0],
+      hbl_carprintsc1: ['N'],
+      hbl_carprintsc2: ['N'],
+
+      hbl_tocarrier2: [''],
+      hbl_carrate2: [0],
+      hbl_cartotal2: [0],
+      hbl_carprintsc3: ['N'],
+      hbl_carprintsc4: ['N'],
+
+      hbl_tocarrier3: [''],
+      hbl_carrate3: [0],
+      hbl_cartotal3: [0],
+      hbl_carprintsc5: ['N'],
+      hbl_carprintsc6: ['N'],
+
       hbl_charges1: [''],
       hbl_charges2: [''],
       hbl_charges3: [''],
       hbl_charges4: [''],
       hbl_charges5: [''],
+
+      hbl_charges1_carrier: [''],
+      hbl_charges2_carrier: [''],
+      hbl_charges3_carrier: [''],
 
       hbl_remark1: [''],
       hbl_remark2: [''],
@@ -169,6 +191,57 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_issued_date: [''],
       hbl_delivery_date: [''],
       hbl_issued_by: [''],
+
+      desc_parent_id: [0],
+      desc_parent_type: [''],
+      desc_ctr: [0],
+
+      desc_id1: [0],
+      desc_id2: [0],
+      desc_id3: [0],
+      desc_id4: [0],
+      desc_id5: [0],
+      desc_id6: [0],
+      desc_id7: [0],
+      desc_id8: [0],
+      desc_id9: [0],
+      desc_id10: [0],
+      desc_id11: [0],
+      desc_id12: [0],
+      desc_id13: [0],
+      desc_id14: [0],
+      desc_id15: [0],
+      desc_id16: [0],
+      desc_id17: [0],
+
+      desc_mark1: [''],
+      desc_mark2: [''],
+      desc_mark3: [''],
+      desc_mark4: [''],
+      desc_mark5: [''],
+      desc_mark6: [''],
+      desc_mark7: [''],
+      desc_mark8: [''],
+      desc_mark9: [''],
+      desc_mark10: [''],
+
+      desc_description1: [''],
+      desc_description2: [''],
+      desc_description3: [''],
+      desc_description4: [''],
+      desc_description5: [''],
+      desc_description6: [''],
+      desc_description7: [''],
+      desc_description8: [''],
+      desc_description9: [''],
+      desc_description10: [''],
+      desc_description11: [''],
+      desc_description12: [''],
+      desc_description13: [''],
+      desc_description14: [''],
+      desc_description15: [''],
+      desc_description16: [''],
+      desc_description17: [''],
 
       rec_version: [0],
     })
@@ -188,74 +261,6 @@ export class AirExporthEditComponent extends baseEditComponent {
     this.mform.patchValue({
       hbl_id: this.id
     })
-  }
-
-  //function for get a print list of elements
-
-  // getCharges(hbl_group: string | undefined){
-  //   if(hbl_group){
-  //     const details = hbl_group.split(',');
-  //     this.mform.patchValue({
-  //       hbl_toagent1: details[0] || '',
-  //       hbl_rate1: details[1] || 0,
-  //       hbl_total1: details[2] || 0,
-  //       hbl_printsc1: details[3] || '',
-  //       hbl_printsc2: details[4] || '',
-  //     });
-  //   }
-  // }
-
-  getCharges(hbl_charges: string | undefined, index: number) {
-    if (hbl_charges) {
-      const details = hbl_charges.split(',');
-      switch (index) {
-        case 1:
-          this.mform.patchValue({
-            hbl_toagent1: details[0] || '',
-            hbl_rate1: details[1] || 0,
-            hbl_total1: details[2] || 0,
-            hbl_printsc1: details[3] || '',
-            hbl_printsc2: details[4] || '',
-          });
-          break;
-        case 2:
-          this.mform.patchValue({
-            hbl_toagent2: details[0] || '',
-            hbl_rate2: details[1] || 0,
-            hbl_total2: details[2] || 0,
-            hbl_printsc3: details[3] || '',
-            hbl_printsc4: details[4] || '',
-          });
-          break;
-        case 3:
-          this.mform.patchValue({
-            hbl_toagent3: details[0] || '',
-            hbl_rate3: details[1] || 0,
-            hbl_total3: details[2] || 0,
-            hbl_printsc5: details[3] || '',
-            hbl_printsc6: details[4] || '',
-          });
-          break;
-        case 4:
-          this.mform.patchValue({
-            hbl_toagent4: details[0] || '',
-            hbl_rate4: details[1] || 0,
-            hbl_total4: details[2] || 0,
-            hbl_printsc7: details[3] || '',
-            hbl_printsc8: details[4] || '',
-          });
-          break;
-        case 5:
-          this.mform.patchValue({
-            hbl_toagent5: details[0] || '',
-            hbl_rate5: details[1] || 0,
-            hbl_total5: details[2] || 0,
-            hbl_printsc9: details[3] || '',
-            hbl_printsc10: details[4] || '',
-          });
-          break;
-      }
-    }
   }
 
 
@@ -335,6 +340,8 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_rate: rec.hbl_rate,
           hbl_total: rec.hbl_total,
 
+          //charges for agents
+
           hbl_charges1: rec.hbl_charges1,
           hbl_toagent1: rec.hbl_toagent1,
           hbl_rate1: rec.hbl_rate1,
@@ -370,6 +377,29 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_printsc9: rec.hbl_printsc9,
           hbl_printsc10: rec.hbl_printsc10,
 
+          //charges for carrier
+
+          hbl_charges1_carrier: rec.hbl_charges1_carrier,
+          hbl_tocarrier1: rec.hbl_tocarrier1,
+          hbl_carrate1: rec.hbl_carrate1,
+          hbl_cartotal1: rec.hbl_cartotal1,
+          hbl_carprintsc1: rec.hbl_carprintsc1,
+          hbl_carprintsc2: rec.hbl_carprintsc2,
+
+          hbl_charges2_carrier: rec.hbl_charges2_carrier,
+          hbl_tocarrier2: rec.hbl_tocarrier2,
+          hbl_carrate2: rec.hbl_carrate2,
+          hbl_cartotal2: rec.hbl_cartotal2,
+          hbl_carprintsc3: rec.hbl_carprintsc3,
+          hbl_carprintsc4: rec.hbl_carprintsc4,
+
+          hbl_charges3_carrier: rec.hbl_charges3_carrier,
+          hbl_tocarrier3: rec.hbl_tocarrier3,
+          hbl_carrate3: rec.hbl_carrate3,
+          hbl_cartotal3: rec.hbl_cartotal3,
+          hbl_carprintsc5: rec.hbl_carprintsc5,
+          hbl_carprintsc6: rec.hbl_carprintsc6,
+
           hbl_remark1: rec.hbl_remark1,
           hbl_remark2: rec.hbl_remark2,
           hbl_remark3: rec.hbl_remark3,
@@ -381,16 +411,61 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_delivery_date: rec.hbl_delivery_date,
           hbl_issued_by: rec.hbl_issued_by,
 
+          desc_parent_id: rec.desc_parent_id,
+          desc_parent_type: rec.desc_parent_type,
+          desc_ctr: rec.desc_ctr,
+
+          desc_id1: rec.desc_id1,
+          desc_id2: rec.desc_id2,
+          desc_id3: rec.desc_id3,
+          desc_id4: rec.desc_id4,
+          desc_id5: rec.desc_id5,
+          desc_id6: rec.desc_id6,
+          desc_id7: rec.desc_id7,
+          desc_id8: rec.desc_id8,
+          desc_id9: rec.desc_id9,
+          desc_id10: rec.desc_id10,
+          desc_id11: rec.desc_id11,
+          desc_id12: rec.desc_id12,
+          desc_id13: rec.desc_id13,
+          desc_id14: rec.desc_id14,
+          desc_id15: rec.desc_id15,
+          desc_id16: rec.desc_id16,
+          desc_id17: rec.desc_id17,
+
+          desc_mark1: rec.desc_mark1,
+          desc_mark2: rec.desc_mark2,
+          desc_mark3: rec.desc_mark3,
+          desc_mark4: rec.desc_mark4,
+          desc_mark5: rec.desc_mark5,
+          desc_mark6: rec.desc_mark6,
+          desc_mark7: rec.desc_mark7,
+          desc_mark8: rec.desc_mark8,
+          desc_mark9: rec.desc_mark9,
+          desc_mark10: rec.desc_mark10,
+
+          desc_description1: rec.desc_description1,
+          desc_description2: rec.desc_description2,
+          desc_description3: rec.desc_description3,
+          desc_description4: rec.desc_description4,
+          desc_description5: rec.desc_description5,
+          desc_description6: rec.desc_description6,
+          desc_description7: rec.desc_description7,
+          desc_description8: rec.desc_description8,
+          desc_description9: rec.desc_description9,
+          desc_description10: rec.desc_description10,
+          desc_description11: rec.desc_description11,
+          desc_description12: rec.desc_description12,
+          desc_description13: rec.desc_description13,
+          desc_description14: rec.desc_description14,
+          desc_description15: rec.desc_description15,
+          desc_description16: rec.desc_description16,
+          desc_description17: rec.desc_description17,
+
           rec_version: rec.rec_version,
 
         });
-        // this.getCharges(rec.hbl_group ?? '');
-        // this.getCharges(rec.hbl_charges1 ?? '', 1);
-        // this.getCharges(rec.hbl_charges2 ?? '', 2);
-        // this.getCharges(rec.hbl_charges3 ?? '', 3);
-        // this.getCharges(rec.hbl_charges4 ?? '', 4);
-        // this.getCharges(rec.hbl_charges5 ?? '', 5);
-        // console.log(rec.hbl_group);
+
         console.log(rec);
       },
       error: (e) => {
@@ -406,15 +481,6 @@ export class AirExporthEditComponent extends baseEditComponent {
     }
     const data = <iAirexporth>this.mform.value;
     let _mode = this.mode;
-
-    //function for save list of elements
-    // data.hbl_group = `${data.hbl_toagent1},${data.hbl_rate1},${data.hbl_total1},${data.hbl_printsc1},${data.hbl_printsc2}`;
-
-    // data.hbl_charges1 = `${data.hbl_toagent1},${data.hbl_rate1},${data.hbl_total1},${data.hbl_printsc1},${data.hbl_printsc2}`;
-    // data.hbl_charges2 = `${data.hbl_toagent2},${data.hbl_rate2},${data.hbl_total2},${data.hbl_printsc3},${data.hbl_printsc4}`;
-    // data.hbl_charges3 = `${data.hbl_toagent3},${data.hbl_rate3},${data.hbl_total3},${data.hbl_printsc5},${data.hbl_printsc6}`;
-    // data.hbl_charges4 = `${data.hbl_toagent4},${data.hbl_rate4},${data.hbl_total4},${data.hbl_printsc7},${data.hbl_printsc8}`;
-    // data.hbl_charges5 = `${data.hbl_toagent5},${data.hbl_rate5},${data.hbl_total5},${data.hbl_printsc9},${data.hbl_printsc10}`;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -444,14 +510,6 @@ export class AirExporthEditComponent extends baseEditComponent {
 
           rec_version: v.rec_version
         });
-        // this.getCharges(v.hbl_group ?? '');
-
-        // this.getCharges(v.hbl_charges1 ?? '', 1);             //The new function to patch the values
-        // this.getCharges(v.hbl_charges2 ?? '', 2);
-        // this.getCharges(v.hbl_charges3 ?? '', 3);
-        // this.getCharges(v.hbl_charges4 ?? '', 4);
-        // this.getCharges(v.hbl_charges5 ?? '', 5);
-
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -472,6 +530,14 @@ export class AirExporthEditComponent extends baseEditComponent {
     const data = <iAirexporth>this.mform.value;
     const chwt = data?.hbl_chwt || 0;
     const rate = data?.hbl_rate || 0;
+    const rate1 = data?.hbl_rate1 || 0;
+    const rate2 = data?.hbl_rate2 || 0;
+    const rate3 = data?.hbl_rate3 || 0;
+    const rate4 = data?.hbl_rate4 || 0;
+    const rate5 = data?.hbl_rate5 || 0;
+    const carrate1 = data?.hbl_carrate1 || 0;
+    const carrate2 = data?.hbl_carrate2 || 0;
+    const carrate3 = data?.hbl_carrate3 || 0;
 
     if (action.id == "hbl_chwt" || action.id == "hbl_rate") {
       let amount = chwt * rate;
@@ -480,26 +546,63 @@ export class AirExporthEditComponent extends baseEditComponent {
         hbl_total: amount,
       })
     }
-  }
-
-  //function for find total for agent and consignee
-
-  getTotal(fieldName: string) {
-    console.log(fieldName);
-  
-    const data = <iAirexporth>this.mform.value as any;
-    const index = fieldName.replace(/[^\d]/g, ''); // Extract index from field name
-    const rate = data[`hbl_rate${index}`] || 0;
-  
-    if (fieldName === `hbl_rate${index}`) {
-      let amount = rate * 10; // Your logic here
+    if (action.id == "hbl_rate1" ) {
+      let amount = 10 * rate1;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
-        [`hbl_total${index}`]: amount,
-      });
+        hbl_total1: amount,
+      })
+    }
+    if (action.id == "hbl_rate2" ) {
+      let amount = 10 * rate2;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_total2: amount,
+      })
+    }
+    if (action.id == "hbl_rate3" ) {
+      let amount = 10 * rate3;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_total3: amount,
+      })
+    }
+    if (action.id == "hbl_rate4" ) {
+      let amount = 10 * rate4;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_total4: amount,
+      })
+    }
+    if (action.id == "hbl_rate5" ) {
+      let amount = 10 * rate5;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_total5: amount,
+      })
+    }
+    if (action.id == "hbl_carrate1" ) {
+      let amount = 10 * carrate1;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_cartotal1: amount,
+      })
+    }
+    if (action.id == "hbl_carrate2" ) {
+      let amount = 10 * carrate2;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_cartotal2: amount,
+      })
+    }
+    if (action.id == "hbl_carrate3" ) {
+      let amount = 10 * carrate3;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_cartotal3: amount,
+      })
     }
   }
-
 
 
   callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
