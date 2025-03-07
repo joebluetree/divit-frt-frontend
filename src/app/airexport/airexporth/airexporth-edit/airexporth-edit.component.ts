@@ -266,7 +266,7 @@ export class AirExporthEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/AirexportHou/GetRecordAsync').subscribe({
+    this.ms.getRecord(param, '/api/AirexportH/GetRecordAsync').subscribe({
       next: (rec: iAirexporth) => {
         this.mform.patchValue({
           hbl_id: rec.hbl_id,
@@ -279,14 +279,14 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_date: rec.hbl_date,
           hbl_mode: rec.hbl_mode,
           hbl_shipper_id: rec.hbl_shipper_id,
-          bhl_shipper_code: rec.hbl_shipper_code,
+          hbl_shipper_code: rec.hbl_shipper_code,
           hbl_shipper_name: rec.hbl_shipper_name,
           hbl_shipper_add1: rec.hbl_shipper_add1,
           hbl_shipper_add2: rec.hbl_shipper_add2,
           hbl_shipper_add3: rec.hbl_shipper_add3,
           hbl_shipper_add4: rec.hbl_shipper_add4,
           hbl_consignee_id: rec.hbl_consignee_id,
-          hbl_consignee_code: rec.hbl_consigned_code,
+          hbl_consigned_code: rec.hbl_consigned_code,
           hbl_consigned_to1: rec.hbl_consigned_to1,
           hbl_consigned_to2: rec.hbl_consigned_to2,
           hbl_consigned_to3: rec.hbl_consigned_to3,
@@ -492,7 +492,7 @@ export class AirExporthEditComponent extends baseEditComponent {
       'id': data.hbl_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/AirexportHou/SaveAsync').subscribe({
+    this.ms.save(param, data, '/api/AirexportH/SaveAsync').subscribe({
       next: (v: iAirexporth) => {
         if (this.mode == "add") {
           this.id = v.hbl_id;
@@ -530,6 +530,7 @@ export class AirExporthEditComponent extends baseEditComponent {
     const data = <iAirexporth>this.mform.value;
     const chwt = data?.hbl_chwt || 0;
     const rate = data?.hbl_rate || 0;
+    const amt = data?.hbl_total || 0;
     const rate1 = data?.hbl_rate1 || 0;
     const rate2 = data?.hbl_rate2 || 0;
     const rate3 = data?.hbl_rate3 || 0;
@@ -544,6 +545,13 @@ export class AirExporthEditComponent extends baseEditComponent {
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total: amount,
+      })
+    }
+    if(action.id == "hbl_total"){
+      let amount = amt / chwt;
+      amount = this.gs.roundNumber(amount, this.iDec);
+      this.mform.patchValue({
+        hbl_rate: amount,
       })
     }
     if (action.id == "hbl_rate1" ) {
@@ -622,7 +630,7 @@ export class AirExporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'hbl_shipper_code') {
+    if (action.name == 'hbl_shipper_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
@@ -647,7 +655,7 @@ export class AirExporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.id == 'hbl_consigned_code') {
+    if (action.name == 'hbl_consigned_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({

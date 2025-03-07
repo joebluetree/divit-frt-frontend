@@ -6,23 +6,23 @@
 </div>
 
 <div class="page-search">
-  <app-airexporth-search [search_url]="'/api/AirexportHou/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-airexporth-search [search_url]="'/api/AirexportH/GetListAsync'" [input]="ms.getSearchRecord()"
     (searchResult)="search($event)"></app-airexporth-search>
 </div>
 
 <div class="page-pagination">
-  <app-page [search_url]="'/api/AirexportHou/GetListAsync'" [page]="ms.getPageRecord()"
+  <app-page [search_url]="'/api/AirexportH/GetListAsync'" [page]="ms.getPageRecord()"
     (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 <div class="page-body">
   <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
-    [delete_url]="'/api/AirexportHou/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [delete_url]="'/api/AirexportH/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
     [row_id_name]="'hbl_id'" [selected_id]="ms.selectedRow">
   </app-table>
 </div>
 
 <div class="page-pagination line-bottom">
-  <app-page [search_url]="'/api/AirexportHou/GetListAsync'" [page]="ms.getPageRecord()"
+  <app-page [search_url]="'/api/AirexportH/GetListAsync'" [page]="ms.getPageRecord()"
     (pageEvents)="pageEvents($event)"></app-page>
 </div>

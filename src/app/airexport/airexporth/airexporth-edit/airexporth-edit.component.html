@@ -1,7 +1,5 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/airexport/airexporthEdit"
-    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
   <!-- <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button> -->
   <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
@@ -13,7 +11,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">House#</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="hbl_houseno" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="15" formControlName="hbl_houseno" [case]="'UPPER'" [disable]="true"></app-input>
           </div>
         </div>
       </div>
@@ -31,7 +29,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_shipment_stage_name" name="hbl_shipment_stage_name"
               id="hbl_shipment_stage_name" (CallBack)="callBack($event)" table="param" subtable="SHIPSTAGE AE"
-              [company_id]="getCompanyId()" [url]="url" case="upper" required
+              [company_id]="getCompanyId()" [url]="url" case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -258,7 +256,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_handled_name" name="hbl_handled_name" id="hbl_handled_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -267,7 +265,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_salesman_name" name="hbl_salesman_name" id="hbl_salesman_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -288,7 +286,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_format_name" name="hbl_format_name" id="hbl_format_name"
               (CallBack)="callBack($event)" table="param" subtable="HBL-FORMAT" [company_id]="getCompanyId()"
-              [url]="url" case="upper" required
+              [url]="url" case="upper"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -406,8 +404,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">TOTAL</label>
           <div class="col-sm-8">
-            <app-input formControlName="hbl_total" name="hbl_total" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
+            <app-input formControlName="hbl_total" id="hbl_total" name="hbl_total" type="number"
+              [dec]="gs.globalConstants.global_dec_places" (blur)="findTotal($event)"></app-input>
           </div>
         </div>
       </div>
@@ -735,7 +733,7 @@
           <label class="col-sm-4 form-label form-lable-sm">Issued Date</label>
           <div class="col-sm-8">
             <app-date formControlName="hbl_issued_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format" required></app-date>
+              [placeholder]="gs.globalConstants.global_date_format" ></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -748,7 +746,7 @@
           <label class="col-sm-4 form-label form-lable-sm">Actual Delivery Date</label>
           <div class="col-sm-8">
             <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format" required></app-date>
+              [placeholder]="gs.globalConstants.global_date_format" ></app-date>
           </div>
         </div>
         <!-- <div class="form-group row">
@@ -763,18 +761,10 @@
   </div>
 
 
-
-
 </form>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
 </div>
-
-<!-- <div class="row" *ngIf="formArray('ordm_details').length <= 0">
-      <div class="col-md-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addOrderdetails()">Add Invoice details</button>
-      </div>
-    </div> -->
 
 <div *ngIf="showModel">
   <pre>
