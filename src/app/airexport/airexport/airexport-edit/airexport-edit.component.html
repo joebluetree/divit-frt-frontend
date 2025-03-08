@@ -13,15 +13,19 @@
       <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Ref No#</label>
-          <div class="col-sm-3">
+          <div class="col-sm-8">
             <app-input maxlength="15" formControlName="mbl_refno" [disable]="true"></app-input>
           </div>
-          <label class="col-sm-2 form-label form-lable-sm" for="">Date</label>
-          <div class="col-sm-3">
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+          <div class="col-sm-8">
             <app-date formControlName="mbl_ref_date" [format]="gs.globalConstants.global_date_format"
               [placeholder]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
+      </div>
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Stage</label>
           <div class="col-sm-8">
@@ -31,6 +35,12 @@
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Mawb#</label>
           <div class="col-sm-8">
@@ -142,7 +152,7 @@
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Currency</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <auto-complete formControlName="mbl_currency_code" name="mbl_currency_code" id="mbl_currency_code"
               (CallBack)="callBack($event)" table="param" subtable="CURRENCY" [company_id]="getCompanyId()" [url]="url"
               case="upper" required
@@ -151,16 +161,14 @@
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Handled By</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <auto-complete formControlName="mbl_handled_name" name="mbl_handled_name" id="mbl_handled_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
               case="upper" required
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Salesman</label>
-          <div class="col-sm-8">
+          <label class="col-sm-2 form-label form-lable-sm">Salesman</label>
+          <div class="col-sm-3">
             <auto-complete formControlName="mbl_salesman_name" name="mbl_salesman_name" id="mbl_salesman_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
               case="upper" required
@@ -191,6 +199,80 @@
             <label class="ms-1 form-label form-label-sm">Direct Shipment</label>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>EDIT</th>
+              <th *ngIf="showModel">ID</th>
+              <th>HOUSE</th>
+              <th>SHIPPER</th>
+              <th>CONSIGNEE</th>
+              <th>PCS</th>
+              <th>HANDLED_BY</th>
+              <th>ETD</th>
+              <th>ETA</th>
+              <th>CREATED_BY</th>
+              <th>DATE</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="air_export">
+            <tr *ngFor="let iRow of formArray('air_export').controls; let i=index;" [formGroupName]="i">
+              <td align="centre" class="link"><!-- (click)="editdetails(i)"  -->
+                <i class="fa fa-pencil"></i>
+              </td>
+              
+              <td *ngIf="showModel">
+                <label>{{iRow.get('hbl_id')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('hbl_houseno')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_shipper_name')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_consigned_to1')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_packages')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('hbl_handled_name')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_issued_date')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_delivery_date')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('rec_created_by')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('hbl_date')?.value}}</label>
+              </td>
+
+              <td align="centre" (click)="deleteRow(i)" class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

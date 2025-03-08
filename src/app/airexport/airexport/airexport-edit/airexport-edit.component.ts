@@ -7,6 +7,7 @@ import { AirExportService } from '../../services/airexport.service';
 import { iAirexport } from '../../models/iairexport';
 import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexporth-list.component';
 import { AirExporthService } from '../../services/airexporth.service';
+import { iAirexporth } from '../../models/iairexporth';
 
 
 @Component({
@@ -79,6 +80,7 @@ export class AirExportEditComponent extends baseEditComponent {
       mbl_direct: [''],
       mbl_vessel_name: [''],
       mbl_voyage: [''],
+      air_export: this.fb.array([]),
       rec_version: [0],
     })
   }
@@ -146,6 +148,7 @@ export class AirExportEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
 
         });
+        this.fillDetails(rec.air_export);
         console.log(rec);
       },
       error: (e) => {
@@ -153,6 +156,56 @@ export class AirExportEditComponent extends baseEditComponent {
       }
     })
   }
+
+  addRow(rec: iAirexporth) {
+    return this.fb.group({
+      hbl_id: [rec?.hbl_id || 0],
+      hbl_cfno: [rec?.hbl_cfno || 0],
+      hbl_houseno: [rec?.hbl_houseno || ""],
+      hbl_mbl_id: [rec?.hbl_mbl_id || 0],
+      hbl_mbl_refno: [rec?.hbl_mbl_refno || ""],
+     
+      hbl_date: [rec?.hbl_date || ""],
+     
+      hbl_shipper_id: [rec?.hbl_shipper_id || 0],
+      hbl_shipper_code: [rec?.hbl_shipper_code || ""],
+      hbl_shipper_name: [rec?.hbl_shipper_name || ""],
+    
+      hbl_consignee_id: [rec?.hbl_consignee_id || 0],
+      hbl_consigned_code: [rec?.hbl_consigned_code || ""],
+      hbl_consigned_to1: [rec?.hbl_consigned_to1 || ""],
+     
+      hbl_handled_id: [rec?.hbl_handled_id || 0],
+      hbl_handled_name: [rec?.hbl_handled_name || ""],
+     
+      hbl_packages: [rec?.hbl_packages || 0],
+     
+      hbl_issued_date: [rec?.hbl_issued_date || ""],
+      hbl_delivery_date: [rec?.hbl_delivery_date || ""],
+
+      rec_created_by: [rec?.rec_created_by || ""],
+
+    })
+  }
+ addDetails(iRow: iAirexporth = <iAirexporth>{}) {
+    this.formArray('air_export')?.push(this.addRow(iRow));
+  }
+
+  deleteRow(idx: number) {
+    const nidx = idx + 1;
+    const confirmDelete = window.confirm("Delete " + nidx + " y/n");
+    if (confirmDelete) {
+    this.formArray('air_export').removeAt(idx);
+    }
+  }
+
+    fillDetails(ihouse_list: iAirexporth[]) {
+      this.formArray('air_export').clear();
+      ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
+        this.addDetails(rec_air_exporth);
+      });
+    }
+
 
   save() {
     if (this.mform.invalid) {

@@ -1,4 +1,5 @@
 import { iPage } from "ngx-jrt-controls";
+import { iAirexporth } from "./iairexporth";
 
 //Name : Alen Cherian
 //Date : 24/02/2025
@@ -45,6 +46,7 @@ export interface iAirexport {
   mbl_direct?: string;
   mbl_vessel_name?: string;
   mbl_voyage?: string;
+  air_export: iAirexporth[]
 
   rec_version: number;
   rec_company_id: number;
