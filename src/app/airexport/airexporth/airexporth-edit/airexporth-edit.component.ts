@@ -24,6 +24,7 @@ import { iAirexporth, iAirExporthModel } from '../../models/iairexporth';
 export class AirExporthEditComponent extends baseEditComponent {
 
   iDec = 3;
+  mbl_id: number = 0;
 
   dataList = [
     { key: 'PREPAID', value: 'PREPAID' },
@@ -69,13 +70,13 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_shipper_add3: [''],
       hbl_shipper_add4: [''],
       hbl_consignee_id: [null],
-      hbl_consigned_code: [''],
-      hbl_consigned_to1: [''],
-      hbl_consigned_to2: [''],
-      hbl_consigned_to3: [''],
-      hbl_consigned_to4: [''],
-      hbl_consigned_to5: [''],
-      hbl_consigned_to6: [''],
+      hbl_consignee_code: [''],
+      hbl_consignee_name: [''],
+      hbl_consignee_add1: [''],
+      hbl_consignee_add2: [''],
+      hbl_consignee_add3: [''],
+      hbl_consignee_add4: [''],
+      hbl_consignee_add5: [''],
       hbl_notify_name: [''],
       hbl_notify_add1: [''],
       hbl_notify_add2: [''],
@@ -116,7 +117,7 @@ export class AirExporthEditComponent extends baseEditComponent {
 
       hbl_packages: [0],
       hbl_weight: [0],
-      hbl_weight_unit: [''],
+      hbl_weight_unit: ['KG'],
       hbl_class: [''],
       hbl_comm: [''],
       hbl_chwt: [0],
@@ -249,7 +250,12 @@ export class AirExporthEditComponent extends baseEditComponent {
 
   ngOnInit() {
     this.id = 0;
+    this.mbl_id = 0;
     this.init();
+    this.route.queryParams.forEach((rec: any) => {
+      this.mbl_id = +rec["mbl_id"];
+
+    });
     if (this.mode == "add")
       this.newRecord();
     else
@@ -259,7 +265,8 @@ export class AirExporthEditComponent extends baseEditComponent {
   async newRecord() {
     this.id = 0;
     this.mform.patchValue({
-      hbl_id: this.id
+      hbl_id: this.id,
+      hbl_mbl_id: this.mbl_id
     })
   }
 
@@ -286,13 +293,13 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_shipper_add3: rec.hbl_shipper_add3,
           hbl_shipper_add4: rec.hbl_shipper_add4,
           hbl_consignee_id: rec.hbl_consignee_id,
-          hbl_consigned_code: rec.hbl_consigned_code,
-          hbl_consigned_to1: rec.hbl_consigned_to1,
-          hbl_consigned_to2: rec.hbl_consigned_to2,
-          hbl_consigned_to3: rec.hbl_consigned_to3,
-          hbl_consigned_to4: rec.hbl_consigned_to4,
-          hbl_consigned_to5: rec.hbl_consigned_to5,
-          hbl_consigned_to6: rec.hbl_consigned_to6,
+          hbl_consignee_code: rec.hbl_consignee_code,
+          hbl_consignee_name: rec.hbl_consignee_name,
+          hbl_consignee_add1: rec.hbl_consignee_add1,
+          hbl_consignee_add2: rec.hbl_consignee_add2,
+          hbl_consignee_add3: rec.hbl_consignee_add3,
+          hbl_consignee_add4: rec.hbl_consignee_add4,
+          hbl_consignee_add5: rec.hbl_consignee_add5,
           hbl_notify_name: rec.hbl_notify_name,
           hbl_notify_add1: rec.hbl_notify_add1,
           hbl_notify_add2: rec.hbl_notify_add2,
@@ -507,6 +514,8 @@ export class AirExporthEditComponent extends baseEditComponent {
         this.mform.patchValue({
           hbl_cfno: v.hbl_cfno,
           hbl_houseno: v.hbl_houseno,
+          hbl_mbl_id: v.hbl_mbl_id,
+          hbl_mbl_refno: v.hbl_mbl_refno,
 
           rec_version: v.rec_version
         });
@@ -547,63 +556,63 @@ export class AirExporthEditComponent extends baseEditComponent {
         hbl_total: amount,
       })
     }
-    if(action.id == "hbl_total"){
+    if (action.id == "hbl_total") {
       let amount = amt / chwt;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_rate: amount,
       })
     }
-    if (action.id == "hbl_rate1" ) {
+    if (action.id == "hbl_rate1") {
       let amount = 10 * rate1;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total1: amount,
       })
     }
-    if (action.id == "hbl_rate2" ) {
+    if (action.id == "hbl_rate2") {
       let amount = 10 * rate2;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total2: amount,
       })
     }
-    if (action.id == "hbl_rate3" ) {
+    if (action.id == "hbl_rate3") {
       let amount = 10 * rate3;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total3: amount,
       })
     }
-    if (action.id == "hbl_rate4" ) {
+    if (action.id == "hbl_rate4") {
       let amount = 10 * rate4;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total4: amount,
       })
     }
-    if (action.id == "hbl_rate5" ) {
+    if (action.id == "hbl_rate5") {
       let amount = 10 * rate5;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_total5: amount,
       })
     }
-    if (action.id == "hbl_carrate1" ) {
+    if (action.id == "hbl_carrate1") {
       let amount = 10 * carrate1;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_cartotal1: amount,
       })
     }
-    if (action.id == "hbl_carrate2" ) {
+    if (action.id == "hbl_carrate2") {
       let amount = 10 * carrate2;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
         hbl_cartotal2: amount,
       })
     }
-    if (action.id == "hbl_carrate3" ) {
+    if (action.id == "hbl_carrate3") {
       let amount = 10 * carrate3;
       amount = this.gs.roundNumber(amount, this.iDec);
       this.mform.patchValue({
@@ -655,30 +664,30 @@ export class AirExporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.name == 'hbl_consigned_code') {
+    if (action.name == 'hbl_consignee_code') {
       console.log(action);
       if (action.rec) {
         this.mform.patchValue({
           hbl_consignee_id: action.rec.cust_id,
-          hbl_consigned_code: action.rec.cust_code,
-          hbl_consigned_to1: action.rec.cust_name,
-          hbl_consigned_to2: action.rec.cust_address1,
-          hbl_consigned_to3: action.rec.cust_address2,
-          hbl_consigned_to4: action.rec.cust_address3,
-          hbl_consigned_to5: action.rec.cust_address4,
-          hbl_consigned_to6: action.rec.cust_tel,
+          hbl_consignee_code: action.rec.cust_code,
+          hbl_consignee_name: action.rec.cust_name,
+          hbl_consignee_add1: action.rec.cust_address1,
+          hbl_consignee_add2: action.rec.cust_address2,
+          hbl_consignee_add3: action.rec.cust_address3,
+          hbl_consignee_add4: action.rec.cust_address4,
+          hbl_consignee_add5: action.rec.cust_tel,
         });
       }
       else {
         this.mform.patchValue({
           hbl_consignee_id: 0,
-          hbl_consigned_code: '',
-          hbl_consigned_to1: '',
-          hbl_consigned_to2: '',
-          hbl_consigned_to3: '',
-          hbl_consigned_to4: '',
-          hbl_consigned_to5: '',
-          hbl_consigned_to6: '',
+          hbl_consignee_code: '',
+          hbl_consignee_name: '',
+          hbl_consignee_add1: '',
+          hbl_consignee_add2: '',
+          hbl_consignee_add3: '',
+          hbl_consignee_add4: '',
+          hbl_consignee_add5: '',
         });
       }
     }

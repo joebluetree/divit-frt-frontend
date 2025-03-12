@@ -25,13 +25,13 @@ export interface iAirexporth {
   hbl_shipper_add4?: string;
 
   hbl_consignee_id?: number;
-  hbl_consigned_code?: string;
-  hbl_consigned_to1?: string;
-  hbl_consigned_to2?: string;
-  hbl_consigned_to3?: string;
-  hbl_consigned_to4?: string;
-  hbl_consigned_to5?: string;
-  hbl_consigned_to6?: string;
+  hbl_consignee_code?: string;
+  hbl_consignee_name?: string;
+  hbl_consignee_add1?: string;
+  hbl_consignee_add2?: string;
+  hbl_consignee_add3?: string;
+  hbl_consignee_add4?: string;
+  hbl_consignee_add5?: string;
   hbl_notify_name?: string;
   hbl_notify_add1?: string;
   hbl_notify_add2?: string;

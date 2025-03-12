@@ -11,7 +11,7 @@ import { iAirExporth_Search, iAirExporthModel } from '../models/iairexporth';
 
 export class AirExporthService extends baseService {
   constructor() {
-    super('hbl_id', 'hbl_houseno');
+    super('hbl_id','hbl_mbl_id');
   }
 
   setInitialState() {

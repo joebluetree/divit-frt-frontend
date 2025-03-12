@@ -21,7 +21,7 @@
           <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
           <div class="col-sm-8">
             <app-date formControlName="mbl_ref_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format" required></app-date>
+              [placeholder]="gs.globalConstants.global_date_format" ></app-date>
           </div>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="mbl_shipment_stage_name" name="mbl_shipment_stage_name"
               id="mbl_shipment_stage_name" (CallBack)="callBack($event)" table="param" subtable="SHIPSTAGE AE"
-              [company_id]="getCompanyId()" [url]="url" case="upper" required
+              [company_id]="getCompanyId()" [url]="url" case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Mawb#</label>
           <div class="col-sm-8">
-            <app-input maxlength="15" formControlName="mbl_no" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="15" formControlName="mbl_no" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -67,7 +67,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="mbl_pol_name" name="mbl_pol_name" id="mbl_pol_name"
               (CallBack)="callBack($event)" table="param" subtable="AIR-PORT" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <label class="col-sm-2 form-label form-lable-sm" for="">ETD</label>
@@ -81,7 +81,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="mbl_pod_name" name="mbl_pod_name" id="mbl_pod_name"
               (CallBack)="callBack($event)" table="param" subtable="AIR-PORT" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <label class="col-sm-2 form-label form-lable-sm" for="">ETA</label>
@@ -95,7 +95,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="mbl_country_name" name="mbl_country_name" id="mbl_country_name"
               (CallBack)="callBack($event)" table="param" subtable="COUNTRY" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -104,7 +104,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="mbl_liner_name" name="mbl_liner_name" id="mbl_liner_name"
               (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
-              [url]="url" case="upper" required
+              [url]="url" case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -113,41 +113,41 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">To</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_to_port1" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_to_port1" [case]="'UPPER'" ></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">By</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_by_carrier1" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_by_carrier1" [case]="'UPPER'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">To</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_to_port2" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_to_port2" [case]="'UPPER'" ></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">By</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_by_carrier2" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_by_carrier2" [case]="'UPPER'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">To</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_to_port3" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_to_port3" [case]="'UPPER'" ></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">By</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_by_carrier3" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_by_carrier3" [case]="'UPPER'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Flight No</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_vessel_name" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_vessel_name" [case]="'UPPER'"></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">Flight No</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="mbl_voyage" [case]="'UPPER'" required></app-input>
+            <app-input maxlength="100" formControlName="mbl_voyage" [case]="'UPPER'" ></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -155,7 +155,7 @@
           <div class="col-sm-3">
             <auto-complete formControlName="mbl_currency_code" name="mbl_currency_code" id="mbl_currency_code"
               (CallBack)="callBack($event)" table="param" subtable="CURRENCY" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -164,14 +164,14 @@
           <div class="col-sm-3">
             <auto-complete formControlName="mbl_handled_name" name="mbl_handled_name" id="mbl_handled_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">Salesman</label>
           <div class="col-sm-3">
             <auto-complete formControlName="mbl_salesman_name" name="mbl_salesman_name" id="mbl_salesman_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" required
+              case="upper" 
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -203,7 +203,7 @@
     </div>
   </div>
   <div class="page-body">
-    <div class="row">
+    <div class="row" *ngIf="mform.get('mbl_id')?.value > 0">
       <div class="col-sm-12">
         <table class="table table-sm table-hover table-bordered table-striped table-condensed">
           <thead class="table-success">
@@ -225,7 +225,8 @@
 
           <tbody formArrayName="air_export">
             <tr *ngFor="let iRow of formArray('air_export').controls; let i=index;" [formGroupName]="i">
-              <td align="centre" class="link"><!-- (click)="editdetails(i)"  -->
+              <td align="centre" class="link" routerLink="/airexport/airexporthEdit" 
+              [queryParams]="{id :iRow.get('hbl_id')?.value ,mode:'edit',menuid:'AIREXPORTH',type:'AIREXPORTH',appid:appid,mbl_id:mform.get('mbl_id')?.value}" ><!-- (click)="editdetails(i)"  -->
                 <i class="fa fa-pencil"></i>
               </td>
               
@@ -241,7 +242,7 @@
               </td>
 
               <td>
-                <label>{{iRow.get('hbl_consigned_to1')?.value}}</label>
+                <label>{{iRow.get('hbl_consignee_name')?.value}}</label>
               </td>
 
               <td>
@@ -267,7 +268,7 @@
                 <label>{{iRow.get('hbl_date')?.value}}</label>
               </td>
 
-              <td align="centre" (click)="deleteRow(i)" class="link">
+              <td align="centre" (click)="deleteRow(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)" class="link">
                 <i class="fa fa-trash"></i>
               </td>
             </tr>
@@ -277,12 +278,16 @@
     </div>
   </div>
 </form>
+<div class="page-footer line-bottom " *ngIf=" mform.get('mbl_id')?.value > 0">
+  <button class="btn btn-sm btn-info" *ngIf="{mode:'edit'}" class="btn btn-sm btn-success" routerLink="/airexport/airexporthEdit"
+  [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,appid:appid,mbl_id:mform.get('mbl_id')?.value}">Add House</button>
+</div>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
 </div>
-
 <div *ngIf="showModel">
   <pre>
     {{mform.value | json}}
   </pre>
 </div>
+<!-- d-flex justify-content-start -->

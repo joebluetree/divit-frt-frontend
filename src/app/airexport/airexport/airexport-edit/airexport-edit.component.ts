@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { iAirexport } from '../../models/iairexport';
 import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexporth-list.component';
 import { AirExporthService } from '../../services/airexporth.service';
 import { iAirexporth } from '../../models/iairexporth';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { iAirexporth } from '../../models/iairexporth';
   templateUrl: './airexport-edit.component.html',
   styleUrls: ['./airexport-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls, ]
+  imports: [...CustomControls,]
 })
 
 //Name : Alen Cherian
@@ -23,6 +24,8 @@ import { iAirexporth } from '../../models/iairexporth';
 //Command : Create the AirExport Components.
 
 export class AirExportEditComponent extends baseEditComponent {
+
+  protected http = inject(HttpClient);
 
   dataList = [
     { key: 'PREPAID', value: 'PREPAID' },
@@ -164,47 +167,94 @@ export class AirExportEditComponent extends baseEditComponent {
       hbl_houseno: [rec?.hbl_houseno || ""],
       hbl_mbl_id: [rec?.hbl_mbl_id || 0],
       hbl_mbl_refno: [rec?.hbl_mbl_refno || ""],
-     
       hbl_date: [rec?.hbl_date || ""],
-     
       hbl_shipper_id: [rec?.hbl_shipper_id || 0],
       hbl_shipper_code: [rec?.hbl_shipper_code || ""],
       hbl_shipper_name: [rec?.hbl_shipper_name || ""],
-    
       hbl_consignee_id: [rec?.hbl_consignee_id || 0],
-      hbl_consigned_code: [rec?.hbl_consigned_code || ""],
-      hbl_consigned_to1: [rec?.hbl_consigned_to1 || ""],
-     
+      hbl_consignee_code: [rec?.hbl_consignee_code || ""],
+      hbl_consignee_name: [rec?.hbl_consignee_name || ""],
       hbl_handled_id: [rec?.hbl_handled_id || 0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
-     
       hbl_packages: [rec?.hbl_packages || 0],
-     
       hbl_issued_date: [rec?.hbl_issued_date || ""],
       hbl_delivery_date: [rec?.hbl_delivery_date || ""],
-
       rec_created_by: [rec?.rec_created_by || ""],
 
     })
   }
- addDetails(iRow: iAirexporth = <iAirexporth>{}) {
+  addDetails(iRow: iAirexporth = <iAirexporth>{}) {
     this.formArray('air_export')?.push(this.addRow(iRow));
   }
 
-  deleteRow(idx: number) {
-    const nidx = idx + 1;
-    const confirmDelete = window.confirm("Delete " + nidx + " y/n");
-    if (confirmDelete) {
-    this.formArray('air_export').removeAt(idx);
-    }
-  }
+  // deleteRow(idx: number,hbl_id: number) {
+  //   const nidx = idx + 1;
+  //   const confirmDelete = window.confirm("Delete " + nidx + " y/n");
+  //   if (confirmDelete) {
+  //     const param = {'id': hbl_id,url:'/api/AirexportH/DeleteAsync'};
+  //     this.deleteRecord(param);
+  //     this.formArray('air_export').removeAt(idx);
+  //   }
+  // }
 
-    fillDetails(ihouse_list: iAirexporth[]) {
-      this.formArray('air_export').clear();
-      ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
-        this.addDetails(rec_air_exporth);
+  //  deleteRecord(data: any){
+  //   // const param = {'id': hbl_id,url:'/api/AirexportH/DeleteAsync'};
+  //   this.ms.deleteRecord(data);
+  //  }
+
+  // public deleteRecord(data: any) {
+  //   if (data.url == '') {
+  //     alert('No Url Specified');
+  //     return;
+  //   }
+  //   const options = {
+  //     headers: this.gs.getHeaders(),
+  //     params: { ...data }
+  //   }
+  //   let mUrl = data.url;
+  //   this.http.get<any>(this.gs.getUrl(mUrl), options).subscribe({
+  //     next: (v: any) => {
+  //       if (v.status) {
+  //         this.ms.RemoveRecord(data.id);
+  //       }
+  //     },
+  //     error: (err: any) => {
+  //       this.gs.showAlert([err.error]);
+  //     }
+  //   });
+  // }
+
+
+  deleteRow(idx: number,house: string, hbl_id: number) {
+    if (!hbl_id) {
+      alert("Invalid Record ID");
+      return;
+    }
+  
+    if (window.confirm(`Are you sure you want to delete House no ${house}?`)) {
+      const param = { id: hbl_id, url : '/api/AirexportH/DeleteAsync' };
+  
+      this.ms.deleteRecord(param)?.subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.formArray('air_export').removeAt(idx);
+          }
+        },
+        error: (e) => {
+          this.gs.showError(e);
+        }
       });
     }
+  }
+  
+
+
+  fillDetails(ihouse_list: iAirexporth[]) {
+    this.formArray('air_export').clear();
+    ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
+      this.addDetails(rec_air_exporth);
+    });
+  }
 
 
   save() {
@@ -240,6 +290,7 @@ export class AirExportEditComponent extends baseEditComponent {
         this.mform.patchValue({
           mbl_cfno: v.mbl_cfno,
           mbl_refno: v.mbl_refno,
+
 
           rec_version: v.rec_version
         });
