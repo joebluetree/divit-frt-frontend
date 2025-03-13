@@ -218,7 +218,7 @@
               <th>ETD</th>
               <th>ETA</th>
               <th>CREATED_BY</th>
-              <th>DATE</th>
+              <th>CREATED DATE</th>
               <th>DELETE</th>
             </tr>
           </thead>
@@ -279,8 +279,8 @@
   </div>
 </form>
 <div class="page-footer line-bottom " *ngIf=" mform.get('mbl_id')?.value > 0">
-  <button class="btn btn-sm btn-info" *ngIf="{mode:'edit'}" class="btn btn-sm btn-success" routerLink="/airexport/airexporthEdit"
-  [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,appid:appid,mbl_id:mform.get('mbl_id')?.value}">Add House</button>
+  <button class="btn btn-sm btn-info" *ngIf="{mode:'add'}" class="btn btn-sm btn-success" routerLink="/airexport/airexporthEdit"
+  [queryParams]="{id : 0 ,mode:'add', menuid:'AIREXPORTH', type:'AIREXPORTH', appid: appid, mbl_id: mform.get('mbl_id')?.value}">Add House</button>
 </div>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>

@@ -282,10 +282,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Hbl Format</label>
+          <label class="col-sm-4 form-label form-lable-sm">HAWB Format</label>
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_format_name" name="hbl_format_name" id="hbl_format_name"
-              (CallBack)="callBack($event)" table="param" subtable="HBL-FORMAT" [company_id]="getCompanyId()"
+              (CallBack)="callBack($event)" table="param" subtable="HAWB-FORMAT" [company_id]="getCompanyId()"
               [url]="url" case="upper"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
@@ -749,7 +749,7 @@
               [placeholder]="gs.globalConstants.global_date_format" ></app-date>
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="mform.get('hbl_id')?.value > 0">
           <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
           <div class="col-sm-4">
             <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"
@@ -763,8 +763,6 @@
       </div>
     </div>
   </div>
-
-
 </form>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>

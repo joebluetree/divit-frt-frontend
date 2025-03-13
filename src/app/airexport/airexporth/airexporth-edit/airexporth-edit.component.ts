@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
 import { AirExportService } from '../../services/airexport.service';
 import { iAirexporth, iAirExporthModel } from '../../models/iairexporth';
+import { iAirexport } from '../../models/iairexport';
 
 
 @Component({
@@ -268,6 +269,7 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_id: this.id,
       hbl_mbl_id: this.mbl_id
     })
+    this.getMaster();
   }
 
 
@@ -473,6 +475,32 @@ export class AirExporthEditComponent extends baseEditComponent {
 
         });
 
+        console.log(rec);
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    })
+  }
+
+  getMaster() {
+    const param = { 'id': this.mbl_id };
+    this.ms.getRecord(param, '/api/AirexportH/GetMasterAsync').subscribe({
+      next: (rec: iAirexporth) => {
+        this.mform.patchValue({
+          hbl_mbl_id: rec.hbl_mbl_id,
+          hbl_mbl_refno: rec.hbl_mbl_refno,
+          hbl_handled_id: rec.hbl_handled_id,
+          hbl_handled_name: rec.hbl_handled_name,
+          hbl_salesman_id: rec.hbl_salesman_id,
+          hbl_salesman_name: rec.hbl_salesman_name,
+          hbl_pol_name: rec.hbl_pol_name,
+          hbl_pod_name: rec.hbl_pod_name,
+          hbl_issued_date: rec.hbl_issued_date,
+          hbl_issued_by: rec.hbl_issued_by,
+          hbl_by2_carrier: rec.hbl_by2_carrier,
+
+        });
         console.log(rec);
       },
       error: (e) => {

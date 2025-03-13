@@ -187,6 +187,14 @@ export class AirExportEditComponent extends baseEditComponent {
     this.formArray('air_export')?.push(this.addRow(iRow));
   }
 
+  fillDetails(ihouse_list: iAirexporth[]) {
+    this.formArray('air_export').clear();
+    ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
+      this.addDetails(rec_air_exporth);
+    });
+  }
+
+
   // deleteRow(idx: number,hbl_id: number) {
   //   const nidx = idx + 1;
   //   const confirmDelete = window.confirm("Delete " + nidx + " y/n");
@@ -249,12 +257,6 @@ export class AirExportEditComponent extends baseEditComponent {
   
 
 
-  fillDetails(ihouse_list: iAirexporth[]) {
-    this.formArray('air_export').clear();
-    ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
-      this.addDetails(rec_air_exporth);
-    });
-  }
 
 
   save() {

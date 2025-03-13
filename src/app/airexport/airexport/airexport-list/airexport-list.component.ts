@@ -18,16 +18,16 @@ import { AirExportService } from '../../services/airexport.service';
 
 export class AirExportListComponent extends baseListComponent {
 
-  constructor(
-    public ms: AirExportService,
-
-  ) {
+  constructor(public ms: AirExportService) {
     super(ms);
   }
 
   ngOnInit(): void {
+
     this.init();
+
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
+    
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/airexport/airexportEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "mbl_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel },
