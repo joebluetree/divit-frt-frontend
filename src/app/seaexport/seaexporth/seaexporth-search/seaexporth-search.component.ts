@@ -9,7 +9,7 @@ import { iSea_exportH_Search } from '../../models/iseaexporth';
   selector: 'app-seaexporth-search',
   templateUrl: './seaexporth-search.component.html',
   styleUrls: ['./seaexporth-search.component.css'],
-  standalone: true, 
+  standalone: true,
   imports: [...CustomControls]
 })
 
@@ -40,8 +40,6 @@ export class SeaExportHSearchComponent {
       hbl_from_date: [''],
       hbl_to_date: [''],
       hbl_houseno: [''],
-    
-
     })
 
   }
@@ -53,7 +51,7 @@ export class SeaExportHSearchComponent {
       hbl_houseno: this.record.hbl_houseno,
     })
   }
- 
+
   search(_action: string) {
     if (this.output) {
       this.record.hbl_from_date = this.mform.value.hbl_from_date;

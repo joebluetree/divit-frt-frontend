@@ -115,7 +115,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       cntr_id: [rec?.cntr_id || 0],
       cntr_hbl_id: [rec?.cntr_hbl_id || 0],
       cntr_catg: [rec?.cntr_catg || ""],
-      cntr_no: [rec?.cntr_no || ""],
+      cntr_no: [rec?.cntr_no || ""],  //,[Validators.required, Validators.pattern(/^[A-Z]{4}\d{7}$/)]
       cntr_type_id: [rec?.cntr_type_id || 0],
       cntr_type_name: [rec?.cntr_type_name || ""],
       cntr_sealno: [rec?.cntr_sealno || ""],
@@ -139,10 +139,10 @@ export class SeaExportmEditComponent extends baseEditComponent {
       this.formArray('master_cntr').removeAt(idx);
     }
   }
-  fillCntr(iquote_list: iContainer[]) {
+  fillCntr(icntr_list: iContainer[]) {
     this.formArray('master_cntr').clear();
-    iquote_list.forEach(rec_quote => {
-      this.addCntr(rec_quote);
+    icntr_list.forEach(rec_cntr => {
+      this.addCntr(rec_cntr);
     });
   }
 
@@ -157,7 +157,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       hbl_handled_name: [rec?.hbl_handled_name || ""],
       hbl_frt_status_name: [rec?.hbl_frt_status_name || ""],
       rec_created_by: [rec?.rec_created_by || ""],
-      hbl_issued_date: [rec?.hbl_issued_date || ""],
+      rec_created_date: [rec?.rec_created_date || ""],
     });
     return _rec;
   }
@@ -173,6 +173,28 @@ export class SeaExportmEditComponent extends baseEditComponent {
     });
   }
   
+  deleteHouse(idx: number,house: string, hbl_id: number) {
+    if (!hbl_id) {
+      alert("Invalid Record ID");
+      return;
+    }
+  
+    if (window.confirm(`Delete House no ${house} y/n`)) {
+      const param = { id: hbl_id, url : '/api/seaexport/seaexporth/DeleteAsync' };
+  
+      this.ms.deleteRecord(param)?.subscribe({
+        next: (response: any) => {
+          if (response.status) {
+            this.formArray('master_house').removeAt(idx);
+          }
+        },
+        error: (e) => {
+          this.gs.showError(e);
+        }
+      });
+    }
+  }
+
   getRecord() {
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/seaexport/seaexportm/GetRecordAsync').subscribe({
@@ -479,6 +501,10 @@ export class SeaExportmEditComponent extends baseEditComponent {
       }
     }
   }
+
+  // getRefno() {
+  //   return this.mform.get('mbl_refno')?.value || '';
+  // }
 
   // ConvertUnit(value: number, cUnit: 'kgs' | 'lbs' | 'cbm' | 'cft'): number {
   //   const convertionValue = {

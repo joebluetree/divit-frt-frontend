@@ -15,12 +15,13 @@ export interface iSea_expHouse {
   hbl_handled_name: string;
   hbl_frt_status_name: string;
   rec_created_by: string;
-  hbl_issued_date: string;
+  rec_created_date: string;
 }
 
 export interface iContainer {
   cntr_id: number,
   cntr_hbl_id: number,
+  cntr_mbl_id: number,
   cntr_catg: string,
   cntr_no: string,
   cntr_type_id: number,
@@ -103,6 +104,10 @@ export interface iSea_exportm_Search {
   mbl_refno: string;
   mbl_from_date: string;
   mbl_to_date: string;
+  mbl_agent_name: string;
+  mbl_pol_name: string;
+  mbl_pod_name: string;
+
   rec_company_id: number;
   rec_branch_id: number;
 }

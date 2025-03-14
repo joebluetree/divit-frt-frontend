@@ -8,6 +8,7 @@ import { iPage } from "ngx-jrt-controls";
 export interface iContainer {
   cntr_id: number,
   cntr_hbl_id: number,
+  cntr_mbl_id: number,
   cntr_catg: string,
   cntr_no: string,
   cntr_type_id: number,
@@ -36,7 +37,7 @@ export interface iContainer {
 export interface iSea_exportH {
   hbl_id: number;
   hbl_mbl_id: number;
-  hbl_refno: string;
+  hbl_mbl_refno: string;
   hbl_cfno: number;
   hbl_houseno: string;
   hbl_shipment_stage_id: number;
@@ -53,11 +54,12 @@ export interface iSea_exportH {
   hbl_shipper_add5: string;
   hbl_consignee_id: number;
   hbl_consignee_code: string;
-  hbl_consigned_to1: string;
-  hbl_consigned_to2: string;
-  hbl_consigned_to3: string;
-  hbl_consigned_to4: string;
-  hbl_consigned_to5: string;
+  hbl_consignee_name: string;
+  hbl_consignee_add1: string;
+  hbl_consignee_add2: string;
+  hbl_consignee_add3: string;
+  hbl_consignee_add4: string;
+  hbl_consignee_add5: string;
   hbl_notify_id: number;
   hbl_notify_code: string;
   hbl_notify_name: string;
@@ -118,7 +120,11 @@ export interface iSea_exportH {
   hbl_issued_date: string;
   hbl_delivery_date: string;
   hbl_originals: number;
-  
+
+  hbl_mbl_no: string;
+  hbl_mbl_pol_etd: string;
+  hbl_mbl_pod_eta: string;
+
   desc_ctr: number;
   desc_parent_id: number;
 
@@ -179,7 +185,7 @@ export interface iSea_exportH {
   desc_description15: string;
   desc_description16: string;
   desc_description17: string;
-  
+
   house_cntr: iContainer[];
 
   rec_version: number;

@@ -39,6 +39,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
     { key: 'TELEX RELEASE', value: 'TELEX RELEASE' },
   ]
 
+  mbl_id:number;
+  
   constructor(
     private ms: SeaExportHService,
     public dialog: MatDialog
@@ -50,8 +52,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
     let date = this.gs.getToday();
     this.mform = this.fb.group({
       hbl_id: [0],
-      // hbl_mbl_id: [0],
-      hbl_refno: [''],
+      hbl_mbl_id: [0],
+      hbl_mbl_refno: [''],
       hbl_cfno: [0],
       hbl_houseno: [''],
       hbl_shipment_stage_id: [0],
@@ -68,11 +70,12 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_shipper_add5: [''],
       hbl_consignee_id: [0],
       hbl_consignee_code: [''],
-      hbl_consigned_to1: [''],
-      hbl_consigned_to2: [''],
-      hbl_consigned_to3: [''],
-      hbl_consigned_to4: [''],
-      hbl_consigned_to5: [''],
+      hbl_consignee_name: [''],
+      hbl_consignee_add1: [''],
+      hbl_consignee_add2: [''],
+      hbl_consignee_add3: [''],
+      hbl_consignee_add4: [''],
+      hbl_consignee_add5: [''],
       hbl_notify_id: [0],
       hbl_notify_code: [''],
       hbl_notify_name: [''],
@@ -196,7 +199,6 @@ export class SeaExportHEditComponent extends baseEditComponent {
       desc_description16: [''],
       desc_description17: [''],
 
-
       house_cntr: this.fb.array([]),
       rec_version: [0],
 
@@ -205,7 +207,11 @@ export class SeaExportHEditComponent extends baseEditComponent {
 
   ngOnInit() {
     this.id = 0;
+    // this.mbl_id =0;
     this.init();
+    this.route.queryParams.forEach ((rec:any) => {
+      this.mbl_id = rec["mbl_id"]; 
+    }); 
 
     if (this.mode == "add")
       this.newRecord();
@@ -216,9 +222,10 @@ export class SeaExportHEditComponent extends baseEditComponent {
   newRecord() {
     this.id = 0;
     this.mform.patchValue({
-      hbl_id: this.id
+      hbl_id: this.id,
+      hbl_mbl_id: this.mbl_id,
     })
-
+    this.getDefaultData();
   }
 
   addRow(rec: iContainer) {
@@ -228,6 +235,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
     const _rec = this.fb.group({
       cntr_id: [rec?.cntr_id || 0],
       cntr_hbl_id: [rec?.cntr_hbl_id || 0],
+      cntr_mbl_id: [rec?.cntr_mbl_id || 0],
       cntr_catg: [rec?.cntr_catg || ""],
       cntr_no: [rec?.cntr_no || ""],
       cntr_type_id: [rec?.cntr_type_id || 0],
@@ -255,11 +263,35 @@ export class SeaExportHEditComponent extends baseEditComponent {
     }
   }
 
-  fillCntr(iquote_list: iContainer[]) {
+  fillCntr(icntr_list: iContainer[]) {
     this.formArray('house_cntr').clear();
-    iquote_list.forEach(rec_quote => {
-      this.addCntr(rec_quote);
+    icntr_list.forEach(rec_cntr => {
+      this.addCntr(rec_cntr);
     });
+  }
+
+  getDefaultData() {
+
+    const param = { 'id': this.mbl_id };
+    this.ms.getRecord(param, '/api/seaexport/seaexporth/GetDefaultData').subscribe({
+      next: (rec: iSea_exportH) => {
+        this.mform.patchValue({
+          hbl_mbl_id: rec.hbl_mbl_id,
+          hbl_mbl_refno: rec.hbl_mbl_refno,
+          hbl_agent_id: rec.hbl_agent_id,
+          hbl_agent_name: rec.hbl_agent_name,
+          hbl_pol_name: rec.hbl_pol_name,
+          hbl_pod_name: rec.hbl_pod_name,
+          hbl_place_delivery: rec.hbl_place_delivery,
+          hbl_issued_date: rec.hbl_issued_date,
+
+        });
+        this.fillCntr(rec.house_cntr);
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    })
   }
 
   getRecord() {
@@ -270,7 +302,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         this.mform.patchValue({
           hbl_id: rec.hbl_id,
           hbl_mbl_id: rec.hbl_mbl_id,
-          hbl_refno: rec.hbl_refno,
+          hbl_mbl_refno: rec.hbl_mbl_refno,
           hbl_cfno: rec.hbl_cfno,
           hbl_houseno: rec.hbl_houseno,
           hbl_shipment_stage_id: rec.hbl_shipment_stage_id,
@@ -287,11 +319,12 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_shipper_add5: rec.hbl_shipper_add5,
           hbl_consignee_id: rec.hbl_consignee_id,
           hbl_consignee_code: rec.hbl_consignee_code,
-          hbl_consigned_to1: rec.hbl_consigned_to1,
-          hbl_consigned_to2: rec.hbl_consigned_to2,
-          hbl_consigned_to3: rec.hbl_consigned_to3,
-          hbl_consigned_to4: rec.hbl_consigned_to4,
-          hbl_consigned_to5: rec.hbl_consigned_to5,
+          hbl_consignee_name: rec.hbl_consignee_name,
+          hbl_consignee_add1: rec.hbl_consignee_add1,
+          hbl_consignee_add2: rec.hbl_consignee_add2,
+          hbl_consignee_add3: rec.hbl_consignee_add3,
+          hbl_consignee_add4: rec.hbl_consignee_add4,
+          hbl_consignee_add5: rec.hbl_consignee_add5,
           hbl_notify_id: rec.hbl_notify_id,
           hbl_notify_code: rec.hbl_notify_code,
           hbl_notify_name: rec.hbl_notify_name,
@@ -414,6 +447,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
 
         });
+        this.mbl_id = rec.hbl_mbl_id;
         this.fillCntr(rec.house_cntr);
       },
       error: (e) => {
@@ -444,7 +478,6 @@ export class SeaExportHEditComponent extends baseEditComponent {
       next: (v: iSea_exportH) => {
         if (this.mode == "add") {
           this.id = v.hbl_id;
-          // this.updateDescIds(v);
           this.mode = "edit";
           this.mform.patchValue({ hbl_id: this.id });
           const param = {
@@ -459,7 +492,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version,
           hbl_cfno: v.hbl_cfno,
-          hbl_houseno: v.hbl_houseno
+          hbl_houseno: v.hbl_houseno,
+          hbl_mbl_refno: v.hbl_mbl_refno
         });
         this.fillCntr(v.house_cntr);
         this.ms.UpdateRecord(v, _mode);
@@ -523,7 +557,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_shipper_add2: action.rec ? action.rec.cust_address2 : '',
           hbl_shipper_add3: action.rec ? action.rec.cust_address3 : '',
           hbl_shipper_add4: action.rec ? action.rec.cust_address4 : '',
-          hbl_shipper_add5: action.rec ? 'TEL : ' + action.rec.cust_tel + ' FAX : ' + action.rec.cust_fax : '',
+          hbl_shipper_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
+                                         (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
         });
       }
       else {
@@ -544,23 +579,25 @@ export class SeaExportHEditComponent extends baseEditComponent {
         this.mform.patchValue({
           hbl_consignee_id: action.rec ? action.rec.cust_id : 0,
           hbl_consignee_code: action.rec ? action.rec.cust_code : '',
-          hbl_consigned_to1: action.rec ? action.rec.cust_name : '',
-          hbl_consigned_to2: action.rec ? action.rec.cust_address1 : '',
-          hbl_consigned_to3: action.rec ? action.rec.cust_address2 : '',
-          hbl_consigned_to4: action.rec ? action.rec.cust_address3 : '',
-          hbl_consigned_to5: action.rec ? 'TEL : ' + action.rec.cust_tel + ' FAX : ' + action.rec.cust_fax : '',
+          hbl_consignee_name: action.rec ? action.rec.cust_name : '',
+          hbl_consignee_add1: action.rec ? action.rec.cust_address1 : '',
+          hbl_consignee_add2: action.rec ? action.rec.cust_address2 : '',
+          hbl_consignee_add3: action.rec ? action.rec.cust_address3 : '',
+          hbl_consignee_add4: action.rec ? action.rec.cust_address4 : '',
+          hbl_consignee_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
+          (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
         });
       }
       else {
         this.mform.patchValue({
           hbl_consignee_id: 0,
           hbl_consignee_code: '',
-          hbl_consigned_to1: '',
-          hbl_consigned_to2: '',
-          hbl_consigned_to3: '',
-          hbl_consigned_to4: '',
-          hbl_consigned_to5: '',
-
+          hbl_consignee_name: '',
+          hbl_consignee_add1: '',
+          hbl_consignee_add2: '',
+          hbl_consignee_add3: '',
+          hbl_consignee_add4: '',
+          hbl_consignee_add5: '',
         });
       }
     }
@@ -574,7 +611,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_notify_add2: action.rec ? action.rec.cust_address2 : '',
           hbl_notify_add3: action.rec ? action.rec.cust_address3 : '',
           hbl_notify_add4: action.rec ? action.rec.cust_address4 : '',
-          hbl_notify_add5: action.rec ? 'TEL : ' + action.rec.cust_tel + ' FAX : ' + action.rec.cust_fax : '',
+          hbl_notify_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
+          (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
         });
       }
       else {

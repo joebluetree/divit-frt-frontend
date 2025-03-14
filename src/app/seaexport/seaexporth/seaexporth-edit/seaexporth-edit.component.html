@@ -11,7 +11,7 @@
     <div class="col-md-10">
       <div class="page-body">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">House #</label>
               <div class="col-sm-8">
@@ -19,15 +19,17 @@
                   maxlength="15" [disable]="true"></app-input>
               </div>
             </div>
+          </div>
+          <div class="col-sm-4">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Ref #</label>
               <div class="col-sm-8">
-                <app-input formControlName="hbl_refno" [case]="'UPPER'" id="hbl_refno" name="hbl_refno" maxlength="15"
-                  [disable]="true"></app-input>
+                <app-input formControlName="hbl_mbl_refno" [case]="'UPPER'" id="hbl_mbl_refno" name="hbl_mbl_refno"
+                  maxlength="15" [disable]="true"></app-input>
               </div>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Stage</label>
               <div class="col-sm-8">
@@ -62,35 +64,35 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_shipper_add1" [case]="'UPPER'" id="hbl_shipper_add1"
+                <app-input maxlength="60" formControlName="hbl_shipper_add1" [case]="'UPPER'" id="hbl_shipper_add1"
                   name="hbl_shipper_add1"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_shipper_add2" [case]="'UPPER'" id="hbl_shipper_add2"
+                <app-input maxlength="60" formControlName="hbl_shipper_add2" [case]="'UPPER'" id="hbl_shipper_add2"
                   name="hbl_shipper_add2"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_shipper_add3" [case]="'UPPER'" id="hbl_shipper_add3"
+                <app-input maxlength="60" formControlName="hbl_shipper_add3" [case]="'UPPER'" id="hbl_shipper_add3"
                   name="hbl_shipper_add3"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_shipper_add4" [case]="'UPPER'" id="hbl_shipper_add4"
+                <app-input maxlength="60" formControlName="hbl_shipper_add4" [case]="'UPPER'" id="hbl_shipper_add4"
                   name="hbl_shipper_add4"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_shipper_add5" [case]="'UPPER'" id="hbl_shipper_add5"
+                <app-input maxlength="60" formControlName="hbl_shipper_add5" [case]="'UPPER'" id="hbl_shipper_add5"
                   name="hbl_shipper_add5"></app-input>
               </div>
             </div>
@@ -104,37 +106,44 @@
                 </auto-complete>
               </div>
               <div class="col-sm-5">
-                <app-input maxlength="100" formControlName="hbl_consigned_to1" id="hbl_consigned_to1"
-                  name="hbl_consigned_to1" [case]="'UPPER'"></app-input>
+                <app-input maxlength="100" formControlName="hbl_consignee_name" id="hbl_consignee_name"
+                  name="hbl_consignee_name" [case]="'UPPER'"></app-input>
               </div>
             </div>
 
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_consigned_to2" [case]="'UPPER'" id="hbl_consigned_to2"
-                  name="hbl_consigned_to2"></app-input>
+                <app-input maxlength="60" formControlName="hbl_consignee_add1" [case]="'UPPER'" id="hbl_consignee_add1"
+                  name="hbl_consignee_add1"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_consigned_to3" [case]="'UPPER'" id="hbl_consigned_to3"
-                  name="hbl_consigned_to3"></app-input>
+                <app-input maxlength="60" formControlName="hbl_consignee_add2" [case]="'UPPER'" id="hbl_consignee_add2"
+                  name="hbl_consignee_add2"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_consigned_to4" [case]="'UPPER'" id="hbl_consigned_to4"
-                  name="hbl_consigned_to4"></app-input>
+                <app-input maxlength="60" formControlName="hbl_consignee_add3" [case]="'UPPER'" id="hbl_consignee_add3"
+                  name="hbl_consignee_add3"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_consigned_to5" [case]="'UPPER'" id="hbl_consigned_to5"
-                  name="hbl_consigned_to5"></app-input>
+                <app-input maxlength="60" formControlName="hbl_consignee_add4" [case]="'UPPER'" id="hbl_consignee_add4"
+                  name="hbl_consignee_add4"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="hbl_consignee_add5" [case]="'UPPER'" id="hbl_consignee_add5"
+                  name="hbl_consignee_add5"></app-input>
               </div>
             </div>
             <div class="form-group row">
@@ -154,35 +163,35 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_notify_add1" [case]="'UPPER'" id="hbl_notify_add1"
+                <app-input maxlength="60" formControlName="hbl_notify_add1" [case]="'UPPER'" id="hbl_notify_add1"
                   name="hbl_notify_add1"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_notify_add2" [case]="'UPPER'" id="hbl_notify_add2"
+                <app-input maxlength="60" formControlName="hbl_notify_add2" [case]="'UPPER'" id="hbl_notify_add2"
                   name="hbl_notify_add2"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_notify_add3" [case]="'UPPER'" id="hbl_notify_add3"
+                <app-input maxlength="60" formControlName="hbl_notify_add3" [case]="'UPPER'" id="hbl_notify_add3"
                   name="hbl_notify_add3"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_notify_add4" [case]="'UPPER'" id="hbl_notify_add4"
+                <app-input maxlength="60" formControlName="hbl_notify_add4" [case]="'UPPER'" id="hbl_notify_add4"
                   name="hbl_notify_add4"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_notify_add5" [case]="'UPPER'" id="hbl_notify_add5"
+                <app-input maxlength="60" formControlName="hbl_notify_add5" [case]="'UPPER'" id="hbl_notify_add5"
                   name="hbl_notify_add5"></app-input>
               </div>
             </div>
@@ -191,21 +200,21 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Export Ref.</label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_exp_ref1" [case]="'UPPER'" id="hbl_exp_ref1"
+                <app-input maxlength="60" formControlName="hbl_exp_ref1" [case]="'UPPER'" id="hbl_exp_ref1"
                   name="hbl_exp_ref1"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_exp_ref2" [case]="'UPPER'" id="hbl_exp_ref2"
+                <app-input maxlength="60" formControlName="hbl_exp_ref2" [case]="'UPPER'" id="hbl_exp_ref2"
                   name="hbl_exp_ref2"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_exp_ref3" [case]="'UPPER'" id="hbl_exp_ref3"
+                <app-input maxlength="60" formControlName="hbl_exp_ref3" [case]="'UPPER'" id="hbl_exp_ref3"
                   name="hbl_exp_ref3"></app-input>
               </div>
             </div>
@@ -222,35 +231,35 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Origin State</label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_origin" [case]="'UPPER'" id="hbl_origin"
+                <app-input maxlength="60" formControlName="hbl_origin" [case]="'UPPER'" id="hbl_origin"
                   name="hbl_origin"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Routing</label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_rout1" [case]="'UPPER'" id="hbl_rout1"
+                <app-input maxlength="60" formControlName="hbl_rout1" [case]="'UPPER'" id="hbl_rout1"
                   name="hbl_rout1"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_rout2" [case]="'UPPER'" id="hbl_rout2"
+                <app-input maxlength="60" formControlName="hbl_rout2" [case]="'UPPER'" id="hbl_rout2"
                   name="hbl_rout2"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_rout3" [case]="'UPPER'" id="hbl_rout3"
+                <app-input maxlength="60" formControlName="hbl_rout3" [case]="'UPPER'" id="hbl_rout3"
                   name="hbl_rout3"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
               <div class="col-sm-8">
-                <app-input maxlength="30" formControlName="hbl_rout4" [case]="'UPPER'" id="hbl_rout4"
+                <app-input maxlength="60" formControlName="hbl_rout4" [case]="'UPPER'" id="hbl_rout4"
                   name="hbl_rout4"></app-input>
               </div>
             </div>
@@ -858,33 +867,33 @@
           <div class="col-sm-12">
             <div class="form-group row">
               <div class="col-sm-12">
-                <app-combobox maxlength="30"  name="" [dataSource]="frtList" [valueColumn]="'key'"
-                  [displayColumn]="'value'" case="UPPER"  ></app-combobox>
+                <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'"
+                  [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
 
             <div class="form-group row">
               <div class="col-sm-12">
-                <app-checkbox ></app-checkbox>
+                <app-checkbox></app-checkbox>
                 <label class="col-sm-8 form-label form-lable-sm" for="">BL New Format</label>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-12">
-                <app-checkbox ></app-checkbox>
+                <app-checkbox></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">BL Backside</label>
               </div>
             </div>
 
             <div class="form-group row">
               <div class="col-sm-12">
-                <app-checkbox ></app-checkbox>
+                <app-checkbox></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Colour</label>
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-12">
-                <app-checkbox ></app-checkbox>
+                <app-checkbox></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Cntr#/Seal#</label>
               </div>
             </div>
@@ -892,7 +901,7 @@
               <div class="col-sm-12 ">
                 <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
               </div>
-              
+
             </div>
             <div class="form-group row">
               <div class="col-sm-12">
@@ -923,7 +932,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </form>
 
 <!-- <div class="page-footer line-bottom">
