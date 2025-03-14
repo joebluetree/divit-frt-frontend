@@ -6,6 +6,7 @@ import { HistoryComponent } from '../../../shared/history/history.component';
 import { AirExportService } from '../../services/airexport.service';
 import { iAirexporth, iAirExporthModel } from '../../models/iairexporth';
 import { iAirexport } from '../../models/iairexport';
+import { AirExporthService } from '../../services/airexporth.service';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class AirExporthEditComponent extends baseEditComponent {
   ]
 
   constructor(
-    private ms: AirExportService,
+    private ms: AirExporthService,
     public dialog: MatDialog
   ) {
     super();
@@ -269,7 +270,7 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_id: this.id,
       hbl_mbl_id: this.mbl_id
     })
-    this.getMaster();
+    this.getDefaultData();
   }
 
 
@@ -483,9 +484,9 @@ export class AirExporthEditComponent extends baseEditComponent {
     })
   }
 
-  getMaster() {
+  getDefaultData() {
     const param = { 'id': this.mbl_id };
-    this.ms.getRecord(param, '/api/AirexportH/GetMasterAsync').subscribe({
+    this.ms.getRecord(param, '/api/AirexportH/GetDefaultDataAsync').subscribe({
       next: (rec: iAirexporth) => {
         this.mform.patchValue({
           hbl_mbl_id: rec.hbl_mbl_id,
@@ -499,6 +500,20 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_issued_date: rec.hbl_issued_date,
           hbl_issued_by: rec.hbl_issued_by,
           hbl_by2_carrier: rec.hbl_by2_carrier,
+          hbl_agent_name: rec.hbl_agent_name,
+          hbl_agent_city: rec.hbl_agent_city,
+          hbl_exp_ref1: rec.hbl_exp_ref1,
+          hbl_exp_ref2: rec.hbl_exp_ref2,
+          hbl_exp_ref3: rec.hbl_exp_ref3,
+          hbl_iata: rec.hbl_iata,
+          hbl_by1: rec.hbl_by1,
+          hbl_by2: rec.hbl_by2,
+          hbl_rout3: rec.hbl_rout3,
+          hbl_ins_amt: rec.hbl_ins_amt,
+          hbl_customs_value: rec.hbl_customs_value,
+          hbl_carriage_value: rec.hbl_carriage_value,
+          rec_branch_id: rec.rec_branch_id,
+          rec_company_id: rec.rec_company_id,
 
         });
         console.log(rec);
@@ -678,6 +693,7 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_shipper_add2: action.rec.cust_address2,
           hbl_shipper_add3: action.rec.cust_address3,
           hbl_shipper_add4: action.rec.cust_tel,
+          hbl_by1_carrier: action.rec.cust_name,
         });
       }
       else {
@@ -689,6 +705,7 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_shipper_add2: '',
           hbl_shipper_add3: '',
           hbl_shipper_add4: '',
+          hbl_by1_carrier: '',
         });
       }
     }

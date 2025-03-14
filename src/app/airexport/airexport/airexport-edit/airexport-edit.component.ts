@@ -195,53 +195,15 @@ export class AirExportEditComponent extends baseEditComponent {
   }
 
 
-  // deleteRow(idx: number,hbl_id: number) {
-  //   const nidx = idx + 1;
-  //   const confirmDelete = window.confirm("Delete " + nidx + " y/n");
-  //   if (confirmDelete) {
-  //     const param = {'id': hbl_id,url:'/api/AirexportH/DeleteAsync'};
-  //     this.deleteRecord(param);
-  //     this.formArray('air_export').removeAt(idx);
-  //   }
-  // }
-
-  //  deleteRecord(data: any){
-  //   // const param = {'id': hbl_id,url:'/api/AirexportH/DeleteAsync'};
-  //   this.ms.deleteRecord(data);
-  //  }
-
-  // public deleteRecord(data: any) {
-  //   if (data.url == '') {
-  //     alert('No Url Specified');
-  //     return;
-  //   }
-  //   const options = {
-  //     headers: this.gs.getHeaders(),
-  //     params: { ...data }
-  //   }
-  //   let mUrl = data.url;
-  //   this.http.get<any>(this.gs.getUrl(mUrl), options).subscribe({
-  //     next: (v: any) => {
-  //       if (v.status) {
-  //         this.ms.RemoveRecord(data.id);
-  //       }
-  //     },
-  //     error: (err: any) => {
-  //       this.gs.showAlert([err.error]);
-  //     }
-  //   });
-  // }
-
-
-  deleteRow(idx: number,house: string, hbl_id: number) {
+  deleteRow(idx: number, house: string, hbl_id: number) {
     if (!hbl_id) {
       alert("Invalid Record ID");
       return;
     }
-  
+
     if (window.confirm(`Are you sure you want to delete House no ${house}?`)) {
-      const param = { id: hbl_id, url : '/api/AirexportH/DeleteAsync' };
-  
+      const param = { id: hbl_id, url: '/api/AirexportH/DeleteAsync' };
+
       this.ms.deleteRecord(param)?.subscribe({
         next: (response: any) => {
           if (response.status) {
@@ -254,7 +216,7 @@ export class AirExportEditComponent extends baseEditComponent {
       });
     }
   }
-  
+
 
 
 

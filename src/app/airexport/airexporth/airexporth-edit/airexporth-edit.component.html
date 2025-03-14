@@ -29,7 +29,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_shipment_stage_name" name="hbl_shipment_stage_name"
               id="hbl_shipment_stage_name" (CallBack)="callBack($event)" table="param" subtable="SHIPSTAGE AE"
-              [company_id]="getCompanyId()" [url]="url" case="upper" 
+              [company_id]="getCompanyId()" [url]="url" case="upper"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -227,7 +227,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Insurance Amt</label>
           <div class="col-sm-8">
-            <app-input maxlength="3" formControlName="hbl_ins_amt" [case]="'UPPER'"></app-input>
+            <app-input maxlength="25" formControlName="hbl_ins_amt" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -256,7 +256,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_handled_name" name="hbl_handled_name" id="hbl_handled_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" 
+              case="upper"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -265,7 +265,7 @@
           <div class="col-sm-8">
             <auto-complete formControlName="hbl_salesman_name" name="hbl_salesman_name" id="hbl_salesman_name"
               (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()" [url]="url"
-              case="upper" 
+              case="upper"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
         </div>
@@ -416,7 +416,7 @@
     <div class="row">
       <div class="col-sm-8">
         <div class="form-group row">
-          
+
           <label class="col-sm-8 form-label form-lable-sm">Descriptions</label>
           <div class="col-sm-12">
             <app-input maxlength="100" formControlName="desc_mark1" name="desc_mark1" [case]="'UPPER'"></app-input>
@@ -733,7 +733,7 @@
           <label class="col-sm-4 form-label form-lable-sm">Issued Date</label>
           <div class="col-sm-8">
             <app-date formControlName="hbl_issued_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+              [placeholder]="gs.globalConstants.global_date_format"></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -746,14 +746,13 @@
           <label class="col-sm-4 form-label form-lable-sm">Actual Delivery Date</label>
           <div class="col-sm-8">
             <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+              [placeholder]="gs.globalConstants.global_date_format"></app-date>
           </div>
         </div>
         <div class="form-group row" *ngIf="mform.get('hbl_id')?.value > 0">
           <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
           <div class="col-sm-4">
-            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"
-             ></app-combobox>
+            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"></app-combobox>
           </div>
           <div class="col-sm-4">
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm me-2">MAWB</button>
