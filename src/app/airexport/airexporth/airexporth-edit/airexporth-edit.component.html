@@ -702,6 +702,13 @@
             <app-input maxlength="100" formControlName="hbl_remark3" [case]="'UPPER'"></app-input>
           </div>
         </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Actual Delivery Date</label>
+          <div class="col-sm-8">
+            <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format"></app-date>
+          </div>
+        </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group row">
@@ -743,21 +750,20 @@
             <app-input maxlength="100" formControlName="hbl_issued_by" [case]="'UPPER'"></app-input>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Actual Delivery Date</label>
+        
+        <div class="form-group row" *ngIf="mode=='edit'">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
           <div class="col-sm-8">
-            <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
-              [placeholder]="gs.globalConstants.global_date_format"></app-date>
+            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'" formControlName="hbl_print"></app-combobox>
           </div>
         </div>
-        <div class="form-group row" *ngIf="mform.get('hbl_id')?.value > 0">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
+        <div class="form-group row" *ngIf="mode=='edit'">
+          <label class="col-sm-4 form-label form-lable-sm" ></label>
           <div class="col-sm-4">
-            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"></app-combobox>
+            <button class="btn btn-success btn-sm w-100">MAWB</button>
           </div>
           <div class="col-sm-4">
-            <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm me-2">MAWB</button>
-            <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm">BLANK MAWB</button>
+            <button class="btn btn-success btn-sm w-100">BLANK MAWB</button>
           </div>
         </div>
       </div>

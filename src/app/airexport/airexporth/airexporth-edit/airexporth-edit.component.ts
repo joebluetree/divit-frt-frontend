@@ -28,6 +28,7 @@ export class AirExporthEditComponent extends baseEditComponent {
   iDec = 3;
   mbl_id: number = 0;
 
+
   dataList = [
     { key: 'PREPAID', value: 'PREPAID' },
     { key: 'COLLECT', value: 'COLLECT' },
@@ -44,6 +45,8 @@ export class AirExporthEditComponent extends baseEditComponent {
     { key: 'CONSIGNEE', value: 'CONSIGNEE' },
     { key: 'CONSIGNOR', value: 'CONSIGNOR' },
   ]
+
+  defaultPrintType = 'SHIPPER';
 
   constructor(
     private ms: AirExporthService,
@@ -194,6 +197,7 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_issued_date: [''],
       hbl_delivery_date: [''],
       hbl_issued_by: [''],
+      hbl_print: ['SHIPPER'],
 
       desc_parent_id: [0],
       desc_parent_type: [''],

@@ -146,6 +146,7 @@ export interface iAirexporth {
   hbl_issued_date?: string;
   hbl_delivery_date?: string;
   hbl_issued_by?: string;
+  hbl_print?: string;
 
   desc_parent_id: number;
   desc_parent_type: string;
