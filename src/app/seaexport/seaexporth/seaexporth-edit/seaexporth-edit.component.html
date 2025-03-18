@@ -1,14 +1,15 @@
-<div class="page-header">
-  <h5>{{title}}</h5>
-  <!-- <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaexport/seaexporthEdit"
+<div class="row">
+  <div class="col-md-10">
+    <div class="page-header">
+      <h5>{{title}}</h5>
+      <!-- <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaexport/seaexporthEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button> -->
-  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
-  <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
-</div>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+      <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
+    </div>
 
-<form [formGroup]="mform">
-  <div class="row">
-    <div class="col-md-10">
+    <form [formGroup]="mform">
+
       <div class="page-body">
         <div class="row">
           <div class="col-sm-4">
@@ -855,85 +856,86 @@
           </div>
         </div>
       </div>
+    </form>
       <div class="page-footer line-bottom">
         <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
           [disabled]="mform.invalid">Save</button>
       </div>
-    </div>
+  </div>
 
-    <div class="col-md-2">
-      <div class="page-body line-bottom">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'"
-                  [displayColumn]="'value'" case="UPPER"></app-combobox>
-              </div>
+  <div class="col-md-2" *ngIf="mform.get('hbl_id')?.value != 0">
+    <div class="page-body line-bottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'"
+                [displayColumn]="'value'" case="UPPER"></app-combobox>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <app-checkbox></app-checkbox>
+              <label class="col-sm-8 form-label form-lable-sm" for="">BL New Format</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <app-checkbox></app-checkbox>
+              <label class="ms-1 form-label form-label-sm">BL Backside</label>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <app-checkbox></app-checkbox>
+              <label class="ms-1 form-label form-label-sm">Colour</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <app-checkbox></app-checkbox>
+              <label class="ms-1 form-label form-label-sm">Cntr#/Seal#</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12 ">
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
             </div>
 
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-checkbox></app-checkbox>
-                <label class="col-sm-8 form-label form-lable-sm" for="">BL New Format</label>
-              </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(TELEX)</button>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-checkbox></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">BL Backside</label>
-              </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(DRAFT)</button>
             </div>
-
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-checkbox></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Colour</label>
-              </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">PRINT HBL</button>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-checkbox></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Cntr#/Seal#</label>
-              </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">RIDER</button>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12 ">
-                <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
-              </div>
-
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">HBL(TELEX)</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">HBL(DRAFT)</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">PRINT HBL</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">RIDER</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">SAVE</button>
-              </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">SAVE</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</form>
+</div>
+
 
 <!-- <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
