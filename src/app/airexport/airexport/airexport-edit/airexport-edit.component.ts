@@ -254,8 +254,6 @@ export class AirExportEditComponent extends baseEditComponent {
         this.mform.patchValue({
           mbl_cfno: v.mbl_cfno,
           mbl_refno: v.mbl_refno,
-
-
           rec_version: v.rec_version
         });
         console.log(data);

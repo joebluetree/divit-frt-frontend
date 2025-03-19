@@ -518,6 +518,7 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_carriage_value: rec.hbl_carriage_value,
           rec_branch_id: rec.rec_branch_id,
           rec_company_id: rec.rec_company_id,
+          rec_version: rec.rec_version,
 
         });
         console.log(rec);
