@@ -25,8 +25,6 @@ import { HttpClient } from '@angular/common/http';
 
 export class AirExportEditComponent extends baseEditComponent {
 
-  protected http = inject(HttpClient);
-
   dataList = [
     { key: 'PREPAID', value: 'PREPAID' },
     { key: 'COLLECT', value: 'COLLECT' },
