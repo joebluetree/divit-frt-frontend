@@ -414,272 +414,356 @@
 
   <div class="page-body">
     <div class="row">
-      <div class="col-sm-8">
-        <div class="form-group row">
-
-          <label class="col-sm-8 form-label form-lable-sm">Marks & Nos</label>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark1" name="desc_mark1" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark2" name="desc_mark2" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark3" name="desc_mark3" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark4" name="desc_mark4" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark5" name="desc_mark5" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark6" name="desc_mark6" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark7" name="desc_mark7" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark8" name="desc_mark8" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark9" name="desc_mark9" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-12">
-            <app-input maxlength="100" formControlName="desc_mark10" name="desc_mark10" [case]="'UPPER'"></app-input>
+      <div class="col-sm-12">
+        <div formGroupName="mark1">
+          <div class="form-group row">
+            <label class="col-sm-8 form-label form-lable-sm">Marks & Nos</label>
+            <label class="col-sm-4 form-label form-lable-sm">Nature And Quantity Of Goods (Incl. Dimensions or
+              Volume)</label>
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Other Charges To Agent</label>
-          <label class="col-sm-3 form-label form-lable-sm">Rate</label>
-          <label class="col-sm-3 form-label form-lable-sm">Total</label>
-          <label class="col-sm-2 form-label form-lable-sm">Print SC</label>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_toagent1" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_rate1" id="hbl_rate1" name="hbl_rate1" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_total1" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_printsc1" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc2"></app-checkbox>
+        <div formGroupName="mark2">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_toagent2" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_rate2" id="hbl_rate2" name="hbl_rate2" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_total2" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_printsc3" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc4"></app-checkbox>
+        <div formGroupName="mark3">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_toagent3" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_rate3" id="hbl_rate3" name="hbl_rate3" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_total3" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_printsc5" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc6"></app-checkbox>
+        <div formGroupName="mark4">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_toagent4" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_rate4" id="hbl_rate4" name="hbl_rate4" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_total4" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_printsc7" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc8"></app-checkbox>
+        <div formGroupName="mark5">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_toagent5" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_rate5" id="hbl_rate5" name="hbl_rate5" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_total5" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_printsc9" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_printsc10"></app-checkbox>
+        <div formGroupName="mark6">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Other Charges To Carrier</label>
-          <label class="col-sm-3 form-label form-lable-sm">Rate</label>
-          <label class="col-sm-3 form-label form-lable-sm">Total</label>
-          <label class="col-sm-2 form-label form-lable-sm">Print SC</label>
-        </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_tocarrier1" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_carrate1" id="hbl_carrate1" name="hbl_rate1" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_cartotal1" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_carprintsc1" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_carprintsc2"></app-checkbox>
+        <div formGroupName="mark7">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_tocarrier2" [case]="'UPPER'"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_carrate2" id="hbl_carrate2" name="hbl_rate2" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_cartotal2" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
-          </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_carprintsc3" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_carprintsc4"></app-checkbox>
+        <div formGroupName="mark8">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
-
-        <div class="form-group row">
-          <div class="col-sm-4">
-            <app-input maxlength="100" formControlName="hbl_tocarrier3" [case]="'UPPER'"></app-input>
+        <div formGroupName="mark9">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_carrate3" id="hbl_carrate3" name="hbl_rate3" type="number"
-              (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+        </div>
+        <div formGroupName="mark10">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
-          <div class="col-sm-3">
-            <app-input formControlName="hbl_cartotal3" type="number"
-              [dec]="gs.globalConstants.global_dec_places"></app-input>
+        </div>
+        <div formGroupName="mark11">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
-          <div class="col-sm-2">
-            <app-checkbox formControlName="hbl_carprintsc5" class="me-2"></app-checkbox>
-            <app-checkbox formControlName="hbl_carprintsc6"></app-checkbox>
+        </div>
+        <div formGroupName="mark12">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="mark13">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="mark14">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="mark15">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="mark16">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
+          </div>
+        </div>
+        <div formGroupName="mark17">
+          <div class="form-group row">
+            <div class="col-sm-8">
+              <app-input maxlength="100" formControlName="desc_mark" name="desc_mark" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="desc_description" name="desc_description"
+                [case]="'UPPER'"></app-input>
+            </div>
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm">Other Charges To Agent</label>
+            <label class="col-sm-3 form-label form-lable-sm">Rate</label>
+            <label class="col-sm-3 form-label form-lable-sm">Total</label>
+            <label class="col-sm-2 form-label form-lable-sm">Print SC</label>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_toagent1" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_rate1" id="hbl_rate1" name="hbl_rate1" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_total1" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_printsc1" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_printsc2"></app-checkbox>
+            </div>
+          </div>
 
-      <div class="col-sm-4">
-        <div class="form-group row">
-          <label class="col-sm-12 form-label form-lable-sm">Nature And Quantity Of Goods (Incl. Dimensions or
-            Volume)</label>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description1" name="desc_description1"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description2" name="desc_description2"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description3" name="desc_description3"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description4" name="desc_description4"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description5" name="desc_description5"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description6" name="desc_description6"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description7" name="desc_description7"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description8" name="desc_description8"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description9" name="desc_description9"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description10" name="desc_description10"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description11" name="desc_description11"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description12" name="desc_description12"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description13" name="desc_description13"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description14" name="desc_description14"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description15" name="desc_description15"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description16" name="desc_description16"
-            [case]="'UPPER'"></app-input>
-        </div>
-        <div class="col-sm-12">
-          <app-input maxlength="100" formControlName="desc_description17" name="desc_description17"
-            [case]="'UPPER'"></app-input>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_toagent2" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_rate2" id="hbl_rate2" name="hbl_rate2" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_total2" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_printsc3" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_printsc4"></app-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_toagent3" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_rate3" id="hbl_rate3" name="hbl_rate3" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_total3" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_printsc5" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_printsc6"></app-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_toagent4" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_rate4" id="hbl_rate4" name="hbl_rate4" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_total4" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_printsc7" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_printsc8"></app-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_toagent5" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_rate5" id="hbl_rate5" name="hbl_rate5" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_total5" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_printsc9" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_printsc10"></app-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 form-label form-lable-sm">Other Charges To Carrier</label>
+            <label class="col-sm-3 form-label form-lable-sm">Rate</label>
+            <label class="col-sm-3 form-label form-lable-sm">Total</label>
+            <label class="col-sm-2 form-label form-lable-sm">Print SC</label>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_tocarrier1" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_carrate1" id="hbl_carrate1" name="hbl_rate1" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_cartotal1" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_carprintsc1" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_carprintsc2"></app-checkbox>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_tocarrier2" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_carrate2" id="hbl_carrate2" name="hbl_rate2" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_cartotal2" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_carprintsc3" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_carprintsc4"></app-checkbox>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-4">
+              <app-input maxlength="100" formControlName="hbl_tocarrier3" [case]="'UPPER'"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_carrate3" id="hbl_carrate3" name="hbl_rate3" type="number"
+                (blur)="findTotal($event)" [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-3">
+              <app-input formControlName="hbl_cartotal3" type="number"
+                [dec]="gs.globalConstants.global_dec_places"></app-input>
+            </div>
+            <div class="col-sm-2">
+              <app-checkbox formControlName="hbl_carprintsc5" class="me-4"></app-checkbox>
+              <app-checkbox formControlName="hbl_carprintsc6"></app-checkbox>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  
+
 
   <div class="page-body">
     <div class="row">
@@ -750,15 +834,16 @@
             <app-input maxlength="100" formControlName="hbl_issued_by" [case]="'UPPER'"></app-input>
           </div>
         </div>
-        
+
         <div class="form-group row" *ngIf="mode=='edit'">
           <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
           <div class="col-sm-8">
-            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'" formControlName="hbl_print"></app-combobox>
+            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"
+              formControlName="hbl_print"></app-combobox>
           </div>
         </div>
         <div class="form-group row" *ngIf="mode=='edit'">
-          <label class="col-sm-4 form-label form-lable-sm" ></label>
+          <label class="col-sm-4 form-label form-lable-sm"></label>
           <div class="col-sm-4">
             <button class="btn btn-success btn-sm w-100">MAWB</button>
           </div>

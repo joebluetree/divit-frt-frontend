@@ -148,56 +148,23 @@ export interface iAirexporth {
   hbl_issued_by?: string;
   hbl_print?: string;
 
-  desc_parent_id: number;
-  desc_parent_type: string;
-  desc_ctr?: number;
-
-  desc_id1?: number;
-  desc_id2?: number;
-  desc_id3?: number;
-  desc_id4?: number;
-  desc_id5?: number;
-  desc_id6?: number;
-  desc_id7?: number;
-  desc_id8?: number;
-  desc_id9?: number;
-  desc_id10?: number;
-  desc_id11?: number;
-  desc_id12?: number;
-  desc_id13?: number;
-  desc_id14?: number;
-  desc_id15?: number;
-  desc_id16?: number;
-  desc_id17?: number;
-
-  desc_mark1?: string;
-  desc_mark2?: string;
-  desc_mark3?: string;
-  desc_mark4?: string;
-  desc_mark5?: string;
-  desc_mark6?: string;
-  desc_mark7?: string;
-  desc_mark8?: string;
-  desc_mark9?: string;
-  desc_mark10?: string;
-
-  desc_description1?: string;
-  desc_description2?: string;
-  desc_description3?: string;
-  desc_description4?: string;
-  desc_description5?: string;
-  desc_description6?: string;
-  desc_description7?: string;
-  desc_description8?: string;
-  desc_description9?: string;
-  desc_description10?: string;
-  desc_description11?: string;
-  desc_description12?: string;
-  desc_description13?: string;
-  desc_description14?: string;
-  desc_description15?: string;
-  desc_description16?: string;
-  desc_description17?: string;
+  mark1: Cargo_desc;
+  mark2:Cargo_desc;
+  mark3: Cargo_desc;
+  mark4:Cargo_desc;
+  mark5: Cargo_desc;
+  mark6:Cargo_desc;
+  mark7: Cargo_desc;
+  mark8:Cargo_desc;
+  mark9: Cargo_desc;
+  mark10:Cargo_desc;
+  mark11: Cargo_desc;
+  mark12:Cargo_desc;
+  mark13: Cargo_desc;
+  mark14:Cargo_desc;
+  mark15:Cargo_desc;
+  mark16: Cargo_desc;
+  mark17:Cargo_desc;
 
   rec_version: number;
   rec_company_id: number;
@@ -208,6 +175,15 @@ export interface iAirexporth {
   rec_edited_date: string;
 }
 
+export interface Cargo_desc{
+  desc_id: number;
+  desc_parent_id: number;
+  desc_parent_type: string;
+  desc_ctr?: number;
+
+  desc_mark?: string;
+  desc_description?: string;
+}
 
 export interface iAirExporth_Search {
   hbl_houseno: string;

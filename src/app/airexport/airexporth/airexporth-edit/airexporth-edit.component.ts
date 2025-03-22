@@ -7,6 +7,7 @@ import { AirExportService } from '../../services/airexport.service';
 import { iAirexporth, iAirExporthModel } from '../../models/iairexporth';
 import { iAirexport } from '../../models/iairexport';
 import { AirExporthService } from '../../services/airexporth.service';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -199,56 +200,23 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_issued_by: [''],
       hbl_print: ['SHIPPER'],
 
-      desc_parent_id: [0],
-      desc_parent_type: [''],
-      desc_ctr: [0],
-
-      desc_id1: [0],
-      desc_id2: [0],
-      desc_id3: [0],
-      desc_id4: [0],
-      desc_id5: [0],
-      desc_id6: [0],
-      desc_id7: [0],
-      desc_id8: [0],
-      desc_id9: [0],
-      desc_id10: [0],
-      desc_id11: [0],
-      desc_id12: [0],
-      desc_id13: [0],
-      desc_id14: [0],
-      desc_id15: [0],
-      desc_id16: [0],
-      desc_id17: [0],
-
-      desc_mark1: [''],
-      desc_mark2: [''],
-      desc_mark3: [''],
-      desc_mark4: [''],
-      desc_mark5: [''],
-      desc_mark6: [''],
-      desc_mark7: [''],
-      desc_mark8: [''],
-      desc_mark9: [''],
-      desc_mark10: [''],
-
-      desc_description1: [''],
-      desc_description2: [''],
-      desc_description3: [''],
-      desc_description4: [''],
-      desc_description5: [''],
-      desc_description6: [''],
-      desc_description7: [''],
-      desc_description8: [''],
-      desc_description9: [''],
-      desc_description10: [''],
-      desc_description11: [''],
-      desc_description12: [''],
-      desc_description13: [''],
-      desc_description14: [''],
-      desc_description15: [''],
-      desc_description16: [''],
-      desc_description17: [''],
+      mark1: this.createFormDesc(),
+      mark2: this.createFormDesc(),
+      mark3: this.createFormDesc(),
+      mark4: this.createFormDesc(),
+      mark5: this.createFormDesc(),
+      mark6: this.createFormDesc(),
+      mark7: this.createFormDesc(),
+      mark8: this.createFormDesc(),
+      mark9: this.createFormDesc(),
+      mark10: this.createFormDesc(),
+      mark11: this.createFormDesc(),
+      mark12: this.createFormDesc(),
+      mark13: this.createFormDesc(),
+      mark14: this.createFormDesc(),
+      mark15: this.createFormDesc(),
+      mark16: this.createFormDesc(),
+      mark17: this.createFormDesc(),
 
       rec_version: [0],
     })
@@ -275,6 +243,17 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_mbl_id: this.mbl_id
     })
     this.getDefaultData();
+  }
+
+  createFormDesc() {
+    return this.fb.group({
+      desc_id: [0],
+      desc_parent_id: [0],
+      desc_parent_type: [''],
+      desc_ctr: [0],
+      desc_mark: [''],
+      desc_description: ['']
+    });
   }
 
 
@@ -425,60 +404,26 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_delivery_date: rec.hbl_delivery_date,
           hbl_issued_by: rec.hbl_issued_by,
 
-          desc_parent_id: rec.desc_parent_id,
-          desc_parent_type: rec.desc_parent_type,
-          desc_ctr: rec.desc_ctr,
-
-          desc_id1: rec.desc_id1,
-          desc_id2: rec.desc_id2,
-          desc_id3: rec.desc_id3,
-          desc_id4: rec.desc_id4,
-          desc_id5: rec.desc_id5,
-          desc_id6: rec.desc_id6,
-          desc_id7: rec.desc_id7,
-          desc_id8: rec.desc_id8,
-          desc_id9: rec.desc_id9,
-          desc_id10: rec.desc_id10,
-          desc_id11: rec.desc_id11,
-          desc_id12: rec.desc_id12,
-          desc_id13: rec.desc_id13,
-          desc_id14: rec.desc_id14,
-          desc_id15: rec.desc_id15,
-          desc_id16: rec.desc_id16,
-          desc_id17: rec.desc_id17,
-
-          desc_mark1: rec.desc_mark1,
-          desc_mark2: rec.desc_mark2,
-          desc_mark3: rec.desc_mark3,
-          desc_mark4: rec.desc_mark4,
-          desc_mark5: rec.desc_mark5,
-          desc_mark6: rec.desc_mark6,
-          desc_mark7: rec.desc_mark7,
-          desc_mark8: rec.desc_mark8,
-          desc_mark9: rec.desc_mark9,
-          desc_mark10: rec.desc_mark10,
-
-          desc_description1: rec.desc_description1,
-          desc_description2: rec.desc_description2,
-          desc_description3: rec.desc_description3,
-          desc_description4: rec.desc_description4,
-          desc_description5: rec.desc_description5,
-          desc_description6: rec.desc_description6,
-          desc_description7: rec.desc_description7,
-          desc_description8: rec.desc_description8,
-          desc_description9: rec.desc_description9,
-          desc_description10: rec.desc_description10,
-          desc_description11: rec.desc_description11,
-          desc_description12: rec.desc_description12,
-          desc_description13: rec.desc_description13,
-          desc_description14: rec.desc_description14,
-          desc_description15: rec.desc_description15,
-          desc_description16: rec.desc_description16,
-          desc_description17: rec.desc_description17,
-
           rec_version: rec.rec_version,
-
         });
+        
+        this.getMarks(rec.mark1,"mark1");
+        this.getMarks(rec.mark2,"mark2");
+        this.getMarks(rec.mark3,"mark3");
+        this.getMarks(rec.mark4,"mark4");
+        this.getMarks(rec.mark5,"mark5");
+        this.getMarks(rec.mark6,"mark6");
+        this.getMarks(rec.mark7,"mark7");
+        this.getMarks(rec.mark8,"mark8");
+        this.getMarks(rec.mark9,"mark9");
+        this.getMarks(rec.mark10,"mark10");
+        this.getMarks(rec.mark11,"mark11");
+        this.getMarks(rec.mark12,"mark12");
+        this.getMarks(rec.mark13,"mark13");
+        this.getMarks(rec.mark14,"mark14");
+        this.getMarks(rec.mark15,"mark15");
+        this.getMarks(rec.mark16,"mark16");
+        this.getMarks(rec.mark17,"mark17");
 
         console.log(rec);
       },
@@ -486,6 +431,19 @@ export class AirExporthEditComponent extends baseEditComponent {
         this.gs.showError(e);
       }
     })
+  }
+
+  getMarks(mark: any, controlname: string){
+    if(mark){
+      this.mform.get(controlname)?.patchValue({
+        desc_id: mark.desc_id,
+        desc_parent_id: mark.desc_parent_id,
+        desc_parent_type: mark.desc_parent_type,
+        desc_ctr: mark.desc_ctr,
+        desc_mark: mark.desc_mark,
+        desc_description: mark.desc_description,
+      });
+    }
   }
 
   getDefaultData() {
