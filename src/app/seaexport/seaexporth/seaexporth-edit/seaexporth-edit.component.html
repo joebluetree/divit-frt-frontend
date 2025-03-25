@@ -2,8 +2,6 @@
   <div class="col-md-10">
     <div class="page-header">
       <h5>{{title}}</h5>
-      <!-- <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaexport/seaexporthEdit"
-    [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button> -->
       <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
       <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
     </div>
@@ -465,7 +463,8 @@
                       [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
                   </td>
                   <td>
-                    <app-input formControlName="cntr_cbm" [rowIndex]="i" name="cntr_cbm" type="number"></app-input>
+                    <app-input formControlName="cntr_cbm" [rowIndex]="i" name="cntr_cbm"
+                      [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
                   </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
@@ -489,7 +488,6 @@
           </div>
         </div>
       </div>
-
       <div class="page-body">
         <div class="row">
           <div class="col-sm-4">
@@ -497,232 +495,307 @@
               <label class="col-sm-8 form-label form-lable-sm" for="">Marks & Nos</label>
               <label class="col-sm-4 form-label form-lable-sm" for="">Pkgs</label>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-8">
-                <app-input maxlength="100" formControlName="desc_mark1" [case]="'UPPER'" name="desc_mark1"
-                  id="desc_mark1"></app-input>
-              </div>
-              <div class="col-sm-4">
-                <app-input maxlength="100" formControlName="desc_package1" [case]="'UPPER'" name="desc_package1"
-                  id="desc_package1"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-8">
-                <app-input maxlength="100" formControlName="desc_mark2" [case]="'UPPER'" name="desc_mark2"
-                  id="desc_mark2"></app-input>
-              </div>
-              <div class="col-sm-4">
-                <app-input maxlength="100" formControlName="desc_package2" [case]="'UPPER'" name="desc_package2"
-                  id="desc_package2"></app-input>
+
+
+            <div formGroupName="marks1">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-8">
-                <app-input maxlength="100" formControlName="desc_mark3" [case]="'UPPER'" name="desc_mark3"
-                  id="desc_mark3"></app-input>
-              </div>
-              <div class="col-sm-4">
-                <app-input maxlength="100" formControlName="desc_package3" [case]="'UPPER'" name="desc_package3"
-                  id="desc_package3"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark4" [case]="'UPPER'" name="desc_mark4"
-                  id="desc_mark4"></app-input>
+            <div formGroupName="marks2">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark5" [case]="'UPPER'" name="desc_mark5"
-                  id="desc_mark5"></app-input>
+            <div formGroupName="marks3">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark6" [case]="'UPPER'" name="desc_mark6"
-                  id="desc_mark6"></app-input>
+            <div formGroupName="marks4">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark7" [case]="'UPPER'" name="desc_mark7"
-                  id="desc_mark7"></app-input>
+            <div formGroupName="marks5">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark8" [case]="'UPPER'" name="desc_mark8"
-                  id="desc_mark8"></app-input>
+            <div formGroupName="marks6">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark9" [case]="'UPPER'" name="desc_mark9"
-                  id="desc_mark9"></app-input>
+            <div formGroupName="marks7">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark10" [case]="'UPPER'" name="desc_mark10"
-                  id="desc_mark10"></app-input>
+            <div formGroupName="marks8">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark11" [case]="'UPPER'" name="desc_mark11"
-                  id="desc_mark11"></app-input>
+            <div formGroupName="marks9">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark12" [case]="'UPPER'" name="desc_mark12"
-                  id="desc_mark12"></app-input>
+            <div formGroupName="marks10">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark13" [case]="'UPPER'" name="desc_mark13"
-                  id="desc_mark13"></app-input>
+            <div formGroupName="marks11">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark14" [case]="'UPPER'" name="desc_mark14"
-                  id="desc_mark14"></app-input>
+            <div formGroupName="marks12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark15" [case]="'UPPER'" name="desc_mark15"
-                  id="desc_mark15"></app-input>
+            <div formGroupName="marks13">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark16" [case]="'UPPER'" name="desc_mark16"
-                  id="desc_mark16"></app-input>
+            <div formGroupName="marks14">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_mark17" [case]="'UPPER'" name="desc_mark17"
-                  id="desc_mark17"></app-input>
+            <div formGroupName="marks15">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks16">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks17">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="col-sm-4">
             <div class="form-group row">
               <label class="col-sm-8 form-label form-lable-sm" for="">Description</label>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description1" [case]="'UPPER'" name="desc_description1"
-                  id="desc_description1"></app-input>
+            <div formGroupName="marks1">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description2" [case]="'UPPER'" name="desc_description2"
-                  id="desc_description2"></app-input>
+            <div formGroupName="marks2">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description3" [case]="'UPPER'" name="desc_description3"
-                  id="desc_description3"></app-input>
+            <div formGroupName="marks3">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description4" [case]="'UPPER'" name="desc_description4"
-                  id="desc_description4"></app-input>
+            <div formGroupName="marks4">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description5" [case]="'UPPER'" name="desc_description5"
-                  id="desc_description5"></app-input>
+            <div formGroupName="marks5">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description6" [case]="'UPPER'" name="desc_description6"
-                  id="desc_description6"></app-input>
+            <div formGroupName="marks6">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description7" [case]="'UPPER'" name="desc_description7"
-                  id="desc_description7"></app-input>
+            <div formGroupName="marks7">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description8" [case]="'UPPER'" name="desc_description8"
-                  id="desc_description8"></app-input>
+            <div formGroupName="marks8">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description9" [case]="'UPPER'" name="desc_description9"
-                  id="desc_description9"></app-input>
+            <div formGroupName="marks9">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description10" [case]="'UPPER'"
-                  name="desc_description10" id="desc_description10"></app-input>
+            <div formGroupName="marks10">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description11" [case]="'UPPER'"
-                  name="desc_description11" id="desc_description11"></app-input>
+            <div formGroupName="marks11">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description12" [case]="'UPPER'"
-                  name="desc_description12" id="desc_description12"></app-input>
+            <div formGroupName="marks12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description13" [case]="'UPPER'"
-                  name="desc_description13" id="desc_description13"></app-input>
+            <div formGroupName="marks13">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description14" [case]="'UPPER'"
-                  name="desc_description14" id="desc_description14"></app-input>
+            <div formGroupName="marks14">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description15" [case]="'UPPER'"
-                  name="desc_description15" id="desc_description15"></app-input>
+            <div formGroupName="marks15">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description16" [case]="'UPPER'"
-                  name="desc_description16" id="desc_description16"></app-input>
+            <div formGroupName="marks16">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <app-input maxlength="100" formControlName="desc_description17" [case]="'UPPER'"
-                  name="desc_description17" id="desc_description17"></app-input>
+            <div formGroupName="marks17">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-sm-4">
-            <div class="form-group row">
-              <label class="col-sm-12 form-label form-lable-sm" for="">Weight/Measurement</label>
-            </div>
+          <!-- </div>
+      </div> -->
+
+
+      <div class="col-sm-4">
+        <!-- <div class="form-group row"> -->
+          <label class="col-sm-8 form-label form-lable-sm" for=""></label>
+        <!-- </div> -->
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Lbs</label>
               <div class="col-sm-3">
@@ -775,12 +848,12 @@
               <label class="form-label form-label-sm col-sm-4">Print KGS</label>
               <div class="col-sm-3">
                 <app-checkbox formControlName="hbl_print_kgs"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+                <label class="ms-1 form-label form-label-sm">Yes/No </label>
               </div>
               <label class="form-label form-label-sm col-sm-2">Print LBS</label>
               <div class="col-sm-3">
                 <app-checkbox formControlName="hbl_print_lbs"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+                <label class="ms-1 form-label form-label-sm">Yes/No </label>
               </div>
             </div>
             <div class="form-group row">
@@ -857,13 +930,13 @@
         </div>
       </div>
     </form>
-      <div class="page-footer line-bottom">
-        <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
-          [disabled]="mform.invalid">Save</button>
-      </div>
+    <div class="page-footer line-bottom">
+      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+    </div>
   </div>
 
-  <div class="col-md-2" *ngIf="mform.get('hbl_id')?.value != 0">
+  <div class="col-sm-2 border-top" *ngIf="mform.get('hbl_id')?.value != 0">
     <div class="page-body line-bottom">
       <div class="row">
         <div class="col-sm-12">
@@ -901,33 +974,34 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
+              <button class="btn btn-sm btn-info w-100 mb-2">HBL(ORGINAL)</button>
             </div>
 
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(TELEX)</button>
+              <button class="btn btn-sm btn-info w-100 mb-2">HBL(TELEX)</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(DRAFT)</button>
+              <button class="btn btn-sm btn-info w-100 mb-2">HBL(DRAFT)</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PRINT HBL</button>
+              <button class="btn btn-sm btn-info w-100 mb-2">PRINT HBL</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">RIDER</button>
+              <button class="btn btn-sm btn-info w-100 mb-2">RIDER</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">SAVE</button>
+              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-info w-100 mb-2" (click)="save()"
+                [disabled]="mform.invalid">SAVE</button>
             </div>
           </div>
         </div>

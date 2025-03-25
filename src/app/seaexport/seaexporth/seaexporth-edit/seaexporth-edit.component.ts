@@ -48,7 +48,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
   ) {
 
     super();
-    this.showModel = false;
+    this.showModel = true;
     let date = this.gs.getToday();
     this.mform = this.fb.group({
       hbl_id: [0],
@@ -112,10 +112,10 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_is_arranged: [''],
       hbl_obl_telex: ['N/A'],
       hbl_obl_slno: [''],
-      hbl_format_id: [0],
-      hbl_format_name: [''],
-      hbl_draft_format_id: [0],
-      hbl_draft_format_name: [''],
+      hbl_format_id: [46],
+      hbl_format_name: ['MOTHERLINES BLANK'],//default
+      hbl_draft_format_id: [47],
+      hbl_draft_format_name: ['MOTHERLINES DRAFT'],//
       hbl_lbs: [0],
       hbl_weight: [0],
       hbl_cft: [0],
@@ -136,68 +136,24 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_issued_date: [''],
       hbl_delivery_date: [''],
       hbl_originals: [0],
-
-      desc_parent_id: [0],
-      desc_parent_type: [''],
-      desc_ctr: [0],
-
-      desc_id1: [0],
-      desc_id2: [0],
-      desc_id3: [0],
-      desc_id4: [0],
-      desc_id5: [0],
-      desc_id6: [0],
-      desc_id7: [0],
-      desc_id8: [0],
-      desc_id9: [0],
-      desc_id10: [0],
-      desc_id11: [0],
-      desc_id12: [0],
-      desc_id13: [0],
-      desc_id14: [0],
-      desc_id15: [0],
-      desc_id16: [0],
-      desc_id17: [0],
-
-      desc_mark1: [''],
-      desc_mark2: [''],
-      desc_mark3: [''],
-      desc_mark4: [''],
-      desc_mark5: [''],
-      desc_mark6: [''],
-      desc_mark7: [''],
-      desc_mark8: [''],
-      desc_mark9: [''],
-      desc_mark10: [''],
-      desc_mark11: [''],
-      desc_mark12: [''],
-      desc_mark13: [''],
-      desc_mark14: [''],
-      desc_mark15: [''],
-      desc_mark16: [''],
-      desc_mark17: [''],
-
-      desc_package1: [''],
-      desc_package2: [''],
-      desc_package3: [''],
-
-      desc_description1: [''],
-      desc_description2: [''],
-      desc_description3: [''],
-      desc_description4: [''],
-      desc_description5: [''],
-      desc_description6: [''],
-      desc_description7: [''],
-      desc_description8: [''],
-      desc_description9: [''],
-      desc_description10: [''],
-      desc_description11: [''],
-      desc_description12: [''],
-      desc_description13: [''],
-      desc_description14: [''],
-      desc_description15: [''],
-      desc_description16: [''],
-      desc_description17: [''],
+      
+      marks1: this.formDesc(),
+      marks2: this.formDesc(),
+      marks3: this.formDesc(),
+      marks4: this.formDesc(),
+      marks5: this.formDesc(),
+      marks6: this.formDesc(),
+      marks7: this.formDesc(),
+      marks8: this.formDesc(),
+      marks9: this.formDesc(),
+      marks10: this.formDesc(),
+      marks11: this.formDesc(),
+      marks12: this.formDesc(),
+      marks13: this.formDesc(),
+      marks14: this.formDesc(),
+      marks15: this.formDesc(),
+      marks16: this.formDesc(),
+      marks17: this.formDesc(),
 
       house_cntr: this.fb.array([]),
       rec_version: [0],
@@ -224,8 +180,22 @@ export class SeaExportHEditComponent extends baseEditComponent {
     this.mform.patchValue({
       hbl_id: this.id,
       hbl_mbl_id: this.mbl_id,
+
     })
+    // this.formDesc();
     this.getDefaultData();
+  }
+  
+  formDesc() {
+    return this.fb.group({
+      desc_id: [0],
+      desc_parent_id: [0],
+      desc_parent_type: [''],
+      desc_ctr: [0],
+      desc_mark: [''],
+      desc_package: [''],
+      desc_description: ['']
+    });
   }
 
   addRow(rec: iContainer) {
@@ -283,8 +253,13 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_pol_name: rec.hbl_pol_name,
           hbl_pod_name: rec.hbl_pod_name,
           hbl_place_delivery: rec.hbl_place_delivery,
+          hbl_handled_id : rec.hbl_handled_id,
+          hbl_handled_name : rec.hbl_handled_name,
+          hbl_salesman_id : rec.hbl_salesman_id,
+          hbl_salesman_name : rec.hbl_salesman_name,
+          hbl_by1 : rec.hbl_handled_name,
           hbl_issued_date: rec.hbl_issued_date,
-
+//add desc default value
         });
         this.fillCntr(rec.house_cntr);
       },
@@ -386,67 +361,14 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_delivery_date: rec.hbl_delivery_date,
           hbl_originals: rec.hbl_originals,
 
-          desc_id1: rec.desc_id1,
-          desc_id2: rec.desc_id2,
-          desc_id3: rec.desc_id3,
-          desc_id4: rec.desc_id4,
-          desc_id5: rec.desc_id5,
-          desc_id6: rec.desc_id6,
-          desc_id7: rec.desc_id7,
-          desc_id8: rec.desc_id8,
-          desc_id9: rec.desc_id9,
-          desc_id10: rec.desc_id10,
-          desc_id11: rec.desc_id11,
-          desc_id12: rec.desc_id12,
-          desc_id13: rec.desc_id13,
-          desc_id14: rec.desc_id14,
-          desc_id15: rec.desc_id15,
-          desc_id16: rec.desc_id16,
-          desc_id17: rec.desc_id17,
-
-          desc_mark1: rec.desc_mark1,
-          desc_mark2: rec.desc_mark2,
-          desc_mark3: rec.desc_mark3,
-          desc_mark4: rec.desc_mark4,
-          desc_mark5: rec.desc_mark5,
-          desc_mark6: rec.desc_mark6,
-          desc_mark7: rec.desc_mark7,
-          desc_mark8: rec.desc_mark8,
-          desc_mark9: rec.desc_mark9,
-          desc_mark10: rec.desc_mark10,
-          desc_mark11: rec.desc_mark11,
-          desc_mark12: rec.desc_mark12,
-          desc_mark13: rec.desc_mark13,
-          desc_mark14: rec.desc_mark14,
-          desc_mark15: rec.desc_mark15,
-          desc_mark16: rec.desc_mark16,
-          desc_mark17: rec.desc_mark17,
-
-          desc_package1: rec.desc_package1,
-          desc_package2: rec.desc_package2,
-          desc_package3: rec.desc_package3,
-
-          desc_description1: rec.desc_description1,
-          desc_description2: rec.desc_description2,
-          desc_description3: rec.desc_description3,
-          desc_description4: rec.desc_description4,
-          desc_description5: rec.desc_description5,
-          desc_description6: rec.desc_description6,
-          desc_description7: rec.desc_description7,
-          desc_description8: rec.desc_description8,
-          desc_description9: rec.desc_description9,
-          desc_description10: rec.desc_description10,
-          desc_description11: rec.desc_description11,
-          desc_description12: rec.desc_description12,
-          desc_description13: rec.desc_description13,
-          desc_description14: rec.desc_description14,
-          desc_description15: rec.desc_description15,
-          desc_description16: rec.desc_description16,
-          desc_description17: rec.desc_description17,
-
           rec_version: rec.rec_version,
 
         });
+        // for (let i = 1; i <= 17; i++) {
+        //   this.mform.patchValue({ [`marks${i}`]: (rec as any)[`marks${i}`] ?? this.formDesc() });
+        // }
+        this.updateDescIds(rec);
+
         this.mbl_id = rec.hbl_mbl_id;
         this.fillCntr(rec.house_cntr);
       },
@@ -509,28 +431,11 @@ export class SeaExportHEditComponent extends baseEditComponent {
   updateDescIds(data: iSea_exportH) {
     if (!data) return;
 
-    this.mform.patchValue({
-      desc_id1: data.desc_id1,
-      desc_id2: data.desc_id2,
-      desc_id3: data.desc_id3,
-      desc_id4: data.desc_id4,
-      desc_id5: data.desc_id5,
-      desc_id6: data.desc_id6,
-      desc_id7: data.desc_id7,
-      desc_id8: data.desc_id8,
-      desc_id9: data.desc_id9,
-      desc_id10: data.desc_id10,
-      desc_id11: data.desc_id11,
-      desc_id12: data.desc_id12,
-      desc_id13: data.desc_id13,
-      desc_id14: data.desc_id14,
-      desc_id15: data.desc_id15,
-      desc_id16: data.desc_id16,
-      desc_id17: data.desc_id17
-    });
-
-    console.log(this.mform);
-
+    for (let i = 1; i <= 17; i++) {
+      this.mform.patchValue({ [`marks${i}`]: (data as any)[`marks${i}`] ?? this.formDesc() });
+    }
+  
+    // this.mform.patchValue(patchValues);
   }
   callBack(action: any) {
     if (action.id == 'hbl_shipment_stage_name') {

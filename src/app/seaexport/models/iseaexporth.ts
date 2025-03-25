@@ -125,66 +125,29 @@ export interface iSea_exportH {
   hbl_mbl_pol_etd: string;
   hbl_mbl_pod_eta: string;
 
-  desc_ctr: number;
+  // desc_ctr: number;
   desc_parent_id: number;
 
-  desc_id1: number;
-  desc_id2: number;
-  desc_id3: number;
-  desc_id4: number;
-  desc_id5: number;
-  desc_id6: number;
-  desc_id7: number;
-  desc_id8: number;
-  desc_id9: number;
-  desc_id10: number;
-  desc_id11: number;
-  desc_id12: number;
-  desc_id13: number;
-  desc_id14: number;
-  desc_id15: number;
-  desc_id16: number;
-  desc_id17: number;
+  
+  marks1: iCargo_desc[];
+  marks2: iCargo_desc[];
+  marks3: iCargo_desc[];
+  marks4: iCargo_desc[];
+  marks5: iCargo_desc[];
+  marks6: iCargo_desc[];
+  marks7: iCargo_desc[];
+  marks8: iCargo_desc[];
+  marks9: iCargo_desc[];
+  marks10: iCargo_desc[];
+  marks11: iCargo_desc[];
+  marks12: iCargo_desc[];
+  marks13: iCargo_desc[];
+  marks14: iCargo_desc[];
+  marks15: iCargo_desc[];
+  marks16: iCargo_desc[];
+  marks17: iCargo_desc[];
 
-  desc_mark1: string;
-  desc_mark2: string;
-  desc_mark3: string;
-  desc_mark4: string;
-  desc_mark5: string;
-  desc_mark6: string;
-  desc_mark7: string;
-  desc_mark8: string;
-  desc_mark9: string;
-  desc_mark10: string;
-  desc_mark11: string;
-  desc_mark12: string;
-  desc_mark13: string;
-  desc_mark14: string;
-  desc_mark15: string;
-  desc_mark16: string;
-  desc_mark17: string;
 
-  desc_package1: string;
-  desc_package2: string;
-  desc_package3: string;
-
-  desc_description1: string;
-  desc_description2: string;
-  desc_description3: string;
-  desc_description4: string;
-  desc_description5: string;
-  desc_description6: string;
-  desc_description7: string;
-  desc_description8: string;
-  desc_description9: string;
-  desc_description10: string;
-  desc_description11: string;
-  desc_description12: string;
-  desc_description13: string;
-  desc_description14: string;
-  desc_description15: string;
-  desc_description16: string;
-  desc_description17: string;
 
   house_cntr: iContainer[];
 
@@ -195,6 +158,13 @@ export interface iSea_exportH {
   rec_created_date: string;
   rec_edited_by: string;
   rec_edited_date: string;
+}
+export interface iCargo_desc {
+  desc_id: number;
+  desc_ctr: number;
+  desc_mark: string;
+  desc_package: string; 
+  desc_description: string;
 }
 
 export interface iSea_exportH_Search {
