@@ -406,24 +406,28 @@ export class AirExporthEditComponent extends baseEditComponent {
 
           rec_version: rec.rec_version,
         });
-        
-        this.getMarks(rec.mark1,"mark1");
-        this.getMarks(rec.mark2,"mark2");
-        this.getMarks(rec.mark3,"mark3");
-        this.getMarks(rec.mark4,"mark4");
-        this.getMarks(rec.mark5,"mark5");
-        this.getMarks(rec.mark6,"mark6");
-        this.getMarks(rec.mark7,"mark7");
-        this.getMarks(rec.mark8,"mark8");
-        this.getMarks(rec.mark9,"mark9");
-        this.getMarks(rec.mark10,"mark10");
-        this.getMarks(rec.mark11,"mark11");
-        this.getMarks(rec.mark12,"mark12");
-        this.getMarks(rec.mark13,"mark13");
-        this.getMarks(rec.mark14,"mark14");
-        this.getMarks(rec.mark15,"mark15");
-        this.getMarks(rec.mark16,"mark16");
-        this.getMarks(rec.mark17,"mark17");
+
+      //   for (let i = 1; i <= 17; i++) {
+      //     this.getMarks((rec as any)[`mark${i}`], `mark${i}`);
+      // }
+   
+        this.getMarks(rec.mark1, "mark1");
+        this.getMarks(rec.mark2, "mark2");
+        this.getMarks(rec.mark3, "mark3");
+        this.getMarks(rec.mark4, "mark4");
+        this.getMarks(rec.mark5, "mark5");
+        this.getMarks(rec.mark6, "mark6");
+        this.getMarks(rec.mark7, "mark7");
+        this.getMarks(rec.mark8, "mark8");
+        this.getMarks(rec.mark9, "mark9");
+        this.getMarks(rec.mark10, "mark10");
+        this.getMarks(rec.mark11, "mark11");
+        this.getMarks(rec.mark12, "mark12");
+        this.getMarks(rec.mark13, "mark13");
+        this.getMarks(rec.mark14, "mark14");
+        this.getMarks(rec.mark15, "mark15");
+        this.getMarks(rec.mark16, "mark16");
+        this.getMarks(rec.mark17, "mark17");
 
         console.log(rec);
       },
@@ -433,8 +437,8 @@ export class AirExporthEditComponent extends baseEditComponent {
     })
   }
 
-  getMarks(mark: any, controlname: string){
-    if(mark){
+  getMarks(mark: any, controlname: string) {
+    if (mark) {
       this.mform.get(controlname)?.patchValue({
         desc_id: mark.desc_id,
         desc_parent_id: mark.desc_parent_id,
@@ -443,6 +447,16 @@ export class AirExporthEditComponent extends baseEditComponent {
         desc_mark: mark.desc_mark,
         desc_description: mark.desc_description,
       });
+    } 
+    else {
+        this.mform.get(controlname)?.patchValue({
+          desc_id: 0,
+          desc_parent_id: 0,
+          desc_parent_type: '',
+          desc_ctr: '',
+          desc_mark: '',
+          desc_description: '',
+        })
     }
   }
 
@@ -517,7 +531,25 @@ export class AirExporthEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
-        this.mform.patchValue({
+
+          this.getMarks(v.mark1, "mark1");
+          this.getMarks(v.mark2, "mark2");
+          this.getMarks(v.mark3, "mark3");
+          this.getMarks(v.mark4, "mark4");
+          this.getMarks(v.mark5, "mark5");
+          this.getMarks(v.mark6, "mark6");
+          this.getMarks(v.mark7, "mark7");
+          this.getMarks(v.mark8, "mark8");
+          this.getMarks(v.mark9, "mark9");
+          this.getMarks(v.mark10, "mark10");
+          this.getMarks(v.mark11, "mark11");
+          this.getMarks(v.mark12, "mark12");
+          this.getMarks(v.mark13, "mark13");
+          this.getMarks(v.mark14, "mark14");
+          this.getMarks(v.mark15, "mark15");
+          this.getMarks(v.mark16, "mark16");
+          this.getMarks(v.mark17, "mark17");
+          this.mform.patchValue({
           hbl_cfno: v.hbl_cfno,
           hbl_houseno: v.hbl_houseno,
           hbl_mbl_id: v.hbl_mbl_id,
