@@ -8,7 +8,7 @@ export type data_house = { mode: string, record: iAirexporth, index: number };
 
 export interface iAirexporth {
   hbl_id: number;
-  hbl_cfno:number;
+  hbl_cfno: number;
   hbl_houseno?: string;
   hbl_mbl_id: number;
   hbl_mbl_refno?: string;
@@ -69,9 +69,9 @@ export interface iAirexporth {
   hbl_pod_name?: string;
   hbl_asarranged_consignee?: string;
   hbl_asarranged_shipper?: string;
-  
+
   hbl_packages?: number;
-  hbl_weight?:number;
+  hbl_weight?: number;
   hbl_weight_unit?: string;
   hbl_class?: string;
   hbl_comm?: string;
@@ -115,14 +115,14 @@ export interface iAirexporth {
   hbl_printsc9: string;
   hbl_printsc10: string;
 
-  hbl_charges1_carrier?:string;
+  hbl_charges1_carrier?: string;
   hbl_tocarrier1?: string;
   hbl_carrate1?: number;
   hbl_cartotal1?: number;
   hbl_carprintsc1?: string;
   hbl_carprintsc2?: string;
 
-  hbl_charges2_carrier?:string;
+  hbl_charges2_carrier?: string;
   hbl_tocarrier2?: string;
   hbl_carrate2?: number;
   hbl_cartotal2?: number;
@@ -137,7 +137,7 @@ export interface iAirexporth {
   hbl_carprintsc6?: string;
 
   hbl_remark1?: string;
-  hbl_remark2?:string;
+  hbl_remark2?: string;
   hbl_remark3?: string;
   hbl_by1?: string;
   hbl_by1_carrier?: string;
@@ -148,23 +148,23 @@ export interface iAirexporth {
   hbl_issued_by?: string;
   hbl_print?: string;
 
-  mark1: Cargo_desc;
-  mark2:Cargo_desc;
-  mark3: Cargo_desc;
-  mark4:Cargo_desc;
-  mark5: Cargo_desc;
-  mark6:Cargo_desc;
-  mark7: Cargo_desc;
-  mark8:Cargo_desc;
-  mark9: Cargo_desc;
-  mark10:Cargo_desc;
-  mark11: Cargo_desc;
-  mark12:Cargo_desc;
-  mark13: Cargo_desc;
-  mark14:Cargo_desc;
-  mark15:Cargo_desc;
-  mark16: Cargo_desc;
-  mark17:Cargo_desc;
+  marks1: Cargo_desc;
+  marks2: Cargo_desc;
+  marks3: Cargo_desc;
+  marks4: Cargo_desc;
+  marks5: Cargo_desc;
+  marks6: Cargo_desc;
+  marks7: Cargo_desc;
+  marks8: Cargo_desc;
+  marks9: Cargo_desc;
+  marks10: Cargo_desc;
+  marks11: Cargo_desc;
+  marks12: Cargo_desc;
+  marks13: Cargo_desc;
+  marks14: Cargo_desc;
+  marks15: Cargo_desc;
+  marks16: Cargo_desc;
+  marks17: Cargo_desc;
 
   rec_version: number;
   rec_company_id: number;
@@ -175,7 +175,7 @@ export interface iAirexporth {
   rec_edited_date: string;
 }
 
-export interface Cargo_desc{
+export interface Cargo_desc {
   desc_id: number;
   desc_parent_id: number;
   desc_parent_type: string;

@@ -41,6 +41,7 @@ export class AirExporthEditComponent extends baseEditComponent {
     { key: 'MUTUAL', value: 'MUTUAL' },
     { key: 'NOMINATION', value: 'NOMINATION' },
   ]
+
   dataList2 = [
     { key: 'SHIPPER', value: 'SHIPPER' },
     { key: 'CONSIGNEE', value: 'CONSIGNEE' },
@@ -55,7 +56,7 @@ export class AirExporthEditComponent extends baseEditComponent {
   ) {
     super();
 
-    this.showModel = false;
+    this.showModel = true;
     let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({
@@ -64,18 +65,18 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_houseno: [''],
       hbl_mbl_id: [0],
       hbl_mbl_refno: [''],
-      hbl_shipment_stage_id: [null],
+      hbl_shipment_stage_id: [0],
       hbl_shipment_stage_name: [''],
       hbl_date: [date],
       hbl_mode: [''],
-      hbl_shipper_id: [null],
+      hbl_shipper_id: [0],
       hbl_shipper_code: [''],
       hbl_shipper_name: [''],
       hbl_shipper_add1: [''],
       hbl_shipper_add2: [''],
       hbl_shipper_add3: [''],
       hbl_shipper_add4: [''],
-      hbl_consignee_id: [null],
+      hbl_consignee_id: [0],
       hbl_consignee_code: [''],
       hbl_consignee_name: [''],
       hbl_consignee_add1: [''],
@@ -105,13 +106,13 @@ export class AirExporthEditComponent extends baseEditComponent {
 
       hbl_lcno: [''],
       hbl_bltype: [''],
-      hbl_handled_id: [null],
+      hbl_handled_id: [0],
       hbl_handled_name: [''],
-      hbl_salesman_id: [null],
+      hbl_salesman_id: [0],
       hbl_salesman_name: [''],
       hbl_goods_nature: [''],
       hbl_commodity: [''],
-      hbl_format_id: [null],
+      hbl_format_id: [0],
       hbl_format_name: [''],
       hbl_rout1: [''],
       hbl_rout2: [''],
@@ -200,23 +201,23 @@ export class AirExporthEditComponent extends baseEditComponent {
       hbl_issued_by: [''],
       hbl_print: ['SHIPPER'],
 
-      mark1: this.createFormDesc(),
-      mark2: this.createFormDesc(),
-      mark3: this.createFormDesc(),
-      mark4: this.createFormDesc(),
-      mark5: this.createFormDesc(),
-      mark6: this.createFormDesc(),
-      mark7: this.createFormDesc(),
-      mark8: this.createFormDesc(),
-      mark9: this.createFormDesc(),
-      mark10: this.createFormDesc(),
-      mark11: this.createFormDesc(),
-      mark12: this.createFormDesc(),
-      mark13: this.createFormDesc(),
-      mark14: this.createFormDesc(),
-      mark15: this.createFormDesc(),
-      mark16: this.createFormDesc(),
-      mark17: this.createFormDesc(),
+      marks1: this.createFormDesc(),
+      marks2: this.createFormDesc(),
+      marks3: this.createFormDesc(),
+      marks4: this.createFormDesc(),
+      marks5: this.createFormDesc(),
+      marks6: this.createFormDesc(),
+      marks7: this.createFormDesc(),
+      marks8: this.createFormDesc(),
+      marks9: this.createFormDesc(),
+      marks10: this.createFormDesc(),
+      marks11: this.createFormDesc(),
+      marks12: this.createFormDesc(),
+      marks13: this.createFormDesc(),
+      marks14: this.createFormDesc(),
+      marks15: this.createFormDesc(),
+      marks16: this.createFormDesc(),
+      marks17: this.createFormDesc(),
 
       rec_version: [0],
     })
@@ -228,7 +229,6 @@ export class AirExporthEditComponent extends baseEditComponent {
     this.init();
     this.route.queryParams.forEach((rec: any) => {
       this.mbl_id = +rec["mbl_id"];
-
     });
     if (this.mode == "add")
       this.newRecord();
@@ -407,28 +407,7 @@ export class AirExporthEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
         });
 
-      //   for (let i = 1; i <= 17; i++) {
-      //     this.getMarks((rec as any)[`mark${i}`], `mark${i}`);
-      // }
-   
-        this.getMarks(rec.mark1, "mark1");
-        this.getMarks(rec.mark2, "mark2");
-        this.getMarks(rec.mark3, "mark3");
-        this.getMarks(rec.mark4, "mark4");
-        this.getMarks(rec.mark5, "mark5");
-        this.getMarks(rec.mark6, "mark6");
-        this.getMarks(rec.mark7, "mark7");
-        this.getMarks(rec.mark8, "mark8");
-        this.getMarks(rec.mark9, "mark9");
-        this.getMarks(rec.mark10, "mark10");
-        this.getMarks(rec.mark11, "mark11");
-        this.getMarks(rec.mark12, "mark12");
-        this.getMarks(rec.mark13, "mark13");
-        this.getMarks(rec.mark14, "mark14");
-        this.getMarks(rec.mark15, "mark15");
-        this.getMarks(rec.mark16, "mark16");
-        this.getMarks(rec.mark17, "mark17");
-
+        this.updateDesc(rec);
         console.log(rec);
       },
       error: (e) => {
@@ -437,26 +416,11 @@ export class AirExporthEditComponent extends baseEditComponent {
     })
   }
 
-  getMarks(mark: any, controlname: string) {
-    if (mark) {
-      this.mform.get(controlname)?.patchValue({
-        desc_id: mark.desc_id,
-        desc_parent_id: mark.desc_parent_id,
-        desc_parent_type: mark.desc_parent_type,
-        desc_ctr: mark.desc_ctr,
-        desc_mark: mark.desc_mark,
-        desc_description: mark.desc_description,
-      });
-    } 
-    else {
-        this.mform.get(controlname)?.patchValue({
-          desc_id: 0,
-          desc_parent_id: 0,
-          desc_parent_type: '',
-          desc_ctr: '',
-          desc_mark: '',
-          desc_description: '',
-        })
+  updateDesc(data: iAirexporth) {
+    if (!data)
+      return;
+    for (let i = 1; i <= 17; i++) {
+      this.mform.patchValue({ [`marks${i}`]: (data as any)[`marks${i}`] ?? this.createFormDesc() });
     }
   }
 
@@ -488,6 +452,8 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_ins_amt: rec.hbl_ins_amt,
           hbl_customs_value: rec.hbl_customs_value,
           hbl_carriage_value: rec.hbl_carriage_value,
+          hbl_format_id: rec.hbl_format_id,
+          hbl_format_name: rec.hbl_format_name,
           rec_branch_id: rec.rec_branch_id,
           rec_company_id: rec.rec_company_id,
           rec_version: rec.rec_version,
@@ -531,32 +497,15 @@ export class AirExporthEditComponent extends baseEditComponent {
           };
           this.gs.updateURL(param);
         };
-
-          this.getMarks(v.mark1, "mark1");
-          this.getMarks(v.mark2, "mark2");
-          this.getMarks(v.mark3, "mark3");
-          this.getMarks(v.mark4, "mark4");
-          this.getMarks(v.mark5, "mark5");
-          this.getMarks(v.mark6, "mark6");
-          this.getMarks(v.mark7, "mark7");
-          this.getMarks(v.mark8, "mark8");
-          this.getMarks(v.mark9, "mark9");
-          this.getMarks(v.mark10, "mark10");
-          this.getMarks(v.mark11, "mark11");
-          this.getMarks(v.mark12, "mark12");
-          this.getMarks(v.mark13, "mark13");
-          this.getMarks(v.mark14, "mark14");
-          this.getMarks(v.mark15, "mark15");
-          this.getMarks(v.mark16, "mark16");
-          this.getMarks(v.mark17, "mark17");
-          this.mform.patchValue({
+        this.updateDesc(v);
+        this.mform.patchValue({
           hbl_cfno: v.hbl_cfno,
           hbl_houseno: v.hbl_houseno,
           hbl_mbl_id: v.hbl_mbl_id,
           hbl_mbl_refno: v.hbl_mbl_refno,
-
           rec_version: v.rec_version
         });
+
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
