@@ -9,7 +9,7 @@
             <app-input formControlName="value" [type]="inputType"></app-input>
           </ng-container>
           <ng-container *ngIf="format=='table'">
-            <auto-complete formControlName="name" id="name" (CallBack)="callBack($event)" [table]="table_name"
+        <auto-complete formControlName="name" id="name" (CallBack)="callBack($event)" [table]="table_name" [subtable]="subtable_name"
               [company_id]="getCompanyId()" [url]="url" [display_column]="list_data"></auto-complete>
           </ng-container>
           <ng-container *ngIf="format=='boolean'">

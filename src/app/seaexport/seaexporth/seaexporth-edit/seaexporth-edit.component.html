@@ -34,9 +34,9 @@
               <div class="col-sm-8">
                 <auto-complete formControlName="hbl_shipment_stage_name" id="hbl_shipment_stage_name"
                   (CallBack)="callBack($event)" [table]="'param'" [subtable]="'shipstage oe'"
-                  [company_id]="getCompanyId()" [url]="url"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
-                </auto-complete>
+                  [company_id]="getCompanyId()" [url]="url" 
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" >
+                 </auto-complete>
               </div>
             </div>
           </div>

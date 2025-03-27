@@ -48,7 +48,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
   ) {
 
     super();
-    this.showModel = true;
+    this.showModel = false;
     let date = this.gs.getToday();
     this.mform = this.fb.group({
       hbl_id: [0],
@@ -78,7 +78,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_consignee_add5: [''],
       hbl_notify_id: [0],
       hbl_notify_code: [''],
-      hbl_notify_name: [''],
+      hbl_notify_name: ['SAME AS CONSIGNEE'],
       hbl_notify_add1: [''],
       hbl_notify_add2: [''],
       hbl_notify_add3: [''],
@@ -112,10 +112,10 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_is_arranged: [''],
       hbl_obl_telex: ['N/A'],
       hbl_obl_slno: [''],
-      hbl_format_id: [46],
-      hbl_format_name: ['MOTHERLINES BLANK'],//default
-      hbl_draft_format_id: [47],
-      hbl_draft_format_name: ['MOTHERLINES DRAFT'],//
+      hbl_format_id: [0],
+      hbl_format_name: [''],//default MOTHERLINES BLANK 46
+      hbl_draft_format_id: [0],
+      hbl_draft_format_name: [''],//MOTHERLINES DRAFT 47
       hbl_lbs: [0],
       hbl_weight: [0],
       hbl_cft: [0],
@@ -137,23 +137,23 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_delivery_date: [''],
       hbl_originals: [0],
       
-      marks1: this.formDesc(),
-      marks2: this.formDesc(),
-      marks3: this.formDesc(),
-      marks4: this.formDesc(),
-      marks5: this.formDesc(),
-      marks6: this.formDesc(),
-      marks7: this.formDesc(),
-      marks8: this.formDesc(),
-      marks9: this.formDesc(),
-      marks10: this.formDesc(),
-      marks11: this.formDesc(),
-      marks12: this.formDesc(),
-      marks13: this.formDesc(),
-      marks14: this.formDesc(),
-      marks15: this.formDesc(),
-      marks16: this.formDesc(),
-      marks17: this.formDesc(),
+      marks1: this.CreateFormDesc(),
+      marks2: this.CreateFormDesc(),
+      marks3: this.CreateFormDesc(),
+      marks4: this.CreateFormDesc(),
+      marks5: this.CreateFormDesc(),
+      marks6: this.CreateFormDesc(),
+      marks7: this.CreateFormDesc(),
+      marks8: this.CreateFormDesc(),
+      marks9: this.CreateFormDesc(),
+      marks10: this.CreateFormDesc(),
+      marks11: this.CreateFormDesc(),
+      marks12: this.CreateFormDesc(),
+      marks13: this.CreateFormDesc(),
+      marks14: this.CreateFormDesc(),
+      marks15: this.CreateFormDesc(),
+      marks16: this.CreateFormDesc(),
+      marks17: this.CreateFormDesc(),
 
       house_cntr: this.fb.array([]),
       rec_version: [0],
@@ -182,11 +182,11 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_mbl_id: this.mbl_id,
 
     })
-    // this.formDesc();
+    // this.CreateFormDesc();
     this.getDefaultData();
   }
   
-  formDesc() {
+  CreateFormDesc() {
     return this.fb.group({
       desc_id: [0],
       desc_parent_id: [0],
@@ -247,6 +247,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
       next: (rec: iSea_exportH) => {
         this.mform.patchValue({
           hbl_mbl_id: rec.hbl_mbl_id,
+          hbl_shipment_stage_id: rec.hbl_shipment_stage_id,
+          hbl_shipment_stage_name: rec.hbl_shipment_stage_name,
           hbl_mbl_refno: rec.hbl_mbl_refno,
           hbl_agent_id: rec.hbl_agent_id,
           hbl_agent_name: rec.hbl_agent_name,
@@ -257,9 +259,18 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_handled_name : rec.hbl_handled_name,
           hbl_salesman_id : rec.hbl_salesman_id,
           hbl_salesman_name : rec.hbl_salesman_name,
+          hbl_format_id : rec.hbl_format_id,
+          hbl_format_name : rec.hbl_format_name,
+          hbl_draft_format_id : rec.hbl_draft_format_id,
+          hbl_draft_format_name : rec.hbl_draft_format_name,
           hbl_by1 : rec.hbl_handled_name,
           hbl_issued_date: rec.hbl_issued_date,
-//add desc default value
+
+          marks1: rec.marks1 ? rec.marks1 : "",
+          marks2: rec.marks2 ? rec.marks2 : ""
+
+          
+
         });
         this.fillCntr(rec.house_cntr);
       },
@@ -363,11 +374,9 @@ export class SeaExportHEditComponent extends baseEditComponent {
 
           rec_version: rec.rec_version,
 
-        });
-        // for (let i = 1; i <= 17; i++) {
-        //   this.mform.patchValue({ [`marks${i}`]: (rec as any)[`marks${i}`] ?? this.formDesc() });
-        // }
-        this.updateDescIds(rec);
+        })
+
+        this.updateDesc(rec);
 
         this.mbl_id = rec.hbl_mbl_id;
         this.fillCntr(rec.house_cntr);
@@ -409,7 +418,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
           this.gs.updateURL(param);
         };
 
-        this.updateDescIds(v);
+        this.updateDesc(v);
 
         this.mform.patchValue({
           rec_version: v.rec_version,
@@ -428,15 +437,15 @@ export class SeaExportHEditComponent extends baseEditComponent {
     })
   }
 
-  updateDescIds(data: iSea_exportH) {
-    if (!data) return;
+  updateDesc(data: iSea_exportH) {
+    if (!data) 
+      return;
 
     for (let i = 1; i <= 17; i++) {
-      this.mform.patchValue({ [`marks${i}`]: (data as any)[`marks${i}`] ?? this.formDesc() });
+      this.mform.patchValue({ [`marks${i}`]: (data as any)[`marks${i}`] ?? this.CreateFormDesc() });
     }
-  
-    // this.mform.patchValue(patchValues);
   }
+
   callBack(action: any) {
     if (action.id == 'hbl_shipment_stage_name') {
       if (action.rec) {
@@ -491,6 +500,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_consignee_add4: action.rec ? action.rec.cust_address4 : '',
           hbl_consignee_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
           (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
+          hbl_bltype: action.rec ? action.rec.cust_nomination: '',
         });
       }
       else {
@@ -503,6 +513,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_consignee_add3: '',
           hbl_consignee_add4: '',
           hbl_consignee_add5: '',
+          hbl_bltype: '',
         });
       }
     }
