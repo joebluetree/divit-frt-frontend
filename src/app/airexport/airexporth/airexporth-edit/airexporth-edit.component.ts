@@ -3,12 +3,8 @@ import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
-import { AirExportService } from '../../services/airexport.service';
 import { iAirexporth, iAirExporthModel } from '../../models/iairexporth';
-import { iAirexport } from '../../models/iairexport';
 import { AirExporthService } from '../../services/airexporth.service';
-import { FormGroup } from '@angular/forms';
-
 
 @Component({
   selector: 'app-airexporth-edit',
@@ -56,7 +52,7 @@ export class AirExporthEditComponent extends baseEditComponent {
   ) {
     super();
 
-    this.showModel = true;
+    this.showModel = false;
     let date = this.gs.getToday();
     let user = this.gs.getUserName();
     this.mform = this.fb.group({
@@ -609,7 +605,7 @@ export class AirExporthEditComponent extends baseEditComponent {
   }
 
 
-  callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
+  callBack(action: any ) {
     if (action.id == 'hbl_shipment_stage_name') {
       console.log(action);
       if (action.rec) {
@@ -665,6 +661,7 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_consignee_add3: action.rec.cust_address3,
           hbl_consignee_add4: action.rec.cust_address4,
           hbl_consignee_add5: action.rec.cust_tel,
+          hbl_bltype: action.rec.cust_nomination,
         });
       }
       else {
@@ -677,11 +674,13 @@ export class AirExporthEditComponent extends baseEditComponent {
           hbl_consignee_add3: '',
           hbl_consignee_add4: '',
           hbl_consignee_add5: '',
+          hbl_bltype: '',
         });
       }
     }
 
     if (action.id == 'hbl_handled_name') {
+      console.log(action);
       if (action.rec) {
         this.mform.patchValue({
           hbl_handled_id: action.rec.param_id,
@@ -696,6 +695,7 @@ export class AirExporthEditComponent extends baseEditComponent {
       }
     }
     if (action.id == 'hbl_salesman_name') {
+      console.log(action);
       if (action.rec) {
         this.mform.patchValue({
           hbl_salesman_id: action.rec.param_id,
@@ -711,6 +711,7 @@ export class AirExporthEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'hbl_format_name') {
+      console.log(action);
       if (action.rec) {
         this.mform.patchValue({
           hbl_format_id: action.rec.param_id,

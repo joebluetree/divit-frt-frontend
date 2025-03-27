@@ -27,7 +27,7 @@ export class SettingsEditComponent extends baseEditComponent {
   //value = '';
 
   table_name = '';
-
+  sub_table = '';
   value_column = '';
   display_column1 = '';
   display_column2 = '';
@@ -71,9 +71,10 @@ export class SettingsEditComponent extends baseEditComponent {
       let col = this.rec.table.toString().split(",");
 
       this.table_name = col[0];
-      this.value_column = col[1].trim();
-      this.display_column1 = col[2].trim();
-      this.display_column2 = col[3].trim();
+      this.sub_table = col[1].trim();
+      this.value_column = col[2].trim();
+      this.display_column1 = col[3].trim();
+      this.display_column2 = col[4].trim();
 
       //this.value = this.rec.value;
       //this.code = this.rec.code;

@@ -215,10 +215,6 @@ export class AirExportEditComponent extends baseEditComponent {
     }
   }
 
-
-
-
-
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
@@ -266,7 +262,7 @@ export class AirExportEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
+  callBack(action: any ) {
     if (action.id == 'mbl_shipment_stage_name') {
       if (action.rec) {
         this.mform.patchValue({
