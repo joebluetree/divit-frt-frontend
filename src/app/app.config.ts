@@ -44,6 +44,7 @@ export const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./user-admin/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'tnt', loadChildren: () => import('./tnt/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'marketing', loadChildren: () => import('./marketing1/routes').then(m => m.routes), canActivate: [AuthGuard] },
+  { path: 'airexport', loadChildren: () => import('./airexport/routes').then(m => m.routes), canActivate: [AuthGuard] },
 ];
 
 export const appConfig: ApplicationConfig = {

@@ -155,7 +155,18 @@ export abstract class baseService {
     }
     if (!confirm(`Delete ${data.rec[this.name]} y/n`))
       return;
-    this.deleteRecord({ 'id': data.rec[this.pkid], url: data.url });
+    const _data = { 'id': data.rec[this.pkid], url: data.url };
+
+    this.deleteRecord(_data)?.subscribe({
+      next: (v: any) => {
+        if (v.status) {
+          this.RemoveRecord(_data.id);
+        }
+      },
+      error: (err: any) => {
+        this.gs.showAlert([err.error]);
+      }
+    });
   }
 
   public deleteRecord(data: any) {
@@ -168,16 +179,7 @@ export abstract class baseService {
       params: { ...data }
     }
     let mUrl = data.url;
-    this.http.get<any>(this.gs.getUrl(mUrl), options).subscribe({
-      next: (v: any) => {
-        if (v.status) {
-          this.RemoveRecord(data.id);
-        }
-      },
-      error: (err: any) => {
-        this.gs.showAlert([err.error]);
-      }
-    });
+    return this.http.get<any>(this.gs.getUrl(mUrl), options);
   }
-
+  
 }
