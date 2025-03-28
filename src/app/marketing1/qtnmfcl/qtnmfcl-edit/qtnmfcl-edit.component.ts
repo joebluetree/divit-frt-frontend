@@ -215,7 +215,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: { id: string, name: string, rowIndex: number, rec: any }) {
+  callBack(action: any ) {
     if (action.id == 'qtnm_to_name') {
       if (action.rec) {
         this.mform.patchValue({

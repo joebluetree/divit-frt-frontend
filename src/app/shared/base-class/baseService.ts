@@ -155,7 +155,7 @@ export abstract class baseService {
     }
     if (!confirm(`Delete ${data.rec[this.name]} y/n`))
       return;
-    // this.deleteRecord({ 'id': data.rec[this.pkid], url: data.url });
+
     const _data = { 'id': data.rec[this.pkid], url: data.url };
 
     this.deleteRecord(_data)?.subscribe({
@@ -182,5 +182,5 @@ export abstract class baseService {
     let mUrl = data.url;
     return this.http.get<any>(this.gs.getUrl(mUrl), options);
   }
-
+  
 }
