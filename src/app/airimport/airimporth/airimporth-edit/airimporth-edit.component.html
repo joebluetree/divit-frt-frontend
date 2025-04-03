@@ -242,8 +242,10 @@
               </div>
               <label class="col-sm-2 form-label form-lable-sm">Unit</label>
               <div class="col-sm-3">
-                <app-input formControlName="hbl_uom_name" name="hbl_uom_name" maxlength="100"
-                  [case]="'UPPER'"></app-input>
+                <auto-complete formControlName="hbl_uom_name" name="hbl_uom_name"
+                  id="hbl_uom_name" (CallBack)="callBack($event)" table="param" subtable="UNIT-MASTER"
+                  [company_id]="getCompanyId()" [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
             <div class="form-group row">
@@ -319,7 +321,7 @@
               </div>
               <label class="col-sm-2 form-label form-lable-sm">Pickup Date</label>
               <div class="col-sm-3">
-                <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
+                <app-date formControlName="hbl_pickup_date" [format]="gs.globalConstants.global_date_format"
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>
               </div>
             </div>

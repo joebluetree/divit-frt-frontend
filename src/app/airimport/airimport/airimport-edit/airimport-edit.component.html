@@ -98,7 +98,11 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <label class="col-sm-4 form-label form-lable-sm">
+                <div class="d-grid">
+                <button class="btn btn-success btn-sm" type="button" >Return</button>
+              </div>
+              </label>
               <div class="col-sm-8">
                 <app-input maxlength="100" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'"></app-input>
               </div>
@@ -249,7 +253,7 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_issued_date')?.value}}</label>
+                    <label>{{iRow.get('hbl_pickup_date')?.value}}</label>
                   </td>
 
                   <td>

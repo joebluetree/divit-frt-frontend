@@ -514,29 +514,32 @@ export class AirImporthEditComponent extends baseEditComponent {
   // }
 
 
-  fillFclDetails(customerData: any = {}) {
+  fillCustomer(customerData: any = {}) {
     this.mform.patchValue({
       hbl_cha_id: customerData.cust_id || 0,
       hbl_cha_code: customerData.cust_code || "",
       hbl_cha_name: customerData.cust_name || "",
       hbl_cha_attn: customerData.cust_contact || "",
       hbl_cha_tel: customerData.cust_tel || "",
-      hbl_cha_fax: customerData.cust_fax || ""
+      hbl_cha_fax: customerData.cust_fax || "",
     });
   }
-  
+
   getCustomerData(id: any) {
-    if (!id) return this.fillFclDetails(); // Reset form if no ID
-  
-    this.ms.getRecord({ id }, '/api/search/GetCustomerDataAsync').subscribe({
-      next: (rec: any) => this.fillFclDetails(rec || {}), // Update form or reset
+    if (!id) { // Reset form if no ID
+      this.fillCustomer();
+      return;
+    }
+    const param = { 'id': id };
+    this.ms.getRecord(param, '/api/search/GetCustomerAsync').subscribe({
+      next: (rec: any) => this.fillCustomer(rec || {}), // Update form or reset
       error: (error) => {
         this.gs.showError(error);
-        this.fillFclDetails(); // Reset form on error
+        this.fillCustomer(); // Reset form on error
       }
     });
   }
-  
+
 
 
 
@@ -584,38 +587,64 @@ export class AirImporthEditComponent extends baseEditComponent {
         });
       }
     }
-    if (action.name == 'hbl_consignee_code') {
+    // if (action.name == 'hbl_consignee_code') {
+    //   console.log(action);
+    //   let rec = {};
+    //   if (action.rec) {
+    //     rec= action.rec;
+    //     this.mform.patchValue({
+    //       hbl_consignee_id: action.rec.cust_id ,
+    //       hbl_consignee_code: action.rec.cust_code,
+    //       hbl_consignee_name: action.rec.cust_name,
+    //       hbl_consignee_add1: action.rec.cust_address1,
+    //       hbl_consignee_add2: action.rec.cust_address2,
+    //       hbl_consignee_add3: action.rec.cust_address3,
+    //       hbl_consignee_add4: action.rec.cust_address4,
+    //       hbl_consignee_add5: action.rec.cust_tel,
+    //       hbl_bltype: action.rec.cust_nomination,
+    //       hbl_cha_id: action.rec.cust_chb_id,
+    //     });
+    //     this.getCustomerData(action.rec.cust_chb_id);
+    //   }
+    //   else {
+    //     this.mform.patchValue({
+    //       hbl_consignee_id: 0,
+    //       hbl_consignee_code: '',
+    //       hbl_consignee_name: '',
+    //       hbl_consignee_add1: '',
+    //       hbl_consignee_add2: '',
+    //       hbl_consignee_add3: '',
+    //       hbl_consignee_add4: '',
+    //       hbl_consignee_add5: '',
+    //       hbl_bltype: '',
+    //       hbl_cha_id: 0,
+    //     });
+    //   }
+    // }
+
+    if (action.name === 'hbl_consignee_code') {
       console.log(action);
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_consignee_id: action.rec.cust_id,
-          hbl_consignee_code: action.rec.cust_code,
-          hbl_consignee_name: action.rec.cust_name,
-          hbl_consignee_add1: action.rec.cust_address1,
-          hbl_consignee_add2: action.rec.cust_address2,
-          hbl_consignee_add3: action.rec.cust_address3,
-          hbl_consignee_add4: action.rec.cust_address4,
-          hbl_consignee_add5: action.rec.cust_tel,
-          hbl_bltype: action.rec.cust_nomination,
-          hbl_cha_id: action.rec.cust_chb_id,
-        });
-        this.getCustomerData(action.rec.cust_chb_id);
+      let rec: any = {};
+      
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_consignee_id: 0,
-          hbl_consignee_code: '',
-          hbl_consignee_name: '',
-          hbl_consignee_add1: '',
-          hbl_consignee_add2: '',
-          hbl_consignee_add3: '',
-          hbl_consignee_add4: '',
-          hbl_consignee_add5: '',
-          hbl_bltype: '',
-          hbl_cha_id: 0,
-        });
-      }
+      this.mform.patchValue({
+        hbl_consignee_id: rec.cust_id || 0,
+        hbl_consignee_code: rec.cust_code || "",
+        hbl_consignee_name: rec.cust_name || "",
+        hbl_consignee_add1: rec.cust_address1 || "",
+        hbl_consignee_add2: rec.cust_address2 || "",
+        hbl_consignee_add3: rec.cust_address3 || "",
+        hbl_consignee_add4: rec.cust_address4 || "",
+        hbl_consignee_add5: rec.cust_tel || "",
+        hbl_bltype: rec.cust_nomination || "",
+        hbl_cha_id: rec.cust_chb_id || 0,
+      });
+
+      this.getCustomerData(rec.cust_chb_id);
     }
+
     if (action.id == 'hbl_agent_name') {
       console.log(action);
       if (action.rec) {
