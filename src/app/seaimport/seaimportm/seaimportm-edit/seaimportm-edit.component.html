@@ -155,10 +155,10 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-4 form-label form-lable-sm" for="">Place.Receipt</label>
-                <div class="col-sm-3">
-                  <app-input maxlength="100" formControlName="mbl_place_delivery" [case]="'UPPER'"></app-input>
-                </div>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Place.Receipt</label>
+              <div class="col-sm-3">
+                <app-input maxlength="100" formControlName="mbl_place_delivery" [case]="'UPPER'"></app-input>
+              </div>
               <label class="col-sm-2 form-label form-lable-sm" for="">ETA</label>
               <div class="col-sm-3">
                 <app-date formControlName="mbl_pofd_eta" [format]="gs.globalConstants.global_date_format"
@@ -201,10 +201,32 @@
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
-
-
-
-
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">OMBL.Sent.Date</label>
+              <div class="col-sm-2">
+                <app-date formControlName="mbl_ombl_sent_on" name="mbl_ombl_sent_on"
+                  [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+              <div class="col-sm-1">
+                <app-combobox maxlength="10" formControlName="mbl_ombl_sent_ampm" name="mbl_ombl_sent_ampm"
+                  [dataSource]="TimeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </div>
+              <!-- </div>
+            <div class="form-group row"> -->
+              <label class="col-sm-2 form-label form-lable-sm" for=""> O/F.Sent.On</label>
+              <div class="col-sm-3">
+                <app-date formControlName="mbl_of_sent_on" name="mbl_of_sent_on"
+                  [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
               <div class="col-sm-3">
@@ -247,7 +269,8 @@
                   name="mbl_cargo_loc_add4"></app-input>
               </div>
             </div>
-
+          </div>
+          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Devan Location</label>
               <div class="col-sm-3">
@@ -308,6 +331,11 @@
                   <th>UNIT</th>
                   <th>WEIGHT</th>
                   <th>CBM</th>
+                  <th>DISCHARGE</th>
+                  <th>LFD</th>
+                  <th>PICKUP</th>
+                  <th>EMPTY.RETURN</th>
+                  <!-- <th>MOVEMENT</th> -->
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
                   <th>DELETE</th>
@@ -349,7 +377,23 @@
                   </td>
                   <td>
                     <app-input formControlName="cntr_cbm" [rowIndex]="i" name="cntr_cbm"
-                    [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
+                      [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_discharge_date" [rowIndex]="i" name="cntr_discharge_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_lfd" [rowIndex]="i" name="cntr_lfd"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_pick_date" [rowIndex]="i" name="cntr_pick_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_return_date" [rowIndex]="i" name="cntr_return_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
                   </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
@@ -385,13 +429,10 @@
                   <th>HOUSE</th>
                   <th>SHIPPER</th>
                   <th>CONSIGNEE</th>
-                  <th>PCS</th>
                   <th>HANDLED-BY</th>
                   <th>FREIGHT</th>
-                  <!-- <th>TERMS</th> -->
                   <th>CREATED-BY</th>
                   <th>CREATED-DATE</th>
-                  <!-- <th>ADD</th> -->
                   <th>DELETE</th>
                 </tr>
               </thead>
@@ -400,7 +441,7 @@
                 <tr *ngFor="let iRow of formArray('master_house').controls; let i=index;" [formGroupName]="i">
                   <td align="centre" [routerLink]="['/seaimport/seaimporthEdit']"
                     [queryParams]="{ id: iRow.get('hbl_id')?.value, mbl_id: mform.get('mbl_id')?.value, mode: 'edit',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
-                    class="link"> <!--menuid: menuid, -->
+                    class="link"> 
                     <i class="fa fa-pencil"></i>
                   </td>
                   <td *ngIf="showModel">
@@ -416,9 +457,6 @@
                     <label>{{iRow.get('hbl_consignee_name')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('hbl_pcs')?.value}}</label>
-                  </td>
-                  <td>
                     <label>{{iRow.get('hbl_handled_name')?.value}}</label>
                   </td>
                   <td>
@@ -430,11 +468,7 @@
                   <td>
                     <label>{{iRow.get('rec_created_date')?.value}}</label>
                   </td>
-                  <!-- <td align="centre" [routerLink]="['/seaexport/seaexporthEdit']"
-                [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
-                class="link">
-                <i class="fa fa-plus"></i>
-              </td> -->
+
                   <td align="centre" (click)="deleteHouse(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
                     class="link">
                     <i class="fa fa-trash"></i>

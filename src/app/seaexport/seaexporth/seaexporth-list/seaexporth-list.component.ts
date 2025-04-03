@@ -38,7 +38,7 @@ export class SeaExportHListComponent extends baseListComponent {
       { col_name: "hbl_mbl_no", col_caption: "MBL #", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_houseno", col_caption: "HOUSE #", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_shipper_name", col_caption: "SHIPPER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "hbl_consigned_to1", col_caption: "CONSIGNEE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "hbl_consignee_name", col_caption: "CONSIGNEE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_pcs", col_caption: "PCS", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_handled_name", col_caption: "HANDLED", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_mbl_pol_etd", col_caption: "ETD", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },

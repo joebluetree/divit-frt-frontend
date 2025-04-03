@@ -36,6 +36,10 @@ export class SeaImportmEditComponent extends baseEditComponent {
     { key: 'CONSOLE', value: 'CONSOLE' },
     { key: 'OTHERS', value: 'OTHERS' },
   ]
+  TimeList = [
+    { key: 'AM', value: 'AM' },
+    { key: 'PM', value: 'PM' },
+  ]
   constructor(
     public ms: SeaImportmService,
     public dialog: MatDialog
@@ -67,8 +71,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_ship_term_id: [0],
       mbl_ship_term_name: [''],
       mbl_cntr_type: [''],
-      mbl_inco_term_id:[0],
-      mbl_inco_term_name:[''],
+      mbl_incoterm_id:[0],
+      mbl_incoterm_name:[''],
       mbl_pol_id: [0],
       mbl_pol_name: [''],
       mbl_pol_etd: [''],
@@ -106,7 +110,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
       
 
       master_cntr: this.fb.array([]),
-      // master_house: this.fb.array([]),
+      master_house: this.fb.array([]),
       rec_version: [0],
 
     })
@@ -147,6 +151,10 @@ export class SeaImportmEditComponent extends baseEditComponent {
       cntr_packages_unit_name: [rec?.cntr_packages_unit_name || ""],
       cntr_cbm: [rec?.cntr_cbm || 0],
       cntr_weight: [rec?.cntr_weight || 0],
+      cntr_pick_date: [rec?.cntr_pick_date || ""],
+      cntr_return_date: [rec?.cntr_return_date || ""],
+      cntr_lfd: [rec?.cntr_lfd || ""],
+      cntr_discharge_date: [rec?.cntr_discharge_date || ""],
       cntr_order: [rec?.cntr_order || 0],
     });
     return _rec;
@@ -176,7 +184,6 @@ export class SeaImportmEditComponent extends baseEditComponent {
       hbl_houseno: [rec?.hbl_houseno || ""],
       hbl_shipper_name: [rec?.hbl_shipper_name || ""],
       hbl_consignee_name: [rec?.hbl_consignee_name || ""],
-      hbl_pcs: [rec?.hbl_pcs || null],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
       hbl_frt_status_name: [rec?.hbl_frt_status_name || ""],
       rec_created_by: [rec?.rec_created_by || ""],
@@ -244,8 +251,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
           mbl_ship_term_id: rec.mbl_ship_term_id,
           mbl_ship_term_name: rec.mbl_ship_term_name,
           mbl_cntr_type: rec.mbl_cntr_type,
-          mbl_inco_term_id: rec.mbl_inco_term_id,
-          mbl_inco_term_name: rec.mbl_inco_term_name,
+          mbl_incoterm_id: rec.mbl_incoterm_id,
+          mbl_incoterm_name: rec.mbl_incoterm_name,
           mbl_pol_id: rec.mbl_pol_id,
           mbl_pol_name: rec.mbl_pol_name,
           mbl_pol_etd: rec.mbl_pol_etd,
@@ -387,8 +394,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
     if (action.id == 'mbl_coloader_name') {
       if (action.rec) {
         this.mform.patchValue({
-          mbl_coloader_id: action.rec ? action.rec.param_id : 0,
-          mbl_coloader_name: action.rec ? action.rec.param_name : '',
+          mbl_coloader_id: action.rec ? action.rec.cust_id : 0,
+          mbl_coloader_name: action.rec ? action.rec.cust_name : '',
         });
       }
       else {
@@ -468,6 +475,20 @@ export class SeaImportmEditComponent extends baseEditComponent {
         });
       }
     }
+    if (action.id == 'mbl_status_name') {
+      if (action.rec) {
+        this.mform.patchValue({
+          mbl_status_id: action.rec ? action.rec.param_id : 0,
+          mbl_status_name: action.rec ? action.rec.param_name : '',
+        });
+      }
+      else {
+        this.mform.patchValue({
+          mbl_status_id: 0,
+          mbl_status_name: '',
+        });
+      }
+    }
 
     if (action.id == 'mbl_pol_name') {
       if (action.rec) {
@@ -536,7 +557,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
           mbl_cargo_loc_add1: action.rec ? action.rec.cust_address1 : '',
           mbl_cargo_loc_add2: action.rec ? action.rec.cust_address2 : '',
           mbl_cargo_loc_add3: action.rec ? action.rec.cust_address3 : '',
-          mbl_cargo_loc_add4: action.rec ? action.rec.cust_address4 : '',
+          mbl_cargo_loc_add4: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
+          (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
         });
       }
       else {

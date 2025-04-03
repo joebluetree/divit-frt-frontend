@@ -11,7 +11,6 @@ export interface iSea_impHouse {
   hbl_houseno: string;
   hbl_shipper_name: string;
   hbl_consignee_name: string;
-  hbl_pcs: number;
   hbl_handled_name: string;
   hbl_frt_status_name: string;
   rec_created_by: string;
@@ -31,10 +30,13 @@ export interface iContainer {
   cntr_packages_unit_id: number,
   cntr_packages_unit_name: string,
   // cntr_packages: number,
-  // cntr_teu: number,
   cntr_cbm: number,
   // cntr_weight_uom: string,
   cntr_weight: number,
+  cntr_pick_date: string;
+  cntr_return_date: string;
+  cntr_lfd: string;
+  cntr_discharge_date: string;
   cntr_order: number,
 
   rec_version: number;
@@ -69,8 +71,8 @@ export interface iSea_importm {
   mbl_ship_term_id: number;
   mbl_ship_term_name: string;
   mbl_cntr_type: string;
-  mbl_inco_term_id: number;
-  mbl_inco_term_name: string;
+  mbl_incoterm_id: number;
+  mbl_incoterm_name: string;
   mbl_pol_id: number;
   mbl_pol_name: string;
   mbl_pol_etd: string;

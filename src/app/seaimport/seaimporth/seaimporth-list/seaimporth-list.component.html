@@ -1,30 +1,30 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <!-- <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/seaexport/seaexporthEdit"
+  <!-- <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/seaimport/seaimporthEdit"
     [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,  appid:appid}">New</button> -->
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
 <div class="page-search">
-  <app-seaexporth-search [search_url]="'/api/seaexport/seaexporth/GetListAsync'" [input]="ms.getSearchRecord()"
-    (searchResult)="search($event)"></app-seaexporth-search>
+  <app-seaimporth-search [search_url]="'/api/seaimport/seaimporth/GetListAsync'" [input]="ms.getSearchRecord()"
+    (searchResult)="search($event)"></app-seaimporth-search>
 </div>
 
 <div class="page-pagination">
-  <app-page [search_url]="'/api/seaexport/seaexporth/GetListAsync'" [page]="ms.getPageRecord()"
+  <app-page [search_url]="'/api/seaimport/seaimporth/GetListAsync'" [page]="ms.getPageRecord()"
     (pageEvents)="pageEvents($event)"></app-page>
 </div>
 
 <div class="page-body">
 
   <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
-    [delete_url]="'/api/seaexport/seaexporth/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [delete_url]="'/api/seaimport/seaimporth/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
     [row_id_name]="'hbl_id'" [selected_id]="ms.selectedRow">
   </app-table>
 
 </div>
 
 <div class="page-pagination line-bottom">
-  <app-page [search_url]="'/api/seaexport/seaexporth/GetListAsync'" [page]="ms.getPageRecord()"
+  <app-page [search_url]="'/api/seaimport/seaimporth/GetListAsync'" [page]="ms.getPageRecord()"
     (pageEvents)="pageEvents($event)"></app-page>
 </div>

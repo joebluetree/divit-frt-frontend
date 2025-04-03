@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
-import { iSea_exportm_Search } from '../../models/iseaexportm';
-import { iSea_exportH_Search } from '../../models/iseaexporth';
+import { iSea_importH_Search } from '../../models/iseaimporth';
+
 
 @Component({
-  selector: 'app-seaexporth-search',
-  templateUrl: './seaexporth-search.component.html',
-  styleUrls: ['./seaexporth-search.component.css'],
+  selector: 'app-seaimporth-search',
+  templateUrl: './seaimporth-search.component.html',
+  styleUrls: ['./seaimporth-search.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
@@ -17,14 +17,14 @@ import { iSea_exportH_Search } from '../../models/iseaexporth';
 //Created Date : 24/02/2025
 //Remark : this component manages searching of hbl-lcl records
 
-export class SeaExportHSearchComponent {
+export class SeaImportHSearchComponent {
 
   mform: FormGroup;
-  record!: iSea_exportH_Search;
+  record!: iSea_importH_Search;
 
   @Input('search_url') search_url = '';
 
-  @Input('input') set input(v: iSea_exportH_Search) {
+  @Input('input') set input(v: iSea_importH_Search) {
     this.record = { ...v };
   }
 
