@@ -176,7 +176,7 @@ export class AirImportEditComponent extends baseEditComponent {
       hbl_handled_id: [rec?.hbl_handled_id || 0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
       hbl_packages: [rec?.hbl_packages || 0],
-      hbl_pickup_date: [rec?.hbl_pickup_date || ""], 
+      hbl_pickup_date: [rec?.hbl_pickup_date || ""],
       hbl_delivery_date: [rec?.hbl_delivery_date || ""],
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],

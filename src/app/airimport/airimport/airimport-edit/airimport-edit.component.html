@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      <div class="page-body line-bottom">
+      <div class="page-body">
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group row">
@@ -53,6 +53,15 @@
                 <auto-complete formControlName="mbl_agent_name" id="mbl_agent_name" (CallBack)="callBack($event)"
                   [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
                   display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Carrier</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_liner_name" name="mbl_liner_name" id="mbl_liner_name"
+                  (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
             <div class="form-group row">
@@ -84,6 +93,77 @@
               </div>
             </div>
             <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Origin.Country</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_country_name" name="mbl_country_name" id="mbl_country_name"
+                  (CallBack)="callBack($event)" table="param" subtable="COUNTRY" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Flight No</label>
+              <div class="col-sm-8">
+                <app-input maxlength="15" formControlName="mbl_vessel_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Status</label>
+              <div class="col-sm-8">
+                <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+                  formControlName="mbl_frt_status_name"></app-combobox>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inco Term</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_incoterm" name="mbl_incoterm" id="mbl_incoterm"
+                  (CallBack)="callBack($event)" table="param" subtable="INCOTERM" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Gr.Wt</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbl_mawb_weight" type="number"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Ch.Wt</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbl_mawb_chwt" type="number"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Handled By</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_handled_name" name="mbl_handled_name" id="mbl_handled_name"
+                  (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Salesman</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_salesman_name" name="mbl_salesman_name" id="mbl_salesman_name"
+                  (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm">Cargo Location</label>
               <div class="col-sm-8">
                 <auto-complete formControlName="mbl_cargo_loc_code" name="mbl_cargo_loc_code" id="mbl_cargo_loc_code"
@@ -98,11 +178,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">
-                <div class="d-grid">
-                <button class="btn btn-success btn-sm" type="button" >Return</button>
-              </div>
-              </label>
+              <label class="col-sm-4 form-label form-lable-sm">Address</label>
               <div class="col-sm-8">
                 <app-input maxlength="100" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'"></app-input>
               </div>
@@ -125,81 +201,15 @@
                 <app-input maxlength="100" formControlName="mbl_cargo_loc_add4" [case]="'UPPER'"></app-input>
               </div>
             </div>
-
+            <div class="form-group row" *ngIf="mode=='edit'">
+              <label class="col-sm-4 form-label form-label-sm"></label>
+              <div class="col-sm-8 gap-1 text-center">
+                <button class="btn btn-success btn-sm my-1" type="button">Copy Cargo Location To All Houses</button>
+              </div>
+            </div>
           </div>
           <div class="col-sm-6">
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Carrier</label>
-              <div class="col-sm-8">
-                <auto-complete formControlName="mbl_liner_name" name="mbl_liner_name" id="mbl_liner_name"
-                  (CallBack)="callBack($event)" table="param" subtable="SEA CARRIER" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Flight No</label>
-              <div class="col-sm-8">
-                <app-input maxlength="15" formControlName="mbl_vessel_name" [case]="'UPPER'"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Status</label>
-              <div class="col-sm-8">
-                <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
-                  formControlName="mbl_frt_status_name"></app-combobox>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Origin.Country</label>
-              <div class="col-sm-8">
-                <auto-complete formControlName="mbl_country_name" name="mbl_country_name" id="mbl_country_name"
-                  (CallBack)="callBack($event)" table="param" subtable="COUNTRY" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Handled By</label>
-              <div class="col-sm-8">
-                <auto-complete formControlName="mbl_handled_name" name="mbl_handled_name" id="mbl_handled_name"
-                  (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Salesman</label>
-              <div class="col-sm-8">
-                <auto-complete formControlName="mbl_salesman_name" name="mbl_salesman_name" id="mbl_salesman_name"
-                  (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Inco Term</label>
-              <div class="col-sm-8">
-                <auto-complete formControlName="mbl_incoterm" name="mbl_incoterm" id="mbl_incoterm"
-                  (CallBack)="callBack($event)" table="param" subtable="INCOTERM" [company_id]="getCompanyId()"
-                  [url]="url" case="upper"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">GrWt</label>
-              <div class="col-sm-8">
-                <app-input formControlName="mbl_mawb_weight" type="number"
-                  [dec]="gs.globalConstants.global_dec_places"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">ChWt</label>
-              <div class="col-sm-8">
-                <app-input formControlName="mbl_mawb_chwt" type="number"
-                  [dec]="gs.globalConstants.global_dec_places"></app-input>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -215,10 +225,10 @@
                   <th>SHIPPER</th>
                   <th>CONSIGNEE</th>
                   <th>PCS</th>
-                  <th>HANDLED_BY</th>
+                  <th>HANDLED BY</th>
                   <th>ETD</th>
                   <th>ETA</th>
-                  <th>CREATED_BY</th>
+                  <th>CREATED-BY</th>
                   <th>CREATED DATE</th>
                   <th>DELETE</th>
                 </tr>
@@ -253,11 +263,11 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_pickup_date')?.value}}</label>
+                    <label>{{iRow.get('hbl_pickup_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_delivery_date')?.value}}</label>
+                    <label>{{iRow.get('hbl_delivery_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
@@ -265,7 +275,7 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value}}</label>
+                    <label>{{iRow.get('rec_created_date')?.value | date:gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
 
                   <td align="centre" (click)="deleteRow(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"

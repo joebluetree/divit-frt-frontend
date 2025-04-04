@@ -23,6 +23,7 @@ export interface iAirimporth {
   hbl_shipper_add2?: string;
   hbl_shipper_add3?: string;
   hbl_shipper_add4?: string;
+  hbl_shipper_add5?: string;
 
   hbl_consignee_id?: number;
   hbl_consignee_code?: string;

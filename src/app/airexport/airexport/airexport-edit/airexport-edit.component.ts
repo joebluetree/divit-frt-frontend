@@ -178,6 +178,7 @@ export class AirExportEditComponent extends baseEditComponent {
       hbl_issued_date: [rec?.hbl_issued_date || ""],
       hbl_delivery_date: [rec?.hbl_delivery_date || ""],
       rec_created_by: [rec?.rec_created_by || ""],
+      rec_created_date: [rec?.rec_created_date || ""],
 
     })
   }
