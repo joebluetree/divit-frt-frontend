@@ -11,8 +11,14 @@ export interface iSea_impHouse {
   hbl_houseno: string;
   hbl_shipper_name: string;
   hbl_consignee_name: string;
+  hbl_client_cat: string;
+  hbl_client_type: string;
+  hbl_packages: number;
   hbl_handled_name: string;
+  hbl_telex_released_id: number;
+  hbl_telex_released_name: string;
   hbl_frt_status_name: string;
+  hbl_ship_term_name: string;
   rec_created_by: string;
   rec_created_date: string;
 }

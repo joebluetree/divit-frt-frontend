@@ -120,7 +120,7 @@
               <label class="col-sm-2 form-label form-lable-sm">Inco.Term </label>
               <div class="col-sm-3">
                 <auto-complete formControlName="mbl_incoterm_name" id="mbl_incoterm_name" (CallBack)="callBack($event)"
-                  [table]="'param'" [subtable]="'vessel'" [company_id]="getCompanyId()" [url]="url"
+                  [table]="'param'" [subtable]="'INCOTERM'" [company_id]="getCompanyId()" [url]="url"
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
@@ -197,8 +197,13 @@
               <label class="col-sm-4 form-label form-lable-sm" for="">MBL.Status</label>
               <div class="col-sm-3">
                 <auto-complete formControlName="mbl_status_name" id="mbl_status_name" (CallBack)="callBack($event)"
-                  [table]="'param'" [subtable]="'vessel'" [company_id]="getCompanyId()" [url]="url"
+                  [table]="'param'" [subtable]="'MBL-STATUS'" [company_id]="getCompanyId()" [url]="url"
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">BL.Status</label>
+              <div class="col-sm-3">
+                <app-combobox maxlength="30" formControlName="mbl_is_sea_waybill" name="mbl_is_sea_waybill"
+                  [dataSource]="BlStatusList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
             <div class="form-group row">
@@ -209,7 +214,7 @@
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>
               </div>
               <div class="col-sm-1">
-                <app-combobox maxlength="10" formControlName="mbl_ombl_sent_ampm" name="mbl_ombl_sent_ampm"
+                <app-combobox maxlength="20" formControlName="mbl_ombl_sent_ampm" name="mbl_ombl_sent_ampm"
                   [dataSource]="TimeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
               <!-- </div>
@@ -334,7 +339,7 @@
                   <th>DISCHARGE</th>
                   <th>LFD</th>
                   <th>PICKUP</th>
-                  <th>EMPTY.RETURN</th>
+                  <th>EMPTY RETURN</th>
                   <!-- <th>MOVEMENT</th> -->
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
@@ -429,8 +434,13 @@
                   <th>HOUSE</th>
                   <th>SHIPPER</th>
                   <th>CONSIGNEE</th>
+                  <th>CLIENT-CATEGORY</th>
+                  <th>CLIENT-TYPE</th>
+                  <th>PCS</th>
                   <th>HANDLED-BY</th>
+                  <th>HBL-STATUS</th>
                   <th>FREIGHT</th>
+                  <th>TERMS</th>
                   <th>CREATED-BY</th>
                   <th>CREATED-DATE</th>
                   <th>DELETE</th>
@@ -457,10 +467,25 @@
                     <label>{{iRow.get('hbl_consignee_name')?.value}}</label>
                   </td>
                   <td>
+                    <label>{{iRow.get('hbl_client_cat')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_client_type')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_packages')?.value}}</label>
+                  </td>
+                  <td>
                     <label>{{iRow.get('hbl_handled_name')?.value}}</label>
                   </td>
                   <td>
+                    <label>{{iRow.get('hbl_telex_released_name')?.value}}</label>
+                  </td>
+                  <td>
                     <label>{{iRow.get('hbl_frt_status_name')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_ship_term_name')?.value}}</label>
                   </td>
                   <td>
                     <label>{{iRow.get('rec_created_by')?.value}}</label>
@@ -501,25 +526,16 @@
         <div class="col-sm-12">
           <div class="form-group row">
             <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">BOOKING</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
             </div>
 
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">MBL INSTRUCTION</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">DEVANING INSTRUCTION</button>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DOCK RECEIPT</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">MANIFEST</button>
-            </div>
-          </div>
+
           <div class="form-group row">
             <div class="col-sm-12">
               <button class="btn btn-sm btn-success w-100 mb-2">AR & AP</button>
@@ -572,7 +588,18 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">SAVE</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">PRODUCT</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
+                [disabled]="mform.invalid">Save</button>
             </div>
           </div>
         </div>

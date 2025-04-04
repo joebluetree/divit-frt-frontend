@@ -143,48 +143,6 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
-              <div class="col-sm-3">
-                <auto-complete formControlName="hbl_location_code" id="hbl_location_code" (CallBack)="callBack($event)"
-                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
-                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
-                </auto-complete>
-              </div>
-              <div class="col-sm-5">
-                <app-input maxlength="100" formControlName="hbl_location_name" id="hbl_location_name"
-                  name="hbl_location_name" [case]="'UPPER'"></app-input>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
-                <app-input maxlength="60" formControlName="hbl_location_add1" [case]="'UPPER'" id="hbl_location_add1"
-                  name="hbl_location_add1"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
-                <app-input maxlength="60" formControlName="hbl_location_add2" [case]="'UPPER'" id="hbl_location_add2"
-                  name="hbl_location_add2"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
-                <app-input maxlength="60" formControlName="hbl_location_add3" [case]="'UPPER'" id="hbl_location_add3"
-                  name="hbl_location_add3"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
-                <app-input maxlength="60" formControlName="hbl_location_add4" [case]="'UPPER'" id="hbl_location_add4"
-                  name="hbl_location_add4"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Notify</label>
               <div class="col-sm-3">
                 <auto-complete formControlName="hbl_notify_code" id="hbl_notify_code" (CallBack)="callBack($event)"
@@ -233,6 +191,48 @@
                   [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
                   display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
                 </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="hbl_location_code" id="hbl_location_code" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="hbl_location_name" id="hbl_location_name"
+                  name="hbl_location_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="hbl_location_add1" [case]="'UPPER'" id="hbl_location_add1"
+                  name="hbl_location_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="hbl_location_add2" [case]="'UPPER'" id="hbl_location_add2"
+                  name="hbl_location_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="hbl_location_add3" [case]="'UPPER'" id="hbl_location_add3"
+                  name="hbl_location_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="hbl_location_add4" [case]="'UPPER'" id="hbl_location_add4"
+                  name="hbl_location_add4"></app-input>
               </div>
             </div>
           </div>
@@ -309,17 +309,18 @@
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>
               </div>
             </div>
-
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">IT.No.</label>
-              <div class="col-sm-3">
-                <app-input maxlength="50" formControlName="hbl_it_no" [case]="'UPPER'" id="hbl_it_no"
-                  name="hbl_it_no"></app-input>
-              </div>
-              <label class="col-sm-2 form-label form-lable-sm" for=""></label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">IT Shipment</label>
               <div class="col-sm-3">
                 <app-checkbox formControlName="hbl_is_itshipment"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">IT Shipment</label>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">IT.No.</label>
+              <div class="col-sm-8">
+                <app-input maxlength="50" formControlName="hbl_it_no" [case]="'UPPER'" id="hbl_it_no"
+                  name="hbl_it_no"></app-input>
               </div>
             </div>
 
@@ -463,10 +464,15 @@
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Telex Released</label>
-              <div class="col-sm-8">
+              <div class="col-sm-3">
+                <auto-complete formControlName="hbl_telex_released_name" id="hbl_telex_released_name"
+                  (CallBack)="callBack($event)" [table]="'param'" [subtable]="'PAID_STATUS'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+              <!-- <div class="col-sm-8">
                 <app-combobox maxlength="30" formControlName="hbl_telex_released" name="hbl_telex_released"
                   [dataSource]="telexRelList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
-              </div>
+              </div> -->
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Moved By DAD</label>
@@ -559,14 +565,14 @@
               <label class="col-sm-4 form-label form-lable-sm" for="">B/L.Status</label>
               <div class="col-sm-8">
                 <app-combobox maxlength="30" formControlName="hbl_cargo_release_status" name="hbl_cargo_release_status"
-                  [dataSource]="clientList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+                  [dataSource]="BlStatuslList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Release.Status</label>
               <div class="col-sm-8">
                 <app-combobox maxlength="30" formControlName="hbl_frt_status_name" name="hbl_frt_status_name"
-                  [dataSource]="clientList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+                  [dataSource]="frtStatuslList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
           </div>
@@ -591,7 +597,7 @@
                   <th>DISCHARGE</th>
                   <th>LFD</th>
                   <th>PICKUP</th>
-                  <th>EMPTY.RETURN</th>
+                  <th>EMPTY RETURN</th>
                   <!-- <th>MOVEMENT</th> -->
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
@@ -970,21 +976,21 @@
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Remarks</label>
-              <div class="col-sm-8">
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-12">
                 <app-input maxlength="100" formControlName="hbl_remark1" [case]="'UPPER'" name="hbl_remark1"
                   id="hbl_remark1"></app-input>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
+              <div class="col-sm-12">
                 <app-input maxlength="100" formControlName="hbl_remark2" [case]="'UPPER'" name="hbl_remark2"
                   id="hbl_remark2"></app-input>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-8">
+              <div class="col-sm-12">
                 <app-input maxlength="100" formControlName="hbl_remark3" [case]="'UPPER'" name="hbl_remark3"
                   id="hbl_remark3"></app-input>
               </div>
@@ -1012,7 +1018,6 @@
       </div>
       <div class="page-body">
         <div class="row">
-          <div class="col-sm-6"></div>
           <div class="col-sm-3">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-label-sm" for="">Last.Free.Date</label>
@@ -1055,6 +1060,7 @@
               </div>
             </div>
           </div>
+          <div class="col-sm-6"></div>
         </div>
       </div>
     </form>
@@ -1069,66 +1075,59 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group row">
-            <div class="col-sm-12">
-              <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'"
-                [displayColumn]="'value'" case="UPPER"></app-combobox>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <app-checkbox></app-checkbox>
-              <label class="col-sm-8 form-label form-lable-sm" for="">BL New Format</label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <app-checkbox></app-checkbox>
-              <label class="ms-1 form-label form-label-sm">BL Backside</label>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <app-checkbox></app-checkbox>
-              <label class="ms-1 form-label form-label-sm">Colour</label>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <app-checkbox></app-checkbox>
-              <label class="ms-1 form-label form-label-sm">Cntr#/Seal#</label>
-            </div>
-          </div>
-          <div class="form-group row">
             <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(ORGINAL)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">ARRIVAL NOTICE</button>
             </div>
 
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(TELEX)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">ARRIVAL NOTICE(FRT INVOICE)</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(DRAFT)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">PRE-ADVISE</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">PRINT HBL</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">TURNOVER LETTER</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">RIDER</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-info w-100 mb-2" (click)="save()"
+              <button class="btn btn-sm btn-success w-100 mb-2">US CUSTOM HOLD</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">DEVAN/INSTRUCTIONS</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">HOUSE INTERNAL MEMO</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">RIDER PAGE</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">PRODUCTS</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
                 [disabled]="mform.invalid">SAVE</button>
             </div>
           </div>

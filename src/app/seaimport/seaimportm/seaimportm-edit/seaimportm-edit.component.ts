@@ -40,6 +40,13 @@ export class SeaImportmEditComponent extends baseEditComponent {
     { key: 'AM', value: 'AM' },
     { key: 'PM', value: 'PM' },
   ]
+  BlStatusList = [
+    { key: 'NIL', value: 'NIL' },
+    { key: 'PENDING SEAWAY', value: 'PENDING SEAWAY' },
+    { key: 'SEAWAY BILL', value: 'SEAWAY BILL' },
+    { key: 'PENDING TELEX RELEASED', value: 'PENDING TELEX RELEASED' },
+    { key: 'TELEX RELEASED', value: 'TELEX RELEASED' },
+  ]
   constructor(
     public ms: SeaImportmService,
     public dialog: MatDialog
@@ -184,8 +191,13 @@ export class SeaImportmEditComponent extends baseEditComponent {
       hbl_houseno: [rec?.hbl_houseno || ""],
       hbl_shipper_name: [rec?.hbl_shipper_name || ""],
       hbl_consignee_name: [rec?.hbl_consignee_name || ""],
+      hbl_client_cat: [rec?.hbl_client_cat || ""],
+      hbl_client_type: [rec?.hbl_client_type || ""],
+      hbl_packages:[rec?.hbl_packages||0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
+      hbl_telex_released_name: [rec?.hbl_telex_released_name || ""],
       hbl_frt_status_name: [rec?.hbl_frt_status_name || ""],
+      hbl_ship_term_name: [rec?.hbl_ship_term_name || ""],
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],
     });

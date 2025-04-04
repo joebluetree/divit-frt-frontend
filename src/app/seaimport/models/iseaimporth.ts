@@ -120,7 +120,8 @@ export interface iSea_importH {
   hbl_ams_fileno: string;
   hbl_sub_house: string;
   hbl_isf_no: string;
-  hbl_telex_released: string;
+  hbl_telex_released_id: number;
+  hbl_telex_released_name: string;
   hbl_mov_dad: string;
   hbl_bl_req: string;
   hbl_book_slno: string;
