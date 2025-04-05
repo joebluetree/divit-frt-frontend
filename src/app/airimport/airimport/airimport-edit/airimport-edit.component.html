@@ -201,15 +201,13 @@
                 <app-input maxlength="100" formControlName="mbl_cargo_loc_add4" [case]="'UPPER'"></app-input>
               </div>
             </div>
-            <div class="form-group row" *ngIf="mode=='edit'">
-              <label class="col-sm-4 form-label form-label-sm"></label>
-              <div class="col-sm-8 gap-1 text-center">
-                <button class="btn btn-success btn-sm my-1" type="button">Copy Cargo Location To All Houses</button>
-              </div>
-            </div>
           </div>
           <div class="col-sm-6">
-
+            <div class="form-group row" *ngIf="mode=='edit'">
+              <label class="col-sm-6 form-label form-label-sm"><button class="btn btn-success btn-sm my-1" type="button">Copy Cargo Location To All Houses</button></label>
+              <div class="col-sm-6 gap-1">
+              </div>
+            </div>
           </div>
         </div>
       </div>

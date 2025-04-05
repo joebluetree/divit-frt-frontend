@@ -28,13 +28,13 @@ export class AirImporthEditComponent extends baseEditComponent {
   mbl_id: number = 0;
 
 
-  dataList = [
+  Frt_Status = [
     { key: 'PREPAID', value: 'PREPAID' },
     { key: 'COLLECT', value: 'COLLECT' },
     { key: 'TBA', value: 'TBA' },
   ]
 
-  dataList1 = [
+  Client_Type = [
     { key: 'FREEHAND', value: 'FREEHAND' },
     { key: 'MUTUAL', value: 'MUTUAL' },
     { key: 'NOMINATION', value: 'NOMINATION' },
@@ -506,12 +506,14 @@ export class AirImporthEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
+    console.log(action);
+    let rec: any = {};
+    if (action?.rec != null) {
+      rec = action.rec;
+    }
+  
     if (action.name === 'hbl_consignee_code') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_consignee_id: rec.cust_id || 0,
         hbl_consignee_code: rec.cust_code || "",
@@ -526,23 +528,17 @@ export class AirImporthEditComponent extends baseEditComponent {
       });
       this.getCustomerData(rec.cust_chb_id);
     }
+  
     if (action.id === 'hbl_shipment_stage_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_shipment_stage_id: rec.param_id || 0,
         hbl_shipment_stage_name: rec.param_name || "",
       });
     }
+  
     if (action.name === 'hbl_shipper_code') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_shipper_id: rec.cust_id || 0,
         hbl_shipper_code: rec.cust_code || "",
@@ -555,23 +551,17 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_by1_carrier: rec.cust_name || "",
       });
     }
+  
     if (action.id === 'hbl_agent_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_agent_id: rec.cust_id || 0,
         hbl_agent_name: rec.cust_name || "",
       });
     }
+  
     if (action.id === 'hbl_location_id') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_location_id: rec.cust_id || 0,
         hbl_location_code: rec.cust_code || "",
@@ -582,12 +572,9 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_location_add4: rec.cust_address4 || "",
       });
     }
+  
     if (action.id === 'hbl_cha_id') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_cha_id: rec.cust_id || 0,
         hbl_cha_code: rec.cust_code || "",
@@ -597,74 +584,57 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_cha_fax: rec.cust_fax || "",
       });
     }
+  
     if (action.id === 'hbl_handled_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_handled_id: rec.param_id || 0,
         hbl_handled_name: rec.param_name || "",
       });
     }
+  
     if (action.id === 'hbl_salesman_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_salesman_id: rec.param_id || 0,
         hbl_salesman_name: rec.param_name || "",
       });
     }
-
+  
     if (action.id === 'hbl_careof_id') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_careof_id: rec.cust_id || 0,
         hbl_careof_name: rec.cust_name || "",
       });
     }
+  
     if (action.id === 'hbl_incoterm') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_incoterm_id: rec.param_id || 0,
         hbl_incoterm: rec.param_name || "",
       });
     }
+  
     if (action.id === 'hbl_uom_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_uom_id: rec.param_id || 0,
         hbl_uom_name: rec.param_name || "",
       });
     }
+  
     if (action.id === 'hbl_paid_status_name') {
       console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
       this.mform.patchValue({
         hbl_paid_status_id: rec.param_id || 0,
         hbl_paid_status_name: rec.param_name || "",
       });
     }
   }
+  
+  
 
 
   openHistory(): void {

@@ -340,7 +340,7 @@ export class GlobalService {
 
   }
 
-    // Get ATTN
+// Get ATTN
 public getAttention(data: any): string {
   const contact = data?.cust_contact;
   return contact ? `ATTN: ${contact}` : "";

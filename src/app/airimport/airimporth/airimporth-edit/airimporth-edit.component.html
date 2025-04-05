@@ -2,7 +2,6 @@
   <div class="col-sm-10">
     <div class="page-header">
       <h5>{{title}}</h5>
-      <!-- <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button> -->
       <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
       <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
     </div>
@@ -84,7 +83,8 @@
                 <app-input maxlength="100" formControlName="hbl_shipper_add5" [case]="'UPPER'"></app-input>
               </div>
             </div>
-
+          </div>
+          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Consignee</label>
               <div class="col-sm-8">
@@ -131,6 +131,10 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
@@ -180,6 +184,8 @@
                   display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
               </div>
             </div>
+          </div>
+          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">CHB</label>
               <div class="col-sm-8">
@@ -309,12 +315,12 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm">Frt.Status</label>
               <div class="col-sm-3">
-                <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+                <app-combobox [dataSource]="Frt_Status" [valueColumn]="'key'" [displayColumn]="'value'"
                   formControlName="hbl_frt_status_name" name="hbl_frt_status_name"></app-combobox>
               </div>
               <label class="col-sm-2 form-label form-lable-sm">Client.Type</label>
               <div class="col-sm-3">
-                <app-combobox [dataSource]="dataList1" [valueColumn]="'key'" [displayColumn]="'value'"
+                <app-combobox [dataSource]="Client_Type" [valueColumn]="'key'" [displayColumn]="'value'"
                   formControlName="hbl_bltype" name="hbl_bltype"></app-combobox>
               </div>
             </div>
@@ -372,13 +378,6 @@
                   formControlName="hbl_is_delivery" name="hbl_is_delivery"></app-combobox>
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm"></label>
-              <div class="col-sm-8">
-                <app-checkbox formControlName="hbl_is_itshipment"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">IT Shipment</label>
-              </div>
-            </div>
           </div>
           <div class="col-sm-6">
             <div class="form-group row">
@@ -402,8 +401,13 @@
                 <label class="ms-1 form-label form-label-sm">Carrier AN</label>
               </div>
             </div>
-
-
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="hbl_is_itshipment"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">IT Shipment</label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -428,10 +432,11 @@
                   [case]="'UPPER'"></app-input>
               </div>
               <div class="col-sm-2">
-                <app-input maxlength="100" formControlName="hbl_it_pcs" name="hbl_it_pcs" type="number"></app-input>
+                <app-input  formControlName="hbl_it_pcs" name="hbl_it_pcs" type="number"></app-input>
               </div>
               <div class="col-sm-2">
-                <app-input maxlength="100" formControlName="hbl_it_wt" name="hbl_it_wt" type="number"></app-input>
+                <app-input  formControlName="hbl_it_wt" name="hbl_it_wt" type="number"
+                [dec]="gs.globalConstants.global_dec_places" ></app-input>
               </div>
             </div>
             <div class="form-group row">
@@ -447,10 +452,11 @@
                   [case]="'UPPER'"></app-input>
               </div>
               <div class="col-sm-2">
-                <app-input maxlength="100" formControlName="hbl_it_pcs2" name="hbl_it_pcs2" type="number"></app-input>
+                <app-input  formControlName="hbl_it_pcs2" name="hbl_it_pcs2" type="number"></app-input>
               </div>
               <div class="col-sm-2">
-                <app-input maxlength="100" formControlName="hbl_it_wt2" name="hbl_it_wt2" type="number"></app-input>
+                <app-input  formControlName="hbl_it_wt2" name="hbl_it_wt2" type="number"
+                [dec]="gs.globalConstants.global_dec_places" ></app-input>
               </div>
             </div>
             <div class="form-group row">
@@ -469,7 +475,8 @@
                 <app-input formControlName="hbl_it_pcs3" name="hbl_it_pcs3" type="number"></app-input>
               </div>
               <div class="col-sm-2">
-                <app-input formControlName="hbl_it_wt3" name="hbl_it_wt3" type="number"></app-input>
+                <app-input formControlName="hbl_it_wt3" name="hbl_it_wt3" type="number" 
+                [dec]="gs.globalConstants.global_dec_places" ></app-input>
               </div>
             </div>
           </div>

@@ -266,154 +266,119 @@ export class AirImportEditComponent extends baseEditComponent {
 
   callBack(action: any) {
     if (action.id == 'mbl_shipment_stage_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_shipment_stage_id: action.rec.param_id,
-          mbl_shipment_stage_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_shipment_stage_id: 0,
-          mbl_shipment_stage_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_shipment_stage_id: action.rec.param_id || 0,
+        mbl_shipment_stage_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_agent_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_agent_id: action.rec.cust_id,
-          mbl_agent_name: action.rec.cust_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_agent_id: 0,
-          mbl_agent_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_agent_id: action.rec.cust_id || 0,
+        mbl_agent_name: action.rec.cust_name || "",
+      });
     }
     if (action.id == 'mbl_pol_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_pol_id: action.rec.param_id,
-          mbl_pol_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_pol_id: 0,
-          mbl_pol_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_pol_id: action.rec.param_id || 0,
+        mbl_pol_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_pod_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_pod_id: action.rec.param_id,
-          mbl_pod_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_pod_id: 0,
-          mbl_pod_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_pod_id: action.rec.param_id || 0,
+        mbl_pod_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_country_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_country_id: action.rec.param_id,
-          mbl_country_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_country_id: 0,
-          mbl_country_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_country_id: action.rec.param_id || 0,
+        mbl_country_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_liner_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_liner_id: action.rec.param_id,
-          mbl_liner_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_liner_id: 0,
-          mbl_liner_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_liner_id: action.rec.param_id || 0,
+        mbl_liner_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_cargo_loc_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_cargo_loc_id: action.rec.cust_id,
-          mbl_cargo_loc_code: action.rec.cust_code,
-          mbl_cargo_loc_name: action.rec.cust_name,
-          mbl_cargo_loc_add1: action.rec.cust_address1,
-          mbl_cargo_loc_add2: action.rec.cust_address2,
-          mbl_cargo_loc_add3: action.rec.cust_address3,
-          mbl_cargo_loc_add4: action.rec.cust_tel,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_cargo_loc_id: 0,
-          mbl_cargo_loc_code: '',
-          mbl_cargo_loc_name: '',
-          mbl_cargo_loc_add1: '',
-          mbl_cargo_loc_add2: '',
-          mbl_cargo_loc_add3: '',
-          mbl_cargo_loc_add4: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_cargo_loc_id: action.rec.cust_id || 0,
+        mbl_cargo_loc_code: action.rec.cust_code || "",
+        mbl_cargo_loc_name: action.rec.cust_name || "",
+        mbl_cargo_loc_add1: action.rec.cust_address1 || "",
+        mbl_cargo_loc_add2: action.rec.cust_address2 || "",
+        mbl_cargo_loc_add3: action.rec.cust_address3 || "",
+        mbl_cargo_loc_add4: action.rec.cust_tel || "",
+      });
     }
     if (action.id == 'mbl_handled_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_handled_id: action.rec.param_id,
-          mbl_handled_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_handled_id: 0,
-          mbl_handled_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_handled_id: action.rec.param_id || 0,
+        mbl_handled_name: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_incoterm') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_incoterm_id: action.rec.param_id,
-          mbl_incoterm: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_incoterm_id: 0,
-          mbl_incoterm: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_incoterm_id: action.rec.param_id || 0,
+        mbl_incoterm: action.rec.param_name || "",
+      });
     }
     if (action.id == 'mbl_salesman_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_salesman_id: action.rec.param_id,
-          mbl_salesman_name: action.rec.param_name,
-        });
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_salesman_id: 0,
-          mbl_salesman_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_salesman_id: action.rec.param_id || 0,
+        mbl_salesman_name: action.rec.param_name || "",
+      });
     }
   }
 

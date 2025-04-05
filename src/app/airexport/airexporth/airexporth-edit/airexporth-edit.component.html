@@ -1,6 +1,5 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <!-- <button class="btn btn-success btn-sm ml-2" (click)="openHistory()">History</button> -->
   <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
@@ -78,7 +77,14 @@
             <app-input maxlength="100" formControlName="hbl_shipper_add4" [case]="'UPPER'"></app-input>
           </div>
         </div>
-
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="hbl_shipper_add5" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Consignee</label>
           <div class="col-sm-8">
@@ -124,30 +130,6 @@
             <app-input maxlength="100" formControlName="hbl_consignee_add5" [case]="'UPPER'"></app-input>
           </div>
         </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Accounting</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="hbl_notify_name" [case]="'UPPER'"></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Information</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="hbl_notify_add1" [case]="'UPPER'"></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="hbl_notify_add2" [case]="'UPPER'"></app-input>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm"></label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="hbl_notify_add3" [case]="'UPPER'"></app-input>
-          </div>
-        </div>
       </div>
       <div class="col-sm-4">
         <div class="form-group row">
@@ -180,6 +162,37 @@
             <app-input maxlength="100" formControlName="hbl_agent_city" [case]="'UPPER'"></app-input>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Accounting</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="hbl_notify_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Information</label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="hbl_notify_add1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="hbl_notify_add2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="100" formControlName="hbl_notify_add3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Place Of Delivery</label>
           <div class="col-sm-8">
@@ -201,7 +214,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Status</label>
           <div class="col-sm-8">
-            <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+            <app-combobox [dataSource]="Frt_Status" [valueColumn]="'key'" [displayColumn]="'value'"
               formControlName="hbl_frt_status_name"></app-combobox>
           </div>
         </div>
@@ -212,6 +225,8 @@
             <app-input maxlength="1" formControlName="hbl_oc_status" [case]="'UPPER'"></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Value For Carriage</label>
           <div class="col-sm-8">
@@ -236,8 +251,6 @@
             <app-input maxlength="30" formControlName="hbl_aesno" [case]="'UPPER'"></app-input>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">L/C#</label>
           <div class="col-sm-8">
@@ -247,7 +260,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Client.Type</label>
           <div class="col-sm-8">
-            <app-combobox [dataSource]="dataList1" [valueColumn]="'key'" [displayColumn]="'value'"
+            <app-combobox [dataSource]="Client_Type" [valueColumn]="'key'" [displayColumn]="'value'"
               formControlName="hbl_bltype" name="hbl_bltype"></app-combobox>
           </div>
         </div>
@@ -275,6 +288,8 @@
             <app-input maxlength="100" formControlName="hbl_goods_nature" name="hbl_goods_nature"></app-input>
           </div>
         </div>
+      </div>
+      <div class="col-sm-4">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Commodity</label>
           <div class="col-sm-8">
@@ -838,7 +853,7 @@
         <div class="form-group row" *ngIf="mode=='edit'">
           <label class="col-sm-4 form-label form-lable-sm" for="">Print Type</label>
           <div class="col-sm-8">
-            <app-combobox [dataSource]="dataList2" [valueColumn]="'key'" [displayColumn]="'value'"
+            <app-combobox [dataSource]="print_type" [valueColumn]="'key'" [displayColumn]="'value'"
               formControlName="hbl_print"></app-combobox>
           </div>
         </div>
