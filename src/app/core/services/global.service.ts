@@ -7,6 +7,7 @@ import { iMenum } from '../models/imenum';
 
 import ShortUniqueId from 'short-unique-id';
 import { HttpHeaders } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class GlobalService {
   public app_id = '';
   public user: iUser = <iUser>{};
 
+  protected mform: FormGroup;
   private authenticatedSignal = signal<Boolean>(false);
   private autherisedSignal = signal<Boolean>(false);
   private errorSignal = signal<string | null>('');
@@ -214,6 +216,8 @@ export class GlobalService {
       global_user_branch_id: this.user.user_branch_id,
       global_dec_places: 3,
       global_date_format: 'mm/dd/yyyy',
+      global_output_datetime_format: 'dd-MMM-yyyy HH:mm',
+      global_display_date_format: 'dd-MMM-yyyy',
     };
   }
 
@@ -227,6 +231,8 @@ export class GlobalService {
       'global_user_branch_id': this.user.user_branch_id.toString(),
       'global_dec_places': 2,
       'global_date_format': 'mm/dd/yyyy',
+      'global_output_datetime_format': 'dd-MMM-yyyy HH:mm',
+      'global_display_date_format': 'dd-MMM-yyyy',
     });
 
   }
@@ -304,7 +310,7 @@ export class GlobalService {
   }
 
 
-  public roundNumber(_number: number, _precision: number = 2): number  {
+  public roundNumber(_number: number, _precision: number = 2): number {
     try {
       // Check if the input number is a valid number
       if (typeof _number !== 'number' || isNaN(_number)) {
@@ -336,7 +342,23 @@ export class GlobalService {
 
   }
 
-  public getToday(){
+  // Get ATTN
+  public getAttention(data: any): string {
+    const contact = data?.cust_contact;
+    return contact ? `ATTN: ${contact}` : "";
+  }
+
+  // Get TEL & FAX
+  public getTelFax(data: any): string {
+    const tel = data?.cust_tel ? `TEL: ${data.cust_tel}` : "";
+    const fax = data?.cust_fax ? `FAX: ${data.cust_fax}` : "";
+
+    if (tel && fax) return `${tel}, ${fax}`;
+    return tel || fax || "";
+  }
+
+
+  public getToday() {
     return this.getNewdate(0);
   }
 
@@ -363,7 +385,7 @@ export class GlobalService {
       `MESSAGE : ${errorObj.message}`,
       `ERROR : ${errorObj.error}`
     ];
-  
+
     this.showAlert(errorMsg); // Show as alert
   }
 

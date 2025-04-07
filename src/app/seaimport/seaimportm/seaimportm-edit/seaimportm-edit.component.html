@@ -245,9 +245,10 @@
                   name="mbl_cargo_loc_name" [case]="'UPPER'"></app-input>
               </div>
             </div>
-
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+                <div class="col-sm-4">
+                  <button class="btn btn-sm btn-success w-100 mb-2">Copy To All House</button>
+                </div>
               <div class="col-sm-8">
                 <app-input maxlength="60" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'" id="mbl_cargo_loc_add1"
                   name="mbl_cargo_loc_add1"></app-input>
@@ -324,8 +325,7 @@
       <div class="page-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-
+            <table class="table table-sm  table-hover table-bordered table-striped table-condensed">
               <thead class="table-success">
                 <tr class="table-header">
                   <th *ngIf="showModel">ID</th>
@@ -340,7 +340,7 @@
                   <th>LFD</th>
                   <th>PICKUP</th>
                   <th>EMPTY RETURN</th>
-                  <!-- <th>MOVEMENT</th> -->
+                  <th>MOVEMENT</th>
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
                   <th>DELETE</th>
@@ -400,6 +400,9 @@
                     <app-date formControlName="cntr_return_date" [rowIndex]="i" name="cntr_return_date"
                        [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
                   </td>
+                  <td [align]="'center'"> 
+                  <i class="fa fa-pencil"></i>
+                </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
                   </td>
@@ -422,6 +425,7 @@
           </div>
         </div>
       </div>
+      
       <div class="page-body" *ngIf="mform.get('mbl_id')?.value != 0">
         <div class="row">
           <div class="col-md-12">
@@ -439,8 +443,11 @@
                   <th>PCS</th>
                   <th>HANDLED-BY</th>
                   <th>HBL-STATUS</th>
-                  <th>FREIGHT</th>
+                   <th>FREIGHT</th>
                   <th>TERMS</th>
+                  <th>AN-SENT</th>
+                  <th>AN-SENT BY</th>
+                  <th>AN-SENT DATE</th>
                   <th>CREATED-BY</th>
                   <th>CREATED-DATE</th>
                   <th>DELETE</th>
@@ -449,13 +456,13 @@
 
               <tbody formArrayName="master_house">
                 <tr *ngFor="let iRow of formArray('master_house').controls; let i=index;" [formGroupName]="i">
+                  <td *ngIf="showModel">
+                    <label>{{iRow.get('hbl_id')?.value}}</label>
+                  </td>
                   <td align="centre" [routerLink]="['/seaimport/seaimporthEdit']"
                     [queryParams]="{ id: iRow.get('hbl_id')?.value, mbl_id: mform.get('mbl_id')?.value, mode: 'edit',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
                     class="link"> 
                     <i class="fa fa-pencil"></i>
-                  </td>
-                  <td *ngIf="showModel">
-                    <label>{{iRow.get('hbl_id')?.value}}</label>
                   </td>
                   <td>
                     <label>{{iRow.get('hbl_houseno')?.value}}</label>
@@ -479,7 +486,7 @@
                     <label>{{iRow.get('hbl_handled_name')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('hbl_telex_released_name')?.value}}</label>
+                    <label>{{iRow.get('hbl_telex_released_code')?.value}}</label>
                   </td>
                   <td>
                     <label>{{iRow.get('hbl_frt_status_name')?.value}}</label>
@@ -488,10 +495,19 @@
                     <label>{{iRow.get('hbl_ship_term_name')?.value}}</label>
                   </td>
                   <td>
+                    <label>{{iRow.get('')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('')?.value}}</label>
+                  </td>
+                  <td>
                     <label>{{iRow.get('rec_created_by')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value}}</label>
+                    <label>{{iRow.get('rec_created_date')?.value | date: gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
 
                   <td align="centre" (click)="deleteHouse(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
@@ -528,7 +544,6 @@
             <div class="col-sm-12 ">
               <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
             </div>
-
           </div>
           <div class="form-group row">
             <div class="col-sm-12">

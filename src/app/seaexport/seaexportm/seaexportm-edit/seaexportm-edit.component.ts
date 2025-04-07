@@ -301,226 +301,168 @@ export class SeaExportmEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
+    let rec: any = {};
+  
     if (action.id == 'mbl_shipment_stage_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_shipment_stage_id: action.rec ? action.rec.param_id : 0,
-          mbl_shipment_stage_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_shipment_stage_id: 0,
-          mbl_shipment_stage_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_shipment_stage_id: rec.param_id || 0,
+        mbl_shipment_stage_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_agent_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_agent_id: action.rec ? action.rec.cust_id : 0,
-          mbl_agent_name: action.rec ? action.rec.cust_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_agent_id: 0,
-          mbl_agent_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_agent_id: rec.cust_id || 0,
+        mbl_agent_name: rec.cust_name || '',
+      });
     }
+  
     if (action.id == 'mbl_liner_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_liner_id: action.rec ? action.rec.param_id : 0,
-          mbl_liner_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_liner_id: 0,
-          mbl_liner_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_liner_id: rec.param_id || 0,
+        mbl_liner_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_handled_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_handled_id: action.rec ? action.rec.param_id : 0,
-          mbl_handled_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_handled_id: 0,
-          mbl_handled_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_handled_id: rec.param_id || 0,
+        mbl_handled_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_salesman_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_salesman_id: action.rec ? action.rec.param_id : 0,
-          mbl_salesman_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_salesman_id: 0,
-          mbl_salesman_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_salesman_id: rec.param_id || 0,
+        mbl_salesman_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_frt_status_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_frt_status_id: action.rec ? action.rec.param_id : 0,
-          mbl_frt_status_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_frt_status_id: 0,
-          mbl_frt_status_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_frt_status_id: rec.param_id || 0,
+        mbl_frt_status_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_ship_term_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_ship_term_id: action.rec ? action.rec.param_id : 0,
-          mbl_ship_term_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_ship_term_id: 0,
-          mbl_ship_term_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_ship_term_id: rec.param_id || 0,
+        mbl_ship_term_name: rec.param_name || '',
+      });
     }
-
+  
     if (action.id == 'mbl_pol_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_pol_id: action.rec ? action.rec.param_id : 0,
-          mbl_pol_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_pol_id: 0,
-          mbl_pol_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_pol_id: rec.param_id || 0,
+        mbl_pol_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_pod_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_pod_id: action.rec ? action.rec.param_id : 0,
-          mbl_pod_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_pod_id: 0,
-          mbl_pod_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_pod_id: rec.param_id || 0,
+        mbl_pod_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_pofd_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_pofd_id: action.rec ? action.rec.param_id : 0,
-          mbl_pofd_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_pofd_id: 0,
-          mbl_pofd_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_pofd_id: rec.param_id || 0,
+        mbl_pofd_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_vessel_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_vessel_id: action.rec ? action.rec.param_id : 0,
-          mbl_vessel_code: action.rec ? action.rec.param_code : '',
-          mbl_vessel_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_vessel_id: 0,
-          mbl_vessel_code: '',
-          mbl_vessel_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_vessel_id: rec.param_id || 0,
+        mbl_vessel_code: rec.param_code || '',
+        mbl_vessel_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'mbl_country_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          mbl_country_id: action.rec ? action.rec.param_id : 0,
-          mbl_country_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          mbl_country_id: 0,
-          mbl_country_name: '',
-        });
-      }
+      this.mform.patchValue({
+        mbl_country_id: rec.param_id || 0,
+        mbl_country_name: rec.param_name || '',
+      });
     }
+  
     if (action.name == 'cntr_type_name') {
-      if (action.rec) {
-        this.formArrayRecord('master_cntr', action.rowIndex)?.patchValue({
-          cntr_type_id: action.rec ? action.rec.param_id : 0,
-          cntr_type_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          cntr_type_id: 0,
-          cntr_type_name: '',
-        });
-      }
+      this.formArrayRecord('master_cntr', action.rowIndex)?.patchValue({
+        cntr_type_id: rec.param_id || 0,
+        cntr_type_name: rec.param_name || '',
+      });
     }
+  
     if (action.name == 'cntr_packages_unit_name') {
-      if (action.rec) {
-        this.formArrayRecord('master_cntr', action.rowIndex)?.patchValue({
-          cntr_packages_unit_id: action.rec ? action.rec.param_id : 0,
-          cntr_packages_unit_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          cntr_packages_unit_id: 0,
-          cntr_packages_unit_name: '',
-        });
-      }
+      this.formArrayRecord('master_cntr', action.rowIndex)?.patchValue({
+        cntr_packages_unit_id: rec.param_id || 0,
+        cntr_packages_unit_name: rec.param_name || '',
+      });
     }
   }
 
-  // getRefno() {
-  //   return this.mform.get('mbl_refno')?.value || '';
-  // }
 
-  // ConvertUnit(value: number, cUnit: 'kgs' | 'lbs' | 'cbm' | 'cft'): number {
-  //   const convertionValue = {
-  //     kgs: 2.20462,
-  //     lbs: 0.453592,
-  //     cbm: 35.3147,
-  //     cft: 0.0283168
-  //   };
-  //   const changedValue = convertionValue[cUnit];
-  //   return changedValue * value;
-  // }
   // onBlur(action: any) {
   //   console.log('onBlur Action', action);
   // }
-
-
 
 }
 

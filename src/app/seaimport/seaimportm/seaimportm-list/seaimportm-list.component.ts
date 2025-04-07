@@ -44,6 +44,8 @@ export class SeaImportmListComponent extends baseListComponent {
       { col_name: "mbl_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "mbl_pod_eta", col_caption: "ETA", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "mbl_cntr_type", col_caption: "SHIP TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "mbl_teu", col_caption: "TEU", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "mbl_cbm_tot", col_caption: "CBM", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "mbl_handled_name", col_caption: "HANDLED", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },

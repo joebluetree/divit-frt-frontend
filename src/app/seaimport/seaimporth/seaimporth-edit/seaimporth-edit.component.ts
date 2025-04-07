@@ -540,8 +540,9 @@ export class SeaImportHEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
+    let rec: any = {};
     if (action.id == 'hbl_shipment_stage_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -551,7 +552,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
       });
     }
     if (action.id == 'hbl_shipper_code') {
-      let rec: any = {};
+      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -562,13 +563,13 @@ export class SeaImportHEditComponent extends baseEditComponent {
         hbl_shipper_add1: rec.cust_address1 || '',
         hbl_shipper_add2: rec.cust_address2 || '',
         hbl_shipper_add3: rec.cust_address3 || '',
-        hbl_shipper_add4: rec.cust_contact || '',
-        hbl_shipper_add5: (rec.cust_tel ? 'TEL : ' + rec.cust_tel : '') + (rec.cust_fax ? ' FAX : ' + rec.cust_fax : ''),
+        hbl_shipper_add4: this.gs.getAttention(rec),
+        hbl_shipper_add5: this.gs.getTelFax(rec),
       });
     }
     
     if (action.id == 'hbl_consignee_code') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -579,8 +580,8 @@ export class SeaImportHEditComponent extends baseEditComponent {
         hbl_consignee_add1: rec.cust_address1 || '',
         hbl_consignee_add2: rec.cust_address2 || '',
         hbl_consignee_add3: rec.cust_address3 || '',
-        hbl_consignee_add4: rec.cust_contact || '',
-        hbl_consignee_add5: (rec.cust_tel ? 'TEL : ' + rec.cust_tel : '') + (rec.cust_fax ? ' FAX : ' + rec.cust_fax : ''),
+        hbl_consignee_add4: this.gs.getAttention(rec),
+        hbl_consignee_add5: this.gs.getTelFax(rec),
         hbl_bltype: rec.cust_nomination || '',
         hbl_cha_id: rec.cust_chb_id || '',
       });
@@ -588,7 +589,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_location_code') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -599,12 +600,12 @@ export class SeaImportHEditComponent extends baseEditComponent {
         hbl_location_add1: rec.cust_address1 || '',
         hbl_location_add2: rec.cust_address2 || '',
         hbl_location_add3: rec.cust_address3 || '',
-        hbl_location_add4: (rec.cust_tel ? 'TEL : ' + rec.cust_tel : '') + (rec.cust_fax ? ' FAX : ' + rec.cust_fax : ''),
+        hbl_location_add4: this.gs.getTelFax(rec),
       });
     }
     
     if (action.id == 'hbl_notify_code') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -615,12 +616,12 @@ export class SeaImportHEditComponent extends baseEditComponent {
         hbl_notify_add1: rec.cust_address1 || '',
         hbl_notify_add2: rec.cust_address2 || '',
         hbl_notify_add3: rec.cust_address3 || '',
-        hbl_notify_add4: (rec.cust_tel ? 'TEL : ' + rec.cust_tel : '') + (rec.cust_fax ? ' FAX : ' + rec.cust_fax : ''),
+        hbl_notify_add4: this.gs.getTelFax(rec),
       });
     }
     
     if (action.id == 'hbl_careof_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -631,7 +632,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_agent_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -642,7 +643,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_paid_status_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -653,7 +654,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_cha_code') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -668,7 +669,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_handled_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -679,7 +680,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_salesman_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -690,7 +691,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_ship_term_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -701,7 +702,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_incoterm_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -712,7 +713,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_format_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -723,7 +724,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_draft_format_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -734,7 +735,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.id == 'hbl_uom_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -743,9 +744,18 @@ export class SeaImportHEditComponent extends baseEditComponent {
         hbl_uom_name: rec.param_name || '',
       });
     }
-    
+    if (action.id == 'hbl_telex_released_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_telex_released_id: rec.param_id || 0,
+        hbl_telex_released_name: rec.param_name || '',
+      });
+    }
     if (action.name == 'cntr_type_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -756,7 +766,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
     }
     
     if (action.name == 'cntr_packages_unit_name') {
-      let rec: any = {};
+      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -777,9 +787,9 @@ export class SeaImportHEditComponent extends baseEditComponent {
     const changedValue = convertionValue[cUnit];
     return changedValue * value;
   }
-  // onBlur(action: any) {
-  //   console.log('onBlur Action', action);
-  // }
+  onBlur(action: any) {
+    console.log('onBlur Action', action);
+  }
 
 
   findUnit(action: any) {

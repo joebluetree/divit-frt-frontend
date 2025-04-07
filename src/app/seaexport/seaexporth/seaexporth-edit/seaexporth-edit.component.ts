@@ -39,8 +39,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
     { key: 'TELEX RELEASE', value: 'TELEX RELEASE' },
   ]
 
-  mbl_id:number;
-  
+  mbl_id: number;
+
   constructor(
     private ms: SeaExportHService,
     public dialog: MatDialog
@@ -78,7 +78,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_consignee_add5: [''],
       hbl_notify_id: [0],
       hbl_notify_code: [''],
-      hbl_notify_name: ['SAME AS CONSIGNEE'],
+      hbl_notify_name: [''],
       hbl_notify_add1: [''],
       hbl_notify_add2: [''],
       hbl_notify_add3: [''],
@@ -136,7 +136,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_issued_date: [''],
       hbl_delivery_date: [''],
       hbl_originals: [0],
-      
+
       marks1: this.CreateFormDesc(),
       marks2: this.CreateFormDesc(),
       marks3: this.CreateFormDesc(),
@@ -165,9 +165,9 @@ export class SeaExportHEditComponent extends baseEditComponent {
     this.id = 0;
     // this.mbl_id =0;
     this.init();
-    this.route.queryParams.forEach ((rec:any) => {
-      this.mbl_id = rec["mbl_id"]; 
-    }); 
+    this.route.queryParams.forEach((rec: any) => {
+      this.mbl_id = rec["mbl_id"];
+    });
 
     if (this.mode == "add")
       this.newRecord();
@@ -185,7 +185,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
     // this.CreateFormDesc();
     this.getDefaultData();
   }
-  
+
   CreateFormDesc() {
     return this.fb.group({
       desc_id: [0],
@@ -255,21 +255,21 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_pol_name: rec.hbl_pol_name,
           hbl_pod_name: rec.hbl_pod_name,
           hbl_place_delivery: rec.hbl_place_delivery,
-          hbl_handled_id : rec.hbl_handled_id,
-          hbl_handled_name : rec.hbl_handled_name,
-          hbl_salesman_id : rec.hbl_salesman_id,
-          hbl_salesman_name : rec.hbl_salesman_name,
-          hbl_format_id : rec.hbl_format_id,
-          hbl_format_name : rec.hbl_format_name,
-          hbl_draft_format_id : rec.hbl_draft_format_id,
-          hbl_draft_format_name : rec.hbl_draft_format_name,
-          hbl_by1 : rec.hbl_handled_name,
+          hbl_handled_id: rec.hbl_handled_id,
+          hbl_handled_name: rec.hbl_handled_name,
+          hbl_salesman_id: rec.hbl_salesman_id,
+          hbl_salesman_name: rec.hbl_salesman_name,
+          hbl_format_id: rec.hbl_format_id,
+          hbl_format_name: rec.hbl_format_name,
+          hbl_draft_format_id: rec.hbl_draft_format_id,
+          hbl_draft_format_name: rec.hbl_draft_format_name,
+          hbl_by1: rec.hbl_handled_name,
           hbl_issued_date: rec.hbl_issued_date,
 
           marks1: rec.marks1 ? rec.marks1 : "",
           marks2: rec.marks2 ? rec.marks2 : ""
 
-          
+
 
         });
         this.fillCntr(rec.house_cntr);
@@ -438,7 +438,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
   }
 
   updateDesc(data: iSea_exportH) {
-    if (!data) 
+    if (!data)
       return;
 
     for (let i = 1; i <= 17; i++) {
@@ -447,214 +447,157 @@ export class SeaExportHEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
+    let rec: any = {};
+  
     if (action.id == 'hbl_shipment_stage_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_shipment_stage_id: action.rec ? action.rec.param_id : 0,
-          hbl_shipment_stage_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_shipment_stage_id: 0,
-          hbl_shipment_stage_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_shipment_stage_id: rec.param_id || 0,
+        hbl_shipment_stage_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'hbl_shipper_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_shipper_id: action.rec ? action.rec.cust_id : 0,
-          hbl_shipper_code: action.rec ? action.rec.cust_code : '',
-          hbl_shipper_name: action.rec ? action.rec.cust_name : '',
-          hbl_shipper_add1: action.rec ? action.rec.cust_address1 : '',
-          hbl_shipper_add2: action.rec ? action.rec.cust_address2 : '',
-          hbl_shipper_add3: action.rec ? action.rec.cust_address3 : '',
-          hbl_shipper_add4: action.rec ? action.rec.cust_address4 : '',
-          hbl_shipper_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
-                                         (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_shipper_id: 0,
-          hbl_shipper_code: '',
-          hbl_shipper_name: '',
-          hbl_shipper_add1: '',
-          hbl_shipper_add2: '',
-          hbl_shipper_add3: '',
-          hbl_shipper_add4: '',
-          hbl_shipper_add5: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_shipper_id: rec.cust_id || 0,
+        hbl_shipper_code: rec.cust_code || '',
+        hbl_shipper_name: rec.cust_name || '',
+        hbl_shipper_add1: rec.cust_address1 || '',
+        hbl_shipper_add2: rec.cust_address2 || '',
+        hbl_shipper_add3: rec.cust_address3 || '',
+        hbl_shipper_add4: this.gs.getAttention(rec),
+        hbl_shipper_add5: this.gs.getTelFax(rec),
+      });
     }
+  
     if (action.id == 'hbl_consignee_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_consignee_id: action.rec ? action.rec.cust_id : 0,
-          hbl_consignee_code: action.rec ? action.rec.cust_code : '',
-          hbl_consignee_name: action.rec ? action.rec.cust_name : '',
-          hbl_consignee_add1: action.rec ? action.rec.cust_address1 : '',
-          hbl_consignee_add2: action.rec ? action.rec.cust_address2 : '',
-          hbl_consignee_add3: action.rec ? action.rec.cust_address3 : '',
-          hbl_consignee_add4: action.rec ? action.rec.cust_address4 : '',
-          hbl_consignee_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
-          (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
-          hbl_bltype: action.rec ? action.rec.cust_nomination: '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_consignee_id: 0,
-          hbl_consignee_code: '',
-          hbl_consignee_name: '',
-          hbl_consignee_add1: '',
-          hbl_consignee_add2: '',
-          hbl_consignee_add3: '',
-          hbl_consignee_add4: '',
-          hbl_consignee_add5: '',
-          hbl_bltype: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_consignee_id: rec.cust_id || 0,
+        hbl_consignee_code: rec.cust_code || '',
+        hbl_consignee_name: rec.cust_name || '',
+        hbl_consignee_add1: rec.cust_address1 || '',
+        hbl_consignee_add2: rec.cust_address2 || '',
+        hbl_consignee_add3: rec.cust_address3 || '',
+        hbl_consignee_add4: this.gs.getAttention(rec),
+        hbl_consignee_add5: this.gs.getTelFax(rec),
+        hbl_bltype: rec.cust_nomination || '',
+      });
     }
+  
     if (action.id == 'hbl_notify_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_notify_id: action.rec ? action.rec.cust_id : 0,
-          hbl_notify_code: action.rec ? action.rec.cust_code : '',
-          hbl_notify_name: action.rec ? action.rec.cust_name : '',
-          hbl_notify_add1: action.rec ? action.rec.cust_address1 : '',
-          hbl_notify_add2: action.rec ? action.rec.cust_address2 : '',
-          hbl_notify_add3: action.rec ? action.rec.cust_address3 : '',
-          hbl_notify_add4: action.rec ? action.rec.cust_address4 : '',
-          hbl_notify_add5: action.rec ? (action.rec.cust_tel ? 'TEL : ' + action.rec.cust_tel : '') +
-          (action.rec.cust_fax ? ' FAX : ' + action.rec.cust_fax : '') : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_notify_id: 0,
-          hbl_notify_code: '',
-          hbl_notify_name: '',
-          hbl_notify_add1: '',
-          hbl_notify_add2: '',
-          hbl_notify_add3: '',
-          hbl_notify_add4: '',
-          hbl_notify_add5: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_notify_id: rec.cust_id || 0,
+        hbl_notify_code: rec.cust_code || '',
+        hbl_notify_name: rec.cust_name || '',
+        hbl_notify_add1: rec.cust_address1 || '',
+        hbl_notify_add2: rec.cust_address2 || '',
+        hbl_notify_add3: rec.cust_address3 || '',
+        hbl_notify_add4: this.gs.getAttention(rec),
+        hbl_notify_add5: this.gs.getTelFax(rec),
+      });
     }
+  
     if (action.id == 'hbl_agent_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_agent_id: action.rec ? action.rec.cust_id : 0,
-          hbl_agent_name: action.rec ? action.rec.cust_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_agent_id: 0,
-          hbl_agent_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_agent_id: rec.cust_id || 0,
+        hbl_agent_name: rec.cust_name || '',
+      });
     }
+  
     if (action.id == 'hbl_handled_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_handled_id: action.rec ? action.rec.param_id : 0,
-          hbl_handled_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_handled_id: 0,
-          hbl_handled_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_handled_id: rec.param_id || 0,
+        hbl_handled_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'hbl_salesman_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_salesman_id: action.rec ? action.rec.param_id : 0,
-          hbl_salesman_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_salesman_id: 0,
-          hbl_salesman_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_salesman_id: rec.param_id || 0,
+        hbl_salesman_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'hbl_format_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_format_id: action.rec ? action.rec.param_id : 0,
-          hbl_format_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_format_id: 0,
-          hbl_format_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_format_id: rec.param_id || 0,
+        hbl_format_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'hbl_draft_format_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_draft_format_id: action.rec ? action.rec.param_id : 0,
-          hbl_draft_format_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_draft_format_id: 0,
-          hbl_draft_format_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_draft_format_id: rec.param_id || 0,
+        hbl_draft_format_name: rec.param_name || '',
+      });
     }
+  
     if (action.id == 'hbl_uom_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          hbl_uom_id: action.rec ? action.rec.param_id : 0,
-          hbl_uom_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          hbl_uom_id: 0,
-          hbl_uom_name: '',
-        });
-      }
+      this.mform.patchValue({
+        hbl_uom_id: rec.param_id || 0,
+        hbl_uom_name: rec.param_name || '',
+      });
     }
+  
     if (action.name == 'cntr_type_name') {
-      if (action.rec) {
-        this.formArrayRecord('house_cntr', action.rowIndex)?.patchValue({
-          cntr_type_id: action.rec ? action.rec.param_id : 0,
-          cntr_type_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          cntr_type_id: 0,
-          cntr_type_name: '',
-        });
-      }
+      this.formArrayRecord('house_cntr', action.rowIndex)?.patchValue({
+        cntr_type_id: rec.param_id || 0,
+        cntr_type_name: rec.param_name || '',
+      });
     }
+  
     if (action.name == 'cntr_packages_unit_name') {
-      if (action.rec) {
-        this.formArrayRecord('house_cntr', action.rowIndex)?.patchValue({
-          cntr_packages_unit_id: action.rec ? action.rec.param_id : 0,
-          cntr_packages_unit_name: action.rec ? action.rec.param_name : '',
-        });
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          cntr_packages_unit_id: 0,
-          cntr_packages_unit_name: '',
-        });
-      }
+      this.formArrayRecord('house_cntr', action.rowIndex)?.patchValue({
+        cntr_packages_unit_id: rec.param_id || 0,
+        cntr_packages_unit_name: rec.param_name || '',
+      });
     }
   }
 

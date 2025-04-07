@@ -16,6 +16,7 @@ export interface iSea_impHouse {
   hbl_packages: number;
   hbl_handled_name: string;
   hbl_telex_released_id: number;
+  hbl_telex_released_code: string;
   hbl_telex_released_name: string;
   hbl_frt_status_name: string;
   hbl_ship_term_name: string;
@@ -35,9 +36,9 @@ export interface iContainer {
   cntr_pieces: number,
   cntr_packages_unit_id: number,
   cntr_packages_unit_name: string,
-  // cntr_packages: number,
+  cntr_packages: number,
   cntr_cbm: number,
-  // cntr_weight_uom: string,
+  cntr_weight_uom: string,
   cntr_weight: number,
   cntr_pick_date: string;
   cntr_return_date: string;
