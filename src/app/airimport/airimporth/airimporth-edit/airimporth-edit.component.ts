@@ -511,7 +511,7 @@ export class AirImporthEditComponent extends baseEditComponent {
     if (action?.rec != null) {
       rec = action.rec;
     }
-  
+
     if (action.name === 'hbl_consignee_code') {
       console.log(action);
       this.mform.patchValue({
@@ -528,7 +528,7 @@ export class AirImporthEditComponent extends baseEditComponent {
       });
       this.getCustomerData(rec.cust_chb_id);
     }
-  
+
     if (action.id === 'hbl_shipment_stage_name') {
       console.log(action);
       this.mform.patchValue({
@@ -536,7 +536,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_shipment_stage_name: rec.param_name || "",
       });
     }
-  
+
     if (action.name === 'hbl_shipper_code') {
       console.log(action);
       this.mform.patchValue({
@@ -551,7 +551,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_by1_carrier: rec.cust_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_agent_name') {
       console.log(action);
       this.mform.patchValue({
@@ -559,7 +559,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_agent_name: rec.cust_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_location_id') {
       console.log(action);
       this.mform.patchValue({
@@ -572,7 +572,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_location_add4: rec.cust_address4 || "",
       });
     }
-  
+
     if (action.id === 'hbl_cha_id') {
       console.log(action);
       this.mform.patchValue({
@@ -584,7 +584,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_cha_fax: rec.cust_fax || "",
       });
     }
-  
+
     if (action.id === 'hbl_handled_name') {
       console.log(action);
       this.mform.patchValue({
@@ -592,7 +592,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_handled_name: rec.param_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_salesman_name') {
       console.log(action);
       this.mform.patchValue({
@@ -600,7 +600,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_salesman_name: rec.param_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_careof_id') {
       console.log(action);
       this.mform.patchValue({
@@ -608,7 +608,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_careof_name: rec.cust_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_incoterm') {
       console.log(action);
       this.mform.patchValue({
@@ -616,7 +616,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_incoterm: rec.param_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_uom_name') {
       console.log(action);
       this.mform.patchValue({
@@ -624,7 +624,7 @@ export class AirImporthEditComponent extends baseEditComponent {
         hbl_uom_name: rec.param_name || "",
       });
     }
-  
+
     if (action.id === 'hbl_paid_status_name') {
       console.log(action);
       this.mform.patchValue({
@@ -633,8 +633,8 @@ export class AirImporthEditComponent extends baseEditComponent {
       });
     }
   }
-  
-  
+
+
 
 
   openHistory(): void {

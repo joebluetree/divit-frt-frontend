@@ -271,8 +271,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_shipment_stage_id: action.rec.param_id || 0,
-        mbl_shipment_stage_name: action.rec.param_name || "",
+        mbl_shipment_stage_id: rec.param_id || 0,
+        mbl_shipment_stage_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_agent_name') {
@@ -282,8 +282,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_agent_id: action.rec.cust_id || 0,
-        mbl_agent_name: action.rec.cust_name || "",
+        mbl_agent_id: rec.cust_id || 0,
+        mbl_agent_name: rec.cust_name || "",
       });
     }
     if (action.id == 'mbl_pol_name') {
@@ -293,8 +293,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_pol_id: action.rec.param_id || 0,
-        mbl_pol_name: action.rec.param_name || "",
+        mbl_pol_id: rec.param_id || 0,
+        mbl_pol_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_pod_name') {
@@ -304,8 +304,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_pod_id: action.rec.param_id || 0,
-        mbl_pod_name: action.rec.param_name || "",
+        mbl_pod_id: rec.param_id || 0,
+        mbl_pod_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_country_name') {
@@ -315,8 +315,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_country_id: action.rec.param_id || 0,
-        mbl_country_name: action.rec.param_name || "",
+        mbl_country_id: rec.param_id || 0,
+        mbl_country_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_liner_name') {
@@ -326,8 +326,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_liner_id: action.rec.param_id || 0,
-        mbl_liner_name: action.rec.param_name || "",
+        mbl_liner_id: rec.param_id || 0,
+        mbl_liner_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_currency_code') {
@@ -337,8 +337,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_currency_id: action.rec.param_id || 0,
-        mbl_currency_code: action.rec.param_code || "",
+        mbl_currency_id: rec.param_id || 0,
+        mbl_currency_code: rec.param_code || "",
       });
     }
     if (action.id == 'mbl_handled_name') {
@@ -348,8 +348,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_handled_id: action.rec.param_id || 0,
-        mbl_handled_name: action.rec.param_name || "",
+        mbl_handled_id: rec.param_id || 0,
+        mbl_handled_name: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_salesman_name') {
@@ -359,8 +359,8 @@ export class AirExportEditComponent extends baseEditComponent {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_salesman_id: action.rec.param_id || 0,
-        mbl_salesman_name: action.rec.param_name || "",
+        mbl_salesman_id: rec.param_id || 0,
+        mbl_salesman_name: rec.param_name || "",
       });
     }
   }
