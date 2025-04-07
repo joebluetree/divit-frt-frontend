@@ -214,6 +214,8 @@ export class GlobalService {
       global_user_branch_id: this.user.user_branch_id,
       global_dec_places: 3,
       global_date_format: 'mm/dd/yyyy',
+      global_output_datetime_format: 'dd-MMM-yyyy HH:mm',
+      global_display_date_format: 'dd-MMM-yyyy'
     };
   }
 
@@ -227,6 +229,8 @@ export class GlobalService {
       'global_user_branch_id': this.user.user_branch_id.toString(),
       'global_dec_places': 2,
       'global_date_format': 'mm/dd/yyyy',
+      'global_output_datetime_format' : 'dd-MMM-yyyy HH:mm',
+      'global_display_date_format' : 'dd-MMM-yyyy'
     });
 
   }
@@ -335,6 +339,22 @@ export class GlobalService {
     }
 
   }
+
+// Get ATTN
+public getAttention(data: any): string {
+  const contact = data?.cust_contact;
+  return contact ? `ATTN: ${contact}` : "";
+}
+
+// Get TEL & FAX
+public getTelFax(data: any): string {
+  const tel = data?.cust_tel ? `TEL: ${data.cust_tel}` : "";
+  const fax = data?.cust_fax ? `FAX: ${data.cust_fax}` : "";
+
+  if (tel && fax) return `${tel}, ${fax}`;
+  return tel || fax || "";
+}
+
 
   public getToday(){
     return this.getNewdate(0);
