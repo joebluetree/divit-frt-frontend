@@ -3,27 +3,24 @@ import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
-import { AirExportService } from '../../services/airexport.service';
-import { iAirexport } from '../../models/iairexport';
-import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexporth-list.component';
-import { AirExporthService } from '../../services/airexporth.service';
-import { iAirexporth } from '../../models/iairexporth';
-import { HttpClient } from '@angular/common/http';
+import { AirImportService } from '../../services/airimport.service';
+import { iAirimport } from '../../models/iairimport';
+import { iAirimporth } from '../../models/iairimporth';
 
 
 @Component({
-  selector: 'app-airexport-edit',
-  templateUrl: './airexport-edit.component.html',
-  styleUrls: ['./airexport-edit.component.css'],
+  selector: 'app-airimport-edit',
+  templateUrl: './airimport-edit.component.html',
+  styleUrls: ['./airimport-edit.component.css'],
   standalone: true,
   imports: [...CustomControls,]
 })
 
 //Name : Alen Cherian
-//Date : 24/02/2025
-//Command : Create the AirExport Components.
+//Date : 29/03/2025
+//Command : Create the AirImport Components.
 
-export class AirExportEditComponent extends baseEditComponent {
+export class AirImportEditComponent extends baseEditComponent {
 
   dataList = [
     { key: 'PREPAID', value: 'PREPAID' },
@@ -33,8 +30,7 @@ export class AirExportEditComponent extends baseEditComponent {
   isSaved: boolean = false;
 
   constructor(
-    private ms: AirExportService,
-    public bs: AirExporthService,
+    private ms: AirImportService,
     public dialog: MatDialog
   ) {
     super();
@@ -46,42 +42,44 @@ export class AirExportEditComponent extends baseEditComponent {
       mbl_cfno: [0],
       mbl_refno: [''],
       mbl_ref_date: [date],
-      mbl_shipment_stage_id: [null],
+      mbl_shipment_stage_id: [0],
       mbl_shipment_stage_name: [''],
       mbl_mode: [''],
       mbl_no: [''],
-      mbl_agent_id: [null],
+      mbl_agent_id: [0],
       mbl_agent_name: [''],
       mbl_frt_status_name: [''],
-      mbl_pol_id: [null],
+      mbl_pol_id: [0],
       mbl_pol_name: [''],
       mbl_pol_etd: [''],
-      mbl_pod_id: [null],
+      mbl_pod_id: [0],
       mbl_pod_name: [''],
       mbl_pod_eta: [''],
-      mbl_country_id: [null],
+      mbl_country_id: [0],
       mbl_country_name: [''],
-      mbl_liner_id: [null],
+      mbl_liner_id: [0],
       mbl_liner_name: [''],
-      mbl_by_carrier1: [''],
-      mbl_by_carrier2: [''],
-      mbl_by_carrier3: [''],
-      mbl_to_port1: [''],
-      mbl_to_port2: [''],
-      mbl_to_port3: [''],
-      mbl_currency_id: [null],
-      mbl_currency_code: [''],
-      mbl_handled_id: [null],
+      mbl_handled_id: [0],
       mbl_handled_name: [''],
-      mbl_salesman_id: [null],
+      mbl_salesman_id: [0],
       mbl_salesman_name: [''],
       mbl_mawb_weight: [0],
       mbl_mawb_chwt: [0],
-      mbl_3rdparty: [''],
-      mbl_direct: [''],
       mbl_vessel_name: [''],
-      mbl_voyage: [''],
-      air_export: this.fb.array([]),
+
+      mbl_cargo_loc_id: [0],
+      mbl_cargo_loc_code: [''],
+      mbl_cargo_loc_name: [''],
+      mbl_cargo_loc_add1: [''],
+      mbl_cargo_loc_add2: [''],
+      mbl_cargo_loc_add3: [''],
+      mbl_cargo_loc_add4: [''],
+      mbl_incoterm_id: [''],
+      mbl_incoterm: [''],
+
+      mbl_stage_changed_date: [''],
+      mbl_an_sent_dt: [''],
+      air_import: this.fb.array([]),
       rec_version: [0],
     })
   }
@@ -104,8 +102,8 @@ export class AirExportEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/Airexport/GetRecordAsync').subscribe({
-      next: (rec: iAirexport) => {
+    this.ms.getRecord(param, '/api/Airimport/GetRecordAsync').subscribe({
+      next: (rec: iAirimport) => {
         this.mform.patchValue({
           mbl_id: rec.mbl_id,
           mbl_cfno: rec.mbl_cfno,
@@ -128,28 +126,31 @@ export class AirExportEditComponent extends baseEditComponent {
           mbl_country_name: rec.mbl_country_name,
           mbl_liner_id: rec.mbl_liner_id,
           mbl_liner_name: rec.mbl_liner_name,
-          mbl_by_carrier1: rec.mbl_by_carrier1,
-          mbl_by_carrier2: rec.mbl_by_carrier2,
-          mbl_by_carrier3: rec.mbl_by_carrier3,
-          mbl_to_port1: rec.mbl_to_port1,
-          mbl_to_port2: rec.mbl_to_port2,
-          mbl_to_port3: rec.mbl_to_port3,
-          mbl_currency_id: rec.mbl_currency_id,
-          mbl_currency_code: rec.mbl_currency_code,
           mbl_handled_id: rec.mbl_handled_id,
           mbl_handled_name: rec.mbl_handled_name,
           mbl_salesman_id: rec.mbl_salesman_id,
           mbl_salesman_name: rec.mbl_salesman_name,
           mbl_mawb_weight: rec.mbl_mawb_weight,
           mbl_mawb_chwt: rec.mbl_mawb_chwt,
-          mbl_3rdparty: rec.mbl_3rdparty,
-          mbl_direct: rec.mbl_direct,
           mbl_vessel_name: rec.mbl_vessel_name,
-          mbl_voyage: rec.mbl_voyage,
+
+          mbl_cargo_loc_id: rec.mbl_cargo_loc_id,
+          mbl_cargo_loc_code: rec.mbl_cargo_loc_code,
+          mbl_cargo_loc_name: rec.mbl_cargo_loc_name,
+          mbl_cargo_loc_add1: rec.mbl_cargo_loc_add1,
+          mbl_cargo_loc_add2: rec.mbl_cargo_loc_add2,
+          mbl_cargo_loc_add3: rec.mbl_cargo_loc_add3,
+          mbl_cargo_loc_add4: rec.mbl_cargo_loc_add4,
+          mbl_incoterm_id: rec.mbl_incoterm_id,
+          mbl_incoterm: rec.mbl_incoterm,
+
+          mbl_stage_changed_date: rec.mbl_stage_changed_date,
+          mbl_an_sent_dt: rec.mbl_an_sent_dt,
+
           rec_version: rec.rec_version,
 
         });
-        this.fillDetails(rec.air_export);
+        this.fillDetails(rec.air_import);
         console.log(rec);
       },
       error: (e) => {
@@ -158,7 +159,7 @@ export class AirExportEditComponent extends baseEditComponent {
     })
   }
 
-  addRow(rec: iAirexporth) {
+  addRow(rec: iAirimporth) {
     return this.fb.group({
       hbl_id: [rec?.hbl_id || 0],
       hbl_cfno: [rec?.hbl_cfno || 0],
@@ -175,21 +176,21 @@ export class AirExportEditComponent extends baseEditComponent {
       hbl_handled_id: [rec?.hbl_handled_id || 0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
       hbl_packages: [rec?.hbl_packages || 0],
-      hbl_issued_date: [rec?.hbl_issued_date || ""],
+      hbl_pickup_date: [rec?.hbl_pickup_date || ""],
       hbl_delivery_date: [rec?.hbl_delivery_date || ""],
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],
 
     })
   }
-  addDetails(iRow: iAirexporth = <iAirexporth>{}) {
-    this.formArray('air_export')?.push(this.addRow(iRow));
+  addDetails(iRow: iAirimporth = <iAirimporth>{}) {
+    this.formArray('air_import')?.push(this.addRow(iRow));
   }
 
-  fillDetails(ihouse_list: iAirexporth[]) {
-    this.formArray('air_export').clear();
-    ihouse_list.forEach((rec_air_exporth: iAirexporth) => {
-      this.addDetails(rec_air_exporth);
+  fillDetails(ihouse_list: iAirimporth[]) {
+    this.formArray('air_import').clear();
+    ihouse_list.forEach((rec_air_importh: iAirimporth) => {
+      this.addDetails(rec_air_importh);
     });
   }
 
@@ -201,12 +202,12 @@ export class AirExportEditComponent extends baseEditComponent {
     }
 
     if (window.confirm(`Are you sure you want to delete House no ${house}?`)) {
-      const param = { id: hbl_id, url: '/api/AirexportH/DeleteAsync' };
+      const param = { id: hbl_id, url: '/api/AirimportH/DeleteAsync' };
 
       this.ms.deleteRecord(param)?.subscribe({
         next: (response: any) => {
           if (response.status) {
-            this.formArray('air_export').removeAt(idx);
+            this.formArray('air_import').removeAt(idx);
           }
         },
         error: (e) => {
@@ -221,7 +222,7 @@ export class AirExportEditComponent extends baseEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iAirexport>this.mform.value;
+    const data = <iAirimport>this.mform.value;
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -234,8 +235,8 @@ export class AirExportEditComponent extends baseEditComponent {
       'id': data.mbl_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/Airexport/SaveAsync').subscribe({
-      next: (v: iAirexport) => {
+    this.ms.save(param, data, '/api/Airimport/SaveAsync').subscribe({
+      next: (v: iAirimport) => {
         if (this.mode == "add") {
           this.id = v.mbl_id;
           this.mode = "edit";
@@ -330,15 +331,20 @@ export class AirExportEditComponent extends baseEditComponent {
         mbl_liner_name: rec.param_name || "",
       });
     }
-    if (action.id == 'mbl_currency_code') {
+    if (action.id == 'mbl_cargo_loc_code') {
       console.log(action);
       let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
       this.mform.patchValue({
-        mbl_currency_id: rec.param_id || 0,
-        mbl_currency_code: rec.param_code || "",
+        mbl_cargo_loc_id: rec.cust_id || 0,
+        mbl_cargo_loc_code: rec.cust_code || "",
+        mbl_cargo_loc_name: rec.cust_name || "",
+        mbl_cargo_loc_add1: rec.cust_address1 || "",
+        mbl_cargo_loc_add2: rec.cust_address2 || "",
+        mbl_cargo_loc_add3: rec.cust_address3 || "",
+        mbl_cargo_loc_add4: rec.cust_tel || "",
       });
     }
     if (action.id == 'mbl_handled_name') {
@@ -350,6 +356,17 @@ export class AirExportEditComponent extends baseEditComponent {
       this.mform.patchValue({
         mbl_handled_id: rec.param_id || 0,
         mbl_handled_name: rec.param_name || "",
+      });
+    }
+    if (action.id == 'mbl_incoterm') {
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_incoterm_id: rec.param_id || 0,
+        mbl_incoterm: rec.param_name || "",
       });
     }
     if (action.id == 'mbl_salesman_name') {

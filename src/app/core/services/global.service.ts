@@ -342,6 +342,7 @@ export class GlobalService {
 
   }
 
+
   // Get ATTN
   public getAttention(data: any): string {
     const contact = data?.cust_contact;
@@ -358,7 +359,8 @@ export class GlobalService {
   }
 
 
-  public getToday() {
+
+  public getToday(){
     return this.getNewdate(0);
   }
 

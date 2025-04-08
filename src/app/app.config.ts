@@ -48,6 +48,7 @@ export const routes: Routes = [
   { path: 'seaexport', loadChildren: () => import('./seaexport/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'seaimport', loadChildren: () => import('./seaimport/routes').then(m => m.routes), canActivate: [AuthGuard] },
   { path: 'airexport', loadChildren: () => import('./airexport/routes').then(m => m.routes), canActivate: [AuthGuard] },
+  { path: 'airimport', loadChildren: () => import('./airimport/routes').then(m => m.routes), canActivate: [AuthGuard] },
 
 ];
 
