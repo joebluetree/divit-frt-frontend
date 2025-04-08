@@ -2,7 +2,7 @@
   <div class="col-md-10">
     <div class="page-header">
       <h5>{{title}}</h5>
-      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaexport/seaexportmEdit"
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaimport/seaimportmEdit"
         [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
       <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
       <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
@@ -54,22 +54,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Sub-House</label>
-              <div class="col-sm-8">
-                <app-input maxlength="15" formControlName="mbl_sub_houseno" [case]="'UPPER'" id="mbl_sub_houseno"
-                  name="mbl_sub_houseno"></app-input>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Booking No</label>
-              <div class="col-sm-8">
-                <app-input maxlength="15" formControlName="mbl_liner_bookingno" [case]="'UPPER'"
-                  id="mbl_liner_bookingno" name="mbl_liner_bookingno"></app-input>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Master Agent</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Agent</label>
               <div class="col-sm-8">
                 <auto-complete formControlName="mbl_agent_name" id="mbl_agent_name" (CallBack)="callBack($event)"
                   [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
@@ -83,6 +68,15 @@
                 <auto-complete formControlName="mbl_liner_name" id="mbl_liner_name" (CallBack)="callBack($event)"
                   [table]="'param'" [subtable]="'sea carrier'" [company_id]="getCompanyId()" [url]="url"
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Co-Loader</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbl_coloader_name" id="mbl_coloader_name" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
                 </auto-complete>
               </div>
             </div>
@@ -123,20 +117,15 @@
                   [dataSource]="ShiptypeList" [valueColumn]="'key'" [displayColumn]="'value'"
                   case="UPPER"></app-combobox>
               </div>
-              <label class="form-label form-label-sm col-sm-2">Direct Shipment</label>
+              <label class="col-sm-2 form-label form-lable-sm">Inco.Term </label>
               <div class="col-sm-3">
-                <app-checkbox formControlName="mbl_direct"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+                <auto-complete formControlName="mbl_incoterm_name" id="mbl_incoterm_name" (CallBack)="callBack($event)"
+                  [table]="'param'" [subtable]="'INCOTERM'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Place.Receipt</label>
-              <div class="col-sm-8">
-                <app-input maxlength="100" formControlName="mbl_place_delivery" [case]="'UPPER'"></app-input>
-              </div>
-            </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Pol</label>
               <div class="col-sm-3">
@@ -166,11 +155,9 @@
             </div>
 
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Port.Final</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Place.Receipt</label>
               <div class="col-sm-3">
-                <auto-complete formControlName="mbl_pofd_name" id="mbl_pofd_name" (CallBack)="callBack($event)"
-                  [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                <app-input maxlength="100" formControlName="mbl_place_delivery" [case]="'UPPER'"></app-input>
               </div>
               <label class="col-sm-2 form-label form-lable-sm" for="">ETA</label>
               <div class="col-sm-3">
@@ -201,14 +188,135 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Voyage</label>
-              <div class="col-sm-3">
+              <div class="col-sm-8">
                 <app-input formControlName="mbl_voyage" id="mbl_voyage" name="mbl_voyage" case="UPPER" maxlength="50">
                 </app-input>
               </div>
-              <label class="col-sm-2 form-label form-lable-sm" for="">Book.SL#</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">MBL.Status</label>
               <div class="col-sm-3">
-                <app-input formControlName="mbl_book_slno" id="mbl_book_slno" name="mbl_book_slno" type="number">
-                </app-input>
+                <auto-complete formControlName="mbl_status_name" id="mbl_status_name" (CallBack)="callBack($event)"
+                  [table]="'param'" [subtable]="'MBL-STATUS'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">BL.Status</label>
+              <div class="col-sm-3">
+                <app-combobox maxlength="30" formControlName="mbl_is_sea_waybill" name="mbl_is_sea_waybill"
+                  [dataSource]="BlStatusList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">OMBL.Sent.Date</label>
+              <div class="col-sm-2">
+                <app-date formControlName="mbl_ombl_sent_on" name="mbl_ombl_sent_on"
+                  [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+              <div class="col-sm-1">
+                <app-combobox maxlength="20" formControlName="mbl_ombl_sent_ampm" name="mbl_ombl_sent_ampm"
+                  [dataSource]="TimeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </div>
+              <!-- </div>
+            <div class="form-group row"> -->
+              <label class="col-sm-2 form-label form-lable-sm" for=""> O/F.Sent.On</label>
+              <div class="col-sm-3">
+                <app-date formControlName="mbl_of_sent_on" name="mbl_of_sent_on"
+                  [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="mbl_cargo_loc_code" id="mbl_cargo_loc_code"
+                  (CallBack)="callBack($event)" [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="mbl_cargo_loc_name" id="mbl_cargo_loc_name"
+                  name="mbl_cargo_loc_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-4">
+                  <button class="btn btn-sm btn-success w-100 mb-2">Copy To All House</button>
+                </div>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'" id="mbl_cargo_loc_add1"
+                  name="mbl_cargo_loc_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_cargo_loc_add2" [case]="'UPPER'" id="mbl_cargo_loc_add2"
+                  name="mbl_cargo_loc_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_cargo_loc_add3" [case]="'UPPER'" id="mbl_cargo_loc_add3"
+                  name="mbl_cargo_loc_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_cargo_loc_add4" [case]="'UPPER'" id="mbl_cargo_loc_add4"
+                  name="mbl_cargo_loc_add4"></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Devan Location</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="mbl_devan_loc_code" id="mbl_devan_loc_code"
+                  (CallBack)="callBack($event)" [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="mbl_devan_loc_name" id="mbl_devan_loc_name"
+                  name="mbl_devan_loc_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_devan_loc_add1" [case]="'UPPER'" id="mbl_devan_loc_add1"
+                  name="mbl_devan_loc_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_devan_loc_add2" [case]="'UPPER'" id="mbl_devan_loc_add2"
+                  name="mbl_devan_loc_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_devan_loc_add3" [case]="'UPPER'" id="mbl_devan_loc_add3"
+                  name="mbl_devan_loc_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbl_devan_loc_add4" [case]="'UPPER'" id="mbl_devan_loc_add4"
+                  name="mbl_devan_loc_add4"></app-input>
               </div>
             </div>
           </div>
@@ -217,8 +325,7 @@
       <div class="page-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
-
+            <table class="table table-sm  table-hover table-bordered table-striped table-condensed">
               <thead class="table-success">
                 <tr class="table-header">
                   <th *ngIf="showModel">ID</th>
@@ -229,6 +336,11 @@
                   <th>UNIT</th>
                   <th>WEIGHT</th>
                   <th>CBM</th>
+                  <th>DISCHARGE</th>
+                  <th>LFD</th>
+                  <th>PICKUP</th>
+                  <th>EMPTY RETURN</th>
+                  <th>MOVEMENT</th>
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
                   <th>DELETE</th>
@@ -270,8 +382,27 @@
                   </td>
                   <td>
                     <app-input formControlName="cntr_cbm" [rowIndex]="i" name="cntr_cbm"
-                    [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
+                      [dec]="gs.globalConstants.global_dec_places" type="number"></app-input>
                   </td>
+                  <td>
+                    <app-date formControlName="cntr_discharge_date" [rowIndex]="i" name="cntr_discharge_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_lfd" [rowIndex]="i" name="cntr_lfd"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_pick_date" [rowIndex]="i" name="cntr_pick_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td>
+                    <app-date formControlName="cntr_return_date" [rowIndex]="i" name="cntr_return_date"
+                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                  </td>
+                  <td [align]="'center'"> 
+                  <i class="fa fa-pencil"></i>
+                </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
                   </td>
@@ -294,6 +425,7 @@
           </div>
         </div>
       </div>
+      
       <div class="page-body" *ngIf="mform.get('mbl_id')?.value != 0">
         <div class="row">
           <div class="col-md-12">
@@ -306,26 +438,31 @@
                   <th>HOUSE</th>
                   <th>SHIPPER</th>
                   <th>CONSIGNEE</th>
+                  <th>CLIENT-CATEGORY</th>
+                  <th>CLIENT-TYPE</th>
                   <th>PCS</th>
                   <th>HANDLED-BY</th>
-                  <th>FREIGHT</th>
-                  <!-- <th>TERMS</th> -->
+                  <th>HBL-STATUS</th>
+                   <th>FREIGHT</th>
+                  <th>TERMS</th>
+                  <th>AN-SENT</th>
+                  <th>AN-SENT BY</th>
+                  <th>AN-SENT DATE</th>
                   <th>CREATED-BY</th>
                   <th>CREATED-DATE</th>
-                  <!-- <th>ADD</th> -->
                   <th>DELETE</th>
                 </tr>
               </thead>
 
               <tbody formArrayName="master_house">
                 <tr *ngFor="let iRow of formArray('master_house').controls; let i=index;" [formGroupName]="i">
-                  <td align="centre" [routerLink]="['/seaexport/seaexporthEdit']"
-                    [queryParams]="{ id: iRow.get('hbl_id')?.value, mbl_id: mform.get('mbl_id')?.value, mode: 'edit',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
-                    class="link"> <!--menuid: menuid, -->
-                    <i class="fa fa-pencil"></i>
-                  </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('hbl_id')?.value}}</label>
+                  </td>
+                  <td align="centre" [routerLink]="['/seaimport/seaimporthEdit']"
+                    [queryParams]="{ id: iRow.get('hbl_id')?.value, mbl_id: mform.get('mbl_id')?.value, mode: 'edit',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
+                    class="link"> 
+                    <i class="fa fa-pencil"></i>
                   </td>
                   <td>
                     <label>{{iRow.get('hbl_houseno')?.value}}</label>
@@ -337,25 +474,42 @@
                     <label>{{iRow.get('hbl_consignee_name')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('hbl_pcs')?.value}}</label>
+                    <label>{{iRow.get('hbl_client_cat')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_client_type')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_packages')?.value}}</label>
                   </td>
                   <td>
                     <label>{{iRow.get('hbl_handled_name')?.value}}</label>
                   </td>
                   <td>
+                    <label>{{iRow.get('hbl_telex_released_code')?.value}}</label>
+                  </td>
+                  <td>
                     <label>{{iRow.get('hbl_frt_status_name')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('hbl_ship_term_name')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('')?.value}}</label>
                   </td>
                   <td>
                     <label>{{iRow.get('rec_created_by')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value}}</label>
+                    <label>{{iRow.get('rec_created_date')?.value | date: gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
-                  <!-- <td align="centre" [routerLink]="['/seaexport/seaexporthEdit']"
-                [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }"
-                class="link">
-                <i class="fa fa-plus"></i>
-              </td> -->
+
                   <td align="centre" (click)="deleteHouse(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
                     class="link">
                     <i class="fa fa-trash"></i>
@@ -365,7 +519,7 @@
             </table>
             <div class="row" *ngIf=" mform.get('mbl_id')?.value != 0">
               <div class="col-md-12 text-center mb-2">
-                <button *ngIf="bAdd" class="btn btn-sm btn-info" type="button" routerLink="/seaexport/seaexporthEdit"
+                <button *ngIf="bAdd" class="btn btn-sm btn-info" type="button" routerLink="/seaimport/seaimporthEdit"
                   [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }">
                   Add House</button>
               </div>
@@ -388,25 +542,15 @@
         <div class="col-sm-12">
           <div class="form-group row">
             <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">BOOKING</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
             </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">DEVANING INSTRUCTION</button>
+            </div>
+          </div>
 
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">MBL INSTRUCTION</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DOCK RECEIPT</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">MANIFEST</button>
-            </div>
-          </div>
           <div class="form-group row">
             <div class="col-sm-12">
               <button class="btn btn-sm btn-success w-100 mb-2">AR & AP</button>
@@ -459,7 +603,18 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">SAVE</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button class="btn btn-sm btn-success w-100 mb-2">PRODUCT</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
+                [disabled]="mform.invalid">Save</button>
             </div>
           </div>
         </div>

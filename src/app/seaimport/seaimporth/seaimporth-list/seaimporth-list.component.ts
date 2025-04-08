@@ -1,26 +1,26 @@
 import { Component } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseListComponent } from '../../../shared/base-class/baseListComponent';
-import { SeaExportHSearchComponent } from '../seaexporth-search/seaexporth-search.component';
-import { SeaExportHService } from '../../services/seaexporth.service';
+import { SeaImportHService } from '../../services/seaimporth.service';
+import { SeaImportHSearchComponent } from '../seaimporth-search/seaimporth-search.component';
 
 
 @Component({
-  selector: 'app-seaexporth-list',
-  templateUrl: './seaexporth-list.component.html',
-  styleUrls: ['./seaexporth-list.component.css'],
+  selector: 'app-seaimporth-list',
+  templateUrl: './seaimporth-list.component.html',
+  styleUrls: ['./seaimporth-list.component.css'],
   standalone: true,
-  imports: [...CustomControls, SeaExportHSearchComponent],
+  imports: [...CustomControls, SeaImportHSearchComponent],
 })
 
 //Name : Sourav V
-//Created Date : 24/02/2025
+//Created Date : 02/04/2025
 //Remark : this component display relevant details of each sea export master records
-//version : v1 - 24-02-2025
+//version : v1 - 02-04-2025
 
-export class SeaExportHListComponent extends baseListComponent {
+export class SeaImportHListComponent extends baseListComponent {
 
-  constructor(public ms: SeaExportHService) {
+  constructor(public ms: SeaImportHService) {
     super(ms);
   }
 
@@ -32,13 +32,12 @@ export class SeaExportHListComponent extends baseListComponent {
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
 
     this.table_data = [
-      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/seaexport/seaexporthEdit', col_param: param, col_show: this.bEdit || this.bView },
+      { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/seaimport/seaimporthEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "hbl_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel },
       { col_name: "hbl_mbl_refno", col_caption: "REF #", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_mbl_no", col_caption: "MBL #", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_houseno", col_caption: "HOUSE #", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_shipper_name", col_caption: "SHIPPER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "hbl_consignee_name", col_caption: "CONSIGNEE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_pcs", col_caption: "PCS", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_handled_name", col_caption: "HANDLED", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "hbl_mbl_pol_etd", col_caption: "ETD", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },

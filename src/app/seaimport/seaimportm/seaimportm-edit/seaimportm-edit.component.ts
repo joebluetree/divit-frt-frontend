@@ -3,22 +3,21 @@ import { Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
-import { SeaExportmService } from '../../services/seaexportm.service';
-import { iContainer,iSea_expHouse,iSea_exportm } from '../../models/iseaexportm';
-import { iSea_exportH } from '../../models/iseaexporth';
+import { SeaImportmService } from '../../services/seaimportm.service';
+import { iContainer, iSea_impHouse, iSea_importm } from '../../models/iseaimportm';
 
 //Name : Sourav V
-//Created Date : 04/01/2025
-//Remark : this component manages creation,editing and saving of qtnm-lcl(parent table) records
+//Created Date : 29/03/2025
+//Remark : this component manages creation,editing and saving of sea import (parent table) records
 
 @Component({
-  selector: 'app-seaexportm-edit',
-  templateUrl: './seaexportm-edit.component.html',
-  styleUrls: ['./seaexportm-edit.component.css'],
+  selector: 'app-seaimportm-edit',
+  templateUrl: './seaimportm-edit.component.html',
+  styleUrls: ['./seaimportm-edit.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class SeaExportmEditComponent extends baseEditComponent {
+export class SeaImportmEditComponent extends baseEditComponent {
 
   frtList = [
     { key: 'COLLECT', value: 'COLLECT' },
@@ -31,9 +30,25 @@ export class SeaExportmEditComponent extends baseEditComponent {
     { key: 'CONSOLE', value: 'CONSOLE' },
     { key: 'OTHERS', value: 'OTHERS' },
   ]
-
+  IncotermList = [
+    { key: 'FCL', value: 'FCL' },
+    { key: 'LCL', value: 'LCL' },
+    { key: 'CONSOLE', value: 'CONSOLE' },
+    { key: 'OTHERS', value: 'OTHERS' },
+  ]
+  TimeList = [
+    { key: 'AM', value: 'AM' },
+    { key: 'PM', value: 'PM' },
+  ]
+  BlStatusList = [
+    { key: 'NIL', value: 'NIL' },
+    { key: 'PENDING SEAWAY', value: 'PENDING SEAWAY' },
+    { key: 'SEAWAY BILL', value: 'SEAWAY BILL' },
+    { key: 'PENDING TELEX RELEASED', value: 'PENDING TELEX RELEASED' },
+    { key: 'TELEX RELEASED', value: 'TELEX RELEASED' },
+  ]
   constructor(
-    public ms: SeaExportmService,
+    public ms: SeaImportmService,
     public dialog: MatDialog
 
   ) {
@@ -49,12 +64,12 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_shipment_stage_id: [0],
       mbl_shipment_stage_name: [''],
       mbl_no: [''],
-      mbl_sub_houseno: [''],
-      mbl_liner_bookingno: [''],
       mbl_agent_id: [0],
       mbl_agent_name: [''],
       mbl_liner_id: [0],
       mbl_liner_name: [''],
+      mbl_coloader_id:[0],
+      mbl_coloader_name:[''],
       mbl_handled_id: [0],
       mbl_handled_name: [''],
       mbl_salesman_id: [0],
@@ -63,16 +78,15 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_ship_term_id: [0],
       mbl_ship_term_name: [''],
       mbl_cntr_type: [''],
-      mbl_direct: [''],
-      mbl_place_delivery: [''],
+      mbl_incoterm_id:[0],
+      mbl_incoterm_name:[''],
       mbl_pol_id: [0],
       mbl_pol_name: [''],
       mbl_pol_etd: [''],
       mbl_pod_id: [0],
       mbl_pod_name: [''],
       mbl_pod_eta: [''],
-      mbl_pofd_id: [0],
-      mbl_pofd_name: [''],
+      mbl_place_delivery: [''],
       mbl_pofd_eta: [''],
       mbl_country_id: [0],
       mbl_country_name: [''],
@@ -80,7 +94,27 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_vessel_code: [''],
       mbl_vessel_name: [''],
       mbl_voyage: [''],
-      mbl_book_slno: [0],
+      mbl_status_id:[0],
+      mbl_status_name:[''],
+      mbl_is_sea_waybill:[''],
+      mbl_ombl_sent_on:[''],
+      mbl_ombl_sent_ampm:[''],
+      mbl_of_sent_on:[''],
+      mbl_cargo_loc_id:[0],
+      mbl_cargo_loc_code:[''],
+      mbl_cargo_loc_name:[''],
+      mbl_cargo_loc_add1:[''],
+      mbl_cargo_loc_add2:[''],
+      mbl_cargo_loc_add3:[''],
+      mbl_cargo_loc_add4:[''],
+      mbl_devan_loc_id:[0],
+      mbl_devan_loc_code:[''],
+      mbl_devan_loc_name:[''],
+      mbl_devan_loc_add1:[''],
+      mbl_devan_loc_add2:[''],
+      mbl_devan_loc_add3:[''],
+      mbl_devan_loc_add4:[''],
+      
 
       master_cntr: this.fb.array([]),
       master_house: this.fb.array([]),
@@ -124,6 +158,10 @@ export class SeaExportmEditComponent extends baseEditComponent {
       cntr_packages_unit_name: [rec?.cntr_packages_unit_name || ""],
       cntr_cbm: [rec?.cntr_cbm || 0],
       cntr_weight: [rec?.cntr_weight || 0],
+      cntr_pick_date: [rec?.cntr_pick_date || ""],
+      cntr_return_date: [rec?.cntr_return_date || ""],
+      cntr_lfd: [rec?.cntr_lfd || ""],
+      cntr_discharge_date: [rec?.cntr_discharge_date || ""],
       cntr_order: [rec?.cntr_order || 0],
     });
     return _rec;
@@ -146,27 +184,31 @@ export class SeaExportmEditComponent extends baseEditComponent {
     });
   }
 
-  addHouseRow(rec: iSea_expHouse) {
+  addHouseRow(rec: iSea_impHouse) {
     const _rec = this.fb.group({
       hbl_id: [rec?.hbl_id || 0],
       hbl_mbl_id: [rec?.hbl_mbl_id || 0],
       hbl_houseno: [rec?.hbl_houseno || ""],
       hbl_shipper_name: [rec?.hbl_shipper_name || ""],
       hbl_consignee_name: [rec?.hbl_consignee_name || ""],
-      hbl_pcs: [rec?.hbl_pcs || null],
+      hbl_client_cat: [rec?.hbl_client_cat || ""],
+      hbl_client_type: [rec?.hbl_client_type || ""],
+      hbl_packages:[rec?.hbl_packages||0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
+      hbl_telex_released_code: [rec?.hbl_telex_released_code || ""],
       hbl_frt_status_name: [rec?.hbl_frt_status_name || ""],
+      hbl_ship_term_name: [rec?.hbl_ship_term_name || ""],
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],
     });
     return _rec;
   }
 
-  addHouse(iRow: iSea_expHouse = <iSea_expHouse>{}) {
+  addHouse(iRow: iSea_impHouse = <iSea_impHouse>{}) {
     this.formArray('master_house')?.push(this.addHouseRow(iRow));
   }
 
-  fillHouse(ihouse_list: iSea_expHouse[]) {
+  fillHouse(ihouse_list: iSea_impHouse[]) {
     this.formArray('master_house').clear();
     ihouse_list.forEach(rec_house => {
       this.addHouse(rec_house);
@@ -197,8 +239,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
 
   getRecord() {
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/seaexport/seaexportm/GetRecordAsync').subscribe({
-      next: (rec: iSea_exportm) => {
+    this.ms.getRecord(param, '/api/seaimport/seaimportm/GetRecordAsync').subscribe({
+      next: (rec: iSea_importm) => {
         this.mform.patchValue({
           mbl_id: rec.mbl_id,
           mbl_cfno: rec.mbl_cfno,
@@ -207,12 +249,12 @@ export class SeaExportmEditComponent extends baseEditComponent {
           mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
           mbl_shipment_stage_name: rec.mbl_shipment_stage_name,
           mbl_no: rec.mbl_no,
-          mbl_sub_houseno: rec.mbl_sub_houseno,
-          mbl_liner_bookingno: rec.mbl_liner_bookingno,
           mbl_agent_id: rec.mbl_agent_id,
           mbl_agent_name: rec.mbl_agent_name,
           mbl_liner_id: rec.mbl_liner_id,
           mbl_liner_name: rec.mbl_liner_name,
+          mbl_coloader_id: rec.mbl_coloader_id,
+          mbl_coloader_name: rec.mbl_coloader_name,
           mbl_handled_id: rec.mbl_handled_id,
           mbl_handled_name: rec.mbl_handled_name,
           mbl_salesman_id: rec.mbl_salesman_id,
@@ -221,16 +263,15 @@ export class SeaExportmEditComponent extends baseEditComponent {
           mbl_ship_term_id: rec.mbl_ship_term_id,
           mbl_ship_term_name: rec.mbl_ship_term_name,
           mbl_cntr_type: rec.mbl_cntr_type,
-          mbl_direct: rec.mbl_direct,
-          mbl_place_delivery: rec.mbl_place_delivery,
+          mbl_incoterm_id: rec.mbl_incoterm_id,
+          mbl_incoterm_name: rec.mbl_incoterm_name,
           mbl_pol_id: rec.mbl_pol_id,
           mbl_pol_name: rec.mbl_pol_name,
           mbl_pol_etd: rec.mbl_pol_etd,
           mbl_pod_id: rec.mbl_pod_id,
           mbl_pod_name: rec.mbl_pod_name,
           mbl_pod_eta: rec.mbl_pod_eta,
-          mbl_pofd_id: rec.mbl_pofd_id,
-          mbl_pofd_name: rec.mbl_pofd_name,
+          mbl_place_delivery: rec.mbl_place_delivery,
           mbl_pofd_eta: rec.mbl_pofd_eta,
           mbl_country_id: rec.mbl_country_id,
           mbl_country_name: rec.mbl_country_name,
@@ -238,7 +279,26 @@ export class SeaExportmEditComponent extends baseEditComponent {
           mbl_vessel_code: rec.mbl_vessel_code,
           mbl_vessel_name: rec.mbl_vessel_name,
           mbl_voyage: rec.mbl_voyage,
-          mbl_book_slno: rec.mbl_book_slno,
+          mbl_status_id: rec.mbl_status_id,
+          mbl_status_name: rec.mbl_status_name,
+          mbl_is_sea_waybill: rec.mbl_is_sea_waybill,
+          mbl_ombl_sent_on: rec.mbl_ombl_sent_on,
+          mbl_ombl_sent_ampm: rec.mbl_ombl_sent_ampm,
+          mbl_of_sent_on: rec.mbl_of_sent_on,
+          mbl_cargo_loc_id: rec.mbl_cargo_loc_id,
+          mbl_cargo_loc_code: rec.mbl_cargo_loc_code,
+          mbl_cargo_loc_name: rec.mbl_cargo_loc_name,
+          mbl_cargo_loc_add1: rec.mbl_cargo_loc_add1,
+          mbl_cargo_loc_add2: rec.mbl_cargo_loc_add2,
+          mbl_cargo_loc_add3: rec.mbl_cargo_loc_add3,
+          mbl_cargo_loc_add4: rec.mbl_cargo_loc_add4,
+          mbl_devan_loc_id: rec.mbl_devan_loc_id,
+          mbl_devan_loc_code: rec.mbl_devan_loc_code,
+          mbl_devan_loc_name: rec.mbl_devan_loc_name,
+          mbl_devan_loc_add1: rec.mbl_devan_loc_add1,
+          mbl_devan_loc_add2: rec.mbl_devan_loc_add2,
+          mbl_devan_loc_add3: rec.mbl_devan_loc_add3,
+          mbl_devan_loc_add4: rec.mbl_devan_loc_add4,
 
           rec_version: rec.rec_version,
 
@@ -259,7 +319,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iSea_exportm>this.mform.value;
+    const data = <iSea_importm>this.mform.value;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -271,8 +331,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
       'id': data.mbl_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/seaexport/seaexportm/SaveAsync').subscribe({
-      next: (v: iSea_exportm) => {
+    this.ms.save(param, data, '/api/seaimport/seaimportm/SaveAsync').subscribe({
+      next: (v: iSea_importm) => {
         if (this.mode == "add") {
           this.id = v.mbl_id;
           this.mode = "edit";
@@ -304,7 +364,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     let rec: any = {};
   
     if (action.id == 'mbl_shipment_stage_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -315,7 +374,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_agent_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -326,7 +384,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_liner_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -336,8 +393,17 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
+    if (action.id == 'mbl_coloader_name') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_coloader_id: rec.cust_id || 0,
+        mbl_coloader_name: rec.cust_name || '',
+      });
+    }
+  
     if (action.id == 'mbl_handled_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -348,7 +414,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_salesman_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -359,7 +424,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_frt_status_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -370,7 +434,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_ship_term_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -380,8 +443,27 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
+    if (action.id == 'mbl_incoterm_name') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_incoterm_id: rec.param_id || 0,
+        mbl_incoterm_name: rec.param_name || '',
+      });
+    }
+  
+    if (action.id == 'mbl_status_name') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_status_id: rec.param_id || 0,
+        mbl_status_name: rec.param_name || '',
+      });
+    }
+  
     if (action.id == 'mbl_pol_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -392,7 +474,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_pod_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -402,19 +483,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_pofd_name') {
-      //let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        mbl_pofd_id: rec.param_id || 0,
-        mbl_pofd_name: rec.param_name || '',
-      });
-    }
-  
     if (action.id == 'mbl_vessel_code') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -426,7 +495,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'mbl_country_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -436,8 +504,37 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
+    if (action.id == 'mbl_cargo_loc_code') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_cargo_loc_id: rec.cust_id || 0,
+        mbl_cargo_loc_code: rec.cust_code || '',
+        mbl_cargo_loc_name: rec.cust_name || '',
+        mbl_cargo_loc_add1: rec.cust_address1 || '',
+        mbl_cargo_loc_add2: rec.cust_address2 || '',
+        mbl_cargo_loc_add3: rec.cust_address3 || '',
+        mbl_cargo_loc_add4: this.gs.getTelFax(rec),
+      });
+    }
+  
+    if (action.id == 'mbl_devan_loc_code') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        mbl_devan_loc_id: rec.cust_id || 0,
+        mbl_devan_loc_code: rec.cust_code || '',
+        mbl_devan_loc_name: rec.cust_name || '',
+        mbl_devan_loc_add1: rec.cust_address1 || '',
+        mbl_devan_loc_add2: rec.cust_address2 || '',
+        mbl_devan_loc_add3: rec.cust_address3 || '',
+        mbl_devan_loc_add4: rec.cust_address4 || '',
+      });
+    }
+  
     if (action.name == 'cntr_type_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -448,7 +545,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   
     if (action.name == 'cntr_packages_unit_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -459,10 +555,6 @@ export class SeaExportmEditComponent extends baseEditComponent {
     }
   }
 
-
-  // onBlur(action: any) {
-  //   console.log('onBlur Action', action);
-  // }
 
 }
 

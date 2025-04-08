@@ -3,23 +3,22 @@ import { Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
-import { SeaExportmService } from '../../services/seaexportm.service';
-import { iContainer, iSea_exportm } from '../../models/iseaexportm';
-import { SeaExportHService } from '../../services/seaexporth.service';
-import { iSea_exportH } from '../../models/iseaexporth';
+import { iContainer, iSea_importH } from '../../models/iseaimporth';
+import { SeaImportHService } from '../../services/seaimporth.service';
+
 
 //Name : Sourav V
 //Created Date : 28/02/2025
-//Remark : this component manages creation,editing and saving of sea export house(parent table) records
+//Remark : this component manages creation,editing and saving of sea import house(parent table) records
 
 @Component({
-  selector: 'app-seaexporth-edit',
-  templateUrl: './seaexporth-edit.component.html',
-  styleUrls: ['./seaexporth-edit.component.css'],
+  selector: 'app-seaimporth-edit',
+  templateUrl: './seaimporth-edit.component.html',
+  styleUrls: ['./seaimporth-edit.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class SeaExportHEditComponent extends baseEditComponent {
+export class SeaImportHEditComponent extends baseEditComponent {
 
   print_frt_status_type = "TBA";
 
@@ -33,16 +32,42 @@ export class SeaExportHEditComponent extends baseEditComponent {
     { key: 'MUTUAL', value: 'MUTUAL' },
     { key: 'NOMINATION', value: 'NOMINATION' },
   ]
-  telexList = [
+  MovdadList = [
+    { key: 'N', value: 'NO' },
+    { key: 'Y', value: 'YES' },
+  ]
+  // telexRelList = [
+  //   { key: 'N', value: 'NO' },
+  //   { key: 'Y', value: 'YES' },
+  // ]
+  customRelList = [
     { key: 'N/A', value: 'N/A' },
-    { key: 'OBL ISSUES', value: 'OBL ISSUES' },
-    { key: 'TELEX RELEASE', value: 'TELEX RELEASE' },
+    { key: 'PENDING', value: 'PENDING' },
+    { key: 'EXAM', value: 'EXAM' },
+    { key: 'COMPLETED', value: 'COMPLETED' },
+    { key: 'SUBMITTED', value: 'SUBMITTED' },
+  ]
+  DeliveryList = [
+    { key: 'N/A', value: 'N/A' },
+    { key: 'N', value: 'NO' },
+    { key: 'Y', value: 'YES' },
+  ]
+  BlStatuslList = [
+    { key: 'NIL', value: 'NIL' },
+    { key: 'RECIVED', value: 'RECIVED' },
+    { key: 'NOT RECIVED', value: 'NOT RECIVED' },
+    { key: 'TELEX RELEASED', value: 'TELEX RELEASED' },
+  ]
+  frtStatuslList = [
+    { key: 'NIL', value: 'NIL' },
+    { key: 'RELEASED', value: 'RELEASED' },
+    { key: 'NOT RELEASED', value: 'NOT RELEASED' },
   ]
 
   mbl_id: number;
 
   constructor(
-    private ms: SeaExportHService,
+    private ms: SeaImportHService,
     public dialog: MatDialog
 
   ) {
@@ -53,8 +78,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
     this.mform = this.fb.group({
       hbl_id: [0],
       hbl_mbl_id: [0],
-      hbl_mbl_refno: [''],
       hbl_cfno: [0],
+      hbl_mbl_refno: [''],
       hbl_houseno: [''],
       hbl_shipment_stage_id: [0],
       hbl_shipment_stage_name: [''],
@@ -76,6 +101,13 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_consignee_add3: [''],
       hbl_consignee_add4: [''],
       hbl_consignee_add5: [''],
+      hbl_location_id: [0],
+      hbl_location_code: [''],
+      hbl_location_name: [''],
+      hbl_location_add1: [''],
+      hbl_location_add2: [''],
+      hbl_location_add3: [''],
+      hbl_location_add4: [''],
       hbl_notify_id: [0],
       hbl_notify_code: [''],
       hbl_notify_name: [''],
@@ -83,59 +115,69 @@ export class SeaExportHEditComponent extends baseEditComponent {
       hbl_notify_add2: [''],
       hbl_notify_add3: [''],
       hbl_notify_add4: [''],
-      hbl_notify_add5: [''],
-      hbl_exp_ref1: [''],
-      hbl_exp_ref2: [''],
-      hbl_exp_ref3: [''],
+      hbl_careof_id: [0],
+      hbl_careof_name: [''],
       hbl_agent_id: [0],
       hbl_agent_name: [''],
-      hbl_origin: [''],
-      hbl_rout1: [''],
-      hbl_rout2: [''],
-      hbl_rout3: [''],
-      hbl_rout4: [''],
-      hbl_pre_carriage: [''],
-      hbl_place_receipt: [''],
-      hbl_pol_name: [''],
-      hbl_pod_name: [''],
+      hbl_cha_id: [0],
+      hbl_cha_code: [''],
+      hbl_cha_name: [''],
+      hbl_cha_attn: [''],
+      hbl_cha_tel: [''],
+      hbl_cha_fax: [''],
       hbl_place_delivery: [''],
-      hbl_pofd_name: [''],
-      hbl_type_move: [''],
-      hbl_is_cntrized: [''],
+      hbl_pld_eta: [''],
+      hbl_place_final: [''],
+      hbl_plf_eta: [''],
+      hbl_it_no: [''],
+      hbl_is_itshipment: [''],
+      hbl_it_port: [''],
+      hbl_it_date: [''],
+      hbl_packages: [0],
+      hbl_uom_id: [0],
+      hbl_uom_name: [''],
+      hbl_lbs: [0],
+      hbl_weight: [0],
+      hbl_cft: [0],
+      hbl_cbm: [0],
+      hbl_commodity: [''],
+      hbl_ship_term_id: [0],
+      hbl_ship_term_name: [''],
+      hbl_incoterm_id: [0],
+      hbl_incoterm_name: [''],
+      hbl_pono: [''],
+      hbl_invoiceno: [''],
+      hbl_ams_fileno: [''],
+      hbl_sub_house: [''],
+      hbl_isf_no: [''],
+      hbl_telex_released_id: [0],
+      hbl_telex_released_name: [''],
+      hbl_mov_dad: [''],
+      hbl_bl_req: [''],
+      hbl_book_slno: [''],
+      hbl_is_pl: [''],
+      hbl_is_ci: [''],
+      hbl_is_carr_an: [''],
+      hbl_custom_reles_status: [''],
+      hbl_custom_clear_date: [''],
+      hbl_is_delivery: [''],
+      hbl_paid_status_id: [0],
+      hbl_paid_status_name: [''],
+      hbl_bl_status: [''],
+      hbl_cargo_release_status: [''],
       hbl_frt_status_name: [''],
       hbl_handled_id: [0],
       hbl_handled_name: [''],
       hbl_salesman_id: [0],
       hbl_salesman_name: [''],
-      hbl_goods_nature: [''],
-      hbl_commodity: [''],
-      hbl_is_arranged: [''],
-      hbl_obl_telex: ['N/A'],
-      hbl_obl_slno: [''],
-      hbl_format_id: [0],
-      hbl_format_name: [''],//default MOTHERLINES BLANK 46
-      hbl_draft_format_id: [0],
-      hbl_draft_format_name: [''],//MOTHERLINES DRAFT 47
-      hbl_lbs: [0],
-      hbl_weight: [0],
-      hbl_cft: [0],
-      hbl_cbm: [0],
-      hbl_pcs: [0],
-      hbl_packages: [0],
-      hbl_uom_id: [0],
-      hbl_uom_name: [''],
-      hbl_print_kgs: [''],
-      hbl_print_lbs: [''],
-      hbl_clean: [''],
       hbl_remark1: [''],
       hbl_remark2: [''],
       hbl_remark3: [''],
-      hbl_by1: [''],
-      hbl_by2: [''],
-      hbl_issued_place: [''],
-      hbl_issued_date: [''],
+      hbl_lfd_date: [''],
+      hbl_go_date: [''],
+      hbl_pickup_date: [''],
+      hbl_empty_ret_date: [''],
       hbl_delivery_date: [''],
-      hbl_originals: [0],
 
       marks1: this.CreateFormDesc(),
       marks2: this.CreateFormDesc(),
@@ -193,7 +235,6 @@ export class SeaExportHEditComponent extends baseEditComponent {
       desc_parent_type: [''],
       desc_ctr: [0],
       desc_mark: [''],
-      desc_package: [''],
       desc_description: ['']
     });
   }
@@ -216,6 +257,10 @@ export class SeaExportHEditComponent extends baseEditComponent {
       cntr_packages_unit_name: [rec?.cntr_packages_unit_name || ""],
       cntr_cbm: [rec?.cntr_cbm || 0],
       cntr_weight: [rec?.cntr_weight || 0],
+      cntr_pick_date: [rec?.cntr_pick_date || ""],
+      cntr_return_date: [rec?.cntr_return_date || ""],
+      cntr_lfd: [rec?.cntr_lfd || ""],
+      cntr_discharge_date: [rec?.cntr_discharge_date || ""],
       cntr_order: [rec?.cntr_order || 0],
     });
     return _rec;
@@ -243,33 +288,38 @@ export class SeaExportHEditComponent extends baseEditComponent {
   getDefaultData() {
 
     const param = { 'id': this.mbl_id };
-    this.ms.getRecord(param, '/api/seaexport/seaexporth/GetDefaultData').subscribe({
-      next: (rec: iSea_exportH) => {
+    this.ms.getRecord(param, '/api/seaimport/seaimporth/GetDefaultData').subscribe({
+      next: (rec: iSea_importH) => {
         this.mform.patchValue({
           hbl_mbl_id: rec.hbl_mbl_id,
           hbl_shipment_stage_id: rec.hbl_shipment_stage_id,
           hbl_shipment_stage_name: rec.hbl_shipment_stage_name,
+          hbl_location_id: rec.hbl_location_id,
+          hbl_location_code: rec.hbl_location_code,
+          hbl_location_name: rec.hbl_location_name,
+          hbl_location_add1: rec.hbl_location_add1,
+          hbl_location_add2: rec.hbl_location_add2,
+          hbl_location_add3: rec.hbl_location_add3,
+          hbl_location_add4: rec.hbl_location_add4,
           hbl_mbl_refno: rec.hbl_mbl_refno,
           hbl_agent_id: rec.hbl_agent_id,
           hbl_agent_name: rec.hbl_agent_name,
-          hbl_pol_name: rec.hbl_pol_name,
-          hbl_pod_name: rec.hbl_pod_name,
           hbl_place_delivery: rec.hbl_place_delivery,
           hbl_handled_id: rec.hbl_handled_id,
           hbl_handled_name: rec.hbl_handled_name,
           hbl_salesman_id: rec.hbl_salesman_id,
           hbl_salesman_name: rec.hbl_salesman_name,
-          hbl_format_id: rec.hbl_format_id,
-          hbl_format_name: rec.hbl_format_name,
-          hbl_draft_format_id: rec.hbl_draft_format_id,
-          hbl_draft_format_name: rec.hbl_draft_format_name,
-          hbl_by1: rec.hbl_handled_name,
-          hbl_issued_date: rec.hbl_issued_date,
+          hbl_bl_req: rec.hbl_bl_req,
+          hbl_uom_id: rec.hbl_uom_id,
+          hbl_uom_name: rec.hbl_uom_name,
+          hbl_packages: rec.hbl_packages,
+          hbl_weight: rec.hbl_weight,
+          hbl_lbs: this.ConvertUnit(rec.hbl_weight, 'weight'),
+          hbl_cbm: rec.hbl_cbm,
+          hbl_cft: this.ConvertUnit(rec.hbl_cbm, 'cbm'),
 
-          marks1: rec.marks1 ? rec.marks1 : "",
-          marks2: rec.marks2 ? rec.marks2 : ""
-
-
+          marks9: rec.marks9 ? rec.marks9 : "",
+          marks10: rec.marks10 ? rec.marks10 : ""
 
         });
         this.fillCntr(rec.house_cntr);
@@ -283,8 +333,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
   getRecord() {
 
     const param = { 'id': this.id };
-    this.ms.getRecord(param, '/api/seaexport/seaexporth/GetRecordAsync').subscribe({
-      next: (rec: iSea_exportH) => {
+    this.ms.getRecord(param, '/api/seaimport/seaimporth/GetRecordAsync').subscribe({
+      next: (rec: iSea_importH) => {
         this.mform.patchValue({
           hbl_id: rec.hbl_id,
           hbl_mbl_id: rec.hbl_mbl_id,
@@ -311,6 +361,13 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_consignee_add3: rec.hbl_consignee_add3,
           hbl_consignee_add4: rec.hbl_consignee_add4,
           hbl_consignee_add5: rec.hbl_consignee_add5,
+          hbl_location_id: rec.hbl_location_id,
+          hbl_location_code: rec.hbl_location_code,
+          hbl_location_name: rec.hbl_location_name,
+          hbl_location_add1: rec.hbl_location_add1,
+          hbl_location_add2: rec.hbl_location_add2,
+          hbl_location_add3: rec.hbl_location_add3,
+          hbl_location_add4: rec.hbl_location_add4,
           hbl_notify_id: rec.hbl_notify_id,
           hbl_notify_code: rec.hbl_notify_code,
           hbl_notify_name: rec.hbl_notify_name,
@@ -318,60 +375,70 @@ export class SeaExportHEditComponent extends baseEditComponent {
           hbl_notify_add2: rec.hbl_notify_add2,
           hbl_notify_add3: rec.hbl_notify_add3,
           hbl_notify_add4: rec.hbl_notify_add4,
-          hbl_notify_add5: rec.hbl_notify_add5,
-          hbl_exp_ref1: rec.hbl_exp_ref1,
-          hbl_exp_ref2: rec.hbl_exp_ref2,
-          hbl_exp_ref3: rec.hbl_exp_ref3,
+          hbl_careof_id: rec.hbl_careof_id,
+          hbl_careof_name: rec.hbl_careof_name,
           hbl_agent_id: rec.hbl_agent_id,
           hbl_agent_name: rec.hbl_agent_name,
-          hbl_origin: rec.hbl_origin,
-          hbl_rout1: rec.hbl_rout1,
-          hbl_rout2: rec.hbl_rout2,
-          hbl_rout3: rec.hbl_rout3,
-          hbl_rout4: rec.hbl_rout4,
-          hbl_pre_carriage: rec.hbl_pre_carriage,
-          hbl_place_receipt: rec.hbl_place_receipt,
-          hbl_pol_name: rec.hbl_pol_name,
-          hbl_pod_name: rec.hbl_pod_name,
+          hbl_cha_id: rec.hbl_cha_id,
+          hbl_cha_code: rec.hbl_cha_code,
+          hbl_cha_name: rec.hbl_cha_name,
+          hbl_cha_attn: rec.hbl_cha_attn,
+          hbl_cha_tel: rec.hbl_cha_tel,
+          hbl_cha_fax: rec.hbl_cha_fax,
           hbl_place_delivery: rec.hbl_place_delivery,
-          hbl_pofd_name: rec.hbl_pofd_name,
-          hbl_type_move: rec.hbl_type_move,
-          hbl_is_cntrized: rec.hbl_is_cntrized,
-          hbl_frt_status_name: rec.hbl_frt_status_name,
-          hbl_handled_id: rec.hbl_handled_id,
-          hbl_handled_name: rec.hbl_handled_name,
-          hbl_salesman_id: rec.hbl_salesman_id,
-          hbl_salesman_name: rec.hbl_salesman_name,
-          hbl_goods_nature: rec.hbl_goods_nature,
-          hbl_commodity: rec.hbl_commodity,
-          hbl_is_arranged: rec.hbl_is_arranged,
-          hbl_obl_telex: rec.hbl_obl_telex,
-          hbl_obl_slno: rec.hbl_obl_slno,
-          hbl_format_id: rec.hbl_format_id,
-          hbl_format_name: rec.hbl_format_name,
-          hbl_draft_format_id: rec.hbl_draft_format_id,
-          hbl_draft_format_name: rec.hbl_draft_format_name,
+          hbl_pld_eta: rec.hbl_pld_eta,
+          hbl_place_final: rec.hbl_place_final,
+          hbl_plf_eta: rec.hbl_plf_eta,
+          hbl_it_no: rec.hbl_it_no,
+          hbl_is_itshipment: rec.hbl_is_itshipment,
+          hbl_it_port: rec.hbl_it_port,
+          hbl_it_date: rec.hbl_it_date,
+          hbl_packages: rec.hbl_packages,
+          hbl_uom_id: rec.hbl_uom_id,
+          hbl_uom_name: rec.hbl_uom_name,
           hbl_lbs: rec.hbl_lbs,
           hbl_weight: rec.hbl_weight,
           hbl_cft: rec.hbl_cft,
           hbl_cbm: rec.hbl_cbm,
           hbl_pcs: rec.hbl_pcs,
-          hbl_packages: rec.hbl_packages,
-          hbl_uom_id: rec.hbl_uom_id,
-          hbl_uom_name: rec.hbl_uom_name,
-          hbl_print_kgs: rec.hbl_print_kgs,
-          hbl_print_lbs: rec.hbl_print_lbs,
-          hbl_clean: rec.hbl_clean,
+          hbl_commodity: rec.hbl_commodity,
+          hbl_ship_term_id: rec.hbl_ship_term_id,
+          hbl_ship_term_name: rec.hbl_ship_term_name,
+          hbl_incoterm_id: rec.hbl_incoterm_id,
+          hbl_incoterm_name: rec.hbl_incoterm_name,
+          hbl_pono: rec.hbl_pono,
+          hbl_invoiceno: rec.hbl_invoiceno,
+          hbl_ams_fileno: rec.hbl_ams_fileno,
+          hbl_sub_house: rec.hbl_sub_house,
+          hbl_isf_no: rec.hbl_isf_no,
+          hbl_telex_released_id: rec.hbl_telex_released_id,
+          hbl_telex_released_name: rec.hbl_telex_released_name,
+          hbl_mov_dad: rec.hbl_mov_dad,
+          hbl_bl_req: rec.hbl_bl_req,
+          hbl_book_slno: rec.hbl_book_slno,
+          hbl_is_pl: rec.hbl_is_pl,
+          hbl_is_ci: rec.hbl_is_ci,
+          hbl_is_carr_an: rec.hbl_is_carr_an,
+          hbl_custom_reles_status: rec.hbl_custom_reles_status,
+          hbl_custom_clear_date: rec.hbl_custom_clear_date,
+          hbl_is_delivery: rec.hbl_is_delivery,
+          hbl_paid_status_id: rec.hbl_paid_status_id,
+          hbl_paid_status_name: rec.hbl_paid_status_name,
+          hbl_bl_status: rec.hbl_bl_status,
+          hbl_cargo_release_status: rec.hbl_cargo_release_status,
+          hbl_frt_status_name: rec.hbl_frt_status_name,
+          hbl_handled_id: rec.hbl_handled_id,
+          hbl_handled_name: rec.hbl_handled_name,
+          hbl_salesman_id: rec.hbl_salesman_id,
+          hbl_salesman_name: rec.hbl_salesman_name,
           hbl_remark1: rec.hbl_remark1,
           hbl_remark2: rec.hbl_remark2,
           hbl_remark3: rec.hbl_remark3,
-          hbl_by1: rec.hbl_by1,
-          hbl_by2: rec.hbl_by2,
-          hbl_issued_place: rec.hbl_issued_place,
-          hbl_issued_date: rec.hbl_issued_date,
+          hbl_lfd_date: rec.hbl_lfd_date,
+          hbl_go_date: rec.hbl_go_date,
+          hbl_pickup_date: rec.hbl_pickup_date,
+          hbl_empty_ret_date: rec.hbl_empty_ret_date,
           hbl_delivery_date: rec.hbl_delivery_date,
-          hbl_originals: rec.hbl_originals,
-
           rec_version: rec.rec_version,
 
         })
@@ -394,7 +461,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iSea_exportH>this.mform.value;
+    const data = <iSea_importH>this.mform.value;
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
@@ -405,8 +472,8 @@ export class SeaExportHEditComponent extends baseEditComponent {
       'id': data.hbl_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/seaexport/seaexporth/SaveAsync').subscribe({
-      next: (v: iSea_exportH) => {
+    this.ms.save(param, data, '/api/seaimport/seaimporth/SaveAsync').subscribe({
+      next: (v: iSea_importH) => {
         if (this.mode == "add") {
           this.id = v.hbl_id;
           this.mode = "edit";
@@ -437,7 +504,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
     })
   }
 
-  updateDesc(data: iSea_exportH) {
+  updateDesc(data: iSea_importH) {
     if (!data)
       return;
 
@@ -446,22 +513,46 @@ export class SeaExportHEditComponent extends baseEditComponent {
     }
   }
 
+  fillCustomer(customerData: any = {}) {
+    this.mform.patchValue({
+      hbl_cha_id: customerData.cust_id || 0,
+      hbl_cha_code: customerData.cust_code || '',
+      hbl_cha_name: customerData.cust_name || '',
+      hbl_cha_attn: customerData.cust_contact || '',
+      hbl_cha_tel: customerData.cust_tel || '',
+      hbl_cha_fax: customerData.cust_fax || '',
+    });
+  }
+
+  getCustomerData(id: any) {
+    if (!id) {
+      this.fillCustomer();
+      return;
+    }
+    const param = { 'id': id };
+    this.ms.getRecord(param, 'api/search/GetCustomerAsync').subscribe({
+      next: (rec: any) => this.fillCustomer(rec || {}),
+      error: (error) => {
+        this.gs.showError(error);
+        this.fillCustomer();
+      }
+    });
+  }
+
   callBack(action: any) {
     let rec: any = {};
-  
     if (action.id == 'hbl_shipment_stage_name') {
       //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
       this.mform.patchValue({
-        hbl_shipment_stage_id: rec.param_id || 0,
-        hbl_shipment_stage_name: rec.param_name || '',
+        hbl_shipment_stage_id: action.rec ? action.rec.param_id : 0,
+        hbl_shipment_stage_name: action.rec ? action.rec.param_name : '',
       });
     }
-  
     if (action.id == 'hbl_shipper_code') {
-      //let rec: any = {};
+      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -476,7 +567,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_shipper_add5: this.gs.getTelFax(rec),
       });
     }
-  
+    
     if (action.id == 'hbl_consignee_code') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -492,9 +583,27 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_consignee_add4: this.gs.getAttention(rec),
         hbl_consignee_add5: this.gs.getTelFax(rec),
         hbl_bltype: rec.cust_nomination || '',
+        hbl_cha_id: rec.cust_chb_id || '',
+      });
+      this.getCustomerData(rec.cust_chb_id);
+    }
+    
+    if (action.id == 'hbl_location_code') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_location_id: rec.cust_id || 0,
+        hbl_location_code: rec.cust_code || '',
+        hbl_location_name: rec.cust_name || '',
+        hbl_location_add1: rec.cust_address1 || '',
+        hbl_location_add2: rec.cust_address2 || '',
+        hbl_location_add3: rec.cust_address3 || '',
+        hbl_location_add4: this.gs.getTelFax(rec),
       });
     }
-  
+    
     if (action.id == 'hbl_notify_code') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -507,11 +616,21 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_notify_add1: rec.cust_address1 || '',
         hbl_notify_add2: rec.cust_address2 || '',
         hbl_notify_add3: rec.cust_address3 || '',
-        hbl_notify_add4: this.gs.getAttention(rec),
-        hbl_notify_add5: this.gs.getTelFax(rec),
+        hbl_notify_add4: this.gs.getTelFax(rec),
       });
     }
-  
+    
+    if (action.id == 'hbl_careof_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_careof_id: rec.cust_id || 0,
+        hbl_careof_name: rec.cust_name || '',
+      });
+    }
+    
     if (action.id == 'hbl_agent_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -522,7 +641,33 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_agent_name: rec.cust_name || '',
       });
     }
-  
+    
+    if (action.id == 'hbl_paid_status_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_paid_status_id: rec.param_id || 0,
+        hbl_paid_status_name: rec.param_name || '',
+      });
+    }
+    
+    if (action.id == 'hbl_cha_code') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_cha_id: rec.cust_id || 0,
+        hbl_cha_code: rec.cust_code || '',
+        hbl_cha_name: rec.cust_name || '',
+        hbl_cha_attn: rec.cust_contact || '',
+        hbl_cha_tel: rec.cust_chb_tel || '',
+        hbl_cha_fax: rec.cust_chb_fax || '',
+      });
+    }
+    
     if (action.id == 'hbl_handled_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -533,7 +678,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_handled_name: rec.param_name || '',
       });
     }
-  
+    
     if (action.id == 'hbl_salesman_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -544,7 +689,29 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_salesman_name: rec.param_name || '',
       });
     }
-  
+    
+    if (action.id == 'hbl_ship_term_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_ship_term_id: rec.param_id || 0,
+        hbl_ship_term_name: rec.param_name || '',
+      });
+    }
+    
+    if (action.id == 'hbl_incoterm_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_incoterm_id: rec.param_id || 0,
+        hbl_incoterm_name: rec.param_name || '',
+      });
+    }
+    
     if (action.id == 'hbl_format_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -555,7 +722,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_format_name: rec.param_name || '',
       });
     }
-  
+    
     if (action.id == 'hbl_draft_format_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -566,7 +733,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_draft_format_name: rec.param_name || '',
       });
     }
-  
+    
     if (action.id == 'hbl_uom_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -577,7 +744,16 @@ export class SeaExportHEditComponent extends baseEditComponent {
         hbl_uom_name: rec.param_name || '',
       });
     }
-  
+    if (action.id == 'hbl_telex_released_name') {
+      //let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        hbl_telex_released_id: rec.param_id || 0,
+        hbl_telex_released_name: rec.param_name || '',
+      });
+    }
     if (action.name == 'cntr_type_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -588,7 +764,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
         cntr_type_name: rec.param_name || '',
       });
     }
-  
+    
     if (action.name == 'cntr_packages_unit_name') {
       //let rec: any = {};
       if (action?.rec != null) {
@@ -611,9 +787,9 @@ export class SeaExportHEditComponent extends baseEditComponent {
     const changedValue = convertionValue[cUnit];
     return changedValue * value;
   }
-  // onBlur(action: any) {
-  //   console.log('onBlur Action', action);
-  // }
+  onBlur(action: any) {
+    console.log('onBlur Action', action);
+  }
 
 
   findUnit(action: any) {
@@ -624,7 +800,7 @@ export class SeaExportHEditComponent extends baseEditComponent {
       return;
     }
 
-    const data = <iSea_exportH>this.mform.value
+    const data = <iSea_importH>this.mform.value
 
     const nhbl_weight = data?.hbl_weight || 0;
     const nhbl_lbs = data?.hbl_lbs || 0;
