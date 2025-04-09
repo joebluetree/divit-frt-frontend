@@ -133,6 +133,7 @@ export interface iSea_importH {
   hbl_is_delivery: string;
   hbl_paid_status_id: number;
   hbl_paid_status_name: string;
+  hbl_paid_remarks: string;
   hbl_bl_status: string;
   hbl_cargo_release_status: string;
 
