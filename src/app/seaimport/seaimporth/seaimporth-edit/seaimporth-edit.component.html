@@ -557,21 +557,21 @@
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
               <div class="col-sm-5">
-                <app-input maxlength="100" formControlName="hbl_bl_status" [case]="'UPPER'" name="hbl_bl_status"
-                  id="hbl_bl_status"></app-input>
+                <app-input maxlength="100" formControlName="hbl_paid_remarks" [case]="'UPPER'" name="hbl_paid_remarks"
+                  id="hbl_paid_remarks"></app-input>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">B/L.Status</label>
               <div class="col-sm-8">
-                <app-combobox maxlength="30" formControlName="hbl_cargo_release_status" name="hbl_cargo_release_status"
+                <app-combobox maxlength="30" formControlName="hbl_bl_status" name="hbl_bl_status"
                   [dataSource]="BlStatuslList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Frt.Release.Status</label>
               <div class="col-sm-8">
-                <app-combobox maxlength="30" formControlName="hbl_frt_status_name" name="hbl_frt_status_name"
+                <app-combobox maxlength="30" formControlName="hbl_cargo_release_status" name="hbl_cargo_release_status"
                   [dataSource]="frtStatuslList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
             </div>
