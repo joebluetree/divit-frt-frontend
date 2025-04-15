@@ -538,74 +538,75 @@
 
   <div class="col-md-2 border-top" *ngIf="mform.get('mbl_id')?.value != 0">
     <div class="page-body line-bottom ">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="form-group row">
-            <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group row">
+              <div class="col-sm-12 ">
+                <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DEVANING INSTRUCTION</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">DEVANING INSTRUCTION</button>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">AR & AP</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">AR & AP</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PROFIT REPORT</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">PROFIT REPORT</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">SHIPMENT LABEL</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">SHIPMENT LABEL</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">MESSENGER SLIP</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">MESSENGER SLIP</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PAYMENT REQUEST</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">PAYMENT REQUEST</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">ATTACHMENTS</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">ATTACHMENTS</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">ADD TO FOLLOW UP</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">ADD TO FOLLOW UP</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">INTERNAL MEMO</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2 " routerLink="/memo/memoEdit"
+                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">REQUEST FOR APPROVAL</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">REQUEST FOR APPROVAL</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">CERTIFICATE OF ORIGIN</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">CERTIFICATE OF ORIGIN</button>
+              </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
+            <div class="form-group row">
+              <div class="col-sm-12">
+                <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
+              </div>
             </div>
-          </div>
           <div class="form-group row">
             <div class="col-sm-12">
               <button class="btn btn-sm btn-success w-100 mb-2">PRODUCT</button>

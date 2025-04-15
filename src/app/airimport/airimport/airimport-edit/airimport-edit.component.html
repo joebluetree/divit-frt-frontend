@@ -319,7 +319,8 @@
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
               <button class="btn btn-success btn-sm">ATTACHMENTS</button>
               <button class="btn btn-success btn-sm">ADD TO FOLLOW UP</button>
-              <button class="btn btn-success btn-sm">INTERNAL MEMO</button>
+              <button class="btn btn-success btn-sm"routerLink="/memo/memoEdit"
+              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIRIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO</button>
               <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             </div>
           </div>
