@@ -230,7 +230,7 @@ export class MemoEditComponent extends baseEditComponent {
         });
         this.fillMemoDetails(v.memo_details);
         this.ms.UpdateRecord(v, _mode);
-        // this.gs.showAlert(["Save Complete"]);
+        this.gs.showAlert(["Save Complete"]);
         this.mform.reset();
         this.newRecord();
       },
