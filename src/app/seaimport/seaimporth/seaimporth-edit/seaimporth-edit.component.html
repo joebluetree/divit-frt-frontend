@@ -1070,74 +1070,30 @@
     </div>
   </div>
 
-  <div class="col-sm-2 border-top" *ngIf="mform.get('hbl_id')?.value != 0">
+  <div class="col-sm-2" *ngIf="mode=='edit'">
     <div class="page-body line-bottom">
       <div class="row">
         <div class="col-sm-12">
-          <div class="form-group row">
-            <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">ARRIVAL NOTICE</button>
-            </div>
-
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">ARRIVAL NOTICE(FRT INVOICE)</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PRE-ADVISE</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">TURNOVER LETTER</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">US CUSTOM HOLD</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">DEVAN/INSTRUCTIONS</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2" routerLink="/memo/memoEdit"
-                [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'SEAIMP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">HOUSE INTERNAL MEMO</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">RIDER PAGE</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PRODUCTS</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
-                [disabled]="mform.invalid">SAVE</button>
-            </div>
+          <div class="d-grid gap-1">
+            <button class="btn btn-success btn-sm">ARRIVAL NOTICE</button>
+            <button class="btn btn-success btn-sm">ARRIVAL NOTICE(FRT INVOICE)</button>
+            <button class="btn btn-success btn-sm">PRE-ADVISE</button>
+            <button class="btn btn-success btn-sm">TURNOVER LETTER</button>
+            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm">US CUSTOM HOLD</button>
+            <button class="btn btn-success btn-sm">DEVAN/INSTRUCTIONS</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
+            [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'SEAIMP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">HOUSE INTERNAL MEMO</button>
+            <button class="btn btn-success btn-sm">RIDER PAGE</button>
+            <button class="btn btn-success btn-sm">PRODUCTS</button>
+            <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
+            [disabled]="mform.invalid">Save</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>

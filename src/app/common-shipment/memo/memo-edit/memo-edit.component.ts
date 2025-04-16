@@ -103,7 +103,10 @@ export class MemoEditComponent extends baseEditComponent {
       memo_date: [rec?.memo_date || ""],
       memo_remarks_id: [rec?.memo_remarks_id || 0],
       memo_remarks_name: [rec?.memo_remarks_name || ""],
-      rec_created_by: [rec?.rec_created_by || ""]
+      rec_created_by: [rec?.rec_created_by || ""],
+      rec_created_date: [rec?.rec_created_date || ""],
+      rec_edited_by: [rec?.rec_edited_by || ""],
+      rec_edited_date: [rec?.rec_edited_date || ""]
     });
   }
 

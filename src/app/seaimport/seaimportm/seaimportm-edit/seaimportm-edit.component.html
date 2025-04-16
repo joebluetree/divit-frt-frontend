@@ -535,88 +535,28 @@
         [disabled]="mform.invalid">Save</button>
     </div>
   </div>
-
-  <div class="col-md-2 border-top" *ngIf="mform.get('mbl_id')?.value != 0">
-    <div class="page-body line-bottom ">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group row">
-              <div class="col-sm-12 ">
-                <button class="btn btn-sm btn-success w-100 mb-2">POD</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">DEVANING INSTRUCTION</button>
-              </div>
-            </div>
-
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">AR & AP</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">PROFIT REPORT</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">SHIPMENT LABEL</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">MESSENGER SLIP</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">PAYMENT REQUEST</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">ATTACHMENTS</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">ADD TO FOLLOW UP</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2 " routerLink="/memo/memoEdit"
-                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">REQUEST FOR APPROVAL</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">CERTIFICATE OF ORIGIN</button>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12">
-                <button class="btn btn-sm btn-success w-100 mb-2">DELIVERY ORDER</button>
-              </div>
-            </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PRODUCT</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
-                [disabled]="mform.invalid">Save</button>
-            </div>
+  <div class="col-sm-2" *ngIf="mode=='edit'">
+    <div class="page-body line-bottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="d-grid gap-1">
+            <button class="btn btn-success btn-sm">POD</button>
+            <button class="btn btn-success btn-sm">DEVANING INSTRUCTION</button>
+            <button class="btn btn-success btn-sm">AR & AP</button>
+            <button class="btn btn-success btn-sm">PROFIT REPORT</button>
+            <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
+            <button class="btn btn-success btn-sm">MESSENGER SLIP</button>
+            <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
+            <button class="btn btn-success btn-sm">ATTACHMENTS</button>
+            <button class="btn btn-success btn-sm">ADD TO FOLLOW UP</button>
+            <button class="btn btn-success btn-sm"  routerLink="/common-shipment/memoEdit"
+            [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
+            <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
+            <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
+            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm">PRODUCT</button>
+            <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
+            [disabled]="mform.invalid">Save</button>
           </div>
         </div>
       </div>
