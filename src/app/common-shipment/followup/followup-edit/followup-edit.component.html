@@ -1,0 +1,164 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h5>{{ title }}</h5>
+      <app-history [inputdata]="{ table: 'cargo_followup', id: mbl_id  }"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+      <!-- Ref Details -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Ref#</label>
+              <div class="col-sm-8">
+                <app-input maxlength="15" formControlName="cf_mbl_refno" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">RefDate</label>
+              <div class="col-sm-8">
+                <app-date formControlName="cf_mbl_ref_date" [format]="gs.globalConstants.global_display_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format">
+                </app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+          </div>
+        </div>
+      </div>
+      <!-- Follow-up & Notes -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Follow Up Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="cf_followup_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format">
+                </app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="cf_notes_id" name="cf_notes_id" id="cf_notes_id"
+                  (CallBack)="callBack($event)" table="param" subtable="FOLLOWUP" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Notes</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cf_remarks" [case]="'UPPER'">
+                </app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Handled.By</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cf_handled_name" [case]="'UPPER'" [disable]="true">
+                </app-input>
+              </div>
+            </div>
+
+            <div class="form-group row mb-1">
+              <label class="col-sm-4 form-label form-lable-sm">Assigned To</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="cf_assigned_name" id="cf_assigned_id" name="cf_assigned_id"
+                  (CallBack)="callBack($event)" [table]="'userm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'user_code'},{'caption':'NAME','value':'user_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row mb-1">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8 gap-1">
+                <button class="btn btn-sm btn-success me-2" type="button" (click)="save()" [disabled]="mform.invalid">
+                  {{ mode === 'add' ? 'Add' : 'Update'}}</button>
+                <button class="btn btn-success btn-sm " type="button" (click)="newRecord()">New</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+          </div>
+        </div>
+      </div>
+      <!-- Edit Mode Table -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+              <thead class="table-success">
+                <tr class="table-header">
+                  <th>EDIT</th>
+                  <th *ngIf="showModel">ID</th>
+                  <th *ngIf="showModel">USER</th>
+                  <th>ASSIGNED TO</th>
+                  <th>FOLLOW UP ON</th>
+                  <th>NOTES</th>
+                  <th>CREATED-BY</th>
+                  <th>CREATED-DT</th>
+                  <th *ngIf="showModel">EDITED-BY</th>
+                  <th *ngIf="showModel">EDITED-DT</th>
+                  <th>DELETE</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="followup">
+                <tr *ngFor="let iRow of formArray('followup').controls; let i = index;" [formGroupName]="i">
+                  <td align="centre" (click)="editdetails(iRow.get('cf_id')?.value)" class="link">
+                    <i class="fa fa-pencil"></i>
+                  </td>
+                  <td *ngIf="showModel">
+                    {{ iRow.get('cf_id')?.value }}
+                  </td>
+                  <td *ngIf="showModel">
+                    {{ iRow.get('cf_user_name')?.value }}
+                  </td>
+                  <td>
+                    {{ iRow.get('cf_assigned_name')?.value }}
+                  </td>
+                  <td>
+                    {{ iRow.get('cf_followup_date')?.value | date: gs.globalConstants.global_display_date_format }}
+                  </td>
+                  <td>
+                    {{ iRow.get('cf_remarks')?.value }}
+                  </td>
+                  <td>
+                    {{ iRow.get('rec_created_by')?.value }}
+                  </td>
+                  <td>
+                    {{ iRow.get('rec_created_date')?.value |
+                    date: gs.globalConstants.global_output_datetime_format }}
+                  </td>
+                  <td *ngIf="showModel">
+                    {{ iRow.get('rec_edited_by')?.value }}
+                  </td>
+                  <td *ngIf="showModel">
+                    {{ iRow.get('rec_edited_date')?.value |
+                    date: gs.globalConstants.global_output_datetime_format }}
+                  </td>
+                  <td align="center"
+                    (click)="deleteRow(i, iRow.get('cf_assigned_name')?.value, iRow.get('cf_id')?.value)" class="link">
+                    <i class="fa fa-trash"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Debug JSON Output -->
+<div *ngIf="showModel">
+  <pre>{{ mform.value | json }}</pre>
+</div>

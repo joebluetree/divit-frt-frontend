@@ -311,7 +311,9 @@
               <button class="btn btn-success btn-sm">MESSENGER SLIP</button>
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
               <button class="btn btn-success btn-sm">ATTACHMENTS</button>
-              <button class="btn btn-success btn-sm">ADD TO FOLLOW UP</button>
+              <button class="btn btn-success btn-sm" routerLink="/common-shipment/followupEdit"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, mbl_id: mform.get('mbl_id')?.value, mbl_refno: mform.get('mbl_refno')?.value, mbl_ref_date: mform.get('mbl_ref_date')?.value}"
+              >ADD TO FOLLOW UP</button>
               <button class="btn btn-success btn-sm">INTERNAL MEMO</button>
               <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             </div>
@@ -321,10 +323,6 @@
     </div>
   </div>
 </form>
-<!-- <div class="page-footer line-bottom">
-  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" type="button" (click)="save()"
-    [disabled]="mform.invalid">Save</button>
-</div> -->
 <div *ngIf="showModel">
   <pre>
     {{mform.value | json}}
