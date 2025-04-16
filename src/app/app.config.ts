@@ -52,6 +52,8 @@ export const routes: Routes = [
   
   { path: 'common-shipment', loadChildren: () => import('./common-shipment/routes').then(m => m.routes), canActivate: [AuthGuard] },
 
+  { path: 'common-shipment', loadChildren: () => import('./common-shipment/routes').then(m => m.routes), canActivate: [AuthGuard] },
+
 ];
 
 export const appConfig: ApplicationConfig = {
