@@ -753,7 +753,8 @@
             <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">AUTH. TO MAKE ENTRY</button>
             <button class="btn btn-success btn-sm">NOT RELEASE LETTER</button>
-            <button class="btn btn-success btn-sm">HOUSE INTERNAL MEMO</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
+            [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'AIREXP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO</button>
           </div>
         </div>
       </div>
