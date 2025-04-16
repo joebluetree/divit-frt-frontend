@@ -222,7 +222,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
     }
   
     if (window.confirm(`Delete House no ${house} y/n`)) {
-      const param = { id: hbl_id, url : '/api/seaexport/seaexporth/DeleteAsync' };
+      const param = { id: hbl_id, url : '/api/seaimport/seaimporth/DeleteAsync' };
   
       this.ms.deleteRecord(param)?.subscribe({
         next: (response: any) => {
