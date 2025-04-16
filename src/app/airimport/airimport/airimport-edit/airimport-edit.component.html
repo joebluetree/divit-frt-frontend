@@ -204,7 +204,8 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group row" *ngIf="mode=='edit'">
-              <label class="col-sm-6 form-label form-label-sm"><button class="btn btn-success btn-sm my-1" type="button">Copy Cargo Location To All Houses</button></label>
+              <label class="col-sm-6 form-label form-label-sm"><button class="btn btn-success btn-sm my-1"
+                  type="button">Copy Cargo Location To All Houses</button></label>
               <div class="col-sm-6 gap-1">
               </div>
             </div>
@@ -261,11 +262,13 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_pickup_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
+                    <label>{{iRow.get('hbl_pickup_date')?.value | date:
+                      gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_delivery_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
+                    <label>{{iRow.get('hbl_delivery_date')?.value | date:
+                      gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
@@ -273,7 +276,8 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value | date:gs.globalConstants.global_output_datetime_format}}</label>
+                    <label>{{iRow.get('rec_created_date')?.value |
+                      date:gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
 
                   <td align="centre" (click)="deleteRow(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
@@ -318,7 +322,9 @@
               <button class="btn btn-success btn-sm">MESSENGER SLIP</button>
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
               <button class="btn btn-success btn-sm">ATTACHMENTS</button>
-              <button class="btn btn-success btn-sm">ADD TO FOLLOW UP</button>
+              <button class="btn btn-success btn-sm" routerLink="/common-shipment/followupEdit"
+                [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, mbl_id: mform.get('mbl_id')?.value, mbl_refno: mform.get('mbl_refno')?.value, mbl_ref_date: mform.get('mbl_ref_date')?.value}">ADD
+                TO FOLLOW UP</button>
               <button class="btn btn-success btn-sm">INTERNAL MEMO</button>
               <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             </div>
@@ -328,10 +334,6 @@
     </div>
   </div>
 </form>
-<!-- <div class="page-footer line-bottom">
-  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" type="button" (click)="save()"
-    [disabled]="mform.invalid">Save</button>
-</div> -->
 <div *ngIf="showModel">
   <pre>
     {{mform.value | json}}
