@@ -8,6 +8,7 @@ export const routes: Routes = [
 
    
   { path: 'followupEdit', loadComponent: () => import('./followup/followup-edit/followup-edit.component').then(c => c.FollowUpEditComponent) },
+  { path: 'delvorderEdit', loadComponent: () => import('./delvorder/delvorder-edit/delvorder-edit.component').then(c => c.DelvOrderEditComponent) },    
 
 
   ]

@@ -374,7 +374,7 @@
                       name="cntr_packages_unit_name" fieldName="cntr_packages_unit_name" [rowIndex]="i"
                       (CallBack)="callBack($event)" [table]="'param'" [subtable]="'unit-master'"
                       [company_id]="getCompanyId()" [url]="url"
-                      display_column="[{'caption':'ID','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
                   </td>
                   <td>
                     <app-input formControlName="cntr_weight" [rowIndex]="i" name="cntr_weight"
@@ -555,7 +555,8 @@
             [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
-            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/delvorderEdit"
+            [queryParams]="{parent_id:mform.get('mbl_id')?.value, mode:'add', menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">PRODUCT</button>
             <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
             [disabled]="mform.invalid">Save</button>
