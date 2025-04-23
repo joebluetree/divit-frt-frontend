@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
-import { iDelvOrder_Search } from '../../models/idelvorder';
+import { iDeliveryOrder_Search } from '../../models/ideliveryorder';
 
 @Component({
-  selector: 'app-delvorder-search',
-  templateUrl: './delvorder-search.component.html',
-  styleUrls: ['./delvorder-search.component.css'],
+  selector: 'app-deliveryorder-search',
+  templateUrl: './deliveryorder-search.component.html',
+  styleUrls: ['./deliveryorder-search.component.css'],
   standalone: true, 
   imports: [...CustomControls]
 })
@@ -16,14 +16,14 @@ import { iDelvOrder_Search } from '../../models/idelvorder';
 //Created Date : 19/04/2025
 //Remark : this component manages searching of Delivery Order records
 
-export class DelvOrderSearchComponent {
+export class DeliveryOrderSearchComponent {
 
   mform: FormGroup;
-  record!: iDelvOrder_Search;
+  record!: iDeliveryOrder_Search;
 
   @Input('search_url') search_url = '';
 
-  @Input('input') set input(v: iDelvOrder_Search) {
+  @Input('input') set input(v: iDeliveryOrder_Search) {
     this.record = { ...v };
   }
 

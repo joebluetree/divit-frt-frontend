@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../shared/base-class/baseService';
-import { iDelvOrder_Search, iDelvOrderModel } from '../models/idelvorder';
+import { iDeliveryOrder_Search, iDeliveryOrderModel } from '../models/ideliveryorder';
+
 
 @Injectable({ providedIn: 'root' })
 
@@ -10,17 +11,17 @@ import { iDelvOrder_Search, iDelvOrderModel } from '../models/idelvorder';
 //Remark : this component manages delv order data and set initial state of records (page,row) and searching. 
 //version : v1 - 19-04-2025
 
-export class DelvOrderService extends baseService {
+export class DeliveryOrderService extends baseService {
 
   constructor() {
     super('do_id','');
   }
 
   setInitialState() {
-    return <iDelvOrderModel>{
+    return <iDeliveryOrderModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iDelvOrder_Search>{ rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iDeliveryOrder_Search>{ rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

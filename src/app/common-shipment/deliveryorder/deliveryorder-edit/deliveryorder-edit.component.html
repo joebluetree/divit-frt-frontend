@@ -371,7 +371,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Remark</label>
           <div class="col-sm-4">
-            <app-input maxlength="60" formControlName="do_freight_remark" name="do_freight_remark" [case]="'UPPER'"></app-input>
+            <app-input maxlength="60" formControlName="do_freight_remark" name="do_freight_remark"
+              [case]="'UPPER'"></app-input>
           </div>
         </div>
       </div>
@@ -425,7 +426,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Remark</label>
           <div class="col-sm-4">
-            <app-input maxlength="60" formControlName="do_export_doc_remark" name="do_export_doc_remark" [case]="'UPPER'"></app-input>
+            <app-input maxlength="60" formControlName="do_export_doc_remark" name="do_export_doc_remark"
+              [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -444,7 +446,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="page-body ">
     <div class="row">
       <div class="col-sm-6">
@@ -458,8 +460,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">Terms of Shipment</label>
           <div class="col-sm-8">
-            <app-combobox maxlength="30" formControlName="do_terms_ship" name="do_terms_ship"
-              [dataSource]="shipTerm" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+            <app-combobox maxlength="30" formControlName="do_terms_ship" name="do_terms_ship" [dataSource]="shipTerm"
+              [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
           </div>
         </div>
       </div>
@@ -475,7 +477,38 @@
           <div class="col-sm-8">
             <app-input maxlength="60" formControlName="do_voyage" name="do_voyage" [case]="'UPPER'"></app-input>
           </div>
-        </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- *ngIf="parent_type=='SEA IMPORT'"  -->
+  <div class="page-body">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-sm  table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>SELECT(TO PRINT)</th>
+              <th>CNTR NO</th>
+              <th>SEAL NO</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="deliveryorder_cntr">
+            <tr *ngFor="let iRow of formArray('deliveryorder_cntr').controls; let i=index;" [formGroupName]="i">
+              <td>
+                <app-checkbox name=""></app-checkbox>
+            </td>
+              <td>
+                <app-input formControlName="cntr_no" [rowIndex]="i" name="cntr_no" case="UPPER" maxlength="11"
+                  [disable]="true"></app-input>
+              </td>
+              <td>
+                <app-input formControlName="cntr_sealno" [rowIndex]="i" name="cntr_sealno" case="UPPER"
+                  [disable]="true"></app-input>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

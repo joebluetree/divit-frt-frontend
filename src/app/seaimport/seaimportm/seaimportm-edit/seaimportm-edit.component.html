@@ -555,8 +555,8 @@
             [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/delvorderEdit"
-            [queryParams]="{parent_id:mform.get('mbl_id')?.value, mode:'add', menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+            [queryParams]="{parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">PRODUCT</button>
             <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
             [disabled]="mform.invalid">Save</button>

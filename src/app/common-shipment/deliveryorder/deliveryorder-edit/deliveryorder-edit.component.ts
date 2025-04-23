@@ -4,25 +4,25 @@ import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { HistoryComponent } from '../../../shared/history/history.component';
-import { DelvOrderService } from '../../services/delvorder.service';
-import { iDelvOrder } from '../../models/idelvorder';
+import { DeliveryOrderService } from '../../services/deliveryorder.service';
+import { iContainer, iDeliveryOrder } from '../../models/ideliveryorder';
 
 //Name : Sourav V
 //Created Date : 19/04/2025
 //Remark : this component manages creation,editing and saving of delivery order (parent table) records
 
 @Component({
-  selector: 'app-delvorder-edit',
-  templateUrl: './delvorder-edit.component.html',
-  styleUrls: ['./delvorder-edit.component.css'],
+  selector: 'app-deliveryorder-edit',
+  templateUrl: './deliveryorder-edit.component.html',
+  styleUrls: ['./deliveryorder-edit.component.css'],
   standalone: true,
   imports: [...CustomControls]
 })
-export class DelvOrderEditComponent extends baseEditComponent {
+export class DeliveryOrderEditComponent extends baseEditComponent {
 
   parent_id: number = 0;
   parent_type: string = '';
-  // delvorder_id: number;
+  // deliveryorder_id: number;
 
   goodsCat = [
     { key: 'NO', value: 'NO' },
@@ -35,7 +35,7 @@ export class DelvOrderEditComponent extends baseEditComponent {
   ]
 
   constructor(
-    public ms: DelvOrderService,
+    public ms: DeliveryOrderService,
     public dialog: MatDialog
 
   ) {
@@ -140,6 +140,7 @@ export class DelvOrderEditComponent extends baseEditComponent {
       do_is_delivery_sent: ['N'],
       do_delivery_date: [''],
       rec_version: [0],
+      deliveryorder_cntr: this.fb.array([]),
 
     })
   }
@@ -151,36 +152,83 @@ export class DelvOrderEditComponent extends baseEditComponent {
       this.parent_id = +rec["parent_id"] || 0;
       this.parent_type = rec["parent_type"] || '';
     });
-    if (this.mode == "add")
-      this.newRecord();
-    else
+    if (this.parent_id > 0 || this.id !=0) {
       this.getRecord();
-    // this.getDetails();
+    } 
+    else {
+      this.newRecord(); 
+    }
   }
 
   newRecord() {
     this.id = 0;
     this.mform.patchValue({
       do_id: this.id,
-      do_parent_id: this.parent_id
+      do_parent_id: this.parent_id,
+      do_parent_type: this.parent_type
     })
     this.getDefaultData();
   }
 
+  addRow(rec: iContainer) {
+    const _rec = this.fb.group({
+      cntr_id: [rec?.cntr_id || 0],
+      cntr_mbl_id: [rec?.cntr_mbl_id || 0],
+      cntr_hbl_id: [rec?.cntr_hbl_id || 0],
+      cntr_catg: [rec?.cntr_catg || ""],
+      cntr_no: [rec?.cntr_no || ""],  //,[Validators.required, Validators.pattern(/^[A-Z]{4}\d{7}$/)]
+      cntr_type_id: [rec?.cntr_type_id || 0],
+      cntr_type_name: [rec?.cntr_type_name || ""],
+      cntr_sealno: [rec?.cntr_sealno || ""],
+      cntr_order: [rec?.cntr_order || 0],
+    });
+    return _rec;
+  }
+  addCntr(iRow: iContainer = <iContainer>{}) {
+    this.formArray('deliveryorder_cntr')?.push(this.addRow(iRow));
+  }
+  fillCntr(icntr_list: iContainer[]) {
+    this.formArray('deliveryorder_cntr').clear();
+    icntr_list.forEach(rec_cntr => {
+      this.addCntr(rec_cntr);
+    });
+
+  }
   getDefaultData() {
-    const param = { 'id': this.parent_id };
-    this.ms.getRecord(param, '/api/CommonShipment/delvorder/GetDefaultDataAsync').subscribe({
-      next: (rec: iDelvOrder) => {
+    const param = { 'id': this.parent_id ,'parent_type': this.parent_type};
+    this.ms.getRecord(param, '/api/CommonShipment/deliveryorder/GetDefaultDataAsync').subscribe({
+      next: (rec: iDeliveryOrder) => {
         this.mform.patchValue({
-          do_id:rec.do_id,
+          // do_id:rec.do_id,
           do_parent_id: rec.do_parent_id,
+          do_order_no: rec.do_order_no,
           do_pickup: rec.do_pickup,
           do_addr1: rec.do_addr1,
           do_addr2: rec.do_addr2,
           do_addr3: rec.do_addr3,
           do_tel: rec.do_tel,
+          do_from_id: rec.do_from_id,
+          do_from_code: rec.do_from_code,
+          do_from_name: rec.do_from_name,
+          do_from_addr1: rec.do_from_addr1,
+          do_from_addr2: rec.do_from_addr2,
+          do_from_addr3: rec.do_from_addr3,
+          do_from_addr4: rec.do_from_addr4,
+          do_to_id: rec.do_to_id,
+          do_to_code: rec.do_to_code,
+          do_to_name: rec.do_to_name,
+          do_to_addr1: rec.do_to_addr1,
+          do_to_addr2: rec.do_to_addr2,
+          do_to_addr3: rec.do_to_addr3,
+          do_to_addr4: rec.do_to_addr4,
+          do_desc1: rec.do_desc1,
+          do_tot_piece1: rec.do_tot_piece1,
+          do_uom1_name: rec.do_uom1_name,
+          do_cbm_cft1: rec.do_cbm_cft1,
+          do_wt1: rec.do_wt1,
           do_vessel: rec.do_vessel,
           do_voyage: rec.do_voyage,
+          do_category:rec.do_category,
 
           rec_branch_id: rec.rec_branch_id,
           rec_company_id: rec.rec_company_id,
@@ -188,6 +236,7 @@ export class DelvOrderEditComponent extends baseEditComponent {
 
         });
         console.log(rec);
+        this.fillCntr(rec.deliveryorder_cntr);
       },
       error: (e) => {
         this.gs.showError(e);
@@ -196,9 +245,14 @@ export class DelvOrderEditComponent extends baseEditComponent {
   }
 
   getRecord() {
-    const param = { id: this.id };
-    this.ms.getRecord(param, '/api/CommonShipment/delvorder/GetRecordAsync').subscribe({
-      next: (rec: iDelvOrder) => {
+    const param = { id: this.parent_id };
+    this.ms.getRecord(param, '/api/CommonShipment/deliveryorder/GetRecordAsync').subscribe({
+      next: (rec: iDeliveryOrder) => {
+        if(rec.do_id ==0){
+          this.newRecord();
+          this.mode="add";
+        }
+        else{
         this.mform.patchValue({
           do_id: rec.do_id,
           do_cfno: rec.do_cfno,
@@ -300,7 +354,10 @@ export class DelvOrderEditComponent extends baseEditComponent {
 
         });
         console.log(rec);
+        this.fillCntr(rec.deliveryorder_cntr);
+        }
       },
+      
       error: (e) => {
         this.gs.showError(e);
       }
@@ -312,7 +369,7 @@ export class DelvOrderEditComponent extends baseEditComponent {
       alert('Invalid Form')
       return;
     }
-    const data = <iDelvOrder>this.mform.value;
+    const data = <iDeliveryOrder>this.mform.value;
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -324,8 +381,9 @@ export class DelvOrderEditComponent extends baseEditComponent {
       'id': data.do_id,
       'mode': this.mode
     }
-    this.ms.save(param, data, '/api/CommonShipment/delvorder/SaveAsync').subscribe({
-      next: (v: iDelvOrder) => {
+
+    this.ms.save(param, data, '/api/CommonShipment/deliveryorder/SaveAsync').subscribe({
+      next: (v: iDeliveryOrder) => {
         if (this.mode == "add") {
           this.id = v.do_id;
           this.mode = "edit";
@@ -359,7 +417,7 @@ export class DelvOrderEditComponent extends baseEditComponent {
     if (action.id === 'do_truck_code') {
       console.log(action);
       const telFax = this.gs.getTelFax(rec).split(',');
-      
+
       const tel = telFax.length > 0 ? telFax[0].trim() : '';
       const fax = telFax.length > 1 ? telFax[1].trim() : '';
 

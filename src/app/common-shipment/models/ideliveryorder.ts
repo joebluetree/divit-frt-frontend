@@ -1,6 +1,6 @@
 import { iPage } from "ngx-jrt-controls";
 
-export interface iDelvOrder {
+export interface iDeliveryOrder {
   do_id: number;
   do_cfno?: string;
   do_parent_id?: number;
@@ -97,6 +97,8 @@ export interface iDelvOrder {
   do_is_delivery_sent?: string;
   do_delivery_date?: string;
 
+  deliveryorder_cntr: iContainer[];
+
   rec_version: number;
   rec_company_id?: number;
   rec_branch_id?: number;
@@ -105,17 +107,28 @@ export interface iDelvOrder {
   rec_edited_by?: string;
   rec_edited_date?: string;
 }
+export interface iContainer {
+  cntr_id: number,
+  cntr_hbl_id: number,
+  cntr_mbl_id: number,
+  cntr_catg: string,
+  cntr_no: string,
+  cntr_type_id: number,
+  cntr_type_name: string,
+  cntr_sealno: string,
+  cntr_order: number,
+}
 
-export interface iDelvOrder_Search {
+export interface iDeliveryOrder_Search {
   rec_company_id: number;
   rec_branch_id: number;
 }
 
-export interface iDelvOrderModel {
+export interface iDeliveryOrderModel {
   selected_row_id: number;
-  records: iDelvOrder[],
+  records: iDeliveryOrder[],
   errorMessage: string,
-  searchRecord: iDelvOrder_Search,
+  searchRecord: iDeliveryOrder_Search,
   pageRecord: iPage,
   sort_column: string;
   sort_order: string;

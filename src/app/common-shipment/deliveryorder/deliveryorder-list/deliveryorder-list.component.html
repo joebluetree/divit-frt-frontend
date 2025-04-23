@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/common-shipment/deliveryorderEdit"
+  [queryParams]="{id :0, mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-search">
+  <app-deliveryorder-search [search_url]="'/api/CommonShipment/deliveryorder/GetListAsync'" [input]="ms.getSearchRecord()"
+    (searchResult)="search($event)"></app-deliveryorder-search>
+</div>
+
+<div class="page-pagination">
+  <app-page [search_url]="'/api/CommonShipment/deliveryorder/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+<div class="page-body">
+
+  <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
+    [delete_url]="'/api/CommonShipment/deliveryorder/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [row_id_name]="'do_id'" [selected_id]="ms.selectedRow">
+  </app-table>
+
+</div>
+
+<div class="page-pagination line-bottom">
+  <app-page [search_url]="'/api/CommonShipment/deliveryorder/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>
