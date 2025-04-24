@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button class="btn btn-sm btn-success" type="button" routerLink="/common-shipment/messengerslipEdit"
+    [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,parent_type:this.parent_type,appid:appid,mbl_id: this.mbl_id , mbl_refno: this.mbl_refno}">New</button>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-search">
+  <app-messengerslip-search [search_url]="'/api/CommonShipment/MessengerSlip/GetListAsync'"
+    [input]="ms.getSearchRecord()" (searchResult)="search($event)" [parent_type]="parent_type"
+    [mbl_id]="mbl_id.toString()"></app-messengerslip-search>
+</div>
+
+<div class="page-pagination">
+  <app-page [search_url]="'/api/CommonShipment/MessengerSlip/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+<div class="page-body">
+  <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
+    [delete_url]="'/api/CommonShipment/MessengerSlip/DeleteAsync'" [sort_column]="ms.sortColumn"
+    [sort_order]="ms.sortOrder" [row_id_name]="'cs_id'" [selected_id]="ms.selectedRow">
+  </app-table>
+</div>
+
+<div class="page-pagination line-bottom">
+  <app-page [search_url]="'/api/CommonShipment/MessengerSlip/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>

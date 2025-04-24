@@ -9,5 +9,8 @@ export const routes: Routes = [
    
   { path: 'followupEdit', loadComponent: () => import('./followup/followup-edit/followup-edit.component').then(c => c.FollowUpEditComponent) },
 
+  { path: 'messengerslipEdit', loadComponent: () => import('./messengerslip/messengerslip-edit/messengerslip-edit.component').then(c => c.MessengerSlipEditComponent) },
+  { path: 'messengerslipList', loadComponent: () => import('./messengerslip/messengerslip-list/messengerslip-list.component').then(c => c.MessengerSlipListComponent) },
+
 
   ]
