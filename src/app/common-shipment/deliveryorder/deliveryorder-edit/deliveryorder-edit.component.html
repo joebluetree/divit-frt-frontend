@@ -1,7 +1,7 @@
 <div class="page-header">
   <h5>{{title}}</h5>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
-  <app-history [inputdata]="{table: 'cargo_delivery_order', id:parent_id}"></app-history>
+  <app-history [inputdata]="{table: 'cargo_delivery_order', id:mform.get('do_parent_id')?.value}"></app-history>
 </div>
 
 <form [formGroup]="mform">
@@ -230,10 +230,10 @@
             </auto-complete>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_wt1" name="do_wt1"></app-input>
+            <app-input type="number" formControlName="do_wt1" name="do_wt1" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_cbm_cft1" name="do_cbm_cft1"></app-input>
+            <app-input type="number" formControlName="do_cbm_cft1" name="do_cbm_cft1" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
         </div>
 
@@ -251,10 +251,10 @@
             </auto-complete>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_wt2" name="do_wt2"></app-input>
+            <app-input type="number" formControlName="do_wt2" name="do_wt2" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_cbm_cft2" name="do_cbm_cft2"></app-input>
+            <app-input type="number" formControlName="do_cbm_cft2" name="do_cbm_cft2" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
         </div>
 
@@ -272,10 +272,10 @@
             </auto-complete>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_wt3" name="do_wt3"></app-input>
+            <app-input type="number" formControlName="do_wt3" name="do_wt3" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_cbm_cft3" name="do_cbm_cft3"></app-input>
+            <app-input type="number" formControlName="do_cbm_cft3" name="do_cbm_cft3" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
         </div>
 
@@ -284,7 +284,7 @@
             <app-input maxlength="100" formControlName="do_desc4" name="do_desc4" [case]="'UPPER'"></app-input>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_tot_piece4" name="do_tot_piece4"></app-input>
+            <app-input type="number" formControlName="do_tot_piece4" name="do_tot_piece4" ></app-input>
           </div>
           <div class="col-sm-2">
             <auto-complete formControlName="do_uom4_name" id="do_uom4_name" (CallBack)="callBack($event)"
@@ -293,10 +293,10 @@
             </auto-complete>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_wt4" name="do_wt4"></app-input>
+            <app-input type="number" formControlName="do_wt4" name="do_wt4" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
           <div class="col-sm-2">
-            <app-input type="number" formControlName="do_cbm_cft4" name="do_cbm_cft4"></app-input>
+            <app-input type="number" formControlName="do_cbm_cft4" name="do_cbm_cft4" [dec]="gs.globalConstants.global_dec_places"></app-input>
           </div>
         </div>
       </div>
@@ -324,7 +324,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Freight</label>
+          <label class="col-sm-4 form-label form-lable-sm me-2">Freight</label>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">EXW</label>
@@ -379,7 +379,7 @@
 
       <div class="col-sm-6">
         <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm">Export Document</label>
+          <label class="col-sm-4 form-label form-lable-sm me-2">Export Document</label>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Commerical Invoice</label>
@@ -465,7 +465,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-6" *ngIf="parent_type!='AIR-IMPORT-H'">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Vessel</label>
           <div class="col-sm-8">
@@ -481,10 +481,10 @@
       </div>
     </div>
   </div>
-  <!-- *ngIf="parent_type=='SEA IMPORT'"  -->
-  <div class="page-body">
+  
+  <div class="page-body" *ngIf="parent_type != 'AIR-IMPORT-H' && parent_type != 'GENERAL'">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <table class="table table-sm  table-hover table-bordered table-striped table-condensed">
           <thead class="table-success">
             <tr class="table-header">
@@ -499,12 +499,10 @@
                 <app-checkbox name=""></app-checkbox>
             </td>
               <td>
-                <app-input formControlName="cntr_no" [rowIndex]="i" name="cntr_no" case="UPPER" maxlength="11"
-                  [disable]="true"></app-input>
+                  <label>{{iRow.get('cntr_no')?.value}}</label>
               </td>
               <td>
-                <app-input formControlName="cntr_sealno" [rowIndex]="i" name="cntr_sealno" case="UPPER"
-                  [disable]="true"></app-input>
+                  <label>{{iRow.get('cntr_sealno')?.value}}</label>
               </td>
             </tr>
           </tbody>
@@ -513,9 +511,10 @@
     </div>
   </div>
 </form>
-<!-- *ngIf="bAdd || bEdit"  -->
+
 <div class="page-footer line-bottom">
   <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <button *ngIf="(mform.get('do_id')?.value>0)" class="btn btn-success btn-sm">PRINT</button>
 </div>
 
 

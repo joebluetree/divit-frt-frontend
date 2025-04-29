@@ -111,15 +111,15 @@ export interface iContainer {
   cntr_id: number,
   cntr_hbl_id: number,
   cntr_mbl_id: number,
-  cntr_catg: string,
   cntr_no: string,
-  cntr_type_id: number,
-  cntr_type_name: string,
   cntr_sealno: string,
-  cntr_order: number,
 }
 
 export interface iDeliveryOrder_Search {
+  parent_type: string;
+  do_order_no: string;
+  do_from_date: string;
+  do_to_date: string;
   rec_company_id: number;
   rec_branch_id: number;
 }

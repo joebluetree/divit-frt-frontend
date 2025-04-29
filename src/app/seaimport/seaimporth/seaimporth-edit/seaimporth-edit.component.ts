@@ -315,9 +315,10 @@ export class SeaImportHEditComponent extends baseEditComponent {
           hbl_uom_name: rec.hbl_uom_name,
           hbl_packages: rec.hbl_packages,
           hbl_weight: rec.hbl_weight,
-          hbl_lbs: this.ConvertUnit(rec.hbl_weight, 'weight'),
+          hbl_lbs: this.gs.roundNumber(this.ConvertUnit(rec.hbl_weight, 'weight'), this.gs.globalConstants.global_dec_places),
           hbl_cbm: rec.hbl_cbm,
-          hbl_cft: this.ConvertUnit(rec.hbl_cbm, 'cbm'),
+          hbl_cft: this.gs.roundNumber(this.ConvertUnit(rec.hbl_cbm, 'cbm'), this.gs.globalConstants.global_dec_places),
+          
 
           marks9: rec.marks9 ? rec.marks9 : "",
           marks10: rec.marks10 ? rec.marks10 : ""
