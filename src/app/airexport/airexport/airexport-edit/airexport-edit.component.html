@@ -254,11 +254,13 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_issued_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
+                    <label>{{iRow.get('hbl_issued_date')?.value | date:
+                      gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
-                    <label>{{iRow.get('hbl_delivery_date')?.value | date: gs.globalConstants.global_display_date_format}}</label>
+                    <label>{{iRow.get('hbl_delivery_date')?.value | date:
+                      gs.globalConstants.global_display_date_format}}</label>
                   </td>
 
                   <td>
@@ -266,7 +268,8 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value | date:gs.globalConstants.global_output_datetime_format }}</label>
+                    <label>{{iRow.get('rec_created_date')?.value | date:gs.globalConstants.global_output_datetime_format
+                      }}</label>
                   </td>
 
                   <td align="centre" (click)="deleteRow(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
@@ -305,17 +308,24 @@
             <div class="d-grid gap-1">
               <button class="btn btn-success btn-sm">PRINT MAWB</button>
               <button class="btn btn-success btn-sm">MANIFEST</button>
-              <button class="btn btn-success btn-sm">AR & AP</button>
-              <button class="btn btn-success btn-sm">PROFIT REPORT</button>
+              <button class="btn btn-success btn-sm" type="button">AR & AP</button>
+              <button class="btn btn-success btn-sm" type="button">PROFIT REPORT</button>
               <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
-              <button class="btn btn-success btn-sm">MESSENGER SLIP</button>
+              <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
+                [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER
+                SLIP
+              </button>
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
               <button class="btn btn-success btn-sm">ATTACHMENTS</button>
-              <button class="btn btn-success btn-sm" routerLink="/common-shipment/followupEdit"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, mbl_id: mform.get('mbl_id')?.value, mbl_refno: mform.get('mbl_refno')?.value, mbl_ref_date: mform.get('mbl_ref_date')?.value}"
-              >ADD TO FOLLOW UP</button>
+              <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
+                [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">ADD
+                TO
+                FOLLOW UP
+              </button>
               <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
-              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO</button>
+                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL
+                MEMO
+              </button>
               <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             </div>
           </div>

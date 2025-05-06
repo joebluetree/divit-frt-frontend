@@ -1,0 +1,225 @@
+<form [formGroup]="mform">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h5>{{title}}</h5>
+        <app-history [inputdata]="{ table: 'cargo_slip', id: id  }"></app-history>
+        <button class="btn btn-success btn-sm" type="button" (click)="return2Parent()">Return</button>
+      </div>
+
+      <!-- Ref Details -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Ref#</label>
+              <div class="col-sm-8">
+                <app-input maxlength="15" formControlName="cs_refno" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Date</label>
+              <div class="col-sm-3">
+                <app-date formControlName="cs_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format">
+                </app-date>
+              </div>
+              <label class="col-sm-1 form-label form-lable-sm" for="">Time</label>
+              <div class="col-sm-2">
+                <app-input maxlength="15" formControlName="cs_time" type="text"
+                  [placeholder]="gs.globalConstants.global_time_format"></app-input>
+              </div>
+              <div class="col-sm-2">
+                <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
+                  formControlName="cs_ampm"></app-combobox>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Follow-up & Notes -->
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">To</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="cs_to_code" id="cs_to_id" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Name</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_to_name" [case]="'UPPER'">
+                </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Tel</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_to_tel" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Fax</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_to_fax" [case]="'UPPER'">
+                </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">From</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="cs_from_name" name="cs_from_id" id="cs_from_id"
+                  (CallBack)="callBack($event)" table="param" subtable="SALESMAN" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="cs_is_drop"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Drop</label>
+              </div>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="cs_is_pick"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Pick Up</label>
+              </div>
+              <div class="col-sm-2">
+                <app-checkbox formControlName="cs_is_receipt"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Get Receipt</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <label class="form-label form-label-sm">This is for DROP only (CHECK / BL / OTHERS)</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="cs_is_check" id="cs_is_check"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm" for="cs_is_check">Check</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="cs_check_det" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm"></label>
+              <div class="col-sm-3">
+                <input type="checkbox" formControlName="cs_is_bl" id="cs_is_bl"
+                  [checked]="mform.get('cs_is_bl')?.value === 'YES'" (change)="getBlDetails($event)">
+                <label class="ms-1 form-label form-label-sm" for="cs_is_bl">BL</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="cs_bl_det" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="cs_is_oth"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm" for="cs_is_oth">Other</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="cs_oth_det" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">DeliverTo/Pickup From</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="cs_deliver_to_code" id="cs_deliver_to_id" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Address</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_add1" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_add2" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_add3" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Tel</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_tel" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Attn</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_deliver_to_attn" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm">Remark</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="cs_remark" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="page-body line-bottom">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label class="col-sm-7 form-label form-label-sm"></label>
+        <div class="col-sm-5">
+          <button class="btn btn-sm btn-success" type="button" (click)="save()" [disabled]="mform.invalid">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  *ngIf="bAdd || bEdit"-->
+<!-- Debug JSON Output -->
+<div *ngIf="showModel">
+  <pre>{{ mform.value | json }}</pre>
+</div>

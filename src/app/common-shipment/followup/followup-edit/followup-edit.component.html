@@ -1,12 +1,12 @@
-<div class="row">
-  <div class="col-sm-12">
-    <div class="page-header">
-      <h5>{{ title }}</h5>
-      <app-history [inputdata]="{ table: 'cargo_followup', id: mbl_id  }"></app-history>
-      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
-    </div>
+<form [formGroup]="mform">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="page-header">
+        <h5>Follow Up</h5>
+        <app-history [inputdata]="{ table: 'cargo_followup', id: parent_id  }"></app-history>
+        <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+      </div>
 
-    <form [formGroup]="mform">
       <!-- Ref Details -->
       <div class="page-body">
         <div class="row">
@@ -20,7 +20,7 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm">RefDate</label>
               <div class="col-sm-8">
-                <app-date formControlName="cf_mbl_ref_date" [format]="gs.globalConstants.global_display_date_format"
+                <app-date formControlName="cf_mbl_ref_date" [format]="gs.globalConstants.global_date_format"
                   [placeholder]="gs.globalConstants.global_date_format">
                 </app-date>
               </div>
@@ -91,7 +91,7 @@
         </div>
       </div>
       <!-- Edit Mode Table -->
-      <div class="page-body">
+      <div class="page-body line-bottom">
         <div class="row">
           <div class="col-sm-12">
             <table class="table table-sm table-hover table-bordered table-striped table-condensed">
@@ -154,9 +154,9 @@
           </div>
         </div>
       </div>
-    </form>
+    </div>
   </div>
-</div>
+</form>
 
 <!-- Debug JSON Output -->
 <div *ngIf="showModel">

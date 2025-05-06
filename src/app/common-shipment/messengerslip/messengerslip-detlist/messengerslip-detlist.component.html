@@ -1,0 +1,89 @@
+<form [formGroup]="mform">
+  <div class="page-header">
+    <h5>{{title}}</h5>
+    <button class="btn btn-sm btn-success" type="button" routerLink="/common-shipment/messengerslipEdit"
+      [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,parent_type:this.parent_type,parent_id: this.parent_id , parent_refno: this.parent_refno,appid:appid}">New</button>
+    <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+  </div>
+
+
+  <div class="page-body line-bottom">
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>EDIT</th>
+              <th *ngIf="showModel">ID</th>
+              <th>REFNO#</th>
+              <th>DATE</th>
+              <th>TO</th>
+              <th>TEL</th>
+              <th>FAX</th>
+              <th>CREATED-BY</th>
+              <th>CREATED DATE</th>
+              <th>EDITED-BY</th>
+              <th>EDITED DATE</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="cs_detail">
+            <tr *ngFor="let iRow of formArray('cs_detail').controls; let i=index;" [formGroupName]="i">
+              <td align="centre" class="link" routerLink="/common-shipment/messengerslipEdit"
+                [queryParams]="{id :iRow.get('cs_id')?.value,menuid:'MESSENGER-SLIP',type:'MESSENGER-SLIP',appid:appid,mode:'edit',parent_id: this.parent_id,parent_type: this.parent_type,parent_refno: this.parent_refno}">
+                <!-- (click)="editdetails(i)"  -->
+                <i class="fa fa-pencil"></i>
+              </td>
+              <td *ngIf="showModel">
+                <label>{{iRow.get('cs_id')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('cs_refno')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('cs_date')?.value | date:
+                  gs.globalConstants.global_display_date_format}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('cs_to_name')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('cs_to_tel')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('cs_to_fax')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('rec_created_by')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('rec_created_date')?.value | date:gs.globalConstants.global_output_datetime_format
+                  }}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('rec_edited_by')?.value}}</label>
+              </td>
+
+              <td>
+                <label>{{iRow.get('rec_edited_date')?.value | date:gs.globalConstants.global_output_datetime_format
+                  }}</label>
+              </td>
+
+              <td align="centre" (click)="deleteRow(i,iRow.get('cs_to_name')?.value,iRow.get('cs_id')?.value)"
+                class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
