@@ -34,8 +34,8 @@ export class DeliveryOrderListComponent extends baseListComponent {
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/common-shipment/deliveryorderEdit', col_param: param, col_show: this.bEdit || this.bView },
       { col_name: "do_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel },
-      { col_name: "do_order_no", col_caption: "REFNO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "do_order_date", col_caption: "REFDATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "do_order_no", col_caption: "REF-NO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "do_order_date", col_caption: "REF-DATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "do_truck_name", col_caption: "TRUCKER", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "do_from_name", col_caption: "FROM", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "do_to_name", col_caption: "TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

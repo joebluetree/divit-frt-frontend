@@ -59,7 +59,6 @@ export class DeliveryOrderSearchComponent {
       this.record.do_order_no = this.mform.value.do_order_no;
 
       this.record.parent_type = this.parent_type;
-      // this.record.parent_id = this.parent_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.output.emit({ record: this.record, url: this.search_url });

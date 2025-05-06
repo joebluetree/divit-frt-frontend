@@ -14,7 +14,7 @@ import { iDeliveryOrder_Search, iDeliveryOrderModel } from '../models/ideliveryo
 export class DeliveryOrderService extends baseService {
 
   constructor() {
-    super('do_id','');
+    super('do_id','do_order_no');
   }
 
 setInitialState() {
