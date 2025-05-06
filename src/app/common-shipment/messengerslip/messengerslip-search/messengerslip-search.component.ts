@@ -26,7 +26,6 @@ export class MessengerSlipSearchComponent {
   @Input('search_url') search_url = '';
 
   @Input('parent_type') parent_type: string = '';
-  @Input('mbl_id') mbl_id: string = '';
 
   @Input('input') set input(v: iSlip_Search) {
     this.record = { ...v };
@@ -64,7 +63,6 @@ export class MessengerSlipSearchComponent {
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.parent_type = this.parent_type;
-      this.record.mbl_id = this.mbl_id;
       this.output.emit({ record: this.record, url: this.search_url });
     }
   }

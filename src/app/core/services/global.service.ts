@@ -218,6 +218,7 @@ export class GlobalService {
       global_date_format: 'mm/dd/yyyy',
       global_output_datetime_format: 'dd-MMM-yyyy HH:mm',
       global_display_date_format: 'dd-MMM-yyyy',
+      global_time_format: 'HH:mm',
     };
   }
 
@@ -233,6 +234,7 @@ export class GlobalService {
       'global_date_format': 'mm/dd/yyyy',
       'global_output_datetime_format': 'dd-MMM-yyyy HH:mm',
       'global_display_date_format': 'dd-MMM-yyyy',
+      'global_time_format': 'HH:mm',
     });
 
   }

@@ -1,14 +1,14 @@
 <div class="page-header">
   <h5>{{title}}</h5>
   <button class="btn btn-sm btn-success" type="button" routerLink="/common-shipment/messengerslipEdit"
-    [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,parent_type:this.parent_type,appid:appid,mbl_id: this.mbl_id , mbl_refno: this.mbl_refno}">New</button>
+    [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,parent_type:'GENERAL',appid:appid,parent_id: 0}">New</button>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
 <div class="page-search">
   <app-messengerslip-search [search_url]="'/api/CommonShipment/MessengerSlip/GetListAsync'"
-    [input]="ms.getSearchRecord()" (searchResult)="search($event)" [parent_type]="parent_type"
-    [mbl_id]="mbl_id.toString()"></app-messengerslip-search>
+    [input]="ms.getSearchRecord()" (searchResult)="search($event)"
+    [parent_type]="parent_type"></app-messengerslip-search>
 </div>
 
 <div class="page-pagination">

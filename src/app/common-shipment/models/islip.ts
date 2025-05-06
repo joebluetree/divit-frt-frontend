@@ -7,14 +7,16 @@ import { iPage } from "ngx-jrt-controls";
 
 export interface iSlip {
   cs_id: number;
-  cs_mbl_id: number;
+  cs_mbl_id?: number;
   cs_slno?: number;
   cs_refno?: string;
+  cs_mbl_no?: string;
   cs_mode?: string;
   cs_date?: string;
+  cs_time?: string;
   cs_ampm?: string;
   cs_to_id?: number;
-  cs_to_code?:string;
+  cs_to_code?: string;
   cs_to_name?: string;
   cs_to_tel?: string;
   cs_to_fax?: string;
@@ -38,6 +40,7 @@ export interface iSlip {
   cs_deliver_to_tel?: string;
   cs_deliver_to_attn?: string;
   cs_remark?: string;
+  cs_detail?: iSlip[]
 
   rec_version: number;
   rec_company_id: number;

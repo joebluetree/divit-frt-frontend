@@ -21,12 +21,12 @@ import { iSlip } from '../../models/islip';
 
 
 export class MessengerSlipEditComponent extends baseEditComponent {
-  mbl_refno: string = '';
-  mbl_id: number = 0;
+  parent_id: number = 0;
   mbl_mode: string = '';
   parent_type: string = '';
 
   dataList = [
+    { key: 'NA', value: 'NA' },
     { key: 'AM', value: 'AM' },
     { key: 'PM', value: 'PM' },
   ]
@@ -42,10 +42,12 @@ export class MessengerSlipEditComponent extends baseEditComponent {
       cs_id: [0],
       cs_mbl_id: [0],
       cs_refno: [''],
+      cs_mbl_no: [''],
       cs_date: [date],
       cs_slno: [null],
       cs_mode: [''],
-      cs_ampm: [''],
+      cs_time: [''],
+      cs_ampm: ['NA'],
       cs_to_id: [null],
       cs_to_code: [''],
       cs_to_name: [''],
@@ -79,11 +81,10 @@ export class MessengerSlipEditComponent extends baseEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.mbl_id = 0;
+    this.parent_id = 0;
     this.init();
     this.route.queryParams.forEach((rec: any) => {
-      this.mbl_id = +rec["mbl_id"];
-      this.mbl_refno = rec["mbl_refno"];
+      this.parent_id = +rec["parent_id"];
       this.parent_type = rec["parent_type"];
     });
     if (this.mode == "add")
@@ -97,18 +98,17 @@ export class MessengerSlipEditComponent extends baseEditComponent {
     this.mode = "add";
     this.mform.patchValue({
       cs_id: this.id,
-      cs_mbl_id: this.mbl_id,
+      cs_mbl_id: this.parent_id,
       cs_date: this.gs.getToday(),
       cs_mode: this.parent_type,
     })
-    if (this.mbl_id != 0)
+    if (this.parent_id != 0)
       this.getDefaultData();
   }
 
 
-
   getRecord() {
-    const param = { 'id': this.id };
+    const param = { 'id': this.id, 'parent_type': this.parent_type };
     this.ms.getRecord(param, '/api/CommonShipment/MessengerSlip/GetRecordAsync').subscribe({
       next: (rec: iSlip) => {
         this.mform.patchValue({
@@ -118,6 +118,7 @@ export class MessengerSlipEditComponent extends baseEditComponent {
           cs_refno: rec.cs_refno,
           cs_mode: rec.cs_mode,
           cs_date: rec.cs_date,
+          cs_time: rec.cs_time,
           cs_ampm: rec.cs_ampm,
           cs_to_id: rec.cs_to_id,
           cs_to_code: rec.cs_to_code,
@@ -155,12 +156,14 @@ export class MessengerSlipEditComponent extends baseEditComponent {
   }
 
   getDefaultData() {
-    const param = { 'id': this.mbl_id };
+    const param = { 'id': this.parent_id };
     this.ms.getRecord(param, '/api/CommonShipment/MessengerSlip/GetDefaultDataAsync').subscribe({
       next: (rec: iSlip) => {
         this.mform.patchValue({
           cs_mbl_id: rec.cs_mbl_id,
           cs_refno: rec.cs_refno,
+          cs_mbl_no: rec.cs_mbl_no,
+          cs_mode: rec.cs_mode,
           cs_from_id: rec.cs_from_id,
           cs_from_name: rec.cs_from_name,
           cs_to_id: rec.cs_to_id,
@@ -229,6 +232,16 @@ export class MessengerSlipEditComponent extends baseEditComponent {
       }
     })
   }
+
+  getBlDetails(event: Event) {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    const cs_mbl_no = this.mform.get('cs_mbl_no')?.value || '';
+    this.mform.patchValue({
+      cs_is_bl: isChecked ? 'YES' : 'NO',
+      cs_bl_det: isChecked ? cs_mbl_no : '',
+    });
+  }
+
 
   callBack(action: any) {
     console.log(action);

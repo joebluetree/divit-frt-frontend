@@ -21,8 +21,8 @@ import { iFollowUp } from '../../models/ifollowup';
 
 
 export class FollowUpEditComponent extends baseEditComponent {
-  mbl_refno: string = '';
-  mbl_id: number = 0;
+  parent_id: number = 0;
+  parent_type: string = '';
 
   constructor(
     private ms: FollowUpService,
@@ -36,6 +36,7 @@ export class FollowUpEditComponent extends baseEditComponent {
       cf_id: [0],
       cf_mbl_id: [0],
       cf_mbl_refno: [''],
+      cf_mode: [''],
       cf_mbl_ref_date: [''],
       cf_user_id: [user],
       cf_user_name: [name],
@@ -55,11 +56,12 @@ export class FollowUpEditComponent extends baseEditComponent {
 
   ngOnInit() {
     this.id = 0;
-    this.mbl_id = 0;
+    this.parent_id = 0;
+    this.parent_type = "";
     this.init();
     this.route.queryParams.forEach((rec: any) => {
-      this.mbl_id = +rec["mbl_id"];
-      this.mbl_refno = rec["mbl_refno"];
+      this.parent_id = +rec["parent_id"];
+      this.parent_type = rec["parent_type"];
     });
     if (this.mode == "add")
       this.newRecord();
@@ -78,7 +80,8 @@ export class FollowUpEditComponent extends baseEditComponent {
     });
     this.mform.patchValue({
       cf_id: this.id,
-      cf_mbl_id: this.mbl_id,
+      cf_mbl_id: this.parent_id,
+      cf_mode: this.parent_type,
       cf_user_id: this.gs.globalConstants.global_user_id,
       cf_user_name: this.gs.getUserName(),
       cf_followup_date: this.gs.getToday(),
@@ -89,7 +92,7 @@ export class FollowUpEditComponent extends baseEditComponent {
 
 
   getDetails() {
-    const param = { 'id': this.mbl_id };
+    const param = { 'id': this.parent_id, 'parent_type': this.parent_type };
     this.ms.getRecord(param, '/api/CommonShipment/FollowUp/GetDetailsAsync').subscribe({
       next: (rec: iFollowUp[]) => {
         this.fillDetails(rec);
@@ -102,13 +105,14 @@ export class FollowUpEditComponent extends baseEditComponent {
 
 
   getRecord() {
-    const param = { 'id': this.id };
+    const param = { 'id': this.id, 'parent_type': this.parent_type };
     this.ms.getRecord(param, '/api/CommonShipment/FollowUp/GetRecordAsync').subscribe({
       next: (rec: iFollowUp) => {
         this.mform.patchValue({
           cf_id: rec.cf_id,
           cf_mbl_id: rec.cf_mbl_id,
           cf_mbl_refno: rec.cf_mbl_refno,
+          cf_mode: rec.cf_mode,
           cf_mbl_ref_date: rec.cf_mbl_ref_date,
           cf_user_id: rec.cf_user_id,
           cf_user_name: rec.cf_user_name,
@@ -130,12 +134,13 @@ export class FollowUpEditComponent extends baseEditComponent {
   }
 
   getDefaultData() {
-    const param = { 'id': this.mbl_id };
+    const param = { 'id': this.parent_id };
     this.ms.getRecord(param, '/api/CommonShipment/FollowUp/GetDefaultDataAsync').subscribe({
       next: (rec: iFollowUp) => {
         this.mform.patchValue({
           cf_mbl_id: rec.cf_mbl_id,
           cf_mbl_refno: rec.cf_mbl_refno,
+          cf_mode: rec.cf_mode,
           cf_handled_id: rec.cf_handled_id,
           cf_handled_name: rec.cf_handled_name,
           cf_mbl_ref_date: rec.cf_mbl_ref_date,
@@ -183,7 +188,7 @@ export class FollowUpEditComponent extends baseEditComponent {
   }
 
   editdetails(idx: number) {
-    const param = { 'id': idx };
+    const param = { 'id': idx, 'parent_type': this.parent_type };
     this.mode = "edit";
     this.gs.updateURL({
       id: idx,
@@ -195,6 +200,7 @@ export class FollowUpEditComponent extends baseEditComponent {
           cf_id: rec.cf_id,
           cf_mbl_id: rec.cf_mbl_id,
           cf_mbl_refno: rec.cf_mbl_refno,
+          vf_mode: rec.cf_mode,
           cf_mbl_ref_date: rec.cf_mbl_ref_date,
           cf_followup_date: rec.cf_followup_date,
           cf_user_id: rec.cf_user_id,

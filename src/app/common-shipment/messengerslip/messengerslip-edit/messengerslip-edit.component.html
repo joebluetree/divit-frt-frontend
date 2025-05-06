@@ -4,7 +4,7 @@
       <div class="page-header">
         <h5>{{title}}</h5>
         <app-history [inputdata]="{ table: 'cargo_slip', id: id  }"></app-history>
-        <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+        <button class="btn btn-success btn-sm" type="button" (click)="return2Parent()">Return</button>
       </div>
 
       <!-- Ref Details -->
@@ -17,8 +17,6 @@
                 <app-input maxlength="15" formControlName="cs_refno" [disable]="true"></app-input>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm">Date</label>
               <div class="col-sm-3">
@@ -26,8 +24,12 @@
                   [placeholder]="gs.globalConstants.global_date_format">
                 </app-date>
               </div>
-              <!-- <label class="col-sm-2 form-label form-lable-sm" for=""></label> -->
-              <div class="col-sm-3">
+              <label class="col-sm-1 form-label form-lable-sm" for="">Time</label>
+              <div class="col-sm-2">
+                <app-input maxlength="15" formControlName="cs_time" type="text"
+                  [placeholder]="gs.globalConstants.global_time_format"></app-input>
+              </div>
+              <div class="col-sm-2">
                 <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'"
                   formControlName="cs_ampm"></app-combobox>
               </div>
@@ -76,27 +78,18 @@
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
-          </div>
-          <!--  -->
-          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm"></label>
-              <div class="col-sm-8">
+              <div class="col-sm-3">
                 <app-checkbox formControlName="cs_is_drop"></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Drop</label>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm"></label>
-              <div class="col-sm-8">
+              <div class="col-sm-3">
                 <app-checkbox formControlName="cs_is_pick"></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Pick Up</label>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm"></label>
-              <div class="col-sm-8">
-                <app-checkbox formControlName="cs_is_pick"></app-checkbox>
+              <div class="col-sm-2">
+                <app-checkbox formControlName="cs_is_receipt"></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Get Receipt</label>
               </div>
             </div>
@@ -115,18 +108,19 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm"></label>
               <div class="col-sm-3">
-                <app-checkbox formControlName="cs_is_check"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Check</label>
+                <app-checkbox formControlName="cs_is_check" id="cs_is_check"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm" for="cs_is_check">Check</label>
               </div>
               <div class="col-sm-5">
                 <app-input maxlength="100" formControlName="cs_check_det" [case]="'UPPER'"></app-input>
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <label class="col-sm-4 form-label form-label-sm"></label>
               <div class="col-sm-3">
-                <app-checkbox formControlName="cs_is_bl"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">BL</label>
+                <input type="checkbox" formControlName="cs_is_bl" id="cs_is_bl"
+                  [checked]="mform.get('cs_is_bl')?.value === 'YES'" (change)="getBlDetails($event)">
+                <label class="ms-1 form-label form-label-sm" for="cs_is_bl">BL</label>
               </div>
               <div class="col-sm-5">
                 <app-input maxlength="100" formControlName="cs_bl_det" [case]="'UPPER'"></app-input>
@@ -136,7 +130,7 @@
               <label class="col-sm-4 form-label form-lable-sm"></label>
               <div class="col-sm-3">
                 <app-checkbox formControlName="cs_is_oth"></app-checkbox>
-                <label class="ms-1 form-label form-label-sm">Other</label>
+                <label class="ms-1 form-label form-label-sm" for="cs_is_oth">Other</label>
               </div>
               <div class="col-sm-5">
                 <app-input maxlength="100" formControlName="cs_oth_det" [case]="'UPPER'"></app-input>
@@ -199,7 +193,7 @@
       </div>
       <div class="page-body">
         <div class="row">
-          <div class="col-sm-12">
+          <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-label-sm">Remark</label>
               <div class="col-sm-8">
@@ -209,17 +203,21 @@
           </div>
         </div>
       </div>
-      <div class="page-footer line-bottom">
-        <div class="row">
-          <div class="col-sm-12">
-            <button class="btn btn-sm btn-success" type="button" (click)="save()"
-              [disabled]="mform.invalid">Save</button>
-          </div>
+    </div>
+  </div>
+</form>
+<div class="page-body line-bottom">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label class="col-sm-7 form-label form-label-sm"></label>
+        <div class="col-sm-5">
+          <button class="btn btn-sm btn-success" type="button" (click)="save()" [disabled]="mform.invalid">Save</button>
         </div>
       </div>
     </div>
   </div>
-</form>
+</div>
 <!--  *ngIf="bAdd || bEdit"-->
 <!-- Debug JSON Output -->
 <div *ngIf="showModel">
