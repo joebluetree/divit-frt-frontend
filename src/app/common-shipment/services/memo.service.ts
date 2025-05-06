@@ -13,7 +13,7 @@ import { iMemo_Search, iMemoModel } from '../models/imemo';
 export class MemoService extends baseService {
 
   constructor() {
-    super('memo_id','memo_id');
+    super('memo_id','');
   }
 
   setInitialState() {

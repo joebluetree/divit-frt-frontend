@@ -2,8 +2,8 @@
   <div class="col-md-10">
     <div class="page-header">
       <h5>{{title}}</h5>
-      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
       <app-history [inputdata]="{table: 'cargo_housem', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
     </div>
 
     <form [formGroup]="mform">
@@ -349,7 +349,7 @@
                 <auto-complete formControlName="hbl_uom_name" id="hbl_uom_name" name="hbl_uom_name"
                   fieldName="hbl_uom_name" (CallBack)="callBack($event)" [table]="'param'" [subtable]="'unit-master'"
                   [company_id]="getCompanyId()" [url]="url"
-                  display_column="[{'caption':'ID','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
             </div>
             <div class="form-group row">
@@ -618,7 +618,7 @@
                     <auto-complete formControlName="cntr_type_name" id="cntr_type_name-{{i}}" name="cntr_type_name"
                       fieldName="cntr_type" [rowIndex]="i" (CallBack)="callBack($event)" [table]="'param'"
                       [subtable]="'container-type'" [company_id]="getCompanyId()" [url]="url"
-                      display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
                   </td>
                   <td>
                     <app-input formControlName="cntr_sealno" [rowIndex]="i" name="cntr_sealno" case="UPPER"></app-input>
@@ -632,7 +632,7 @@
                       name="cntr_packages_unit_name" fieldName="cntr_packages_unit_name" [rowIndex]="i"
                       (CallBack)="callBack($event)" [table]="'param'" [subtable]="'unit-master'"
                       [company_id]="getCompanyId()" [url]="url"
-                      display_column="[{'caption':'ID','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
                   </td>
                   <td>
                     <app-input formControlName="cntr_weight" [rowIndex]="i" name="cntr_weight"
@@ -1079,7 +1079,9 @@
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE(FRT INVOICE)</button>
             <button class="btn btn-success btn-sm">PRE-ADVISE</button>
             <button class="btn btn-success btn-sm">TURNOVER LETTER</button>
-            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+            [queryParams]="{ parent_id: mform.get('hbl_id')?.value,mode: 'add',parent_type:'SEA-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }"
+            >DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">US CUSTOM HOLD</button>
             <button class="btn btn-success btn-sm">DEVAN/INSTRUCTIONS</button>
             <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"

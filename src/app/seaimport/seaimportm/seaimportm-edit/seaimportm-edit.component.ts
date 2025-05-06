@@ -530,7 +530,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_devan_loc_add1: rec.cust_address1 || '',
         mbl_devan_loc_add2: rec.cust_address2 || '',
         mbl_devan_loc_add3: rec.cust_address3 || '',
-        mbl_devan_loc_add4: rec.cust_address4 || '',
+        mbl_devan_loc_add4: this.gs.getTelFax(rec),
       });
     }
   

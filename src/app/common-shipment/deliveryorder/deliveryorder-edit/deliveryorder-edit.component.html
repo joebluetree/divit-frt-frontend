@@ -1,0 +1,525 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <app-history [inputdata]="{table: 'cargo_delivery_order', id:mform.get('do_parent_id')?.value}"></app-history>
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<form [formGroup]="mform">
+
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Order ID</label>
+          <div class="col-sm-8">
+            <app-input maxlength="30" formControlName="do_order_no" name="do_order_no" [case]="'UPPER'"
+              [disable]="true"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Date</label>
+          <div class="col-sm-8">
+            <app-date formControlName="do_order_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format">
+            </app-date>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Trucker</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="do_truck_code" id="do_truck_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+            </auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Name</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_truck_name" name="do_truck_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Attention</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_truck_attn" name="do_truck_attn" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Telephone</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_truck_tel" name="do_truck_tel" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Fax</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_truck_fax" name="do_truck_fax" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">CC</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_truck_cc" name="do_truck_cc" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Pick-up</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_pickup" name="do_pickup" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Address</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_addr1" name="do_addr1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_addr2" name="do_addr2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_addr3" name="do_addr3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Tel.No</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_tel" name="do_tel" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Attention</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_attn" name="do_attn" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Date</label>
+          <div class="col-sm-3">
+            <app-date formControlName="do_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format">
+            </app-date>
+          </div>
+          <label class="col-sm-2 form-label form-lable-sm">Time</label>
+          <div class="col-sm-3">
+            <app-input maxlength="60" formControlName="do_time" name="do_time" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">From</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="do_from_code" id="do_from_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+            </auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_from_name" name="do_from_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_from_addr1" name="do_from_addr1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_from_addr2" name="do_from_addr2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_from_addr3" name="do_from_addr3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_from_addr4" name="do_from_addr4" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">To</label>
+          <div class="col-sm-8">
+            <auto-complete formControlName="do_to_code" id="do_to_code" (CallBack)="callBack($event)"
+              [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+            </auto-complete>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_to_name" name="do_to_name" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_to_addr1" name="do_to_addr1" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_to_addr2" name="do_to_addr2" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_to_addr3" name="do_to_addr3" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm"></label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_to_addr4" name="do_to_addr4" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Description</label>
+          <label class="col-sm-2 form-label form-lable-sm">No. of piece</label>
+          <label class="col-sm-2 form-label form-lable-sm">Unit</label>
+          <label class="col-sm-2 form-label form-lable-sm">Weight(LB)</label>
+          <label class="col-sm-2 form-label form-lable-sm">CBM</label>
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="do_desc1" name="do_desc1" [case]="'UPPER'"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_tot_piece1" name="do_tot_piece1"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <auto-complete formControlName="do_uom1_name" id="do_uom1_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'UNIT-MASTER'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_wt1" name="do_wt1" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_cbm_cft1" name="do_cbm_cft1" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="do_desc2" name="do_desc2" [case]="'UPPER'"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_tot_piece2" name="do_tot_piece2"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <auto-complete formControlName="do_uom2_name" id="do_uom2_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'UNIT-MASTER'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_wt2" name="do_wt2" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_cbm_cft2" name="do_cbm_cft2" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="do_desc3" name="do_desc3" [case]="'UPPER'"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_tot_piece3" name="do_tot_piece3"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <auto-complete formControlName="do_uom3_name" id="do_uom3_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'UNIT-MASTER'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_wt3" name="do_wt3" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_cbm_cft3" name="do_cbm_cft3" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <app-input maxlength="100" formControlName="do_desc4" name="do_desc4" [case]="'UPPER'"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_tot_piece4" name="do_tot_piece4" ></app-input>
+          </div>
+          <div class="col-sm-2">
+            <auto-complete formControlName="do_uom4_name" id="do_uom4_name" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'UNIT-MASTER'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
+            </auto-complete>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_wt4" name="do_wt4" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+          <div class="col-sm-2">
+            <app-input type="number" formControlName="do_cbm_cft4" name="do_cbm_cft4" [dec]="gs.globalConstants.global_dec_places"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Remarks</label>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <app-input maxlength="100" formControlName="do_remark_1" name="do_remark_1" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="do_remark_2" name="do_remark_2" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="do_remark_3" name="do_remark_3" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="do_remark_4" name="do_remark_4" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm me-2">Freight</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">EXW</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_exw"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">FOB</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_fob"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">FCA</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_fca"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">CPU</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_cpu"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">DDU</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_ddu"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Others</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_frt_others"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Remark</label>
+          <div class="col-sm-4">
+            <app-input maxlength="60" formControlName="do_freight_remark" name="do_freight_remark"
+              [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm me-2">Export Document</label>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Commerical Invoice</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_comm_inv"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Copy of L/C</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_lc"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Certificate of Origin</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_coo"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Packing List</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_pl"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Export Declaration</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_expdec"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Others</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_exp_others"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Remark</label>
+          <div class="col-sm-4">
+            <app-input maxlength="60" formControlName="do_export_doc_remark" name="do_export_doc_remark"
+              [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Delivery Order Sent</label>
+          <div class="col-sm-3">
+            <app-checkbox formControlName="do_is_delivery_sent"></app-checkbox>
+            <label class="ms-1 form-label form-label-sm">Yes/No</label>
+          </div>
+          <label class="col-sm-2 form-label form-lable-sm">Date</label>
+          <div class="col-sm-3">
+            <app-date formControlName="do_delivery_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format">
+            </app-date>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body ">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Dangerous Goods</label>
+          <div class="col-sm-8">
+            <app-combobox maxlength="30" formControlName="do_danger_goods" name="do_danger_goods"
+              [dataSource]="goodsCat" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Terms of Shipment</label>
+          <div class="col-sm-8">
+            <app-combobox maxlength="30" formControlName="do_terms_ship" name="do_terms_ship" [dataSource]="shipTerm"
+              [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6" *ngIf="parent_type!='AIR-IMPORT-H'">
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Vessel</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_vessel" name="do_vessel" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm" for="">Voyage</label>
+          <div class="col-sm-8">
+            <app-input maxlength="60" formControlName="do_voyage" name="do_voyage" [case]="'UPPER'"></app-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="page-body" *ngIf="parent_type != 'AIR-IMPORT-H' && parent_type != 'GENERAL'">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-sm  table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th>SELECT(TO PRINT)</th>
+              <th>CNTR NO</th>
+              <th>SEAL NO</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="deliveryorder_cntr">
+            <tr *ngFor="let iRow of formArray('deliveryorder_cntr').controls; let i=index;" [formGroupName]="i">
+              <td>
+                <app-checkbox name=""></app-checkbox>
+            </td>
+              <td>
+                  <label>{{iRow.get('cntr_no')?.value}}</label>
+              </td>
+              <td>
+                  <label>{{iRow.get('cntr_sealno')?.value}}</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="page-footer line-bottom">
+  <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <button *ngIf="(mform.get('do_id')?.value>0)" class="btn btn-success btn-sm">PRINT</button>
+</div>
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

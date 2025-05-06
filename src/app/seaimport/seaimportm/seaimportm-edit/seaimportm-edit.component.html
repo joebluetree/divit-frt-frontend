@@ -4,8 +4,8 @@
       <h5>{{title}}</h5>
       <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaimport/seaimportmEdit"
         [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
-      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
-      <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
+        <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
+        <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
     </div>
 
     <form [formGroup]="mform">
@@ -360,7 +360,7 @@
                     <auto-complete formControlName="cntr_type_name" id="cntr_type_name-{{i}}" name="cntr_type_name"
                       fieldName="cntr_type" [rowIndex]="i" (CallBack)="callBack($event)" [table]="'param'"
                       [subtable]="'container-type'" [company_id]="getCompanyId()" [url]="url"
-                      display_column="[{'caption':'ID','value':'param_id'},{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
                   </td>
                   <td>
                     <app-input formControlName="cntr_sealno" [rowIndex]="i" name="cntr_sealno" case="UPPER"></app-input>
@@ -374,7 +374,7 @@
                       name="cntr_packages_unit_name" fieldName="cntr_packages_unit_name" [rowIndex]="i"
                       (CallBack)="callBack($event)" [table]="'param'" [subtable]="'unit-master'"
                       [company_id]="getCompanyId()" [url]="url"
-                      display_column="[{'caption':'ID','value':'param_id'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
                   </td>
                   <td>
                     <app-input formControlName="cntr_weight" [rowIndex]="i" name="cntr_weight"
@@ -520,7 +520,7 @@
             <div class="row" *ngIf=" mform.get('mbl_id')?.value != 0">
               <div class="col-md-12 text-center mb-2">
                 <button *ngIf="bAdd" class="btn btn-sm btn-info" type="button" routerLink="/seaimport/seaimporthEdit"
-                  [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }">
+                  [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-IMPORT-H', type: 'SEA-IMPORT-H', appid: appid }">
                   Add House</button>
               </div>
             </div>
@@ -555,7 +555,8 @@
             [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
-            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+            [queryParams]="{parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">PRODUCT</button>
             <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
             [disabled]="mform.invalid">Save</button>
