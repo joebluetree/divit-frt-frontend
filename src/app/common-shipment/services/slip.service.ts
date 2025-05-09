@@ -11,7 +11,7 @@ import { iSlip_Search, iSlipModel } from '../models/islip';
 
 export class MessengerSlipService extends baseService {
   constructor() {
-    super('cs_id', 'cs_refno'); // wanted to change ?
+    super('cs_id', 'cs_refno');
   }
 
   setInitialState() {

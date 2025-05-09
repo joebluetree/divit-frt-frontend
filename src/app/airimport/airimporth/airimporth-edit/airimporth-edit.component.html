@@ -750,7 +750,8 @@
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE</button>
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE(INVOICE)</button>
             <button class="btn btn-success btn-sm">RELEASE ORDER</button>
-            <button class="btn btn-success btn-sm">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+            [queryParams]="{parent_id:mform.get('hbl_id')?.value, parent_type:'AIR-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">AUTH. TO MAKE ENTRY</button>
             <button class="btn btn-success btn-sm">NOT RELEASE LETTER</button>
             <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
