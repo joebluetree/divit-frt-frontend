@@ -61,6 +61,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_hbl_id: [0],
       oth_parent_id: [0],
       oth_cfno: [0],
+      oth_mode: [''],
       oth_refno: [''],
       oth_ref_date: [date],
       oth_shipment_stage_id: [0],
@@ -124,15 +125,14 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_is_pl: [''],
       oth_is_ci: [''],
       oth_is_carr_an: [''],
-      oth_custom_reles_status: [''],
-      oth_is_delivery: [''],
+      oth_custom_reles_status: ['N/A'],
+      oth_is_delivery: ['N/A'],
       oth_lfd_date: [''],
       oth_it_no: [''],
       oth_it_date: [''],
       oth_it_port: [''],
 
       otherop_cntr: this.fb.array([]),
-      // otherop_house: this.fb.array([]),
       rec_version: [0],
 
     })
@@ -208,6 +208,7 @@ export class OtherOpEditComponent extends baseEditComponent {
           oth_hbl_id: rec.oth_hbl_id,
           oth_parent_id: rec.oth_parent_id,
           oth_cfno: rec.oth_cfno,
+          oth_mode: rec.oth_mode,
           oth_refno: rec.oth_refno,
           oth_ref_date: rec.oth_ref_date,
           oth_shipment_stage_id: rec.oth_shipment_stage_id,
@@ -239,62 +240,65 @@ export class OtherOpEditComponent extends baseEditComponent {
           rec_version: rec.rec_version,
 
         });
-        this.getHouseRecord(rec.otherop_house)
         this.fillCntr(rec.otherop_cntr);
+        this.getHouseRecord(rec.otherop_house)
       },
       error: (e) => {
         this.gs.showError(e);
       }
     })
   }
-  getHouseRecord(house: iOtherOp) {
+  getHouseRecord(house_rec: iOtherOp) {
     this.mform.patchValue({
-      oth_hbl_id: house.oth_hbl_id,
-      oth_hbl_no: house.oth_hbl_no,
-      oth_bltype: house.oth_bltype,
+      oth_hbl_id: house_rec.oth_hbl_id,
+      oth_hbl_no: house_rec.oth_hbl_no,
+      oth_bltype: house_rec.oth_bltype,
   
-      oth_shipper_id: house.oth_shipper_id,
-      oth_shipper_name: house.oth_shipper_name,
-      oth_shipper_add1: house.oth_shipper_add1,
-      oth_shipper_add2: house.oth_shipper_add2,
-      oth_shipper_add3: house.oth_shipper_add3,
-      oth_shipper_add4: house.oth_shipper_add4,
+      oth_shipper_id: house_rec.oth_shipper_id,
+      oth_shipper_code: house_rec.oth_shipper_code,
+      oth_shipper_name: house_rec.oth_shipper_name,
+      oth_shipper_add1: house_rec.oth_shipper_add1,
+      oth_shipper_add2: house_rec.oth_shipper_add2,
+      oth_shipper_add3: house_rec.oth_shipper_add3,
+      oth_shipper_add4: house_rec.oth_shipper_add4,
   
-      oth_consignee_id: house.oth_consignee_id,
-      oth_consignee_name: house.oth_consignee_name,
-      oth_consignee_add1: house.oth_consignee_add1,
-      oth_consignee_add2: house.oth_consignee_add2,
-      oth_consignee_add3: house.oth_consignee_add3,
-      oth_consignee_add4: house.oth_consignee_add4,
+      oth_consignee_id: house_rec.oth_consignee_id,
+      oth_consignee_code: house_rec.oth_consignee_code,
+      oth_consignee_name: house_rec.oth_consignee_name,
+      oth_consignee_add1: house_rec.oth_consignee_add1,
+      oth_consignee_add2: house_rec.oth_consignee_add2,
+      oth_consignee_add3: house_rec.oth_consignee_add3,
+      oth_consignee_add4: house_rec.oth_consignee_add4,
   
-      oth_location_id: house.oth_location_id,
-      oth_location_name: house.oth_location_name,
-      oth_location_add1: house.oth_location_add1,
-      oth_location_add2: house.oth_location_add2,
-      oth_location_add3: house.oth_location_add3,
-      oth_location_add4: house.oth_location_add4,
+      oth_location_id: house_rec.oth_location_id,
+      oth_location_code: house_rec.oth_location_code,
+      oth_location_name: house_rec.oth_location_name,
+      oth_location_add1: house_rec.oth_location_add1,
+      oth_location_add2: house_rec.oth_location_add2,
+      oth_location_add3: house_rec.oth_location_add3,
+      oth_location_add4: house_rec.oth_location_add4,
   
-      oth_it_no: house.oth_it_no,
-      oth_it_date: house.oth_it_date,
-      oth_it_port: house.oth_it_port,
+      oth_it_no: house_rec.oth_it_no,
+      oth_it_date: house_rec.oth_it_date,
+      oth_it_port: house_rec.oth_it_port,
   
-      oth_hbl_frt_status: house.oth_hbl_frt_status,
-      oth_packages: house.oth_packages,
-      oth_cbm: house.oth_cbm,
-      oth_weight: house.oth_weight,
-      oth_chwt: house.oth_chwt,
-      oth_lbs: house.oth_lbs,
-      oth_cft: house.oth_cft,
-      oth_chwt_lbs: house.oth_chwt_lbs,
-      oth_commodity: house.oth_commodity,
+      oth_hbl_frt_status: house_rec.oth_hbl_frt_status,
+      oth_packages: house_rec.oth_packages,
+      oth_cbm: house_rec.oth_cbm,
+      oth_weight: house_rec.oth_weight,
+      oth_chwt: house_rec.oth_chwt,
+      oth_lbs: house_rec.oth_lbs,
+      oth_cft: house_rec.oth_cft,
+      oth_chwt_lbs: house_rec.oth_chwt_lbs,
+      oth_commodity: house_rec.oth_commodity,
   
-      oth_isf_no: house.oth_isf_no,
-      oth_lfd_date: house.oth_lfd_date,
-      oth_is_pl: house.oth_is_pl,
-      oth_is_ci: house.oth_is_ci,
-      oth_is_carr_an: house.oth_is_carr_an,
-      oth_custom_reles_status: house.oth_custom_reles_status,
-      oth_is_delivery: house.oth_is_delivery,
+      oth_isf_no: house_rec.oth_isf_no,
+      oth_lfd_date: house_rec.oth_lfd_date,
+      oth_is_pl: house_rec.oth_is_pl,
+      oth_is_ci: house_rec.oth_is_ci,
+      oth_is_carr_an: house_rec.oth_is_carr_an,
+      oth_custom_reles_status: house_rec.oth_custom_reles_status,
+      oth_is_delivery: house_rec.oth_is_delivery,
     });
   }
 
@@ -331,6 +335,7 @@ export class OtherOpEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version,
           oth_cfno: v.oth_cfno,
+          oth_mode: v.oth_mode,
           oth_refno: v.oth_refno,
           oth_hbl_id: v.oth_hbl_id
         });
@@ -504,6 +509,9 @@ export class OtherOpEditComponent extends baseEditComponent {
       const n_lbs = data?.oth_lbs || 0;
       const n_cbm = data?.oth_cbm || 0;
       const n_cft = data?.oth_cft || 0;
+      const n_chwt = data?.oth_chwt || 0;
+      const n_chwt_lbs = data?.oth_chwt_lbs || 0;
+      
   
   
       if (action.name == 'oth_weight') {
@@ -528,6 +536,18 @@ export class OtherOpEditComponent extends baseEditComponent {
         let ncbm = this.ConvertUnit(n_cft, 'cft');
         this.mform.patchValue({
           oth_cbm: this.gs.roundNumber(ncbm, this.gs.globalConstants.global_dec_places),
+        });
+      }
+      if (action.name == 'oth_chwt') {
+        let nlbs = this.ConvertUnit(n_chwt, 'weight');
+        this.mform.patchValue({
+          oth_chwt_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
+        });
+      }
+      if (action.name == 'oth_chwt_lbs') {
+        let nweight = this.ConvertUnit(n_chwt_lbs, 'lbs');
+        this.mform.patchValue({
+          oth_chwt: this.gs.roundNumber(nweight, this.gs.globalConstants.global_dec_places),
         });
       }
     }

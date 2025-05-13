@@ -114,7 +114,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
       do_remark_2: [''],
       do_remark_3: [''],
       do_remark_4: [''],
-      do_danger_goods: [''],
+      do_danger_goods: ['NO'],
       do_terms_ship: [''],
       do_vessel: [''],
       do_voyage: [''],
@@ -143,7 +143,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
 
     })
   }
-
+  
   ngOnInit() {
     this.id = 0;
     this.init();
@@ -151,15 +151,22 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
       this.parent_id = +rec["parent_id"] || 0;
       this.parent_type = rec["parent_type"] || '';
     });
-    if (this.parent_id > 0 || this.id != 0) {
+    if ((this.parent_id > 0 && this.parent_type != "OTHERS") || this.id != 0) {
       this.getRecord();
       // this.getDefaultData();
     }
     else {
       this.newRecord();
     }
+    this.DefaultShipTerms();
   }
-
+  
+  DefaultShipTerms() {
+    const isSea = this.parent_type === 'SEA-IMPORT-M' || this.parent_type === 'SEA-IMPORT-H';
+    this.mform.patchValue({
+      do_terms_ship: isSea ? 'OCEAN' : 'AIR'
+    });
+  }
   newRecord() {
     this.id = 0;
     this.mform.patchValue({

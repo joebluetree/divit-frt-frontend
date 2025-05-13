@@ -137,7 +137,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Vessel</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Vessel / Flight No</label>
               <div class="col-sm-3">
                 <app-input formControlName="oth_vessel_name" id="oth_vessel_name" name="oth_vessel_name"
                   maxlength="50"></app-input>
@@ -558,19 +558,23 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="d-grid gap-1">
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
-              [queryParams]="{parent_id:mform.get('oth_id')?.value, parent_type:'OTHERS',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
+            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderDetList"
+              [queryParams]="{id:0,parent_id:mform.get('oth_id')?.value, parent_type:'OTHERS',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY
+              ORDER</button>
             <button class="btn btn-success btn-sm">AR & AP</button>
             <button class="btn btn-success btn-sm">PROFIT REPORT</button>
             <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
-            <button class="btn btn-success btn-sm">MESSENGER SLIP</button>
+            <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,parent_id: mform.get('oth_id')?.value,
+                parent_type:mform.get('oth_mode')?.value}">MESSENGER SLIP</button>
             <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
             <button class="btn btn-success btn-sm">ATTACHMENTS</button>
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/followupEdit"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, oth_id: mform.get('oth_id')?.value, oth_refno: mform.get('oth_refno')?.value, oth_ref_date: mform.get('oth_ref_date')?.value}">ADD
+            <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">ADD
               TO FOLLOW UP</button>
             <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
-              [queryParams]="{ id:0, parent_id: mform.get('oth_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
+              [queryParams]="{ id:0, parent_id: mform.get('oth_id')?.value,parent_type:'OTH-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL
+              MEMO</button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button class="btn btn-success btn-sm">PRODUCT</button>
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"

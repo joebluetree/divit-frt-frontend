@@ -50,6 +50,7 @@ export interface iContainer {
 export interface iSea_exportm {
   mbl_id: number;
   mbl_cfno: number;
+  mbl_mode: string;
   mbl_refno: string;
   mbl_ref_date: string;
   mbl_shipment_stage_id: number;

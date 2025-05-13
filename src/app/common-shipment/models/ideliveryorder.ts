@@ -98,6 +98,7 @@ export interface iDeliveryOrder {
   do_delivery_date?: string;
 
   deliveryorder_cntr: iContainer[];
+  do_details: iDeliveryOrder[];
 
   rec_version: number;
   rec_company_id?: number;

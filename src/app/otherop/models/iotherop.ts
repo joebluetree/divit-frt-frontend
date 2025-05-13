@@ -42,6 +42,7 @@ export interface iOtherOp {
   oth_hbl_id: number;
   oth_parent_id: number;
   oth_cfno: number;
+  oth_mode: string;
   oth_refno: string;
   oth_ref_date: string;
   oth_shipment_stage_id: number;
