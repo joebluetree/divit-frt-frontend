@@ -64,7 +64,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_mode: [''],
       oth_refno: [''],
       oth_ref_date: [date],
-      oth_shipment_stage_id: [0],
+      oth_shipment_stage_id: [null],
       oth_shipment_stage_name: [''],
       oth_mbl_no: [''],
       oth_agent_id: [0],
@@ -153,9 +153,22 @@ export class OtherOpEditComponent extends baseEditComponent {
     this.mform.patchValue({
       oth_id: this.id
     })
-
+  this.getDefaultData();
   }
 
+  getDefaultData() {
+    this.ms.getRecord({}, '/api/otherop/otherop/GetDefaultData').subscribe({
+      next: (rec: iOtherOp) => {
+        this.mform.patchValue({
+          oth_shipment_stage_id: rec.oth_shipment_stage_id,
+          oth_shipment_stage_name: rec.oth_shipment_stage_name
+        });
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
+  }
   addRow(rec: iContainer) {
 
     // let a = this.gs.getToday();
@@ -164,7 +177,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       cntr_id: [rec?.cntr_id || 0],
       cntr_hbl_id: [rec?.cntr_hbl_id || 0],
       cntr_catg: [rec?.cntr_catg || ""],
-      cntr_no: [rec?.cntr_no || ""],  //,[Validators.required, Validators.pattern(/^[A-Z]{4}\d{7}$/)]
+      cntr_no: [rec?.cntr_no || ""],
       cntr_type_id: [rec?.cntr_type_id || 0],
       cntr_type_name: [rec?.cntr_type_name || ""],
       cntr_sealno: [rec?.cntr_sealno || ""],
@@ -235,7 +248,7 @@ export class OtherOpEditComponent extends baseEditComponent {
           oth_vessel_id: rec.oth_vessel_id,
           oth_vessel_code: rec.oth_vessel_code,
           oth_vessel_name: rec.oth_vessel_name,
-          oth_voyage: rec.oth_voyage,         
+          oth_voyage: rec.oth_voyage,
 
           rec_version: rec.rec_version,
 
@@ -253,7 +266,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_hbl_id: house_rec.oth_hbl_id,
       oth_hbl_no: house_rec.oth_hbl_no,
       oth_bltype: house_rec.oth_bltype,
-  
+
       oth_shipper_id: house_rec.oth_shipper_id,
       oth_shipper_code: house_rec.oth_shipper_code,
       oth_shipper_name: house_rec.oth_shipper_name,
@@ -261,7 +274,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_shipper_add2: house_rec.oth_shipper_add2,
       oth_shipper_add3: house_rec.oth_shipper_add3,
       oth_shipper_add4: house_rec.oth_shipper_add4,
-  
+
       oth_consignee_id: house_rec.oth_consignee_id,
       oth_consignee_code: house_rec.oth_consignee_code,
       oth_consignee_name: house_rec.oth_consignee_name,
@@ -269,7 +282,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_consignee_add2: house_rec.oth_consignee_add2,
       oth_consignee_add3: house_rec.oth_consignee_add3,
       oth_consignee_add4: house_rec.oth_consignee_add4,
-  
+
       oth_location_id: house_rec.oth_location_id,
       oth_location_code: house_rec.oth_location_code,
       oth_location_name: house_rec.oth_location_name,
@@ -277,11 +290,11 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_location_add2: house_rec.oth_location_add2,
       oth_location_add3: house_rec.oth_location_add3,
       oth_location_add4: house_rec.oth_location_add4,
-  
+
       oth_it_no: house_rec.oth_it_no,
       oth_it_date: house_rec.oth_it_date,
       oth_it_port: house_rec.oth_it_port,
-  
+
       oth_hbl_frt_status: house_rec.oth_hbl_frt_status,
       oth_packages: house_rec.oth_packages,
       oth_cbm: house_rec.oth_cbm,
@@ -291,7 +304,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_cft: house_rec.oth_cft,
       oth_chwt_lbs: house_rec.oth_chwt_lbs,
       oth_commodity: house_rec.oth_commodity,
-  
+
       oth_isf_no: house_rec.oth_isf_no,
       oth_lfd_date: house_rec.oth_lfd_date,
       oth_is_pl: house_rec.oth_is_pl,
@@ -357,7 +370,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_shipper_code') {
-      
+
       this.mform.patchValue({
         oth_shipper_id: rec.cust_id || 0,
         oth_shipper_code: rec.cust_code || '',
@@ -368,7 +381,7 @@ export class OtherOpEditComponent extends baseEditComponent {
         oth_shipper_add4: this.gs.getTelFax(rec),
       });
     }
-    
+
     if (action.id == 'oth_consignee_code') {
 
       this.mform.patchValue({
@@ -404,7 +417,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_agent_name') {
-      
+
       this.mform.patchValue({
         oth_agent_id: rec.cust_id || 0,
         oth_agent_name: rec.cust_name || '',
@@ -412,7 +425,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_liner_name') {
-      
+
       this.mform.patchValue({
         oth_liner_id: rec.param_id || 0,
         oth_liner_name: rec.param_name || '',
@@ -420,7 +433,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_handled_name') {
-      
+
       this.mform.patchValue({
         oth_handled_id: rec.param_id || 0,
         oth_handled_name: rec.param_name || '',
@@ -428,15 +441,15 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_salesman_name') {
-      
+
       this.mform.patchValue({
         oth_salesman_id: rec.param_id || 0,
         oth_salesman_name: rec.param_name || '',
       });
     }
-    
+
     if (action.id == 'oth_pol_name') {
-      
+
       this.mform.patchValue({
         oth_pol_id: rec.param_id || 0,
         oth_pol_name: rec.param_name || '',
@@ -444,7 +457,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_pod_name') {
-      
+
       this.mform.patchValue({
         oth_pod_id: rec.param_id || 0,
         oth_pod_name: rec.param_name || '',
@@ -452,7 +465,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_vessel_code') {
-      
+
       this.mform.patchValue({
         oth_vessel_id: rec.param_id || 0,
         oth_vessel_code: rec.param_code || '',
@@ -461,7 +474,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.id == 'oth_country_name') {
-      
+
       this.mform.patchValue({
         oth_country_id: rec.param_id || 0,
         oth_country_name: rec.param_name || '',
@@ -469,7 +482,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.name == 'cntr_type_name') {
-      
+
       this.formArrayRecord('otherop_cntr', action.rowIndex)?.patchValue({
         cntr_type_id: rec.param_id || 0,
         cntr_type_name: rec.param_name || '',
@@ -477,7 +490,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     }
 
     if (action.name == 'cntr_packages_unit_name') {
-      
+
       this.formArrayRecord('otherop_cntr', action.rowIndex)?.patchValue({
         cntr_packages_unit_id: rec.param_id || 0,
         cntr_packages_unit_name: rec.param_name || '',
@@ -496,61 +509,61 @@ export class OtherOpEditComponent extends baseEditComponent {
     return changedValue * value;
   }
   findUnit(action: any) {
-  
-      console.log(action);
-  
-      if (!action.isChanged) {
-        return;
-      }
-  
-      const data = <iOtherOp>this.mform.value
-  
-      const n_weight = data?.oth_weight || 0;
-      const n_lbs = data?.oth_lbs || 0;
-      const n_cbm = data?.oth_cbm || 0;
-      const n_cft = data?.oth_cft || 0;
-      const n_chwt = data?.oth_chwt || 0;
-      const n_chwt_lbs = data?.oth_chwt_lbs || 0;
-      
-  
-  
-      if (action.name == 'oth_weight') {
-        let nlbs = this.ConvertUnit(n_weight, 'weight');
-        this.mform.patchValue({
-          oth_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
-        });
-      }
-      if (action.name == 'oth_lbs') {
-        let nweight = this.ConvertUnit(n_lbs, 'lbs');
-        this.mform.patchValue({
-          oth_weight: this.gs.roundNumber(nweight, this.gs.globalConstants.global_dec_places),
-        });
-      }
-      if (action.name == 'oth_cbm') {
-        let ncft = this.ConvertUnit(n_cbm, 'cbm');
-        this.mform.patchValue({
-          oth_cft: this.gs.roundNumber(ncft, this.gs.globalConstants.global_dec_places),
-        });
-      }
-      if (action.name == 'oth_cft') {
-        let ncbm = this.ConvertUnit(n_cft, 'cft');
-        this.mform.patchValue({
-          oth_cbm: this.gs.roundNumber(ncbm, this.gs.globalConstants.global_dec_places),
-        });
-      }
-      if (action.name == 'oth_chwt') {
-        let nlbs = this.ConvertUnit(n_chwt, 'weight');
-        this.mform.patchValue({
-          oth_chwt_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
-        });
-      }
-      if (action.name == 'oth_chwt_lbs') {
-        let nweight = this.ConvertUnit(n_chwt_lbs, 'lbs');
-        this.mform.patchValue({
-          oth_chwt: this.gs.roundNumber(nweight, this.gs.globalConstants.global_dec_places),
-        });
-      }
+
+    console.log(action);
+
+    if (!action.isChanged) {
+      return;
     }
+
+    const data = <iOtherOp>this.mform.value
+
+    const n_weight = data?.oth_weight || 0;
+    const n_lbs = data?.oth_lbs || 0;
+    const n_cbm = data?.oth_cbm || 0;
+    const n_cft = data?.oth_cft || 0;
+    const n_chwt = data?.oth_chwt || 0;
+    const n_chwt_lbs = data?.oth_chwt_lbs || 0;
+
+
+
+    if (action.name == 'oth_weight') {
+      let nlbs = this.ConvertUnit(n_weight, 'weight');
+      this.mform.patchValue({
+        oth_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
+      });
+    }
+    if (action.name == 'oth_lbs') {
+      let nweight = this.ConvertUnit(n_lbs, 'lbs');
+      this.mform.patchValue({
+        oth_weight: this.gs.roundNumber(nweight, this.gs.globalConstants.global_dec_places),
+      });
+    }
+    if (action.name == 'oth_cbm') {
+      let ncft = this.ConvertUnit(n_cbm, 'cbm');
+      this.mform.patchValue({
+        oth_cft: this.gs.roundNumber(ncft, this.gs.globalConstants.global_dec_places),
+      });
+    }
+    if (action.name == 'oth_cft') {
+      let ncbm = this.ConvertUnit(n_cft, 'cft');
+      this.mform.patchValue({
+        oth_cbm: this.gs.roundNumber(ncbm, this.gs.globalConstants.global_dec_places),
+      });
+    }
+    if (action.name == 'oth_chwt') {
+      let nlbs = this.ConvertUnit(n_chwt, 'weight');
+      this.mform.patchValue({
+        oth_chwt_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
+      });
+    }
+    if (action.name == 'oth_chwt_lbs') {
+      let nweight = this.ConvertUnit(n_chwt_lbs, 'lbs');
+      this.mform.patchValue({
+        oth_chwt: this.gs.roundNumber(nweight, this.gs.globalConstants.global_dec_places),
+      });
+    }
+  }
 
 
 }

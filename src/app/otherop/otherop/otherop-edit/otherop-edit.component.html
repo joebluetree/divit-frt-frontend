@@ -33,7 +33,7 @@
               <label class="col-sm-4 form-label form-lable-sm" for="">Stage</label>
               <div class="col-sm-8">
                 <auto-complete formControlName="oth_shipment_stage_name" id="oth_shipment_stage_name"
-                  (CallBack)="callBack($event)" [table]="'param'" [subtable]="'shipstage oe'"
+                  (CallBack)="callBack($event)" [table]="'param'" [subtable]="'shipstage oth'"
                   [company_id]="getCompanyId()" [url]="url"
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]">
                 </auto-complete>
@@ -72,7 +72,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Handled.By</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Handled By</label>
               <div class="col-sm-3">
                 <auto-complete formControlName="oth_handled_name" id="oth_handled_name" (CallBack)="callBack($event)"
                   [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
@@ -248,7 +248,7 @@
           </div>
           <div class="col-sm-6">
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Client.Type</label>
+              <label class="col-sm-4 form-label form-lable-sm">Client Type</label>
               <div class="col-sm-3">
                 <app-combobox maxlength="30" formControlName="oth_bltype" name="oth_bltype" [dataSource]="clientList"
                   [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
@@ -267,7 +267,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">IFS.No.</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">IFS No.</label>
               <div class="col-sm-8">
                 <app-input maxlength="100" formControlName="oth_isf_no" [case]="'UPPER'" name="oth_isf_no"
                   id="oth_isf_no"></app-input>
@@ -456,7 +456,6 @@
                   <th>LFD</th>
                   <th>PICKUP</th>
                   <th>EMPTY RETURN</th>
-                  <th>MOVEMENT</th>
                   <th *ngIf="showModel">ORDER </th>
                   <th>ADD</th>
                   <th>DELETE</th>
@@ -519,9 +518,6 @@
                     <app-date formControlName="cntr_return_date" [rowIndex]="i" name="cntr_return_date"
                       [format]="gs.globalConstants.global_date_format"
                       [placeholder]="gs.globalConstants.global_date_format"></app-date>
-                  </td>
-                  <td [align]="'center'">
-                    <i class="fa fa-pencil"></i>
                   </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
