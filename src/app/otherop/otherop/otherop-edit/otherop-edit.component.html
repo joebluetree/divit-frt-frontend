@@ -268,13 +268,13 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">IFS No.</label>
-              <div class="col-sm-8">
+              <div class="col-sm-3">
                 <app-input maxlength="100" formControlName="oth_isf_no" [case]="'UPPER'" name="oth_isf_no"
                   id="oth_isf_no"></app-input>
               </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">PCS</label>
+            <!-- </div>
+            <div class="form-group row"> -->
+              <label class="col-sm-2 form-label form-lable-sm" for="">PCS</label>
               <div class="col-sm-3">
                 <app-input maxlength="100" formControlName="oth_packages" [type]="'number'" name="oth_packages"
                   id="oth_packages"></app-input>
@@ -572,7 +572,6 @@
               [queryParams]="{ id:0, parent_id: mform.get('oth_id')?.value,parent_type:'OTH-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL
               MEMO</button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
-            <button class="btn btn-success btn-sm">PRODUCT</button>
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"
               [disabled]="mform.invalid">SAVE</button>
           </div>
