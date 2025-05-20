@@ -6,7 +6,6 @@
         <button *ngIf="bAdd" class="btn btn-sm btn-success" type="button" routerLink="/airimport/airimportEdit"
           [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
         <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
-        <app-fileupload [inputdata]="{mode: 'add', id:id, parent_type: 'AIR IMPORT'}"></app-fileupload>
         <button class="btn btn-success btn-sm" type="button" (click)="return2Parent()">Return</button>
       </div>
       <div class="page-body">

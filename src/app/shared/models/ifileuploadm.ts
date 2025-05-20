@@ -5,6 +5,7 @@ export interface iFileUploadm {
     files_parent_id?: number;
     files_parent_type?: string;
     files_slno?: number;
+    files_type_id?: number;
     files_type?: string;
     files_desc?: string;
     files_ref_no?: string;
@@ -12,6 +13,9 @@ export interface iFileUploadm {
     files_sub_id?: number;
     files_size?: string;
     files_processed?: string;
+    files_status?: string;
+    rec_deleted_by?: string;
+    rec_deleted_date?: string; 
     fileupload?: iFileUploadm[];
   
     rec_version: number;

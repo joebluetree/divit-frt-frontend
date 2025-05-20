@@ -1,36 +1,61 @@
-<div class="page-header">
-  <h5>Documenents</h5>
-  <button class="btn btn-success btn-sm" (click)="onNoClick()">Close</button>
-  <!-- <app-history [inputdata]="{table: 'mast_mail_serverm', id:id}"></app-history> -->
-  <!-- <button class="btn btn-success btn-sm" (click)="onNoClick()">Return</button> -->
-</div>
 <form [formGroup]="mform">
+  <div class="page-header">
+    <h5>Documents</h5>
+    <button class="btn btn-success btn-sm" (click)="onNoClick()">Close</button>
+    <!-- <app-history *ngIf="mode=='edit'" [inputdata]="{table: 'mast_fileupload', id:id}"></app-history> -->
+  </div>
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6">
-        <div class="form-group row" *ngIf="mode=='add'">
+        <div class="form-group row" *ngIf="mode">
           <label class="col-sm-4 form-label form-lable-sm" for="">File</label>
           <div class="col-sm-8">
-            <input type="file" multiple (change)="onFileChange($event)">
+            <input #fileInput type="file" multiple (change)="onFileChange($event)" [disabled]="mode !== 'add'">
           </div>
         </div>
-        <!-- <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">FileName</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="files_desc" [case]="'upper'" ></app-input>
-          </div>
-        </div> -->
 
-        <div class=" form-group row">
+        <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Ref#</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="files_ref_no" [case]="'upper'" ></app-input>
+            <app-input maxlength="100" formControlName="files_ref_no" [case]="'upper'"></app-input>
           </div>
         </div>
-        <div class=" form-group row mt-1">
-          <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Doc Type</label>
           <div class="col-sm-8">
-            <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+            <app-combobox [dataSource]="dataList" [valueColumn]="'key'" [displayColumn]="'value'" 
+             id="files_type" formControlName="files_type"></app-combobox>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Deleted</label>
+          <div class="col-sm-8">
+            <input type="checkbox" formControlName="files_status" id="files_status"
+            [checked]="mform.get('files_status')?.value === 'D'" (change)="onDeletedToggle($event)" >
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <label></label>
+          </div>
+        </div>
+                <div class="form-group row">
+          <div class="col-sm-12">
+            <label></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-12">
+            <button class="btn btn-sm btn-success me-1" (click)="handleSubmit()" [disabled]="mform.invalid">{{ mode ===
+              'edit' ? 'Save' : 'Upload' }}</button>
+            <button class="btn btn-sm btn-success" type="button" (click)="getDetails()">Refresh</button>
           </div>
         </div>
       </div>
@@ -43,43 +68,65 @@
           <thead class="table-success">
             <tr class="table-header">
               <th>EDIT</th>
+              <th>DOWNLOAD</th>
               <th *ngIf="showModel">ID</th>
               <th *ngIf="showModel">PARENT-ID</th>
-              <th>FILES PATH</th>
-              <th>FILES REF NO</th>
-              <!-- <th>DESC</th> -->
-              <th>CREATED-BY</th>
-              <th>CREATED-DT</th>
+              <th *ngIf="showModel">FILES PATH</th>
+              <th>FILES NAME</th>
+              <th>REF NO</th>
+              <th>DOC TYPE</th>
+              <th>FILES SIZE</th>
+              <th>UPLOADED-BY</th>
+              <th>UPLOADED-DT</th>
+              <th *ngIf="showModel">DELETED-BY</th>
+              <th *ngIf="showModel">DELETED-DT</th>
               <th *ngIf="showModel">EDITED-BY</th>
               <th *ngIf="showModel">EDITED-DT</th>
               <th>DELETE</th>
             </tr>
           </thead>
           <tbody formArrayName="fileupload">
-            <tr *ngFor="let iRow of formArray('fileupload').controls; let i = index;" [formGroupName]="i">
+            <tr *ngFor="let iRow of formArray('fileupload').controls; let i = index;" [formGroupName]="i"
+                  [ngClass]="{ 'table-danger': iRow.get('files_status')?.value === 'D' }">
               <td align="centre" (click)="editdetails(iRow.get('files_id')?.value)" class="link">
                 <i class="fa fa-pencil"></i>
               </td>
+              <td align="centre"  class="link"> 
+                <i class="fa fa-download"></i>
+              </td><!-- (click)="downloadFile(iRow.get('files_id')?.value)" -->
               <td *ngIf="showModel">
                 {{ iRow.get('files_id')?.value }}
               </td>
               <td *ngIf="showModel">
                 {{ iRow.get('files_parent_id')?.value }}
               </td>
-              <td>
+              <td *ngIf="showModel">
                 {{ iRow.get('files_path')?.value }}
+              </td>
+              <td>
+                {{ iRow.get('files_desc')?.value }}
               </td>
               <td>
                 {{ iRow.get('files_ref_no')?.value }}
               </td>
-              <!-- <td>
-                {{ iRow.get('files_desc')?.value }}
-              </td> -->
+              <td>
+                {{ iRow.get('files_type')?.value }}
+              </td>
+              <td>
+                {{ iRow.get('files_size')?.value }}
+              </td>
               <td>
                 {{ iRow.get('rec_created_by')?.value }}
               </td>
               <td>
                 {{ iRow.get('rec_created_date')?.value |
+                date: gs.globalConstants.global_output_datetime_format }}
+              </td>
+              <td *ngIf="showModel">
+                {{ iRow.get('rec_deleted_by')?.value }}
+              </td>
+              <td *ngIf="showModel">
+                {{ iRow.get('rec_deleted_date')?.value |
                 date: gs.globalConstants.global_output_datetime_format }}
               </td>
               <td *ngIf="showModel">
@@ -89,8 +136,8 @@
                 {{ iRow.get('rec_edited_date')?.value |
                 date: gs.globalConstants.global_output_datetime_format }}
               </td>
-              <td align="center"
-                (click)="deleteRow(i, iRow.get('files_ref_no')?.value, iRow.get('files_id')?.value)" class="link">
+              <td align="center" (click)="iRow.get('files_status')?.value !== 'D' && 
+                deleteRow(i, iRow.get('files_ref_no')?.value, iRow.get('files_id')?.value)" class="link">
                 <i class="fa fa-trash"></i>
               </td>
             </tr>

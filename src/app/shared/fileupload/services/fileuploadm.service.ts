@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
 import { baseService } from '../../base-class/baseService';
 import { iFileUploadm_Search, iFileUploadmModel } from '../../models/ifileuploadm';
+import { HttpParams, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 
 @Injectable({ providedIn: 'root' })
@@ -26,11 +28,5 @@ export class FileUploadmService extends baseService {
   uploadFiles(formData: FormData, url: string) {
     return this.http.post<any>(this.gs.getUrl(url), formData);
   }
-  
 
-  // uploadFiles(id:number, record: any, formData: FormData, url: string) {
-  //   //return this.http.post(url, formData);
-  //   return this.http.post<any>(this.gs.getUrl(url), record);
-  // }
-  
 }

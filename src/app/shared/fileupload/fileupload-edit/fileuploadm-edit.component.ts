@@ -1,10 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { HistoryComponent } from '../../../shared/history/history.component';
 import { FileUploadmService } from '../services/fileuploadm.service';
 import { iFileUploadm } from '../../models/ifileuploadm';
+import { HistoryComponent } from '../../history/history.component';
 
 @Component({
   selector: 'app-fileuploadm-edit',
@@ -21,10 +21,17 @@ import { iFileUploadm } from '../../models/ifileuploadm';
 
 
 export class FileUploadmEditComponent extends baseEditComponent {
+  @ViewChild('fileInput') fileInput!: ElementRef;
   parent_id: number = 0;
   parent_type: string = '';
   selectedFiles: File[] = [];
 
+  dataList = [
+    { key: 'HOUSE', value: 'HOUSE' },
+    { key: 'EMAIL', value: 'EMAIL' },
+    { key: 'MASTER', value: 'MASTER' },
+    { key: 'OTHERS', value: 'OTHERS' },
+  ]
 
   constructor(
     private ms: FileUploadmService,
@@ -40,9 +47,12 @@ export class FileUploadmEditComponent extends baseEditComponent {
       files_ref_no: [''],
       files_parent_type: [''],
       files_slno: [0],
+      files_type_id: [0],
       files_type: [''],
-      // files_desc: [''],
+      files_desc: [''],
       files_path: [''],
+      files_size: [''],
+      files_status: [''],
       fileupload: this.fb.array([]),
       rec_version: [0],
     })
@@ -78,13 +88,31 @@ export class FileUploadmEditComponent extends baseEditComponent {
       files_parent_id: this.parent_id,
       files_parent_type: this.parent_type,
     })
+    this.resetFileInput();
     this.getDefaultData();
     this.getDetails();
   }
 
+  onDeletedToggle(event: any) {
+    const checked = event.target.checked;
+    this.mform.get('files_status')?.setValue(checked ? 'D' : '');
+    // this.getDetails(); // Fetch updated data after toggle
+  }
 
   getDetails() {
-    const param = { 'id': this.parent_id, 'parent_type': this.parent_type };
+
+    const filesStatus = this.mform.get('files_status')?.value;
+
+    const param: any = {
+      id: this.parent_id,
+      parent_type: this.parent_type
+    };
+
+    // Send files_status param only if checkbox is checked
+    if (filesStatus === 'D') {
+      param.files_status = filesStatus;
+    }
+
     this.ms.getRecord(param, '/api/UserAdmin/FileUpload/GetDetailsAsync').subscribe({
       next: (rec: iFileUploadm[]) => {
         this.fillDetails(rec);
@@ -92,7 +120,11 @@ export class FileUploadmEditComponent extends baseEditComponent {
       error: (e) => {
         this.gs.showError(e);
       }
-    })
+    });
+    this.resetFileInput();
+    this.getDefaultData();
+    this.mode = "add";
+    this.mform.reset();
   }
 
 
@@ -105,10 +137,13 @@ export class FileUploadmEditComponent extends baseEditComponent {
           files_parent_id: rec.files_parent_id,
           files_parent_type: rec.files_parent_type,
           files_slno: rec.files_slno,
+          files_type_id: rec.files_type_id,
           files_type: rec.files_type,
-          // files_desc: rec.files_desc,
+          files_desc: rec.files_desc,
           files_ref_no: rec.files_ref_no,
           files_path: rec.files_path,
+          files_size: rec.files_size,
+          files_status: rec.files_status,
 
           rec_version: rec.rec_version,
         });
@@ -121,7 +156,7 @@ export class FileUploadmEditComponent extends baseEditComponent {
   }
 
   getDefaultData() {
-    const param = { 'id': this.parent_id };
+    const param = { 'id': this.parent_id, 'parent_type': this.parent_type };
     this.ms.getRecord(param, '/api/UserAdmin/FileUpload/GetDefaultDataAsync').subscribe({
       next: (rec: iFileUploadm) => {
         this.mform.patchValue({
@@ -147,11 +182,17 @@ export class FileUploadmEditComponent extends baseEditComponent {
       files_id: [rec.files_id || 0],
       files_parent_id: [rec?.files_parent_id || 0],
       files_parent_type: [rec?.files_parent_type || ""],
+      files_type_id: [rec?.files_type_id || 0],
       files_type: [rec?.files_type || ""],
       files_slno: [rec?.files_slno || 0],
-      // files_desc: [rec?.files_desc || ""],
+      files_desc: [rec?.files_desc || ""],
       files_ref_no: [rec?.files_ref_no || ""],
       files_path: [rec?.files_path || ""],
+      files_size: [rec?.files_size || ""],
+
+      files_status: [rec?.files_status || ""],
+      rec_deleted_by: [rec?.rec_deleted_by || ""],
+      rec_deleted_date: [rec?.rec_deleted_date || ""],
 
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],
@@ -187,10 +228,12 @@ export class FileUploadmEditComponent extends baseEditComponent {
           files_parent_id: rec.files_parent_id,
           files_parent_type: rec.files_parent_type,
           files_slno: rec.files_slno,
+          files_type_id: rec.files_type_id,
           files_type: rec.files_type,
-          // files_desc: rec.files_desc,
+          files_desc: rec.files_desc,
           files_ref_no: rec.files_ref_no,
           files_path: rec.files_path,
+          files_size: rec.files_size,
 
           rec_version: rec.rec_version,
         });
@@ -203,15 +246,20 @@ export class FileUploadmEditComponent extends baseEditComponent {
   }
 
 
-  deleteRow(idx: number, follow: string, cf_id: number) {
-    if (!cf_id) {
+  deleteRow(idx: number, follow: string, files_id: number) {
+    if (!files_id) {
       alert("Invalid Record ID");
       return;
     }
 
+    const data = <iFileUploadm>this.mform.value;
+    data.files_id = files_id;
+    data.files_status = "D";
+    data.rec_deleted_by = this.gs.user.user_code;
+
     if (window.confirm(`Are you sure you want to delete ${follow} ?`)) {
-      const param = { id: cf_id, url: '/api/UserAdmin/FileUpload/DeleteAsync' };
-      this.ms.deleteRecord(param)?.subscribe({
+      const param = { id: files_id };
+      this.ms.save(param, data, '/api/UserAdmin/FileUpload/DeleteDetailsAsync')?.subscribe({
         next: (response: any) => {
           if (response.status) {
             this.formArray('fileupload').removeAt(idx);
@@ -228,6 +276,11 @@ export class FileUploadmEditComponent extends baseEditComponent {
   save() {
     if (this.mform.invalid) {
       alert('Invalid Form')
+      return;
+    }
+
+    if (this.selectedFiles.length === 0 && this.mode === "add") {
+      this.gs.showAlert(['No files selected']);
       return;
     }
 
@@ -248,8 +301,9 @@ export class FileUploadmEditComponent extends baseEditComponent {
       next: (v: iFileUploadm) => {
         if (this.mode == "add") {
           this.id = v.files_id;
-          // this.mode = "edit";
-          this.mform.patchValue({ cf_id: this.id });
+          // this.uploadFiles(v.files_id, v);
+          this.mode = "edit";
+          this.mform.patchValue({ files_id: this.id });
           const param = {
             id: this.id.toString(),
             mode: this.mode
@@ -263,7 +317,6 @@ export class FileUploadmEditComponent extends baseEditComponent {
           rec_version: v.rec_version
         });
         console.log(data);
-        this.uploadFiles(v.files_id, v);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
         this.newRecord();
@@ -274,43 +327,58 @@ export class FileUploadmEditComponent extends baseEditComponent {
     })
   }
 
-  uploadFiles(id: number, rec: any) {
-    if (!this.selectedFiles || this.selectedFiles.length === 0) {
+  uploadFiles() {
+    if (this.selectedFiles.length === 0) {
       this.gs.showAlert(['No files selected']);
       return;
     }
-  
+
+    if (this.mform.invalid) {
+      alert('Invalid Form');
+      return;
+    }
+
+    const data = <iFileUploadm>this.mform.value;
+    data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_branch_id = this.gs.user.user_branch_id;
+    data.rec_created_by = this.gs.user.user_code;
+
+    const id = data.files_id || 0;
+    const rec = data as any;
+
     const formData = new FormData();
-  
-    // Append files
     for (const file of this.selectedFiles) {
       formData.append('files', file, file.name);
     }
-  
-    // Append scalar id
+
     formData.append('id', id.toString());
-  
-    // Flatten and append DTO fields
     for (const key in rec) {
       if (rec[key] != null) {
         formData.append(key, rec[key]);
       }
     }
-  
-    // Call service
+
     this.ms.uploadFiles(formData, '/api/UserAdmin/FileUpload/UploadFiles').subscribe({
-      next: (res) => {
-        this.gs.showAlert(['Files uploaded successfully']);
+      next: (res: any) => {
         console.log('Upload response:', res);
+        this.getDetails();
+        this.newRecord();
+        this.gs.showAlert(['Files uploaded successfully']);
       },
       error: (err) => {
-        this.gs.showAlert(['File upload failed']);
+        this.gs.showAlert([err.error]);
         console.error('Upload error:', err);
       }
     });
-    this.getDetails();
   }
-  
+
+  handleSubmit() {
+    if (this.mode === 'edit') {
+      this.save();
+    } else {
+      this.uploadFiles();
+    }
+  }
 
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -320,18 +388,39 @@ export class FileUploadmEditComponent extends baseEditComponent {
     }
   }
 
+  resetFileInput() {
+    this.selectedFiles = [];
+    if (this.fileInput?.nativeElement) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
 
-  // openHistory(): void {
-  //   const dialogRef = this.dialog.open(HistoryComponent, {
-  //     hasBackdrop: false,
-  //     width: '250px',
-  //     data: { title: 'History', message: 'Edit Details' }
-  //   });
+  callBack(action: any) {
+    if (action.id == 'files_type') {
+      console.log(action);
+      let rec: any = {};
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        files_type_id: rec.param_id || 0,
+        files_type: rec.param_name || "",
+      });
+    }
+  }
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //   });
-  // }
+
+  openHistory(): void {
+    const dialogRef = this.dialog.open(HistoryComponent, {
+      hasBackdrop: false,
+      width: '250px',
+      data: { title: 'History', message: 'Edit Details' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
   onBlur(action: any) {
     console.log('onBlur Action', action);
@@ -346,4 +435,3 @@ export class FileUploadmEditComponent extends baseEditComponent {
   }
 
 }
-
