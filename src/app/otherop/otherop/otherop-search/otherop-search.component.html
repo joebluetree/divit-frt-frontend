@@ -1,0 +1,32 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="" >From</label>
+        <div class="col-sm-3">
+          <app-date formControlName="oth_from_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date type="text" formControlName="oth_to_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Ref No</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="oth_refno" case="UPPER"> </app-input>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

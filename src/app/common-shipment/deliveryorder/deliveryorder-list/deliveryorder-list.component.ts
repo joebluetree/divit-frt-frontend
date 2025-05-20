@@ -26,7 +26,9 @@ export class DeliveryOrderListComponent extends baseListComponent {
   ngOnInit(): void {
 
     this.init();
-
+    this.route.queryParams.forEach((rec: any) => {
+      this.parent_type = rec["parent_type"];
+    });
     
 
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid,parent_type: 'GENERAL'};

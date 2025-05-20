@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: 'followupEdit', loadComponent: () => import('./followup/followup-edit/followup-edit.component').then(c => c.FollowUpEditComponent) },
   { path: 'deliveryorderEdit', loadComponent: () => import('./deliveryorder/deliveryorder-edit/deliveryorder-edit.component').then(c => c.DeliveryOrderEditComponent) },    
   { path: 'deliveryorderList', loadComponent: () => import('./deliveryorder/deliveryorder-list/deliveryorder-list.component').then(c => c.DeliveryOrderListComponent) },    
+  { path: 'deliveryorderDetList', loadComponent: () => import('./deliveryorder/deliveryorder-detlist/deliveryorder-detlist.component').then(c => c.DeliveryOrderDetListComponent) },
 
   { path: 'messengerslipEdit', loadComponent: () => import('./messengerslip/messengerslip-edit/messengerslip-edit.component').then(c => c.MessengerSlipEditComponent) },
   { path: 'messengerslipList', loadComponent: () => import('./messengerslip/messengerslip-list/messengerslip-list.component').then(c => c.MessengerSlipListComponent) },

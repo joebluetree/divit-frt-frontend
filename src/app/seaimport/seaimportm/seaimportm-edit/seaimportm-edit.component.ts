@@ -59,6 +59,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
     this.mform = this.fb.group({
       mbl_id: [0],
       mbl_cfno: [0],
+      mbl_mode: [''],
       mbl_refno: [''],
       mbl_ref_date: [date],
       mbl_shipment_stage_id: [0],
@@ -244,6 +245,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         this.mform.patchValue({
           mbl_id: rec.mbl_id,
           mbl_cfno: rec.mbl_cfno,
+          mbl_mode: rec.mbl_mode,
           mbl_refno: rec.mbl_refno,
           mbl_ref_date: rec.mbl_ref_date,
           mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
