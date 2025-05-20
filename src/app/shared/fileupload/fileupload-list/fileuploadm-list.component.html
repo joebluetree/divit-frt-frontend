@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h5>History</h5>
+  <button class="btn btn-success btn-sm" (click)="onNoClick()">Close</button>
+</div>
+
+<div class="page-search">
+  <app-fileuploadm-search [search_url]="'/api/UserAdmin/FileUpload/GetListAsync'" [input]="ms.getSearchRecord()"
+    (searchResult)="search($event)"></app-fileuploadm-search>
+</div>
+
+<div class="page-pagination">
+  <app-page [search_url]="'/api/UserAdmin/FileUpload/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+<div class="page-body">
+
+  <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
+    [delete_url]="'/api/UserAdmin/FileUpload/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [row_id_name]="'log_id'" [selected_id]="ms.selectedRow">
+  </app-table>
+
+</div>
+
+<div class="page-pagination line-bottom">
+  <app-page [search_url]="'/api/UserAdmin/FileUpload/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>

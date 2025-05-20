@@ -9,6 +9,7 @@ import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexp
 import { AirExporthService } from '../../services/airexporth.service';
 import { iAirexporth } from '../../models/iairexporth';
 import { HttpClient } from '@angular/common/http';
+import { FileUploadComponent } from '../../../shared/fileupload/fileupload.component';
 
 
 @Component({
@@ -371,6 +372,18 @@ export class AirExportEditComponent extends baseEditComponent {
       hasBackdrop: false,
       width: '250px',
       data: { title: 'History', message: 'Edit Details' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  openAttachment(): void {
+    const dialogRef = this.dialog.open(FileUploadComponent, {
+      hasBackdrop: false,
+      width: '250px',
+      data: { title: 'Attachments', message: 'Edit Details' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
