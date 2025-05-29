@@ -1,3 +1,8 @@
 <div class="d-grid gap-1">
-<button class="btn btn-success btn-sm" type="button" (click)="openAttachment()">ATTACHMENTS</button>
+  <button class="btn btn-sm"
+    [ngClass]="(!!data?.rec_files_count || data?.rec_files_attached === 'Y') ? 'btn-danger' : 'btn-success'"
+    type="button" (click)="openAttachment()">
+    ATTACHMENTS
+    <span *ngIf="!!data?.rec_files_count">({{ data?.rec_files_count}})</span>
+  </button>
 </div>

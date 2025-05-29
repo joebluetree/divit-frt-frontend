@@ -83,6 +83,8 @@ export class AirExportEditComponent extends baseEditComponent {
       mbl_vessel_name: [''],
       mbl_voyage: [''],
       air_export: this.fb.array([]),
+      rec_files_count: [0],
+      rec_files_attached: [''],
       rec_version: [0],
     })
   }
@@ -147,6 +149,8 @@ export class AirExportEditComponent extends baseEditComponent {
           mbl_direct: rec.mbl_direct,
           mbl_vessel_name: rec.mbl_vessel_name,
           mbl_voyage: rec.mbl_voyage,
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

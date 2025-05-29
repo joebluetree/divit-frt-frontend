@@ -46,6 +46,8 @@ export interface iAirexport {
   mbl_direct?: string;
   mbl_vessel_name?: string;
   mbl_voyage?: string;
+  rec_files_count?: number;
+  rec_files_attached?: string;
   air_export: iAirexporth[]
 
   rec_version: number;

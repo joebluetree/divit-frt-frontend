@@ -49,6 +49,8 @@ export interface iAirimport {
 
   mbl_stage_changed_date?: string;
   mbl_an_sent_dt?: string;
+  rec_files_count?: number;
+  rec_files_attached:string;
   air_import: iAirimporth[]
 
   rec_version: number;

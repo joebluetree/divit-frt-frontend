@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CustomControls } from '../../app.config';
 import { MatDialog } from '@angular/material/dialog';
-import { FileUploadmListComponent } from './fileupload-list/fileuploadm-list.component';
 import { FileUploadmEditComponent } from './fileupload-edit/fileuploadm-edit.component';
 
 
@@ -27,9 +26,12 @@ export class FileUploadComponent {
   openAttachment(): void {
     const dialogRef = this.dialog.open(FileUploadmEditComponent, {
       hasBackdrop: true,
-      width: '1500px',
+      width: '1500px',     // Constant width
+      maxHeight: '80vh',    // Constant height
+      disableClose: false, // Optional: disables closing the dialog by clicking outside
       data: this.data
     });
   }
+
 
 }

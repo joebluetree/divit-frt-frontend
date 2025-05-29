@@ -191,3 +191,8 @@ input[type="number"] {
   cursor: pointer;
   /* Color of the scrollbar thumb when hovered */
 }
+
+.bright-label {
+  font-weight: normal;
+  color: #222; /* very dark gray, softer than black */
+}

@@ -17,7 +17,7 @@ export class FileUploadmService extends baseService {
     return <iFileUploadmModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iFileUploadm_Search>{ log_table: '', log_table_row_id: 0, log_desc: '', log_from_date: '', log_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
+      searchRecord: <iFileUploadm_Search>{ files_type: '', files_ref_no: '', files_desc: '', rec_company_id: 0, rec_branch_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',
