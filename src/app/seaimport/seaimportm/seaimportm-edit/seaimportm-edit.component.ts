@@ -115,7 +115,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_devan_loc_add2:[''],
       mbl_devan_loc_add3:[''],
       mbl_devan_loc_add4:[''],
-      
+      rec_files_count: [0],
+      rec_files_attached: [''],      
 
       master_cntr: this.fb.array([]),
       master_house: this.fb.array([]),
@@ -301,7 +302,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
           mbl_devan_loc_add2: rec.mbl_devan_loc_add2,
           mbl_devan_loc_add3: rec.mbl_devan_loc_add3,
           mbl_devan_loc_add4: rec.mbl_devan_loc_add4,
-
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

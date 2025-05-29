@@ -112,7 +112,8 @@ export interface iOtherOp {
   oth_it_no: string;
   oth_it_date: string;
   oth_it_port: string;
-    
+  rec_files_count?: number;
+  rec_files_attached?: string;  
   otherop_cntr: iContainer[];
   otherop_house: iOtherOp;
 

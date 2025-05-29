@@ -54,7 +54,8 @@ export class QtnmAirEditComponent extends baseEditComponent {
       qtnm_salesman_name: [''],
       qtnm_move_type: [''],
       qtnm_commodity: [''],
-
+      rec_files_count: [0],
+      rec_files_attached: [''],
       qtnd_air: this.fb.array([]),
       rec_version: [0],
 
@@ -164,6 +165,8 @@ export class QtnmAirEditComponent extends baseEditComponent {
           qtnm_salesman_name: rec.qtnm_salesman_name,
           qtnm_move_type: rec.qtnm_move_type,
           qtnm_commodity: rec.qtnm_commodity,
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

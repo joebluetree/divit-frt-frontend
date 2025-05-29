@@ -68,7 +68,8 @@ export class QtnmLclEditComponent extends baseEditComponent {
       qtnm_trans_time: [''],
       qtnm_routing: [''],
       qtnm_amt: [0],
-
+      rec_files_count: [0],
+      rec_files_attached: [''],
       qtnd_lcl: this.fb.array([]),
       rec_version: [0],
 
@@ -176,7 +177,8 @@ export class QtnmLclEditComponent extends baseEditComponent {
           qtnm_trans_time: rec.qtnm_trans_time,
           qtnm_routing: rec.qtnm_routing,
           qtnm_amt: rec.qtnm_amt ?? 0,
-
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

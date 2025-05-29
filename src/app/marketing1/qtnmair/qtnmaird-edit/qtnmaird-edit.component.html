@@ -8,7 +8,8 @@
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_pol_code" id="qtnd_pol_code" (CallBack)="callBack($event)"
             [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required></auto-complete>
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
+            required></auto-complete>
         </div>
         <div class="col-sm-5">
           <app-input maxlength="100" formControlName="qtnd_pol_name" [case]="'UPPER'" required></app-input>
@@ -20,7 +21,8 @@
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_pod_code" id="qtnd_pod_code" (CallBack)="callBack($event)"
             [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
-            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required></auto-complete>
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
+            required></auto-complete>
         </div>
         <div class="col-sm-5">
           <app-input maxlength="100" formControlName="qtnd_pod_name" [case]="'UPPER'" required></app-input>
@@ -32,7 +34,8 @@
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_carrier_code" id="qtnd_carrier_code" (CallBack)="callBack($event)"
             [table]="'param'" [subtable]="'air carrier'" [company_id]="getCompanyId()" [url]="url"
-            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]" required></auto-complete>
+            display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
+            required></auto-complete>
         </div>
         <div class="col-sm-5">
           <app-input maxlength="100" formControlName="qtnd_carrier_name" [case]="'UPPER'" required></app-input>
@@ -139,12 +142,20 @@
                   <app-input maxlength="100" formControlName="qtnd_hac" [case]="'UPPER'"></app-input>
                 </div>
               </div>
-              <div style="height: 5px;"></div>
               <div class="form-group row">
-                <label class="col-sm-4 form-label form-label-sm" for=""></label>
+                <label class="col-sm-12 form-label form-lable-sm"></label>
+                <div class="col-sm-6">
+                  <label class="col-sm-4 form-label form-lable-sm"></label>
+                </div>
+              </div>
+              <!-- <div style="height: 5px;"></div> -->
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm"></label>
                 <div class="col-sm-8">
-                  <button class="btn btn-sm btn-success me-3" [disabled]="mform.invalid" (click)="search('search')">{{mode ==='new'? 'Add' : 'Update' }}</button>
-                  <button class="btn btn-sm btn-success" (click)="newRecord()">New</button>
+                  <button class="btn btn-sm btn-success me-2" (click)="search('search')" [disabled]="mform.invalid">{{
+                    mode
+                    === 'new' ? 'Add' : 'Update'}}</button>
+                  <button class="btn btn-success btn-sm " (click)="newRecord()">New</button>
                 </div>
               </div>
             </div>

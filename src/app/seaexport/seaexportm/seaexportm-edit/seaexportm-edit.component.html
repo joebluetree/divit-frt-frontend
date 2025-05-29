@@ -393,7 +393,9 @@
             [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
             parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">MESSENGER SLIP</button>
             <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
-            <button class="btn btn-success btn-sm">ATTACHMENTS</button>
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type: 'SEA EXPORT',
+              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
             [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD TO FOLLOW UP</button>
             <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"

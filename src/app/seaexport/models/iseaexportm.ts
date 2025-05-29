@@ -88,7 +88,8 @@ export interface iSea_exportm {
   mbl_vessel_name: string;
   mbl_voyage: string;
   mbl_book_slno: number;
-  
+  rec_files_count?: number;
+  rec_files_attached?: string;
   master_cntr: iContainer[];
   master_house: iSea_expHouse[];
 

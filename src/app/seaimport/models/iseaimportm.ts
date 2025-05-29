@@ -115,7 +115,8 @@ export interface iSea_importm {
   mbl_devan_loc_add2: string;
   mbl_devan_loc_add3: string;
   mbl_devan_loc_add4: string;
-  
+  rec_files_count?: number;
+  rec_files_attached?: string;
   master_cntr: iContainer[];
   master_house: iSea_impHouse[];
 
