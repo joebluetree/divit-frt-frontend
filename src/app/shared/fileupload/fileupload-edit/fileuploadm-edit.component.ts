@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { FileUploadmService } from '../services/fileuploadm.service';
 import { iFileUploadm } from '../../models/ifileuploadm';
 import { HistoryComponent } from '../../history/history.component';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
+import { baseListComponent } from '../../base-class/baseListComponent';
 
 @Component({
   selector: 'app-fileuploadm-edit',
@@ -18,26 +20,23 @@ import { HistoryComponent } from '../../history/history.component';
 //Date : 06/05/2025
 //Command : Create the File Upload Components.
 //version : 1.0
-
-
 export class FileUploadmEditComponent extends baseEditComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   parent_id: number = 0;
   parent_type: string = '';
   selectedFiles: File[] = [];
-
-  dataList = [
-    { key: 'HOUSE', value: 'HOUSE' },
-    { key: 'EMAIL', value: 'EMAIL' },
-    { key: 'MASTER', value: 'MASTER' },
-    { key: 'OTHERS', value: 'OTHERS' },
-  ]
+  // showDeletedOnly: string = '';
+  showDeletedOnly: boolean = false;
+  state: any;
+  dataList = [];
+  OperationsTypes: string[] = ['AIR IMPORT', 'AIR EXPORT', 'SEA IMPORT', 'SEA EXPORT', 'OTHERS'];
 
   constructor(
-    private ms: FileUploadmService,
+    public ms: FileUploadmService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<FileUploadmEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private http: HttpClient,
   ) {
     super();
     this.showModel = false;
@@ -47,12 +46,14 @@ export class FileUploadmEditComponent extends baseEditComponent {
       files_ref_no: [''],
       files_parent_type: [''],
       files_slno: [0],
-      files_type_id: [0],
+      // files_type_id: [0],
       files_type: [''],
       files_desc: [''],
       files_path: [''],
       files_size: [''],
       files_status: [''],
+      files_search: [''],
+      is_deleted: [false],
       fileupload: this.fb.array([]),
       rec_version: [0],
     })
@@ -68,6 +69,7 @@ export class FileUploadmEditComponent extends baseEditComponent {
     this.parent_id = this.data.id;
     this.parent_type = this.data.parent_type;
     this.mode = this.data.mode;
+    this.getDataList();
     if (this.mode == "add")
       this.newRecord();
     else
@@ -93,22 +95,43 @@ export class FileUploadmEditComponent extends baseEditComponent {
     this.getDetails();
   }
 
-  onDeletedToggle(event: any) {
-    const checked = event.target.checked;
-    this.mform.get('files_status')?.setValue(checked ? 'D' : '');
-    // this.getDetails(); // Fetch updated data after toggle
+  onDeletedToggle(event: Event): void {
+    const checked = (event.target as HTMLInputElement).checked;
+    const newStatus = checked ? 'D' : 'N';
+
+    this.mform.get('files_status')?.setValue(newStatus);
+    this.showDeletedOnly = checked;
   }
 
-  getDetails() {
 
-    const filesStatus = this.mform.get('files_status')?.value;
 
-    const param: any = {
-      id: this.parent_id,
-      parent_type: this.parent_type
+  getDataList() {
+    const param = {
+      data: 'DOC-TYPE'  // only subtable is passed
     };
 
-    // Send files_status param only if checkbox is checked
+    this.ms.getRecord(param, '/api/UserAdmin/FileUpload/GetDataListAsync').subscribe({
+      next: (res: any) => {
+        if (res?.files_type) {
+          this.dataList = res.files_type;  // bind to combobox
+        }
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
+  }
+
+
+  getDetails() {
+    const filesStatus = this.mform.get('files_status')?.value || '';
+    const param: any = {
+      id: this.parent_id,
+      parent_type: this.parent_type,
+      files_search: this.mform.get("files_search")?.value,
+    };
+
+    //Send files_status param only if checkbox is checked
     if (filesStatus === 'D') {
       param.files_status = filesStatus;
     }
@@ -116,6 +139,11 @@ export class FileUploadmEditComponent extends baseEditComponent {
     this.ms.getRecord(param, '/api/UserAdmin/FileUpload/GetDetailsAsync').subscribe({
       next: (rec: iFileUploadm[]) => {
         this.fillDetails(rec);
+
+        const searchValue = param.files_search;
+        this.mform.patchValue({ files_search: searchValue });
+
+        this.mform.get('files_status')?.setValue(filesStatus);
       },
       error: (e) => {
         this.gs.showError(e);
@@ -124,7 +152,6 @@ export class FileUploadmEditComponent extends baseEditComponent {
     this.resetFileInput();
     this.getDefaultData();
     this.mode = "add";
-    this.mform.reset();
   }
 
 
@@ -245,6 +272,47 @@ export class FileUploadmEditComponent extends baseEditComponent {
     })
   }
 
+  downloadFile(files_id: number, files_desc: string) {
+    const url = this.gs.getUrl(`/api/UserAdmin/FileUpload/DownloadFiles`);
+    const params = new HttpParams().set('files_id', files_id.toString());
+
+    this.http.get(url, {
+      params,
+      responseType: 'blob',
+      observe: 'response'  // <-- Needed to read headers
+    }).subscribe({
+      next: (response: HttpResponse<Blob>) => {
+        const blob = response.body!;
+        const contentDisposition = response.headers.get('Content-Disposition');
+
+        // Default fallback
+        let filename = `${files_desc}`;
+
+        // Try to extract filename from Content-Disposition header
+        if (contentDisposition) {
+          const filenameMatch = contentDisposition.match(/FileName[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+          if (filenameMatch != null && filenameMatch[1]) {
+            filename = decodeURIComponent(filenameMatch[1].replace(/['"]/g, ''));
+          }
+        }
+
+        // Download logic
+        const downloadURL = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = downloadURL;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(downloadURL);
+      },
+      error: (err) => {
+        const errorMsg = err.error?.message || err.message || 'Failed to download file';
+        this.gs.showError(errorMsg);
+      }
+    });
+  }
+
 
   deleteRow(idx: number, follow: string, files_id: number) {
     if (!files_id) {
@@ -290,6 +358,7 @@ export class FileUploadmEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
+    data.files_parent_type = this.parent_type;
 
     console.log(data);
 
@@ -301,7 +370,6 @@ export class FileUploadmEditComponent extends baseEditComponent {
       next: (v: iFileUploadm) => {
         if (this.mode == "add") {
           this.id = v.files_id;
-          // this.uploadFiles(v.files_id, v);
           this.mode = "edit";
           this.mform.patchValue({ files_id: this.id });
           const param = {
@@ -361,7 +429,7 @@ export class FileUploadmEditComponent extends baseEditComponent {
     this.ms.uploadFiles(formData, '/api/UserAdmin/FileUpload/UploadFiles').subscribe({
       next: (res: any) => {
         console.log('Upload response:', res);
-        this.getDetails();
+        // this.getDetails();
         this.newRecord();
         this.gs.showAlert(['Files uploaded successfully']);
       },
@@ -407,19 +475,6 @@ export class FileUploadmEditComponent extends baseEditComponent {
         files_type: rec.param_name || "",
       });
     }
-  }
-
-
-  openHistory(): void {
-    const dialogRef = this.dialog.open(HistoryComponent, {
-      hasBackdrop: false,
-      width: '250px',
-      data: { title: 'History', message: 'Edit Details' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
   onBlur(action: any) {

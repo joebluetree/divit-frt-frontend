@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-sm-6">
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Ref No#</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref No</label>
               <div class="col-sm-8">
                 <app-input maxlength="15" formControlName="mbl_refno" [disable]="true"></app-input>
               </div>
@@ -110,13 +110,15 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm">Gr.Wt</label>
-              <div class="col-sm-3">
-                <app-input maxlength="100" formControlName="mbl_mawb_weight" type="number"
+              <div class="col-sm-8">
+                <app-input formControlName="mbl_mawb_weight" type="number"
                   [dec]="gs.globalConstants.global_dec_places"></app-input>
               </div>
-              <label class="col-sm-2 form-label form-lable-sm">Ch.Wt</label>
-              <div class="col-sm-3">
-                <app-input maxlength="100" formControlName="mbl_mawb_chwt" type="number"
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Ch.Wt</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbl_mawb_chwt" type="number"
                   [dec]="gs.globalConstants.global_dec_places"></app-input>
               </div>
             </div>
@@ -153,11 +155,11 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm">Flight No</label>
+              <label class="col-sm-4 form-label form-lable-sm">Flight#</label>
               <div class="col-sm-3">
                 <app-input maxlength="15" formControlName="mbl_vessel_name" [case]="'UPPER'"></app-input>
               </div>
-              <label class="col-sm-2 form-label form-lable-sm">Flight No</label>
+              <label class="col-sm-2 form-label form-lable-sm">Flight#</label>
               <div class="col-sm-3">
                 <app-input maxlength="15" formControlName="mbl_voyage" [case]="'UPPER'"></app-input>
               </div>
@@ -191,12 +193,14 @@
             </div>
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-3">
+              <div class="col-sm-8">
                 <app-checkbox formControlName="mbl_3rdparty"></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">3rd Party Booking</label>
               </div>
-              <label class="col-sm-2 form-label form-lable-sm" for=""></label>
-              <div class="col-sm-3">
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
                 <app-checkbox formControlName="mbl_direct"></app-checkbox>
                 <label class="ms-1 form-label form-label-sm">Direct Shipment</label>
               </div>
@@ -312,11 +316,14 @@
               <button class="btn btn-success btn-sm" type="button">PROFIT REPORT</button>
               <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
-                [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER
+                [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
+                 parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER
                 SLIP
               </button>
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
-              <app-fileupload [inputdata]="{mode:'add', id:id, parent_type: 'AIR EXPORT'}"></app-fileupload>
+              <app-fileupload
+                [inputdata]="{mode:'add', id:id, parent_type: 'AIR EXPORT',
+               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
                 [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">ADD
                 TO

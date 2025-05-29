@@ -80,6 +80,8 @@ export class AirImportEditComponent extends baseEditComponent {
       mbl_stage_changed_date: [''],
       mbl_an_sent_dt: [''],
       air_import: this.fb.array([]),
+      rec_files_count: [0],
+      rec_files_attached: [''],
       rec_version: [0],
     })
   }
@@ -146,6 +148,8 @@ export class AirImportEditComponent extends baseEditComponent {
 
           mbl_stage_changed_date: rec.mbl_stage_changed_date,
           mbl_an_sent_dt: rec.mbl_an_sent_dt,
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
 
           rec_version: rec.rec_version,
 
