@@ -563,7 +563,9 @@
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
               [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,parent_id: mform.get('oth_id')?.value,
                 parent_type:mform.get('oth_mode')?.value}">MESSENGER SLIP</button>
-            <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type: 'OTHERS',
+              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
             <button class="btn btn-success btn-sm">ATTACHMENTS</button>
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
               [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">ADD

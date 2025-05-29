@@ -125,6 +125,8 @@ export interface iCustomerm {
   cust_cur_id: number;
   cust_cur_name: string;
 
+  rec_files_count: number;
+  rec_files_attached: string;
   cust_contacts: iContactm[];
   rec_version: number;
   rec_company_id: number;

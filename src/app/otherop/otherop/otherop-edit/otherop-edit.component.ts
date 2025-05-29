@@ -131,7 +131,8 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_it_no: [''],
       oth_it_date: [''],
       oth_it_port: [''],
-
+      rec_files_count: [0],
+      rec_files_attached: [''],
       otherop_cntr: this.fb.array([]),
       rec_version: [0],
 
@@ -249,7 +250,8 @@ export class OtherOpEditComponent extends baseEditComponent {
           oth_vessel_code: rec.oth_vessel_code,
           oth_vessel_name: rec.oth_vessel_name,
           oth_voyage: rec.oth_voyage,
-
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

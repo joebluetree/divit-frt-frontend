@@ -82,7 +82,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_vessel_name: [''],
       mbl_voyage: [''],
       mbl_book_slno: [0],
-
+      rec_files_count: [0],
+      rec_files_attached: [''],
       master_cntr: this.fb.array([]),
       master_house: this.fb.array([]),
       rec_version: [0],
@@ -241,7 +242,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
           mbl_vessel_name: rec.mbl_vessel_name,
           mbl_voyage: rec.mbl_voyage,
           mbl_book_slno: rec.mbl_book_slno,
-
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

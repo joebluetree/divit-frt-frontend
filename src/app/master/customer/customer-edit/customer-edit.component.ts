@@ -153,6 +153,8 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_cur_name: [''],
 
       cust_contacts: this.fb.array([]),
+      rec_files_count: [0],
+      rec_files_attached: [''],
       rec_version: [0],
 
     })
@@ -346,7 +348,8 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_branch_name: rec.cust_branch_name,
           cust_protected: rec.cust_protected,
           cust_cur_code_id: rec.cust_cur_name,
-
+          rec_files_count: rec.rec_files_count,
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

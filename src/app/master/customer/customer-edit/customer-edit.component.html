@@ -725,7 +725,10 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="d-grid gap-1">
-            <app-fileupload [inputdata]="{mode:'add', id:id, parent_type:'CUSTOMER'}"></app-fileupload>
+            <!-- <app-fileupload [inputdata]="{mode:'add', id:id, parent_type:'CUSTOMER'}"></app-fileupload> -->
+            <app-fileupload
+                [inputdata]="{mode:'add', id:id, parent_type: 'CUSTOMER',
+               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
             <button class="btn btn-success btn-sm">MEMO</button>
             <button class="btn btn-success btn-sm">SOP</button>
             <button class="btn btn-success btn-sm">QUOTATION MEMO</button>
