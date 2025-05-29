@@ -212,6 +212,7 @@
 </form>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <app-fileupload [inputdata]="{mode:'add', id:id, parent_type: 'FCL'}"></app-fileupload>
 </div>
 
 <div *ngIf="showModel">
