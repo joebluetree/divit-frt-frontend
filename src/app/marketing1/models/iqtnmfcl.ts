@@ -77,6 +77,8 @@ export interface iQtnmfcl {
   qtnm_trans_time: string;
   qtnm_routing: string;
   qtnm_amt: number;
+  rec_files_count?: number;
+  rec_files_attached?: string;
   qtnd_fcl: iQtnd_fcl[];
 
   rec_version: number;
