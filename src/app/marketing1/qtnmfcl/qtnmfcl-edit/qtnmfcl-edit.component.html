@@ -2,7 +2,7 @@
   <h5>{{title}}</h5>
   <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/marketing/qtnmfclEdit"
     [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
-   <app-history [inputdata]="{table: 'mark_qtnm', id:id}"></app-history>
+  <app-history [inputdata]="{table: 'mark_qtnm', id:id}"></app-history>
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
@@ -17,7 +17,8 @@
           </div>
           <label class="col-sm-2 form-label form-lable-sm" for="">Date</label>
           <div class="col-sm-3">
-            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" required></app-date>
+            <app-date formControlName="qtnm_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format" required></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -70,7 +71,8 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Validity</label>
           <div class="col-sm-8">
-            <app-date formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+            <app-date formControlName="qtnm_valid_date" [format]="gs.globalConstants.global_date_format"
+              [placeholder]="gs.globalConstants.global_date_format"></app-date>
           </div>
         </div>
         <div class="form-group row">
@@ -209,10 +211,14 @@
       </div>
     </div>
   </div>
+
+  <app-genremarkm-edit #fs [inputdata]="{id:id, parent_type:mform.get('qtnm_type')?.value}"></app-genremarkm-edit>
+
 </form>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-  <app-fileupload [inputdata]="{mode:'add', id:id, parent_type: 'FCL',
+  <app-fileupload
+    [inputdata]="{mode:'add', id:id, parent_type: 'FCL',
   rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
 </div>
 

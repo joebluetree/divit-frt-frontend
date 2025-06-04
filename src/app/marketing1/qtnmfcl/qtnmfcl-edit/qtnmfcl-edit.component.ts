@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,21 +6,26 @@ import { HistoryComponent } from '../../../shared/history/history.component';
 import { QtnmFclService } from '../../services/qtnmfcl.service';
 import { data_fcl, iQtnd_fcl, iQtnmfcl } from '../../models/iqtnmfcl';
 import { QtndFclEditComponent } from '../qtndfcl-edit/qtndfcl-edit.component';
+import { GenRemarkmEditComponent } from "../../../shared/genremarkm/genremarkm-edit/genremarkm-edit.component";
 
 @Component({
   selector: 'app-qtnmfcl-edit',
   templateUrl: './qtnmfcl-edit.component.html',
   styleUrls: ['./qtnmfcl-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls, QtndFclEditComponent]
+  imports: [...CustomControls, QtndFclEditComponent, GenRemarkmEditComponent]
 })
 
 //Name : Alen Cherian
 //Date : 03/01/2025
 //Command : Create the Fcl Components.
+//version 1.0
+//version 2.0 - Added remk_remarks[] to model and GenRemarkmEditComponent.
 
 export class QtnmFclEditComponent extends baseEditComponent {
   data_fcl: data_fcl;
+
+  @ViewChild(GenRemarkmEditComponent) fs!: GenRemarkmEditComponent; //
 
   constructor(
     private ms: QtnmFclService,
@@ -115,7 +119,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
     const nidx = idx + 1;
     const confirmDelete = window.confirm("Delete " + nidx + " y/n");
     if (confirmDelete) {
-    this.formArray('qtnd_fcl').removeAt(idx);
+      this.formArray('qtnd_fcl').removeAt(idx);
     }
   }
 
@@ -164,6 +168,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
 
         });
         this.fillFclDetails(rec.qtnd_fcl);
+        this.fs.fillRemarkDetails(rec.remk_remarks); //
         console.log(rec);
       },
       error: (e) => {
@@ -178,6 +183,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
       return;
     }
     const data = <iQtnmfcl>this.mform.value;
+    data.remk_remarks = this.fs.getRemarksArray().value; //
     let _mode = this.mode;
 
     data.rec_company_id = this.gs.user.user_company_id;
@@ -209,6 +215,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
           rec_version: v.rec_version
         });
         this.fillFclDetails(v.qtnd_fcl);
+        this.fs.fillRemarkDetails(v.remk_remarks); //
         console.log(data);
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
@@ -219,7 +226,7 @@ export class QtnmFclEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: any ) {
+  callBack(action: any) {
     if (action.id == 'qtnm_to_name') {
       if (action.rec) {
         this.mform.patchValue({
@@ -284,4 +291,3 @@ export class QtnmFclEditComponent extends baseEditComponent {
     console.log('onBlur Action', action);
   }
 }
-
