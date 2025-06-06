@@ -51,6 +51,8 @@ export interface iAirimport {
   mbl_an_sent_dt?: string;
   rec_files_count?: number;
   rec_files_attached:string;
+  rec_memo_count?: number;
+  rec_memo_attached:string;
   air_import: iAirimporth[]
 
   rec_version: number;

@@ -82,6 +82,8 @@ export class AirImportEditComponent extends baseEditComponent {
       air_import: this.fb.array([]),
       rec_files_count: [0],
       rec_files_attached: [''],
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
       rec_version: [0],
     })
   }
@@ -150,7 +152,8 @@ export class AirImportEditComponent extends baseEditComponent {
           mbl_an_sent_dt: rec.mbl_an_sent_dt,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
-
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
           rec_version: rec.rec_version,
 
         });

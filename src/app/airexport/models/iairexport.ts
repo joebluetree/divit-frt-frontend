@@ -48,6 +48,8 @@ export interface iAirexport {
   mbl_voyage?: string;
   rec_files_count?: number;
   rec_files_attached?: string;
+  rec_memo_count?: number;
+  rec_memo_attached?: string;
   air_export: iAirexporth[]
 
   rec_version: number;

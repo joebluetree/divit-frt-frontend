@@ -329,10 +329,12 @@
                 TO
                 FOLLOW UP
               </button>
-              <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
-                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL
-                MEMO
-              </button>
+              <!-- <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
+                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
+              </button> -->
+              <app-memo 
+              [inputdata]="{id: 0,parent_id: mform.get('mbl_id')?.value,parent_type: 'AIREXP-CNTR-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
+              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
               <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             </div>
           </div>
