@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MatDialog } from '@angular/material/dialog';
 import { QtnmLclService } from '../../services/qtnmlcl.service';
 import { iQtnd_lcl, iQtnm_lcl } from '../../models/iqtnmlcl';
+import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-edit/genremarkm-edit.component';
 
 //Name : Sourav V
 //Created Date : 04/01/2025
@@ -15,9 +16,11 @@ import { iQtnd_lcl, iQtnm_lcl } from '../../models/iqtnmlcl';
   templateUrl: './qtnmlcl-edit.component.html',
   styleUrls: ['./qtnmlcl-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls]
+  imports: [...CustomControls, GenRemarkmEditComponent]
 })
 export class QtnmLclEditComponent extends baseEditComponent {
+
+  @ViewChild(GenRemarkmEditComponent) fs!: GenRemarkmEditComponent; //
 
   iDec = 3;
   constructor(
@@ -185,6 +188,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
 
         });
         this.fillQuotes(rec.qtnd_lcl);
+        this.fs.fillRemarkDetails(rec.remk_remarks); //
       },
       error: (e) => {
         this.gs.showError(e);
@@ -200,6 +204,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
       return;
     }
     const data = <iQtnm_lcl>this.mform.value;
+    data.remk_remarks = this.fs.getRemarksArray().value; //
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -229,6 +234,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
           qtnm_no: v.qtnm_no
         });
         this.fillQuotes(v.qtnd_lcl);
+        this.fs.fillRemarkDetails(v.remk_remarks); //
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
