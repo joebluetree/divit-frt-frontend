@@ -169,7 +169,9 @@ export class AirImporthEditComponent extends baseEditComponent {
       hbl_incoterm_id: [0],
       hbl_incoterm: [''],
       hbl_invoiceno: [''],
-
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
+      
       marks1: this.createFormDesc(),
       marks2: this.createFormDesc(),
       marks3: this.createFormDesc(),
@@ -329,6 +331,8 @@ export class AirImporthEditComponent extends baseEditComponent {
           hbl_incoterm_id: rec.hbl_incoterm_id,
           hbl_incoterm: rec.hbl_incoterm,
           hbl_invoiceno: rec.hbl_invoiceno,
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
 
           rec_version: rec.rec_version,
         });

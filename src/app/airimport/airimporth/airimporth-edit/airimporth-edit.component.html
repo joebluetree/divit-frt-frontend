@@ -754,8 +754,11 @@
             [queryParams]="{parent_id:mform.get('hbl_id')?.value, parent_type:'AIR-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">AUTH. TO MAKE ENTRY</button>
             <button class="btn btn-success btn-sm">NOT RELEASE LETTER</button>
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
-            [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'AIREXP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO</button>
+            <!-- <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
+            [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'AIREXP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO</button> -->
+            <app-memo 
+              [inputdata]="{id: 0,parent_id: mform.get('hbl_id')?.value,parent_type: 'AIRIMP-SHIP-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
+              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
           </div>
         </div>
       </div>

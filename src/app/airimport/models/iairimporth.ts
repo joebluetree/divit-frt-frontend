@@ -105,7 +105,9 @@ export interface iAirimporth {
   hbl_incoterm_id?: number;
   hbl_incoterm?: string;
   hbl_invoiceno?: string;
-
+  rec_memo_count?: number;
+  rec_memo_attached:string;
+  
   marks1: Cargo_desc;
   marks2: Cargo_desc;
   marks3: Cargo_desc;
