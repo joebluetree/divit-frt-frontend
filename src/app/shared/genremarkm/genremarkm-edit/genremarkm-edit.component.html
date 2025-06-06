@@ -1,0 +1,50 @@
+<form [formGroup]="mform">
+  <div class="page-body line-bottom">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+          <thead class="table-success">
+            <tr class="table-header">
+              <th *ngIf="showModel">ID</th>
+              <th>Sl.No</th>
+              <th>REMARKS</th>
+              <th>ADD</th>
+              <th>DELETE</th>
+            </tr>
+          </thead>
+          <tbody formArrayName="remk_remarks">
+            <tr *ngFor="let iRow of getRemarksArray().controls; let i=index;" [formGroupName]="i">
+              <td *ngIf="showModel">
+                <label>{{iRow.get('remk_id')?.value}}</label>
+              </td>
+              <td>
+                <label>{{iRow.get('remk_order')?.value}}</label>
+              </td>
+              <td>
+                <app-input formControlName="remk_desc" [rowIndex]="i" name="remk_desc" case="UPPER"></app-input>
+              </td>
+              <td align="centre" (click)="addDetails()" class="link">
+                <i class="fa fa-plus"></i>
+              </td>
+              <td align="centre" (click)="deleteDetails(i)" class="link">
+                <i class="fa fa-trash"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="getRemarksArray().length <= 0">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-sm btn-info" (click)="addDetails()">Add Remarks</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

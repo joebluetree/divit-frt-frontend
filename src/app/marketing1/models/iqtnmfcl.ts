@@ -1,8 +1,9 @@
 import { iPage } from "ngx-jrt-controls";
+import { iGenRemarkm } from "../../shared/models/igenremarkm";
 
-    //Name : Alen Cherian
-    //Date : 03/01/2025
-    //Command :  Create angular frontend model for Quotation Fcl.
+//Name : Alen Cherian
+//Date : 03/01/2025
+//Command :  Create angular frontend model for Quotation Fcl.
 
 
 export type data_fcl = { mode: string, record: iQtnd_fcl, index: number };
@@ -80,6 +81,7 @@ export interface iQtnmfcl {
   rec_files_count?: number;
   rec_files_attached?: string;
   qtnd_fcl: iQtnd_fcl[];
+  remk_remarks: iGenRemarkm[];
 
   rec_version: number;
   rec_company_id: number;
