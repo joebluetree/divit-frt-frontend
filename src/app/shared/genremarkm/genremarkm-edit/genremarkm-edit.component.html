@@ -21,7 +21,7 @@
                 <label>{{iRow.get('remk_order')?.value}}</label>
               </td>
               <td>
-                <app-input formControlName="remk_desc" [rowIndex]="i" name="remk_desc" case="UPPER"></app-input>
+                <app-input formControlName="remk_desc" [rowIndex]="i" name="remk_desc" maxlength="100" case="UPPER"></app-input>
               </td>
               <td align="centre" (click)="addDetails()" class="link">
                 <i class="fa fa-plus"></i>

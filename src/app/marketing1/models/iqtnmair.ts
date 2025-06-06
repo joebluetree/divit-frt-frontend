@@ -1,4 +1,5 @@
 import { iPage } from "ngx-jrt-controls";
+import { iGenRemarkm } from "../../shared/models/igenremarkm";
 
 //Name : Sourav V
 //Created Date : 03/01/2025
@@ -65,6 +66,7 @@ export interface iQtnm_air {
   rec_files_count?: number;
   rec_files_attached?: string;
   qtnd_air: iQtnd_air[];
+  remk_remarks: iGenRemarkm[];
 
   rec_version: number;
   rec_company_id: number;

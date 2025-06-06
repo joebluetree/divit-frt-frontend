@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
@@ -8,13 +8,14 @@ import { iQtnd_lcl, iQtnm_lcl } from '../../models/iqtnmlcl';
 import { QtnmAirService } from '../../services/qtnmair.service';
 import { data_qtnmair, iQtnd_air, iQtnm_air } from '../../models/iqtnmair';
 import { QtnmAirdEditComponent } from '../qtnmaird-edit/qtnmaird-edit.component';
+import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-edit/genremarkm-edit.component';
 
 @Component({
   selector: 'app-qtnmair-edit',
   templateUrl: './qtnmair-edit.component.html',
   styleUrls: ['./qtnmair-edit.component.css'],
   standalone: true,
-  imports: [...CustomControls, QtnmAirdEditComponent]
+  imports: [...CustomControls, QtnmAirdEditComponent, GenRemarkmEditComponent]
 })
 
 //Name : Sourav V
@@ -22,6 +23,8 @@ import { QtnmAirdEditComponent } from '../qtnmaird-edit/qtnmaird-edit.component'
 //Remark : this component manages creation,editing and saving of qtnm-air records
 
 export class QtnmAirEditComponent extends baseEditComponent {
+
+  @ViewChild(GenRemarkmEditComponent) fs!: GenRemarkmEditComponent; //
 
   data_qtnmair: data_qtnmair;
   iDec = 3;
@@ -173,6 +176,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
 
         });
         this.fillQuotes(rec.qtnd_air);
+        this.fs.fillRemarkDetails(rec.remk_remarks); //
       },
       error: (e) => {
         this.gs.showError(e);
@@ -187,6 +191,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
       return;
     }
     const data = <iQtnm_air>this.mform.value;
+    data.remk_remarks = this.fs.getRemarksArray().value; //
 
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
@@ -216,6 +221,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
           qtnm_no: v.qtnm_no
         });
         this.fillQuotes(v.qtnd_air);
+        this.fs.fillRemarkDetails(v.remk_remarks); //
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
