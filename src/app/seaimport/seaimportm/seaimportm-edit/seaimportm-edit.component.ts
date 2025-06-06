@@ -37,6 +37,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
     { key: 'OTHERS', value: 'OTHERS' },
   ]
   TimeList = [
+    { key: 'N/A', value: 'N/A' },
     { key: 'AM', value: 'AM' },
     { key: 'PM', value: 'PM' },
   ]
@@ -69,8 +70,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_agent_name: [''],
       mbl_liner_id: [0],
       mbl_liner_name: [''],
-      mbl_coloader_id:[0],
-      mbl_coloader_name:[''],
+      mbl_coloader_id: [0],
+      mbl_coloader_name: [''],
       mbl_handled_id: [0],
       mbl_handled_name: [''],
       mbl_salesman_id: [0],
@@ -79,8 +80,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_ship_term_id: [0],
       mbl_ship_term_name: [''],
       mbl_cntr_type: [''],
-      mbl_incoterm_id:[0],
-      mbl_incoterm_name:[''],
+      mbl_incoterm_id: [0],
+      mbl_incoterm_name: [''],
       mbl_pol_id: [0],
       mbl_pol_name: [''],
       mbl_pol_etd: [''],
@@ -95,28 +96,30 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_vessel_code: [''],
       mbl_vessel_name: [''],
       mbl_voyage: [''],
-      mbl_status_id:[0],
-      mbl_status_name:[''],
-      mbl_is_sea_waybill:[''],
-      mbl_ombl_sent_on:[''],
-      mbl_ombl_sent_ampm:[''],
-      mbl_of_sent_on:[''],
-      mbl_cargo_loc_id:[0],
-      mbl_cargo_loc_code:[''],
-      mbl_cargo_loc_name:[''],
-      mbl_cargo_loc_add1:[''],
-      mbl_cargo_loc_add2:[''],
-      mbl_cargo_loc_add3:[''],
-      mbl_cargo_loc_add4:[''],
-      mbl_devan_loc_id:[0],
-      mbl_devan_loc_code:[''],
-      mbl_devan_loc_name:[''],
-      mbl_devan_loc_add1:[''],
-      mbl_devan_loc_add2:[''],
-      mbl_devan_loc_add3:[''],
-      mbl_devan_loc_add4:[''],
+      mbl_status_id: [0],
+      mbl_status_name: [''],
+      mbl_is_sea_waybill: ['NIL'],
+      mbl_ombl_sent_on: [''],
+      mbl_ombl_sent_ampm: ['N/A'],
+      mbl_of_sent_on: [''],
+      mbl_cargo_loc_id: [0],
+      mbl_cargo_loc_code: [''],
+      mbl_cargo_loc_name: [''],
+      mbl_cargo_loc_add1: [''],
+      mbl_cargo_loc_add2: [''],
+      mbl_cargo_loc_add3: [''],
+      mbl_cargo_loc_add4: [''],
+      mbl_devan_loc_id: [0],
+      mbl_devan_loc_code: [''],
+      mbl_devan_loc_name: [''],
+      mbl_devan_loc_add1: [''],
+      mbl_devan_loc_add2: [''],
+      mbl_devan_loc_add3: [''],
+      mbl_devan_loc_add4: [''],
       rec_files_count: [0],
-      rec_files_attached: [''],      
+      rec_files_attached: [''],
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
 
       master_cntr: this.fb.array([]),
       master_house: this.fb.array([]),
@@ -141,6 +144,21 @@ export class SeaImportmEditComponent extends baseEditComponent {
       mbl_id: this.id
     })
 
+    this.getDefaultData();
+  }
+
+  getDefaultData() {
+    this.ms.getRecord({}, '/api/seaimport/seaimportm/GetDefaultData').subscribe({
+      next: (rec: iSea_importm) => {
+        this.mform.patchValue({
+          mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
+          mbl_shipment_stage_name: rec.mbl_shipment_stage_name
+        });
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
   }
 
   addRow(rec: iContainer) {
@@ -195,7 +213,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
       hbl_consignee_name: [rec?.hbl_consignee_name || ""],
       hbl_client_cat: [rec?.hbl_client_cat || ""],
       hbl_client_type: [rec?.hbl_client_type || ""],
-      hbl_packages:[rec?.hbl_packages||0],
+      hbl_packages: [rec?.hbl_packages || 0],
       hbl_handled_name: [rec?.hbl_handled_name || ""],
       hbl_telex_released_code: [rec?.hbl_telex_released_code || ""],
       hbl_frt_status_name: [rec?.hbl_frt_status_name || ""],
@@ -216,16 +234,16 @@ export class SeaImportmEditComponent extends baseEditComponent {
       this.addHouse(rec_house);
     });
   }
-  
-  deleteHouse(idx: number,house: string, hbl_id: number) {
+
+  deleteHouse(idx: number, house: string, hbl_id: number) {
     if (!hbl_id) {
       alert("Invalid Record ID");
       return;
     }
-  
+
     if (window.confirm(`Delete House no ${house} y/n`)) {
-      const param = { id: hbl_id, url : '/api/seaimport/seaimporth/DeleteAsync' };
-  
+      const param = { id: hbl_id, url: '/api/seaimport/seaimporth/DeleteAsync' };
+
       this.ms.deleteRecord(param)?.subscribe({
         next: (response: any) => {
           if (response.status) {
@@ -304,6 +322,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
           mbl_devan_loc_add4: rec.mbl_devan_loc_add4,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
           rec_version: rec.rec_version,
 
         });
@@ -366,7 +386,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
 
   callBack(action: any) {
     let rec: any = {};
-  
+
     if (action.id == 'mbl_shipment_stage_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -376,7 +396,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_shipment_stage_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_agent_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -386,7 +406,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_agent_name: rec.cust_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_liner_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -396,7 +416,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_liner_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_coloader_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -406,7 +426,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_coloader_name: rec.cust_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_handled_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -416,7 +436,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_handled_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_salesman_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -426,7 +446,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_salesman_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_frt_status_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -436,7 +456,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_frt_status_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_ship_term_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -446,7 +466,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_ship_term_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_incoterm_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -456,7 +476,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_incoterm_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_status_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -466,7 +486,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_status_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_pol_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -476,7 +496,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_pol_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_pod_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -486,7 +506,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_pod_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_vessel_code') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -497,7 +517,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_vessel_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_country_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -507,7 +527,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_country_name: rec.param_name || '',
       });
     }
-  
+
     if (action.id == 'mbl_cargo_loc_code') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -522,7 +542,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_cargo_loc_add4: this.gs.getTelFax(rec),
       });
     }
-  
+
     if (action.id == 'mbl_devan_loc_code') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -537,7 +557,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         mbl_devan_loc_add4: this.gs.getTelFax(rec),
       });
     }
-  
+
     if (action.name == 'cntr_type_name') {
       if (action?.rec != null) {
         rec = action.rec;
@@ -547,7 +567,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
         cntr_type_name: rec.param_name || '',
       });
     }
-  
+
     if (action.name == 'cntr_packages_unit_name') {
       if (action?.rec != null) {
         rec = action.rec;

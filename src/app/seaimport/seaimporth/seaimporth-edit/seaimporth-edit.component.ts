@@ -20,8 +20,6 @@ import { SeaImportHService } from '../../services/seaimporth.service';
 })
 export class SeaImportHEditComponent extends baseEditComponent {
 
-  print_frt_status_type = "TBA";
-
   frtList = [
     { key: 'COLLECT', value: 'COLLECT' },
     { key: 'PREPAID', value: 'PREPAID' },
@@ -36,10 +34,6 @@ export class SeaImportHEditComponent extends baseEditComponent {
     { key: 'N', value: 'NO' },
     { key: 'Y', value: 'YES' },
   ]
-  // telexRelList = [
-  //   { key: 'N', value: 'NO' },
-  //   { key: 'Y', value: 'YES' },
-  // ]
   customRelList = [
     { key: 'N/A', value: 'N/A' },
     { key: 'PENDING', value: 'PENDING' },
@@ -158,15 +152,15 @@ export class SeaImportHEditComponent extends baseEditComponent {
       hbl_is_pl: [''],
       hbl_is_ci: [''],
       hbl_is_carr_an: [''],
-      hbl_custom_reles_status: [''],
+      hbl_custom_reles_status: ['N/A'],
       hbl_custom_clear_date: [''],
-      hbl_is_delivery: [''],
+      hbl_is_delivery: ['N/A'],
       hbl_paid_status_id: [0],
       hbl_paid_status_name: [''],
       hbl_paid_remarks: [''],
-      hbl_bl_status: [''],
-      hbl_cargo_release_status: [''],
-      hbl_frt_status_name: [''],
+      hbl_bl_status: ['NIL'],
+      hbl_cargo_release_status: ['NIL'],
+      hbl_frt_status_name: ['TBA'],
       hbl_handled_id: [0],
       hbl_handled_name: [''],
       hbl_salesman_id: [0],
@@ -197,7 +191,8 @@ export class SeaImportHEditComponent extends baseEditComponent {
       marks15: this.CreateFormDesc(),
       marks16: this.CreateFormDesc(),
       marks17: this.CreateFormDesc(),
-
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
       house_cntr: this.fb.array([]),
       rec_version: [0],
 
@@ -442,6 +437,8 @@ export class SeaImportHEditComponent extends baseEditComponent {
           hbl_pickup_date: rec.hbl_pickup_date,
           hbl_empty_ret_date: rec.hbl_empty_ret_date,
           hbl_delivery_date: rec.hbl_delivery_date,
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
           rec_version: rec.rec_version,
 
         })

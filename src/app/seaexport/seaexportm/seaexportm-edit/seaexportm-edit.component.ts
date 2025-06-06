@@ -84,6 +84,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_book_slno: [0],
       rec_files_count: [0],
       rec_files_attached: [''],
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
       master_cntr: this.fb.array([]),
       master_house: this.fb.array([]),
       rec_version: [0],
@@ -107,7 +109,22 @@ export class SeaExportmEditComponent extends baseEditComponent {
       mbl_id: this.id
     })
 
-  }
+    this.getDefaultData();
+    }
+  
+    getDefaultData() {
+      this.ms.getRecord({}, '/api/seaexport/seaexportm/GetDefaultData').subscribe({
+        next: (rec: iSea_exportm) => {
+          this.mform.patchValue({
+            mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
+            mbl_shipment_stage_name: rec.mbl_shipment_stage_name
+          });
+        },
+        error: (e) => {
+          this.gs.showError(e);
+        }
+      });
+    }
 
   addRow(rec: iContainer) {
 
@@ -244,6 +261,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
           mbl_book_slno: rec.mbl_book_slno,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
           rec_version: rec.rec_version,
 
         });

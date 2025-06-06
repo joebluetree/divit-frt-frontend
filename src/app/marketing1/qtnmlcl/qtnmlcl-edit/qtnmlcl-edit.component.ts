@@ -34,6 +34,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
       qtnm_id: [0],
       qtnm_cfno: [0],
       qtnm_no: [''],
+      qtnm_type: [null],
       qtnm_to_id: [0],
       qtnm_to_code: [''],
       qtnm_to_name: [''],
@@ -141,6 +142,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
           qtnm_id: rec.qtnm_id,
           qtnm_cfno: rec.qtnm_cfno,
           qtnm_no: rec.qtnm_no,
+          qtnm_type: rec.qtnm_type,
           qtnm_to_id: rec.qtnm_to_id,
           qtnm_to_code: rec.qtnm_to_code,
           qtnm_to_name: rec.qtnm_to_name,
@@ -407,9 +409,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
     });
 
   }
-  // onBlur(action: any) {
-  //   console.log('onBlur Action', action);
-  // }
+  onBlur(action: any) {
+    console.log('onBlur Action', action);
+  }
 
 
 
