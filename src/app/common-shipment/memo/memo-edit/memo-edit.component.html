@@ -13,7 +13,7 @@
           <div class="col-sm-6">
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
-              <div class="col-sm-8">                
+              <div class="col-sm-8">
                 <label>{{mform.get('memo_date')?.value|date: gs.globalConstants.global_output_datetime_format}}</label>
               </div>
             </div>
@@ -77,7 +77,8 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('memo_date')?.value|date: gs.globalConstants.global_output_datetime_format}}</label>
+                    <label>{{iRow.get('memo_date')?.value|date:
+                      gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
 
                   <td>
@@ -85,9 +86,14 @@
                   </td>
 
                   <td>
-                    <label>{{iRow.get('')?.value}}</label> <!--rec_attachment-->
+                    <app-fileupload [inputdata]="{
+                      mode: 'add', id: iRow.get('memo_id')?.value,
+                      parent_type: iRow.get('memo_parent_type')?.value, rec_files_count: iRow.get('rec_files_count')?.value,
+                      rec_files_attached: iRow.get('rec_files_attached')?.value
+                     }"></app-fileupload>
+                    <!-- <i class="fa fa-paperclip"></i> -->
                   </td>
-                  
+
                   <td *ngIf="showModel">
                     <label>{{iRow.get('rec_edited_by')?.value}}</label>
                   </td>

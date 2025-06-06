@@ -4,8 +4,8 @@
       <h5>{{title}}</h5>
       <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/seaimport/seaimportmEdit"
         [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,type:type,appid:appid}">New</button>
-        <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
-        <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+      <app-history [inputdata]="{table: 'cargo_masterm', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
     </div>
 
     <form [formGroup]="mform">
@@ -203,7 +203,8 @@
               <label class="col-sm-2 form-label form-lable-sm" for="">BL.Status</label>
               <div class="col-sm-3">
                 <app-combobox maxlength="30" formControlName="mbl_is_sea_waybill" name="mbl_is_sea_waybill"
-                  [dataSource]="BlStatusList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+                  [dataSource]="BlStatusList" [valueColumn]="'key'" [displayColumn]="'value'"
+                  case="UPPER"></app-combobox>
               </div>
             </div>
             <div class="form-group row">
@@ -246,9 +247,9 @@
               </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-4">
-                  <button class="btn btn-sm btn-success w-100 mb-2">Copy To All House</button>
-                </div>
+              <div class="col-sm-4">
+                <button class="btn btn-sm btn-success w-100 mb-2">Copy To All House</button>
+              </div>
               <div class="col-sm-8">
                 <app-input maxlength="60" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'" id="mbl_cargo_loc_add1"
                   name="mbl_cargo_loc_add1"></app-input>
@@ -385,19 +386,23 @@
                   </td>
                   <td>
                     <app-date formControlName="cntr_discharge_date" [rowIndex]="i" name="cntr_discharge_date"
-                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                      [format]="gs.globalConstants.global_date_format"
+                      [placeholder]="gs.globalConstants.global_date_format"></app-date>
                   </td>
                   <td>
                     <app-date formControlName="cntr_lfd" [rowIndex]="i" name="cntr_lfd"
-                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                      [format]="gs.globalConstants.global_date_format"
+                      [placeholder]="gs.globalConstants.global_date_format"></app-date>
                   </td>
                   <td>
                     <app-date formControlName="cntr_pick_date" [rowIndex]="i" name="cntr_pick_date"
-                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                      [format]="gs.globalConstants.global_date_format"
+                      [placeholder]="gs.globalConstants.global_date_format"></app-date>
                   </td>
                   <td>
                     <app-date formControlName="cntr_return_date" [rowIndex]="i" name="cntr_return_date"
-                       [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format" ></app-date>
+                      [format]="gs.globalConstants.global_date_format"
+                      [placeholder]="gs.globalConstants.global_date_format"></app-date>
                   </td>
                   <td *ngIf="showModel">
                     <label>{{iRow.get('cntr_order')?.value}}</label>
@@ -421,7 +426,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="page-body" *ngIf="mform.get('mbl_id')?.value != 0">
         <div class="row">
           <div class="col-md-12">
@@ -439,7 +444,7 @@
                   <th>PCS</th>
                   <th>HANDLED-BY</th>
                   <th>HBL-STATUS</th>
-                   <th>FREIGHT</th>
+                  <th>FREIGHT</th>
                   <th>TERMS</th>
                   <th>AN-SENT</th>
                   <th>AN-SENT BY</th>
@@ -457,7 +462,7 @@
                   </td>
                   <td align="centre" [routerLink]="['/seaimport/seaimporthEdit']"
                     [queryParams]="{ id: iRow.get('hbl_id')?.value, mbl_id: mform.get('mbl_id')?.value, mode: 'edit',menuid:'SEA-IMPORT-H', type: 'SEA-IMPORT-H', appid: appid }"
-                    class="link"> 
+                    class="link">
                     <i class="fa fa-pencil"></i>
                   </td>
                   <td>
@@ -503,7 +508,8 @@
                     <label>{{iRow.get('rec_created_by')?.value}}</label>
                   </td>
                   <td>
-                    <label>{{iRow.get('rec_created_date')?.value | date: gs.globalConstants.global_output_datetime_format}}</label>
+                    <label>{{iRow.get('rec_created_date')?.value | date:
+                      gs.globalConstants.global_output_datetime_format}}</label>
                   </td>
 
                   <td align="centre" (click)="deleteHouse(i,iRow.get('hbl_houseno')?.value,iRow.get('hbl_id')?.value)"
@@ -549,16 +555,19 @@
               [inputdata]="{mode:'add', id:id, parent_type: 'SEA IMPORT',
               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
-            [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD TO FOLLOW UP</button>
-            <button class="btn btn-success btn-sm"  routerLink="/common-shipment/memoEdit"
-            [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid }">INTERNAL MEMO</button>
+              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD
+              TO FOLLOW UP</button>
+            <app-memo 
+              [inputdata]="{id: 0,parent_id: mform.get('mbl_id')?.value,parent_type: 'SEAIMP-CNTR-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
+              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
             <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
-            [queryParams]="{parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
+              [queryParams]="{parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY
+              ORDER</button>
             <button class="btn btn-success btn-sm">PRODUCT</button>
-            <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
-            [disabled]="mform.invalid">Save</button>
+            <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"
+              [disabled]="mform.invalid">Save</button>
           </div>
         </div>
       </div>

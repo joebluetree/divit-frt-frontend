@@ -32,6 +32,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MainmenuComponent } from './core/mainmenu/mainmenu.component';
 import { HistoryComponent } from './shared/history/history.component';
 import { FileUploadComponent } from './shared/fileupload/fileupload.component';
+import { MemoComponent } from './common-shipment/memo/memo.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -79,6 +80,7 @@ export const CustomControls = [
 
   HistoryComponent,
   FileUploadComponent,
+  MemoComponent,
 
   MatIconModule,
   MatToolbarModule,

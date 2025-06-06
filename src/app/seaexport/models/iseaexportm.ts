@@ -90,6 +90,8 @@ export interface iSea_exportm {
   mbl_book_slno: number;
   rec_files_count?: number;
   rec_files_attached?: string;
+  rec_memo_count?: number;
+  rec_memo_attached?: string;
   master_cntr: iContainer[];
   master_house: iSea_expHouse[];
 

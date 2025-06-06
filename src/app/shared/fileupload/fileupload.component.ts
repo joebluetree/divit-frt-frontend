@@ -32,6 +32,27 @@ export class FileUploadComponent {
       data: this.data
     });
   }
+  
+  isMemoType(): boolean {
+    const type = (this.data?.parent_type || '').toUpperCase();
+    const memoTypes = [
+      'AIREXP-CNTR-MEMO',
+      'AIRIMP-CNTR-MEMO',
+      'AIRIMP-SHIP-MEMO',
+      'OTH-CNTR-MEMO',
+      'SEAEXP-CNTR-MEMO',
+      'SEAIMP-CNTR-MEMO',
+      'SEAIMP-SHIP-MEMO',
+    ];
+
+    for (const t of memoTypes) {
+      if (t === type) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
 
 }

@@ -44,6 +44,7 @@ export class MemoEditComponent extends baseEditComponent {
       memo_date: [date],
       memo_memo: [''],
       memo_details: this.fb.array([]),
+      rec_files_attached: [''],
       rec_version: [0],
 
     })
@@ -103,6 +104,7 @@ export class MemoEditComponent extends baseEditComponent {
       memo_date: [rec?.memo_date || ""],
       memo_remarks_id: [rec?.memo_remarks_id || 0],
       memo_remarks_name: [rec?.memo_remarks_name || ""],
+      rec_files_attached: [rec?.rec_files_attached || ""],
       rec_created_by: [rec?.rec_created_by || ""],
       rec_created_date: [rec?.rec_created_date || ""],
       rec_edited_by: [rec?.rec_edited_by || ""],
@@ -138,7 +140,7 @@ export class MemoEditComponent extends baseEditComponent {
           memo_remarks_id: rec.memo_remarks_id,
           memo_remarks_code: rec.memo_remarks_code,
           memo_remarks_name: rec.memo_remarks_name,
-
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
         });
         console.log(rec);
@@ -183,7 +185,7 @@ export class MemoEditComponent extends baseEditComponent {
           memo_remarks_code: rec.memo_remarks_code,
           memo_remarks_name: rec.memo_remarks_name,
           memo_date: rec.memo_date,
-
+          rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
 
         });

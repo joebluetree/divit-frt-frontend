@@ -14,6 +14,7 @@ export interface iMemo {
   memo_remarks_name: string;
   memo_date: string;
   memo_memo: string;
+  rec_files_attached: string;
   memo_details: iMemo[];
 
 

@@ -5,6 +5,7 @@ import { baseEditComponent } from '../../../shared/base-class/baseEditComponent'
 import { MatDialog } from '@angular/material/dialog';
 import { OtherOpService } from '../../services/otherop.service';
 import { iContainer, iOtherOp } from '../../models/iotherop';
+import { MemoEditComponent } from "../../../common-shipment/memo/memo-edit/memo-edit.component";
 
 //Name : Sourav V
 //Created Date : 29/03/2025
@@ -133,6 +134,8 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_it_port: [''],
       rec_files_count: [0],
       rec_files_attached: [''],
+      rec_memo_count: [0],
+      rec_memo_attached: [''],
       otherop_cntr: this.fb.array([]),
       rec_version: [0],
 
@@ -252,6 +255,8 @@ export class OtherOpEditComponent extends baseEditComponent {
           oth_voyage: rec.oth_voyage,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
+          rec_memo_count: rec.rec_memo_count,
+          rec_memo_attached: rec.rec_memo_attached,
           rec_version: rec.rec_version,
 
         });
