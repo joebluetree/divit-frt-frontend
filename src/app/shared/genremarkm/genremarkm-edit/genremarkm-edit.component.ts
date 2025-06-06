@@ -50,8 +50,8 @@ export class GenRemarkmEditComponent extends baseEditComponent {
   addRemarkRow(rec: iGenRemarkm) {
     return this.fb.group({
       remk_id: [rec?.remk_id || 0],
-      remk_parent_id: [rec?.remk_parent_id || 0],
-      remk_parent_type: [rec?.remk_parent_type || ''],
+      remk_parent_id: [rec?.remk_parent_id || this.data.id || 0],
+      remk_parent_type: [rec?.remk_parent_type || this.data.parent_type || ''],
       remk_desc: [rec?.remk_desc || ''],
       remk_order: [rec?.remk_order || 0],
 
