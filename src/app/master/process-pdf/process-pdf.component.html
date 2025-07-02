@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h5>{{ title }}</h5>
+  <button class="btn btn-sm btn-success" (click)="downloadPdf()">Download</button>
+  <button class="btn btn-sm btn-success" (click)="downloadExcel()">Excel</button>
+  <button class="btn btn-sm btn-success" (click)="printPdf()">Print</button>
+  <button class="btn btn-sm btn-success">Email</button>
+  <button class="btn btn-sm btn-success" (click)="return2Parent()">Return</button>
+
+  <button class="btn btn-sm" (click)="zoomOut()">
+    <i class="fa fa-minus"></i>
+  </button>
+  <button class="btn btn-sm" (click)="zoomIn()">
+    <i class="fa fa-plus"></i>
+  </button>
+  <button class="btn btn-sm" (click)="resetZoom()">
+    <i class="fa">Reset</i>
+  </button>
+
+  <button class="btn btn-sm" (click)="toggleFitMode()">
+    <i class="fa">{{ isFitToWidth ? 'Fit to Page' : 'Fit to Width' }}</i>
+  </button>
+</div>
+<div class="page-body line-bottom">
+  <div class="pdf-scroll-container" id="pdf-container" (contextmenu)="disableRightClick($event)">
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" [show-all]="true" [zoom]="computedZoom"
+      [original-size]="!isFitToWidth" style="display: block; height: 80vh;">
+    </pdf-viewer>
+  </div>
+</div>

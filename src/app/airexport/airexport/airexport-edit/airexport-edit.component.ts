@@ -8,7 +8,7 @@ import { iAirexport } from '../../models/iairexport';
 import { AirExporthListComponent } from '../../airexporth/airexporth-list/airexporth-list.component';
 import { AirExporthService } from '../../services/airexporth.service';
 import { iAirexporth } from '../../models/iairexporth';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { FileUploadComponent } from '../../../shared/fileupload/fileupload.component';
 
 
@@ -36,7 +36,8 @@ export class AirExportEditComponent extends baseEditComponent {
   constructor(
     private ms: AirExportService,
     public bs: AirExporthService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http: HttpClient,
   ) {
     super();
     this.showModel = false;
@@ -271,6 +272,26 @@ export class AirExportEditComponent extends baseEditComponent {
         this.isSaved = false;
       }
     })
+  }
+
+  shipmentLabel() {
+    const data = <iAirexport>this.mform.value;
+    const requestData = {
+      'mbl_id': data.mbl_id.toString(),
+      'mbl_mode': data.mbl_mode,
+    };
+
+    this.http.post(this.gs.getUrl(`/api/Airexport/GetLabelAsync`), requestData, {
+      responseType: 'blob',
+      observe: 'response'
+    }).subscribe({
+      next: (response: HttpResponse<Blob>) => {
+        this.gs.downloadFile(response, `${data.mbl_refno}`);
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
   }
 
   callBack(action: any) {

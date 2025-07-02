@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
-import { inject } from "@angular/core";
+import { APP_ID, Inject, inject } from "@angular/core";
 import { GlobalService } from "../../core/services/global.service";
 import { firstValueFrom } from "rxjs";
+import { Router } from "@angular/router";
 
 export abstract class baseService {
 
@@ -11,6 +12,9 @@ export abstract class baseService {
   protected screen_id = '';
   protected state: any;
   protected type = '';
+  protected title = '';
+  protected navdata: any;
+  protected router = inject(Router);
 
   constructor(
     protected pkid: string,
@@ -19,8 +23,10 @@ export abstract class baseService {
   }
   protected abstract setInitialState(): any;
 
-  public init(_screen_id: string, _type: string = '') {
+  public init(_screen_id: string, _type: string = '', title: string) {
+    this.screen_id = _screen_id;
     this.type = _type;
+    this.title = title;
     this.state = this.gs.appStates[_screen_id] || this.setInitialState();
     this.gs.appStates[_screen_id] = this.state;
   }
@@ -101,6 +107,10 @@ export abstract class baseService {
     };
     this.http.post<any>(this.gs.getUrl(url), data, options).subscribe({
       next: (v: any) => {
+        if (v.action === 'PRINT' || v.action === 'PDF' || v.action === 'EXCEL') {
+          this.gs.FilesActions(v.action, v.fileData ?? v, this.screen_id);
+          return;
+        }
         this.state.errorMessage = '';
         this.state.records = v.records;
         this.state.pageRecord.currentPageNo = v.page.currentPageNo;
@@ -182,5 +192,5 @@ export abstract class baseService {
     let mUrl = data.url;
     return this.http.get<any>(this.gs.getUrl(mUrl), options);
   }
-  
+
 }

@@ -9,4 +9,5 @@ export const routes: Routes = [
   { path: 'remarkEdit', loadComponent: () => import('./remark/remark-edit/remark-edit.component').then(c => c.RemarkEditComponent) },
   { path: 'wiretransmList', loadComponent: () => import('./wiretransm/wiretransm-list/wiretransm-list.component').then(c => c.WiretransmListComponent) },
   { path: 'wiretransmEdit', loadComponent: () => import('./wiretransm/wiretransm-edit/wiretransm-edit.component').then(c => c.WiretransmEditComponent) },
+  { path: 'pdfPrint', loadComponent: () => import('./process-pdf/process-pdf.component').then(c => c.ProcessPdfComponent) },
 ]

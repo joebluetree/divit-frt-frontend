@@ -314,7 +314,7 @@
               <button class="btn btn-success btn-sm">MANIFEST</button>
               <button class="btn btn-success btn-sm" type="button">AR & AP</button>
               <button class="btn btn-success btn-sm" type="button">PROFIT REPORT</button>
-              <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
+              <button class="btn btn-success btn-sm" (click)="shipmentLabel()">SHIPMENT LABEL</button>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
                 [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
                  parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER
@@ -329,13 +329,9 @@
                 TO
                 FOLLOW UP
               </button>
-              <!-- <button class="btn btn-success btn-sm" routerLink="/common-shipment/memoEdit"
-                [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
-              </button> -->
-              <app-memo 
-              [inputdata]="{id: 0,parent_id: mform.get('mbl_id')?.value,parent_type: 'AIREXP-CNTR-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
-              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
-              <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
+              <button class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
+              routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO
+              <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
             </div>
           </div>
         </div>

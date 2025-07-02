@@ -56,15 +56,19 @@ export abstract class baseListComponent {
       }
     })
 
-    this._ms.init(this.menuid, this.type);
+    this._ms.init(this.menuid, this.type, this.title);
 
     if (!this.gs.IsValidAppId(this.appid))
       return;
-  }
+  } 
 
   search(_record: any) {
     this._ms.updateSearchRecord(_record.record);
-    this.getList('SEARCH', _record.url);
+    if (!_record.action) {
+      _record.action = 'SEARCH';
+      _record.menu_id = this.menuid;
+    }
+    this.getList(_record.action, _record.url);
   }
 
   pageEvents(arg: any) {

@@ -35,8 +35,8 @@ export class FileUploadmEditComponent extends baseEditComponent {
     public ms: FileUploadmService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<FileUploadmEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     super();
     this.showModel = false;
@@ -273,44 +273,22 @@ export class FileUploadmEditComponent extends baseEditComponent {
   }
 
   downloadFile(files_id: number, files_desc: string) {
-    const url = this.gs.getUrl(`/api/UserAdmin/FileUpload/DownloadFiles`);
-    const params = new HttpParams().set('files_id', files_id.toString());
-
-    this.http.get(url, {
-      params,
+    const requestData = {
+      'files_id': files_id.toString(),
+    };
+    // this.gs.downloadViaPost(url,requestData,`${files_desc}`)
+    this.http.post(this.gs.getUrl(`/api/UserAdmin/FileUpload/DownloadFiles`), requestData, {
       responseType: 'blob',
-      observe: 'response'  // <-- Needed to read headers
+      observe: 'response'
     }).subscribe({
       next: (response: HttpResponse<Blob>) => {
-        const blob = response.body!;
-        const contentDisposition = response.headers.get('Content-Disposition');
-
-        // Default fallback
-        let filename = `${files_desc}`;
-
-        // Try to extract filename from Content-Disposition header
-        if (contentDisposition) {
-          const filenameMatch = contentDisposition.match(/FileName[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
-          if (filenameMatch != null && filenameMatch[1]) {
-            filename = decodeURIComponent(filenameMatch[1].replace(/['"]/g, ''));
-          }
-        }
-
-        // Download logic
-        const downloadURL = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = downloadURL;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(downloadURL);
+        this.gs.downloadFile(response, `${files_desc}`);
       },
-      error: (err) => {
-        const errorMsg = err.error?.message || err.message || 'Failed to download file';
-        this.gs.showError(errorMsg);
+      error: (e) => {
+        this.gs.showError(e);
       }
     });
+
   }
 
 
