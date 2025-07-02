@@ -212,13 +212,13 @@
     </div>
   </div>
 
-  <app-genremarkm-edit [inputdata]="{id:id, parent_type:mform.get('qtnm_type')?.value}"></app-genremarkm-edit>
+  <app-genremarkm-edit [inputdata]="{id:id, parent_type: 'QUOTATION-FCL'}"></app-genremarkm-edit>
 
 </form>
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
   <app-fileupload
-    [inputdata]="{mode:'add', id:id, parent_type: 'FCL',
+    [inputdata]="{mode:'add', id:id, parent_type: 'QUOTATION-FCL',
   rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
 </div>
 

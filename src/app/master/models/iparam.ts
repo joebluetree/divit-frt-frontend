@@ -25,6 +25,7 @@ export interface iParam_Search {
   param_code: string;
   param_name: string;
   rec_company_id: number;
+  rec_branch_id: number;
 }
 
 export interface iParamModel {

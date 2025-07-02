@@ -1,7 +1,0 @@
-<div class="d-grid gap-1">
-    <button class="btn btn-sm"
-        [ngClass]="(!!data?.rec_memo_count || data?.rec_memo_attached === 'Y') ? 'btn-danger' : 'btn-success'"
-        (click)="openMemo()">INTERNAL MEMO
-        <span *ngIf="!!data?.rec_memo_count">({{ data?.rec_memo_count }})</span>
-    </button>
-</div>
