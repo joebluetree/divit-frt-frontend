@@ -10,5 +10,6 @@ export const routes: Routes = [
   { path: 'seaexportmEdit', loadComponent: () => import('./seaexportm/seaexportm-edit/seaexportm-edit.component').then(c => c.SeaExportmEditComponent) },
   { path: 'seaexporthList', loadComponent: () => import('./seaexporth/seaexporth-list/seaexporth-list.component').then(c => c.SeaExportHListComponent) },
   { path: 'seaexporthEdit', loadComponent: () => import('./seaexporth/seaexporth-edit/seaexporth-edit.component').then(c => c.SeaExportHEditComponent) },
+  { path: 'cooEdit', loadComponent: () => import('./coo/coo-edit/coo-edit.component').then(c => c.CoOEditComponent) },
 ]
 

@@ -225,7 +225,7 @@
 <div class="page-footer line-bottom ">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
   <app-fileupload *ngIf="bEdit"
-    [inputdata]="{mode:'add', id:id, parent_type: 'AIR',
+    [inputdata]="{mode:'add', id:id, parent_type: mform.get('qtnm_type')?.value,
     rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
 </div>
 

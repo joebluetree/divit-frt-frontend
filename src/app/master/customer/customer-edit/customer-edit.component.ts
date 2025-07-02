@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { CustomermService } from '../../services/customerm.service';
 import { iContactm, iCustomerm } from '../../models/icustomerm';
@@ -13,6 +13,8 @@ import { baseEditComponent } from '../../../shared/base-class/baseEditComponent'
   imports: [...CustomControls]
 })
 export class CustomerEditComponent extends baseEditComponent {
+  
+  // @ViewChild(CustRemarkmEditComponent) fs!: CustRemarkmEditComponent;
 
   dataList = [
     { key: 'NA', value: 'NA' },
@@ -155,6 +157,10 @@ export class CustomerEditComponent extends baseEditComponent {
       cust_contacts: this.fb.array([]),
       rec_files_count: [0],
       rec_files_attached: [''],
+      rec_memo_attached: [''],
+      rec_sop_attached: [''],
+      rec_qtnm_attached: [''],
+      rec_acc_attached: [''],
       rec_version: [0],
 
     })
@@ -350,6 +356,10 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_cur_code_id: rec.cust_cur_name,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
+          rec_memo_attached: rec.rec_memo_attached,
+          rec_sop_attached: rec.rec_sop_attached,
+          rec_qtnm_attached: rec.rec_qtnm_attached,
+          rec_acc_attached: rec.rec_acc_attached,
           rec_version: rec.rec_version,
 
         });

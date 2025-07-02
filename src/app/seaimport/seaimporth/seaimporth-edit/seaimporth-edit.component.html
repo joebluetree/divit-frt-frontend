@@ -457,7 +457,7 @@
                   id="hbl_isf_no"></app-input>
               </div>
               <div class="col-sm-3">
-                <button class="btn btn-sm btn-info w-100 mb-1">Upload</button>
+                <button class="btn btn-sm btn-success w-100 mb-1">Upload</button>
               </div>
             </div>
           </div>
@@ -545,7 +545,7 @@
                   [dataSource]="DeliveryList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
               <div class="col-sm-5">
-                <button class="btn btn-sm btn-info w-100 mb-1">Upload OHBL Or Telex RLS Copy</button>
+                <button class="btn btn-sm btn-success w-100 mb-1">Upload OHBL Or Telex RLS Copy</button>
               </div>
             </div>
             <div class="form-group row">
@@ -1079,18 +1079,21 @@
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE(FRT INVOICE)</button>
             <button class="btn btn-success btn-sm">PRE-ADVISE</button>
             <button class="btn btn-success btn-sm">TURNOVER LETTER</button>
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
-            [queryParams]="{ parent_id: mform.get('hbl_id')?.value,mode: 'add',parent_type:'SEA-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }"
-            >DELIVERY ORDER</button>
-            <button class="btn btn-success btn-sm">US CUSTOM HOLD</button>
-            <button class="btn btn-success btn-sm">DEVAN/INSTRUCTIONS</button>
-            <app-memo 
-              [inputdata]="{id: 0,parent_id: mform.get('hbl_id')?.value,parent_type: 'SEAIMP-SHIP-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
-              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
-            <button class="btn btn-success btn-sm">RIDER PAGE</button>
+            <button *ngIf="gs.IsUserRightsExits('DELIVERY-ORDER')" class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+              [queryParams]="{ parent_id: mform.get('hbl_id')?.value,mode: 'add',parent_type:'SEA-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }"
+              >DELIVERY ORDER</button>
+            <button *ngIf="gs.IsUserRightsExits('CUSTOM-HOLD')" class="btn btn-success btn-sm" routerLink="/common-shipment/customholdEdit" 
+              [queryParams]="{parent_id: mform.get('hbl_id')?.value, mode: 'add',menuid:'CUSTOM-HOLD', type: 'CUSTOM-HOLD', appid: appid}">US CUSTOM HOLD</button>
+            <button *ngIf="gs.IsUserRightsExits('DEVAN-INSTRUCTION')" class="btn btn-success btn-sm" routerLink="/common-shipment/devaninstEdit"
+              [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type: mform.get('hbl_mode')?.value, mode: 'add',menuid:'DEVAN-INSTRUCTION', type: 'DEVAN-INSTRUCTION', appid: appid}"
+              >DEVAN / INSTRUCTIONS</button>
+            <button *ngIf="gs.IsUserRightsExits('MEMO')" class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
+              routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'SEAIMP-SHIP-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO
+              <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
+            <app-genmemo [inputdata]="{id:id, parent_type: mform.get('hbl_mode')?.value ,menuid:'SEA-IMP-RIDER', type: 'SEA-IMP-RIDER', appid: appid}" [button_name]="'RIDER PAGE'" *ngIf="gs.IsUserRightsExits('SEA-IMP-RIDER')"></app-genmemo>
             <button class="btn btn-success btn-sm">PRODUCTS</button>
             <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
-            [disabled]="mform.invalid">Save</button>
+              [disabled]="mform.invalid">SAVE</button>
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ export const routes: Routes = [
   { path: 'messengerslipEdit', loadComponent: () => import('./messengerslip/messengerslip-edit/messengerslip-edit.component').then(c => c.MessengerSlipEditComponent) },
   { path: 'messengerslipList', loadComponent: () => import('./messengerslip/messengerslip-list/messengerslip-list.component').then(c => c.MessengerSlipListComponent) },
   { path: 'messengerslipDetList', loadComponent: () => import('./messengerslip/messengerslip-detlist/messengerslip-detlist.component').then(c => c.MessengerSlipDetListComponent) },
-
+  { path: 'devaninstEdit', loadComponent: () => import('./devaninst/devaninst-edit/devaninst-edit.component').then(c => c.DevanInstEditComponent) },
+  { path: 'customholdEdit', loadComponent: () => import('./customhold/customhold-edit/customhold-edit.component').then(c => c.CustomHoldEditComponent) },
 
 ]

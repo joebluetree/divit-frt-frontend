@@ -53,11 +53,14 @@ export class SeaImportmEditComponent extends baseEditComponent {
     public dialog: MatDialog
 
   ) {
-
     super();
     this.showModel = false;
+    this.mform = this.createForm();
+  }
+
+  createForm(){
     let date = this.gs.getToday();
-    this.mform = this.fb.group({
+    return this.fb.group({
       mbl_id: [0],
       mbl_cfno: [0],
       mbl_mode: [''],
@@ -127,6 +130,8 @@ export class SeaImportmEditComponent extends baseEditComponent {
 
     })
   }
+
+
 
   ngOnInit() {
     this.id = 0;

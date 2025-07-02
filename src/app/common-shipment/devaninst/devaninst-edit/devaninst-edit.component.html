@@ -1,0 +1,173 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h5>{{title}}</h5>
+      <app-history [inputdata]="{table: 'cargo_devan_inst', id:parent_id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body ">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref#</label>
+              <div class="col-sm-8">
+                <app-input maxlength="30" formControlName="di_refno" name="di_refno" [case]="'UPPER'"
+                [disable]="true"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body ">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Request To</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="di_request_to_code" id="di_request_to_code" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_request_to_name" [case]="'UPPER'" id="di_request_to_name"
+                  name="di_request_to_name"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_request_to_add1" [case]="'UPPER'" id="di_request_to_add1"
+                  name="di_request_to_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_request_to_add2" [case]="'UPPER'" id="di_request_to_add2"
+                  name="di_request_to_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_request_to_add3" [case]="'UPPER'" id="di_request_to_add3"
+                  name="di_request_to_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_request_to_add4" [case]="'UPPER'" id="di_request_to_add4"
+                  name="di_request_to_add4"></app-input>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cargo Location</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="di_cargo_loc_code" id="di_cargo_loc_code" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_cargo_loc_name" [case]="'UPPER'" id="di_cargo_loc_name"
+                  name="di_cargo_loc_name"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_cargo_loc_add1" [case]="'UPPER'" id="di_cargo_loc_add1"
+                  name="di_cargo_loc_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_cargo_loc_add2" [case]="'UPPER'" id="di_cargo_loc_add2"
+                  name="di_cargo_loc_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_cargo_loc_add3" [case]="'UPPER'" id="di_cargo_loc_add3"
+                  name="di_cargo_loc_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_cargo_loc_add4" [case]="'UPPER'" id="di_cargo_loc_add4"
+                  name="di_cargo_loc_add4"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body ">
+        <div class="row">
+          <div class="col-sm-6">  
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Remarks</label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_remark1" [case]="'UPPER'" id="di_remark1"
+                  name="di_remark1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_remark2" [case]="'UPPER'" id="di_remark2"
+                  name="di_remark2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="di_remark3" [case]="'UPPER'" id="di_remark3"
+                  name="di_remark3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="form-label form-label-sm col-sm-4">Devanning Instruction Sent</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="di_is_devan_sent"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="di_devan_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="page-footer line-bottom">
+      <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+      <button *ngIf="(mform.get('do_id')?.value>0)" class="btn btn-success btn-sm">PRINT</button>
+</div>
+  </div>
+
+  <div *ngIf="showModel">
+    <pre>
+    {{mform.value | json}}
+  </pre>
+  </div>
