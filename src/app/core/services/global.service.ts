@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { iMenum } from '../models/imenum';
 
 import ShortUniqueId from 'short-unique-id';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -36,6 +36,7 @@ export class GlobalService {
 
   constructor(
     private location: Location,
+    private http: HttpClient,
     private router: Router
   ) {
     this.url = "https:/jsonplaceholder.typicode.com";
@@ -275,6 +276,24 @@ export class GlobalService {
     else
       return rec;
   }
+  
+  public IsUserRightsExits(menu_code: string): boolean {
+    const rec = this.getUserRights(menu_code);
+    if (rec) {
+      const isVisible = rec.rights_admin == "Y"|| rec.rights_add == "Y"|| rec.rights_edit == "Y"|| rec.rights_view == "Y"|| rec.rights_delete == "Y" ? true : false;
+      return isVisible;
+    }
+    return false;
+  }
+  
+  public AddHouseRights(menu_code: string): boolean {
+    const rec = this.getUserRights(menu_code);
+    if (rec) {
+      const isVisible =  rec.rights_add == "Y" ? true : false;
+      return isVisible;
+    }
+    return false;
+  }
 
   IsValidAppId(_app_id: string) {
     let bflag = true;
@@ -391,6 +410,75 @@ export class GlobalService {
     ];
 
     this.showAlert(errorMsg); // Show as alert
+  }
+
+
+  downloadFile(response: HttpResponse<Blob>, Filename: string): void {
+    let filename = Filename;
+    const contentDisposition = response.headers.get('Content-Disposition');
+
+    if (contentDisposition) {
+      const filenameMatch = contentDisposition.match(/FileName[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+      if (filenameMatch && filenameMatch[1]) {
+        filename = decodeURIComponent(filenameMatch[1].replace(/['"]/g, ''));
+      }
+    }
+
+    const blob = response.body!;
+    const downloadURL = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = downloadURL;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(downloadURL);
+  }
+
+  downloadProcess(rec: string, name: string) {
+    const param = { 'file_path': rec, };
+    this.http.post(this.getUrl('/api/common/GetDownloadFileAsync'), param, {
+      responseType: 'blob',
+      observe: 'response'
+    }).subscribe({
+      next: (response: HttpResponse<Blob>) => {
+        this.downloadFile(response, name);
+      },
+      error: (e) => {
+        this.showError(e);
+      }
+    });
+  }
+
+
+ FilesActions(action: string, fileData: any[], menu_id: any) {
+  if (action === 'PRINT') {
+    this.ToPrint(fileData, menu_id);
+    return;
+  }
+
+  const pdfData = fileData.find(x => x.FileType === 'PDF');
+  const excelData = fileData.find(x => x.FileType === 'EXCEL');
+
+  if (action === 'PDF' && pdfData) {
+    this.downloadProcess(pdfData.FilePath, pdfData.FileName);
+    return;
+  }
+
+  if (action === 'EXCEL' && excelData) {
+    this.downloadProcess(excelData.FilePath, excelData.FileName);
+    return;
+  }
+}
+
+
+ ToPrint(fileData: any, menu_id: any) {
+    this.router.navigate(['/masters/pdfPrint'], {
+      state: { fileData },
+      queryParams: {
+         menuid: menu_id, type: '', appid: this.app_id,
+      }
+    });
   }
 
 }

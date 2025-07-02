@@ -20,6 +20,7 @@ export class AirExportSearchComponent {
 
   mform: FormGroup;
   record!: iAirExport_Search;
+  records: any;
 
   @Input('search_url') search_url = '';
 
