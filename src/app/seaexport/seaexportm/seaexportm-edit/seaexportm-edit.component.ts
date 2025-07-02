@@ -10,6 +10,7 @@ import { iSea_exportH } from '../../models/iseaexporth';
 //Name : Sourav V
 //Created Date : 04/01/2025
 //Remark : this component manages creation,editing and saving of qtnm-lcl(parent table) records
+// version - 2 - 19/06/2025 - memo component and certficate of origin added
 
 @Component({
   selector: 'app-seaexportm-edit',
@@ -309,7 +310,8 @@ export class SeaExportmEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version,
           mbl_cfno: v.mbl_cfno,
-          mbl_refno: v.mbl_refno
+          mbl_refno: v.mbl_refno,
+          mbl_mode: v.mbl_mode
         });
         this.fillCntr(v.master_cntr);
         // this.fillHouse(v.master_house);

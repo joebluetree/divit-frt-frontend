@@ -1,0 +1,6 @@
+<div class="d-grid gap-1">
+    <button class="btn btn-sm"
+    [ngClass]="(data?.rec_is_memo_attached === 'Y') ? 'btn-danger' : 'btn-success'" (click)="openGenMemo()">
+    {{buttonLabel }}
+    </button>
+</div>

@@ -360,7 +360,7 @@
             </table>
             <div class="row" *ngIf=" mform.get('mbl_id')?.value != 0">
               <div class="col-md-12 text-center mb-2">
-                <button *ngIf="bAdd" class="btn btn-sm btn-info" type="button" routerLink="/seaexport/seaexporthEdit"
+                <button *ngIf="gs.AddHouseRights('SEA-EXPORT-H')" class="btn btn-sm btn-info" type="button" routerLink="/seaexport/seaexporthEdit"
                   [queryParams]="{ id:0, mbl_id: mform.get('mbl_id')?.value, mode: 'add',menuid:'SEA-EXPORT-H', type: 'SEA-EXPORT-H', appid: appid }">
                   Add House</button>
               </div>
@@ -389,7 +389,7 @@
             <button class="btn btn-success btn-sm">AR & AP</button>
             <button class="btn btn-success btn-sm">PROFIT REPORT</button>
             <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
-            <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
+            <button *ngIf="gs.IsUserRightsExits('MESSENGER-SLIP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
             [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
             parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">MESSENGER SLIP</button>
             <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
@@ -398,11 +398,13 @@
               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
             [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD TO FOLLOW UP</button>
-            <app-memo 
-              [inputdata]="{id: 0,parent_id: mform.get('mbl_id')?.value,parent_type: 'SEAEXP-CNTR-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
-              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
+            <button *ngIf="gs.IsUserRightsExits('MEMO')" class="btn btn-sm"
+              [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" routerLink="/common-shipment/memoEdit"
+              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAEXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
+              <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
-            <button class="btn btn-success btn-sm">CERTIFICATE OF ORIGIN</button>
+            <button *ngIf="gs.IsUserRightsExits('COO')" class="btn btn-success btn-sm" type="button" routerLink="/seaexport/cooEdit"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'COO', type:'COO', appid: appid,parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">CERTIFICATE OF ORIGIN</button>
             <button *ngIf="bAdd || bEdit"  class="btn btn-success btn-sm"(click)="save()"
             [disabled]="mform.invalid">Save</button>
           </div>

@@ -569,9 +569,10 @@
             <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
               [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">ADD
               TO FOLLOW UP</button>
-            <app-memo 
-              [inputdata]="{id: 0,parent_id: mform.get('oth_id')?.value,parent_type: 'OTH-CNTR-MEMO',menuid: 'MEMO',type: 'MEMO',appid: appid,
-              rec_memo_count: mform.get('rec_memo_count')?.value,rec_memo_attached: mform.get('rec_memo_attached')?.value,mode: 'add',}"></app-memo>
+            <button class="btn btn-sm"
+              [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" routerLink="/common-shipment/memoEdit"
+              [queryParams]="{ id:0, parent_id: mform.get('oth_id')?.value,parent_type:'OTH-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
+              <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"
               [disabled]="mform.invalid">SAVE</button>

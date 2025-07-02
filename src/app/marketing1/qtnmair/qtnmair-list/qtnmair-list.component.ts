@@ -35,6 +35,7 @@ export class QtnmAirListComponent extends baseListComponent {
       { col_name: "qtnm_no", col_caption: "QUOTE#", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_date", col_caption: "DATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_to_name", col_caption: "QUOTE TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "qtnm_quot_by", col_caption: "QUOTE BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pol_name", col_caption: "POL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_pod_name", col_caption: "POD", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "qtnm_move_type", col_caption: "MOVE TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },

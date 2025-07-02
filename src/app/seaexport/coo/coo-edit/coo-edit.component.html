@@ -1,0 +1,580 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h5>Certificate of Origin</h5>
+      <app-history [inputdata]="{table: 'cargo_coo', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref #</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbld_exp_ref" [case]="'UPPER'" id="mbld_exp_ref" name="mbld_exp_ref"
+                  maxlength="30" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Shipper</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="mbld_shipper_code" id="mbld_shipper_code" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="mbld_shipper_name" id="mbld_shipper_name"
+                  name="mbld_shipper_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_shipper_add1" [case]="'UPPER'" id="mbld_shipper_add1"
+                  name="mbld_shipper_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_shipper_add2" [case]="'UPPER'" id="mbld_shipper_add2"
+                  name="mbld_shipper_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_shipper_add3" [case]="'UPPER'" id="mbld_shipper_add3"
+                  name="mbld_shipper_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_shipper_add4" [case]="'UPPER'" id="mbld_shipper_add4"
+                  name="mbld_shipper_add4"></app-input>
+              </div>
+            </div>
+            <!--add-->
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Consignee</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="mbld_consignee_code" id="mbld_consignee_code"
+                  (CallBack)="callBack($event)" [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="mbld_consignee_name" id="mbld_consignee_name"
+                  name="mbld_consignee_name" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_consignee_add1" [case]="'UPPER'" id="mbld_consignee_add1"
+                  name="mbld_consignee_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_consignee_add2" [case]="'UPPER'" id="mbld_consignee_add2"
+                  name="mbld_consignee_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_consignee_add3" [case]="'UPPER'" id="mbld_consignee_add3"
+                  name="mbld_consignee_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_consignee_add4" [case]="'UPPER'" id="mbld_consignee_add4"
+                  name="mbld_consignee_add4"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Notify</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="mbld_notify_code" id="mbld_notify_code" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="mbld_notify_name" id="mbld_notify_name" name="mbld_notify_name"
+                  [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_notify_add1" [case]="'UPPER'" id="mbld_notify_add1"
+                  name="mbld_notify_add1"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_notify_add2" [case]="'UPPER'" id="mbld_notify_add2"
+                  name="mbld_notify_add2"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_notify_add3" [case]="'UPPER'" id="mbld_notify_add3"
+                  name="mbld_notify_add3"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="mbld_notify_add4" [case]="'UPPER'" id="mbld_notify_add4"
+                  name="mbld_notify_add4"></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Agent</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbld_agent_name" id="mbld_agent_name" (CallBack)="callBack($event)"
+                  [table]="'customerm'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]">
+                </auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Place Receipt</label>
+              <div class="col-sm-8">
+                <app-input maxlength="50" formControlName="mbld_place_receipt" [case]="'UPPER'" id="mbld_place_receipt"
+                  name="mbld_place_receipt"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Pol</label>
+              <div class="col-sm-8">
+                <app-input maxlength="50" formControlName="mbld_pol_name" [case]="'UPPER'" id="mbld_pol_name"
+                  name="mbld_pol_name"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Pod</label>
+              <div class="col-sm-8">
+                <app-input maxlength="50" formControlName="mbld_pod_name" [case]="'UPPER'" id="mbld_pod_name"
+                  name="mbld_pod_name"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Place Delivery</label>
+              <div class="col-sm-8">
+                <app-input maxlength="50" formControlName="mbld_place_delivery" [case]="'UPPER'" id="mbld_place_delivery"
+                  name="mbld_place_delivery"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Move Type</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="mbld_move_type" [case]="'UPPER'" name="mbld_move_type"
+                  id="mbld_move_type"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="form-label form-label-sm col-sm-4">Is Containerized</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="mbld_is_cntrized"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Handled.By</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="mbld_handled_name" id="mbld_handled_name" (CallBack)="callBack($event)"
+                  [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="form-label form-label-sm col-sm-4">Print Vessel / Voyage</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="mbld_print_vsl_voy"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Marks & Nos</label>
+              <div class="col-sm-4">
+                <button class="btn btn-sm btn-success mb-1" type="button" (click)="loadCntr()">Load Cntr</button>
+              </div>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Pkgs</label>
+            </div>
+
+
+            <div formGroupName="marks1">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks2">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks3">
+              <div class="form-group row">
+                <div class="col-sm-8">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+                <div class="col-sm-4">
+                  <app-input maxlength="100" formControlName="desc_package" [case]="'UPPER'" name="desc_package"
+                    id="desc_package"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks4">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks5">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks6">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks7">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks8">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks9">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks10">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks11">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks13">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks14">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks15">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks16">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks17">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_mark" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-8 form-label form-lable-sm" for="">Description</label>
+            </div>
+            <div formGroupName="marks1">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks2">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks3">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks4">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks5">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks6">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks7">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks8">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks9">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks10">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks11">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks13">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks14">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks15">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks16">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+            <div formGroupName="marks17">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <app-input maxlength="100" formControlName="desc_description" [case]="'UPPER'" name="desc_mark"
+                    id="desc_mark"></app-input>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div>
+      </div> -->
+
+
+      <div class="col-sm-4">
+        <!-- <div class="form-group row"> -->
+          <label class="col-sm-8 form-label form-lable-sm" for=""></label>
+        <!-- </div> -->
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Lbs</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbld_lbs" [type]="'number'" name="mbld_lbs" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Kgs</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbld_weight" [type]="'number'" name="mbld_weight" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cft</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbld_cft" [type]="'number'" name="mbld_cft" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cbm</label>
+              <div class="col-sm-8">
+                <app-input formControlName="mbld_cbm" [type]="'number'" name="mbld_cbm" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="page-footer line-bottom">
+      <button class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+    </div>
+  </div>
+</div>
+<!-- *ngIf="bAdd || bEdit" -->
+
+<!-- <div class="page-footer line-bottom">
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+</div> -->
+
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

@@ -47,13 +47,14 @@ export class GenRemarkmEditComponent extends baseEditComponent {
     return this.mform.get('remk_remarks') as FormArray;
   }
 
-  addRemarkRow(rec: iGenRemarkm) {
+  addRemarkRow(idx: number,rec: iGenRemarkm) {
+    const nidx = idx + 1;
     return this.fb.group({
       remk_id: [rec?.remk_id || 0],
       remk_parent_id: [rec?.remk_parent_id || this.data.id || 0],
       remk_parent_type: [rec?.remk_parent_type || this.data.parent_type || ''],
       remk_desc: [rec?.remk_desc || ''],
-      remk_order: [rec?.remk_order || 0],
+      remk_order: [rec?.remk_order || nidx],
 
       rec_company_id: [rec?.rec_company_id || 0],
       rec_branch_id: [rec?.rec_branch_id || 0],
@@ -62,7 +63,9 @@ export class GenRemarkmEditComponent extends baseEditComponent {
   }
 
   addDetails(iRow: iGenRemarkm = <iGenRemarkm>{}) {
-    this.getRemarksArray().push(this.addRemarkRow(iRow));
+    const order = this.getRemarksArray().length + 1;
+    iRow.remk_order = iRow.remk_order || order;
+    this.getRemarksArray().push(this.addRemarkRow(order - 1, iRow));
   }
 
   deleteDetails(idx: number) {

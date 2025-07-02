@@ -127,6 +127,10 @@ export interface iCustomerm {
 
   rec_files_count: number;
   rec_files_attached: string;
+  rec_memo_attached: string;
+  rec_sop_attached: string;
+  rec_qtnm_attached: string;
+  rec_acc_attached: string;
   cust_contacts: iContactm[];
   rec_version: number;
   rec_company_id: number;

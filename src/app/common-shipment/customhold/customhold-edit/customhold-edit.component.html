@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h5>{{title}}</h5>
+      <app-history [inputdata]="{table: 'cargo_custom_hold', id:parent_id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body ">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"> Ref# </label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="custom_refno" [case]="'UPPER'" id="custom_refno"
+                  name="custom_refno" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"> HouseNo </label>
+              <div class="col-sm-8">
+                <app-input maxlength="30" formControlName="custom_houseno" [case]="'UPPER'" id="custom_houseno"
+                  name="custom_houseno" [disable]="true"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body ">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm"> Title</label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="custom_title" [case]="'UPPER'" id="custom_title"
+                  name="custom_title"></app-input>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Commercial Invoice, please fax to</label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="custom_comm_inv_yn"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="200" formControlName="custom_comm_inv" [case]="'UPPER'" id="custom_comm_inv"
+                  name="custom_comm_inv"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Fumigation Certificate, please fax to</label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="custom_fumi_cert_yn"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="200" formControlName="custom_fumi_cert" [case]="'UPPER'" id="custom_fumi_cert"
+                  name="custom_fumi_cert"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">The Guarantee for inspection charges to</label>
+              <div class="col-sm-3">
+                <app-checkbox formControlName="custom_insp_chrg_yn"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm">Yes/No</label>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="200" formControlName="custom_insp_chrg" [case]="'UPPER'" id="custom_insp_chrg"
+                  name="custom_insp_chrg"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Remarks</label>
+              <div class="col-sm-8">
+                <app-input maxlength="200" formControlName="custom_remarks" [case]="'UPPER'" id="custom_remarks"
+                  name="custom_remarks"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="page-footer line-bottom">
+      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+      <button *ngIf="(mform.get('custom_id')?.value>0)" class="btn btn-success btn-sm">PRINT</button>
+    </div>
+  </div>
+
+  <div *ngIf="showModel">
+    <pre>
+    {{mform.value | json}}
+  </pre>
+  </div>

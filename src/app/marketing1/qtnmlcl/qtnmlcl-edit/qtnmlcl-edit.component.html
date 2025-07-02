@@ -262,7 +262,7 @@
 
     <div class="row" *ngIf="formArray('qtnd_lcl').length <= 0">
       <div class="col-md-12 text-center">
-        <button class="btn btn-sm btn-info" (click)="addQuote()">Add Quote</button>
+        <button class="btn btn-sm btn-info" type="button" (click)="addQuote()">Add Quote</button>
       </div>
     </div>
   </div>
@@ -276,7 +276,7 @@
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
   <!-- <app-fileupload [inputdata]="{mode:'add', id:id, parent_type: 'LCL'}"></app-fileupload> -->
   <app-fileupload *ngIf="bEdit"
-    [inputdata]="{mode:'add', id:id, parent_type: 'LCL',
+    [inputdata]="{mode:'add', id:id, parent_type: mform.get('qtnm_type')?.value,
     rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
 </div>
 

@@ -902,13 +902,8 @@
                   id="hbl_issued_place"></app-input>
               </div>
             </div>
-            <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Issue Date</label>
-              <div class="col-sm-8">
-                <app-date formControlName="hbl_issued_date" [format]="gs.globalConstants.global_date_format"
-                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
-              </div>
-            </div>
+
+            
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Orginals</label>
               <div class="col-sm-8">
@@ -971,33 +966,31 @@
           </div>
           <div class="form-group row">
             <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(ORGINAL)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
             </div>
 
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(TELEX)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(TELEX)</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">HBL(DRAFT)</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">HBL(DRAFT)</button>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">PRINT HBL</button>
+              <button class="btn btn-sm btn-success w-100 mb-2">PRINT HBL</button>
             </div>
+          </div>
+          <div class="form-group row mb-2">
+            <app-genmemo [inputdata]="{id:id, parent_type: mform.get('hbl_mode')?.value ,menuid:'SEA-EXP-RIDER', type: 'SEA-EXP-RIDER', appid: appid}" [button_name]="'RIDER'" *ngIf="gs.IsUserRightsExits('SEA-EXP-RIDER')"></app-genmemo>
           </div>
           <div class="form-group row">
             <div class="col-sm-12">
-              <button class="btn btn-sm btn-info w-100 mb-2">RIDER</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-info w-100 mb-2" (click)="save()"
+              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
                 [disabled]="mform.invalid">SAVE</button>
             </div>
           </div>

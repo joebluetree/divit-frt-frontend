@@ -513,7 +513,7 @@
 </form>
 
 <div class="page-footer line-bottom">
-  <button class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
+  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
   <button *ngIf="(mform.get('do_id')?.value>0)" class="btn btn-success btn-sm">PRINT</button>
 </div>
 
