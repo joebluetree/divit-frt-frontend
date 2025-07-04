@@ -7,12 +7,12 @@
 
 
 <div class="page-search">
-  <app-param-search [search_url]="'/api/param/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-param-search [search_url]="'/api/param/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-param-search>
 </div>
 
 <div class="page-pagination">
-  <app-page [search_url]="'/api/param/GetListAsync'" [page]="ms.getPageRecord()"
+  <app-page [search_url]="'/api/param/GetListAsync'" [page]="ms.getPageRecord()" 
     (pageEvents)="pageEvents($event)"></app-page>
 </div>
 

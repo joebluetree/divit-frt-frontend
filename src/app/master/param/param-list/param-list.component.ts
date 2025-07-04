@@ -25,6 +25,7 @@ export class ParamListComponent extends baseListComponent {
   value4 = "";
   value5 = "";
 
+
   constructor(public ms: ParamService) {
     super(ms);
   }
@@ -37,6 +38,7 @@ export class ParamListComponent extends baseListComponent {
     if (this.type == "SEA CARRIER") {
       this.value1 = "SCAC CODE";
     }
+ 
 
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
 

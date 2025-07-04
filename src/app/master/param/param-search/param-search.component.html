@@ -15,7 +15,9 @@
       <div class="form-group row">
         <div class="col-sm-12">
           <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
-          <button class="btn btn-sm btn-success me-1" (click)="search('PRINT')">Print</button>
+           <!-- *ngIf="gs.AddParamRights(this.menu_id)" -->
+          <button class="btn btn-sm btn-success me-1" *ngIf="print" (click)="search('PRINT')">Print</button>
+          <!-- *ngIf="bAdd" -->
           <button class="btn btn-sm btn-success me-1" *ngIf="showModel" (click)="search('PDF')">PDF</button>
           <button class="btn btn-sm btn-success" *ngIf="showModel" (click)="search('EXCEL')">Excel</button>
         </div>
