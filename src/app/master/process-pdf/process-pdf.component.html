@@ -1,9 +1,9 @@
 <div class="page-header">
   <h5>{{ title }}</h5>
-  <button class="btn btn-sm btn-success" (click)="downloadPdf()">Download</button>
-  <button class="btn btn-sm btn-success" (click)="downloadExcel()">Excel</button>
-  <button class="btn btn-sm btn-success" (click)="printPdf()">Print</button>
-  <button class="btn btn-sm btn-success">Email</button>
+  <button class="btn btn-sm btn-success" *ngIf="bPdf" (click)="downloadPdf()">Download</button>
+  <button class="btn btn-sm btn-success" *ngIf="bExcel" (click)="downloadExcel()">Excel</button>
+  <button class="btn btn-sm btn-success" *ngIf="bPrint" (click)="printPdf()">Print</button>
+  <button class="btn btn-sm btn-success" *ngIf="bEmail">Email</button>
   <button class="btn btn-sm btn-success" (click)="return2Parent()">Return</button>
 
   <button class="btn btn-sm" (click)="zoomOut()">

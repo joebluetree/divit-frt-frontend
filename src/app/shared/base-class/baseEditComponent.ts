@@ -29,6 +29,10 @@ export abstract class baseEditComponent {
   protected bAdd = false;
   protected bEdit = false;
   protected bView = false;
+  protected bPrint = false;
+  protected bPdf = false;
+  protected bExcel = false;
+  protected bEmail = false;
   protected bDelete = false;
 
   protected menum: iMenum | null;
@@ -53,6 +57,10 @@ export abstract class baseEditComponent {
         this.bAdd = this.menum.rights_add == "Y" ? true : false;
         this.bEdit = this.menum.rights_edit == "Y" ? true : false;
         this.bView = this.menum.rights_view == "Y" ? true : false;
+        this.bPrint = this.menum.rights_print == "Y" ? true : false;
+        this.bPdf = this.menum.rights_pdf == "Y" ? true : false;
+        this.bExcel = this.menum.rights_excel == "Y" ? true : false;
+        this.bEmail = this.menum.rights_email == "Y" ? true : false;
         this.bDelete = this.menum.rights_delete == "Y" ? true : false;
       }
     });
