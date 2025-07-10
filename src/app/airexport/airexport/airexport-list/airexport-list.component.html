@@ -7,7 +7,7 @@
 
 <div class="page-search">
   <app-airexport-search [search_url]="'/api/Airexport/GetListAsync'" [input]="ms.getSearchRecord()"
-    (searchResult)="search($event)"></app-airexport-search>
+    [print]="this.Print" (searchResult)="search($event)"></app-airexport-search>
 </div>
 
 <div class="page-pagination">

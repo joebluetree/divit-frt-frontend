@@ -10,10 +10,10 @@
       <div class="col-sm-12">
         <div class="mb-1 mt-1">
           <button *ngIf="moduleNames?.length" class="btn btn-sm btn-success me-2"
-            [class.btn-primary]="selectedModule === ''" (click)="filterRecords('')">All</button>
+            [class.btn-primary]="selectedModule === ''" (click)="filterModule('')">All</button>
 
           <button *ngFor="let module of moduleNames" class="btn btn-sm btn-success me-2"
-            (click)="filterRecords(module)">{{ module }}</button>
+            (click)="filterModule(module)">{{ module }}</button>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
           <label class="col-sm-1 form-label form-label-sm" for="">Search</label>
           <div class="col-sm-11">
             <input type="text" class="form-control form-control-sm" formControlName="menu_name"
-              (input)="filterRecords('')" />
+              (input)="filterModule(this.selectedModule)" />
           </div>
         </div>
       </div>

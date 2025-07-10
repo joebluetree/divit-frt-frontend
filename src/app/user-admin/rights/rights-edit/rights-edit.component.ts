@@ -147,27 +147,32 @@ export class RightsEditComponent extends baseEditComponent {
 
   }
 
-
-  //function for Search
-filterRecords(module: string) {
-  this.selectedModule = module; // Save selected module
-  const search = (this.mform.get('menu_name')?.value || '').toUpperCase();
-  const allRecords = this.formArray('records').controls;
-
-  if (!search && module === '') {
-    this.filteredRecords = allRecords;
-    return;
+  filterModule(module: string) {
+    this.selectedModule = module;
+    this.filterRecords();
   }
 
-  this.filteredRecords = allRecords.filter(rec => {
-    const menuName = (rec.get('rights_menu_name')?.value || '').toUpperCase();
-    const moduleName = (rec.get('rights_module_name')?.value || '').toUpperCase();
-    const matchesSearch = menuName.includes(search) || moduleName.includes(search);
-    const matchesModule = module === '' || moduleName === module.toUpperCase();
-    return matchesSearch && matchesModule;
-  });
-}
+  //function for Search
+  filterRecords() {
+    const search = (this.mform.get('menu_name')?.value || '').toUpperCase();
+    const allRecords = this.formArray('records').controls;
+    const selectedModuleName = this.selectedModule;
 
+    const modulrecord = allRecords.filter(rec => {
+      const moduleName = (rec.get('rights_module_name')?.value || '');
+      const moduleSearchRecords = !selectedModuleName || moduleName === selectedModuleName;
+      return moduleSearchRecords;
+    });
+
+    // Step 2: Filter by search term on the module-filtered records
+    this.filteredRecords = modulrecord.filter(rec => {
+      const menuName = (rec.get('rights_menu_name')?.value || '').toUpperCase();
+      const moduleName = (rec.get('rights_module_name')?.value || '');
+
+      const matchesSearch = !search || menuName.includes(search) || moduleName.includes(search);
+      return matchesSearch;
+    });
+  }
 
 
   callBack(action: { id: string, rec: iBranchm }) {
