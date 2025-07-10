@@ -22,6 +22,8 @@ export class QtnmLclSearchComponent {
   mform: FormGroup;
   record!: iQtnm_lcl_Search;
   appid: string = '';
+  
+  @Input() print: boolean = false;
 
   @Input('search_url') search_url = '';
 

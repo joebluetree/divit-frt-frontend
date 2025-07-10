@@ -6,7 +6,7 @@
 </div>
 
 <div class="page-search">
-  <app-qtnmair-search [search_url]="'/api/marketing/qtnmair/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-qtnmair-search [search_url]="'/api/marketing/qtnmair/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-qtnmair-search>
 </div>
 
