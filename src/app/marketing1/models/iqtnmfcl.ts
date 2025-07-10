@@ -94,6 +94,7 @@ export interface iQtnmfcl {
 
 export interface iQtnmFcl_Search {
   qtnm_no: string;
+  qtnm_to_name: string;
   qtnm_from_date: string;
   qtnm_to_date: string;
   rec_company_id: number;

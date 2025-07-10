@@ -15,9 +15,15 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Quote To / Quote#</label>
+        <label class="col-sm-4 form-label form-label-sm" for="">Quote#</label>
         <div class="col-sm-8">
           <app-input type="text" formControlName="qtnm_no" [case]="'UPPER'"> </app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Quote To</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="qtnm_to_name" [case]="'UPPER'"> </app-input>
         </div>
       </div>
     </div>
@@ -29,7 +35,8 @@
       </div>
       <div class="form-group row">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')">Print</button>
         </div>
       </div>
     </div>

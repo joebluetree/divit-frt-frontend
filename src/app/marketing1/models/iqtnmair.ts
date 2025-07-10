@@ -81,7 +81,6 @@ export interface iQtnm_air_Search {
   qtnm_search: string;
   qtnm_type: string;
   qtnm_no: string;
-  qtnm_to_id: number;
   qtnm_to_name: string;
   qtnm_from_date: string;
   qtnm_to_date: string;

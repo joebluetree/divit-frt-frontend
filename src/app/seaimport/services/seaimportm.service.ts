@@ -20,7 +20,7 @@ export class SeaImportmService extends baseService {
     return <iSea_importmModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iSea_importm_Search>{ mbl_refno:'',mbl_agent_name:'',mbl_pol_name:'',mbl_pod_name:'', mbl_from_date:'',mbl_to_date:'', rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iSea_importm_Search>{title:this.title, mbl_refno:'', mbl_from_date:'',mbl_to_date:'', rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

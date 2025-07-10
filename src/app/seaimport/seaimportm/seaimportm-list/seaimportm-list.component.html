@@ -6,7 +6,7 @@
 </div>
 
 <div class="page-search">
-  <app-seaimportm-search [search_url]="'/api/seaimport/seaimportm/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-seaimportm-search [search_url]="'/api/seaimport/seaimportm/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-seaimportm-search>
 </div>
 

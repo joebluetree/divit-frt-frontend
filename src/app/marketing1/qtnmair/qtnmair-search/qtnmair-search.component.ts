@@ -21,7 +21,9 @@ export class QtnmAirSearchComponent {
 
   mform: FormGroup;
   record!: iQtnm_air_Search;
+  appid: string = '';
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iQtnm_air_Search) {
@@ -48,6 +50,7 @@ export class QtnmAirSearchComponent {
   }
 
   ngOnInit(): void {
+    this.appid = this.gs.app_id
     this.mform.setValue({
       qtnm_from_date: this.record.qtnm_from_date,
       qtnm_to_date: this.record.qtnm_to_date,
@@ -65,7 +68,7 @@ export class QtnmAirSearchComponent {
       this.record.qtnm_no = this.mform.value.qtnm_no;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({ action: _action,record: this.record, url: this.search_url });
     }
   }
 

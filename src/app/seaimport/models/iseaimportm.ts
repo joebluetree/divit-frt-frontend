@@ -135,9 +135,6 @@ export interface iSea_importm_Search {
   mbl_refno: string;
   mbl_from_date: string;
   mbl_to_date: string;
-  mbl_agent_name: string;
-  mbl_pol_name: string;
-  mbl_pod_name: string;
 
   rec_company_id: number;
   rec_branch_id: number;
