@@ -24,6 +24,8 @@ export class AirExportSearchComponent {
 
   @Input('search_url') search_url = '';
 
+  @Input() print: boolean = false;
+
   @Input('input') set input(v: iAirExport_Search) {
     this.record = { ...v };
   }
@@ -59,7 +61,7 @@ export class AirExportSearchComponent {
       this.record.mbl_to_date = this.mform.value.mbl_to_date;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({ action: _action, record: this.record, url: this.search_url });
     }
   }
 
