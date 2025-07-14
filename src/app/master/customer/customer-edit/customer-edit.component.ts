@@ -382,6 +382,7 @@ export class CustomerEditComponent extends baseEditComponent {
     data.cust_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
 
     let _mode = this.mode;

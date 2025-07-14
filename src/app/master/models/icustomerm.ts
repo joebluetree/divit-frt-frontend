@@ -134,6 +134,7 @@ export interface iCustomerm {
   cust_contacts: iContactm[];
   rec_version: number;
   rec_company_id: number;
+  rec_branch_id: number;
   rec_created_by: string;
   rec_created_date: string;
   rec_edited_by: string;
@@ -152,6 +153,7 @@ export interface iCustomer_Search {
   cust_firm_code: string;
   cust_is_blackacc: string;
   rec_company_id: number;
+  rec_branch_id: number;
 }
 
 export interface iCustomerModel {

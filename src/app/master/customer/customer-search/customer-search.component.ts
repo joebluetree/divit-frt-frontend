@@ -16,6 +16,7 @@ export class CustomerSearchComponent {
   mform: FormGroup;
   record!: iCustomer_Search;
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iCustomer_Search) {
@@ -77,7 +78,8 @@ export class CustomerSearchComponent {
         this.record.cust_firm_code = this.mform.value.cust_firm_code,
         this.record.cust_is_blackacc = this.mform.value.cust_is_blackacc,
         this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+        this.record.rec_branch_id = this.gs.user.user_branch_id;
+      this.output.emit({action: _action, record: this.record, url: this.search_url });
     }
   }
 
