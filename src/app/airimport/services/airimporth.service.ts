@@ -18,7 +18,7 @@ export class AirImporthService extends baseService {
     return <iAirImporthModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iAirImporth_Search>{ hbl_houseno: '', hbl_from_date: '', hbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
+      searchRecord: <iAirImporth_Search>{title:this.title, hbl_houseno: '', hbl_from_date: '', hbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

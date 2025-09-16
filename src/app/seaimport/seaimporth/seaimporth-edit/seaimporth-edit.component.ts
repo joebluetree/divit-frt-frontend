@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+  import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
@@ -68,8 +68,12 @@ export class SeaImportHEditComponent extends baseEditComponent {
 
     super();
     this.showModel = false;
+    this.mform = this.createform();
+  }
+  
+  createform(){
     let date = this.gs.getToday();
-    this.mform = this.fb.group({
+    return this.fb.group({
       hbl_id: [0],
       hbl_mbl_id: [0],
       hbl_cfno: [0],
@@ -193,9 +197,10 @@ export class SeaImportHEditComponent extends baseEditComponent {
       marks17: this.CreateFormDesc(),
       rec_memo_count: [0],
       rec_memo_attached: [''],
+      rec_telex_count: [0],
+      rec_telex_attached: [''],
       house_cntr: this.fb.array([]),
       rec_version: [0],
-
     })
   }
 
@@ -282,7 +287,6 @@ export class SeaImportHEditComponent extends baseEditComponent {
   }
 
   getDefaultData() {
-
     const param = { 'id': this.mbl_id };
     this.ms.getRecord(param, '/api/seaimport/seaimporth/GetDefaultData').subscribe({
       next: (rec: iSea_importH) => {
@@ -439,6 +443,8 @@ export class SeaImportHEditComponent extends baseEditComponent {
           hbl_delivery_date: rec.hbl_delivery_date,
           rec_memo_count: rec.rec_memo_count,
           rec_memo_attached: rec.rec_memo_attached,
+          rec_telex_count: rec.rec_telex_count,
+          rec_telex_attached: rec.rec_telex_attached,
           rec_version: rec.rec_version,
 
         })

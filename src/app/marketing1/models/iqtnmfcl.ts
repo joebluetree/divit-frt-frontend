@@ -62,6 +62,10 @@ export interface iQtnmfcl {
   qtnm_salesman_name: string;
   qtnm_move_type: string;
   qtnm_commodity: string;
+  qtnm_cur_id: number;
+  qtnm_cur_code: string;
+  qtnm_exrate: number;
+  exrate_decimal: number;
   qtnm_package: string;
   qtnm_kgs: number;
   qtnm_lbs: number;

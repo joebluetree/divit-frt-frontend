@@ -4,7 +4,7 @@
 </div>
 
 <div class="page-search">
-  <app-airimporth-search [search_url]="'/api/AirimportH/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-airimporth-search [search_url]="'/api/AirimportH/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-airimporth-search>
 </div>
 

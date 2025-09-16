@@ -23,7 +23,7 @@ export class DeliveryOrderSearchComponent {
 
   @Input('search_url') search_url = '';
   @Input('parent_type') parent_type = '';
-
+  @Input() print: boolean = false;
   @Input('input') set input(v: iDeliveryOrder_Search) {
     this.record = { ...v };
   }
@@ -57,11 +57,10 @@ export class DeliveryOrderSearchComponent {
       this.record.do_from_date = this.mform.value.do_from_date;
       this.record.do_to_date = this.mform.value.do_to_date;
       this.record.do_order_no = this.mform.value.do_order_no;
-
-      this.record.parent_type = this.parent_type;
+      
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({ action:_action, record: this.record, url: this.search_url });
     }
   }
 

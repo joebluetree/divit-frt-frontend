@@ -450,7 +450,6 @@ export class SeaExportHEditComponent extends baseEditComponent {
     let rec: any = {};
   
     if (action.id == 'hbl_shipment_stage_name') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -461,7 +460,6 @@ export class SeaExportHEditComponent extends baseEditComponent {
     }
   
     if (action.id == 'hbl_shipper_code') {
-      //let rec: any = {};
       if (action?.rec != null) {
         rec = action.rec;
       }

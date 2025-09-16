@@ -74,7 +74,7 @@ export class AirImportEditComponent extends baseEditComponent {
       mbl_cargo_loc_add2: [''],
       mbl_cargo_loc_add3: [''],
       mbl_cargo_loc_add4: [''],
-      mbl_incoterm_id: [''],
+      mbl_incoterm_id: [0],
       mbl_incoterm: [''],
 
       mbl_stage_changed_date: [''],
@@ -102,6 +102,21 @@ export class AirImportEditComponent extends baseEditComponent {
     this.mform.patchValue({
       mbl_id: this.id
     })
+    this.getDefaultData();
+  }
+
+  getDefaultData() {
+    this.ms.getRecord({}, '/api/Airimport/GetDefaultData').subscribe({
+      next: (rec: iAirimport) => {
+        this.mform.patchValue({
+          mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
+          mbl_shipment_stage_name: rec.mbl_shipment_stage_name
+        });
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
   }
 
   getRecord() {

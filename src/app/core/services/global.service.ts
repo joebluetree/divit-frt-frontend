@@ -48,7 +48,7 @@ export class GlobalService {
     this.user = {
       user_id: 0, user_branch_id: 0, user_code: '', user_company_id: 0,
       user_email: '', user_module_list: [], user_menu_list: [], user_name: '', user_password: '',
-      user_token: '',
+      user_token: '', user_company_settings: [], user_branch_settings:[],
     }
   }
 
@@ -207,7 +207,35 @@ export class GlobalService {
       return '';
   }
 
+  public UpdateDateFormat(date: any): string {
+    if (!date) return '';
+    const d = new Date(date);
+
+    const mm = (d.getMonth() + 1).toString().padStart(2, '0');
+    const dd = d.getDate().toString().padStart(2, '0');
+    const yyyy = d.getFullYear();
+
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  public getSettingValue(caption: string, defaultValue: string = ''): string {
+    const companySetting = this.user?.user_company_settings?.find(
+    x => x.caption === caption
+    );
+    
+    const branchSetting = this.user?.user_branch_settings?.find(
+    x => x.caption === caption
+    );
+    
+    const value = branchSetting?.value || companySetting?.value || defaultValue;
+    return value;
+  }
+
   public get globalConstants() {
+    const decPlaces = this.getSettingValue('DECIMALS','3');
+    const dateFormat = this.getSettingValue('DATE-FORMAT','mm/dd/yyyy');
+    const exrateDec = this.getSettingValue('EXRATE DECIMAL','7');
+    //const currency = this.getSettingValue('CURRENCY','INR');
     return {
       global_user_id: this.user.user_id,
       global_user_code: this.user.user_code,
@@ -215,11 +243,12 @@ export class GlobalService {
       global_user_email: this.user.user_email,
       global_user_company_id: this.user.user_company_id,
       global_user_branch_id: this.user.user_branch_id,
-      global_dec_places: 3,
-      global_date_format: 'mm/dd/yyyy',
+      global_dec_places: parseInt(decPlaces),
+      global_date_format: dateFormat,
       global_output_datetime_format: 'dd-MMM-yyyy HH:mm',
       global_display_date_format: 'dd-MMM-yyyy',
       global_time_format: 'HH:mm',
+      global_exrate_decimal: parseInt(exrateDec),
     };
   }
 
@@ -261,6 +290,8 @@ export class GlobalService {
         user_password: '',
         user_module_list: user.user_module_list,
         user_menu_list: user.user_menu_list,
+        user_company_settings: user.user_company_settings,
+        user_branch_settings: user.user_branch_settings
       }
       this.user = _user;
 
@@ -276,20 +307,20 @@ export class GlobalService {
     else
       return rec;
   }
-  
+
   public IsUserRightsExits(menu_code: string): boolean {
     const rec = this.getUserRights(menu_code);
     if (rec) {
-      const isVisible = rec.rights_admin == "Y"|| rec.rights_add == "Y"|| rec.rights_edit == "Y"|| rec.rights_view == "Y"|| rec.rights_delete == "Y" ? true : false;
+      const isVisible = rec.rights_admin == "Y" || rec.rights_add == "Y" || rec.rights_edit == "Y" || rec.rights_view == "Y" || rec.rights_delete == "Y" ? true : false;
       return isVisible;
     }
     return false;
   }
-  
+
   public AddHouseRights(menu_code: string): boolean {
     const rec = this.getUserRights(menu_code);
     if (rec) {
-      const isVisible =  rec.rights_add == "Y" ? true : false;
+      const isVisible = rec.rights_add == "Y" ? true : false;
       return isVisible;
     }
     return false;
@@ -379,9 +410,7 @@ export class GlobalService {
     return tel || fax || "";
   }
 
-
-
-  public getToday(){
+  public getToday() {
     return this.getNewdate(0);
   }
 
@@ -451,32 +480,32 @@ export class GlobalService {
   }
 
 
- FilesActions(action: string, fileData: any[], menu_id: any) {
-  if (action === 'PRINT') {
-    this.ToPrint(fileData, menu_id);
-    return;
+  FilesActions(action: string, fileData: any[], menu_id: any) {
+    if (action === 'PRINT') {
+      this.ToPrint(fileData, menu_id);
+      return;
+    }
+
+    const pdfData = fileData.find(x => x.FileType === 'PDF');
+    const excelData = fileData.find(x => x.FileType === 'EXCEL');
+
+    if (action === 'PDF' && pdfData) {
+      this.downloadProcess(pdfData.FilePath, pdfData.FileName);
+      return;
+    }
+
+    if (action === 'EXCEL' && excelData) {
+      this.downloadProcess(excelData.FilePath, excelData.FileName);
+      return;
+    }
   }
 
-  const pdfData = fileData.find(x => x.FileType === 'PDF');
-  const excelData = fileData.find(x => x.FileType === 'EXCEL');
 
-  if (action === 'PDF' && pdfData) {
-    this.downloadProcess(pdfData.FilePath, pdfData.FileName);
-    return;
-  }
-
-  if (action === 'EXCEL' && excelData) {
-    this.downloadProcess(excelData.FilePath, excelData.FileName);
-    return;
-  }
-}
-
-
- ToPrint(fileData: any, menu_id: any) {
+  ToPrint(fileData: any, menu_id: any) {
     this.router.navigate(['/masters/pdfPrint'], {
       state: { fileData },
       queryParams: {
-         menuid: menu_id, type: '', appid: this.app_id,
+        menuid: menu_id, type: '', appid: this.app_id,
       }
     });
   }

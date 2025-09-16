@@ -63,6 +63,9 @@ export interface iQtnm_air {
   qtnm_salesman_name: string;
   qtnm_move_type: string;
   qtnm_commodity: string;
+  qtnm_cur_id: number;
+  qtnm_cur_code: string;
+  qtnm_exrate: number;
   rec_files_count?: number;
   rec_files_attached?: string;
   qtnd_air: iQtnd_air[];

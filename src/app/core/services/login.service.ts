@@ -6,6 +6,7 @@ import { iUser } from '../models/user';
 import { Router } from '@angular/router';
 import { iMenum } from '../models/imenum';
 import { iModulem } from '../models/imodulem';
+import { iSettings } from '../../user-admin/models/isettings';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,8 @@ export class LoginService {
           user_branch_id: user.user_branch_id,
           user_module_list: [],
           user_menu_list: [],
+          user_company_settings: [],
+          user_branch_settings: [],
           //user_rights: []
         }
         this.gs.user = _user;
@@ -73,6 +76,8 @@ export class LoginService {
         this.gs.user.user_branch_id = result.branch_id;
         this.gs.user.user_module_list = <iModulem[]>result.module_list;
         this.gs.user.user_menu_list = <iMenum[]>result.menu_list;
+        this.gs.user.user_company_settings = <iSettings[]>result.company_settings_list;
+        this.gs.user.user_branch_settings = <iSettings[]>result.branch_settings_list;
         //this.gs.createModuleList();
         this.gs.saveAuthState();
         this.gs.Autherize();

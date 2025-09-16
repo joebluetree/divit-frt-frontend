@@ -328,8 +328,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
   callBack(action: any) {
     let rec: any = {};
   
-    if (action.id == 'mbl_shipment_stage_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_shipment_stage_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -339,8 +338,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_agent_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_agent_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -350,8 +348,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_liner_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_liner_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -361,8 +358,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_handled_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_handled_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -372,8 +368,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_salesman_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_salesman_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -383,8 +378,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_frt_status_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_frt_status_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -394,8 +388,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_ship_term_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_ship_term_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -405,8 +398,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_pol_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_pol_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -416,8 +408,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_pod_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_pod_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -427,8 +418,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_pofd_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_pofd_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -438,8 +428,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_vessel_code') {
-      //let rec: any = {};
+    if (action.id == 'mbl_vessel_code') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -450,8 +439,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.id == 'mbl_country_name') {
-      //let rec: any = {};
+    if (action.id == 'mbl_country_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -461,8 +449,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.name == 'cntr_type_name') {
-      //let rec: any = {};
+    if (action.name == 'cntr_type_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }
@@ -472,8 +459,7 @@ export class SeaExportmEditComponent extends baseEditComponent {
       });
     }
   
-    if (action.name == 'cntr_packages_unit_name') {
-      //let rec: any = {};
+    if (action.name == 'cntr_packages_unit_name') {      
       if (action?.rec != null) {
         rec = action.rec;
       }

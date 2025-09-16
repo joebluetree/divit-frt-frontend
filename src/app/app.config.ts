@@ -82,7 +82,6 @@ export const CustomControls = [
 
   HistoryComponent,
   FileUploadComponent,
-
   GenMemoComponent,
 
 

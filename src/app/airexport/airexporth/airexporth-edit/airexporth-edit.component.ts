@@ -428,6 +428,8 @@ export class AirExporthEditComponent extends baseEditComponent {
         this.mform.patchValue({
           hbl_mbl_id: rec.hbl_mbl_id,
           hbl_mbl_refno: rec.hbl_mbl_refno,
+          hbl_shipment_stage_id: rec.hbl_shipment_stage_id,
+          hbl_shipment_stage_name: rec.hbl_shipment_stage_name,
           hbl_handled_id: rec.hbl_handled_id,
           hbl_handled_name: rec.hbl_handled_name,
           hbl_salesman_id: rec.hbl_salesman_id,

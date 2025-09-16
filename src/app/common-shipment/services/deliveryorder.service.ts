@@ -21,7 +21,7 @@ setInitialState() {
     return <iDeliveryOrderModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iDeliveryOrder_Search>{do_order_no:'', do_from_date:'',do_to_date:'', rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iDeliveryOrder_Search>{title:this.title, do_order_no:'', do_from_date:'',do_to_date:'', rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

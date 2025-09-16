@@ -32,7 +32,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
   shipTerm = [
     { key: 'AIR', value: 'AIR' },
     { key: 'OCEAN', value: 'OCEAN' },
-    { key: 'OCEAN,,AIR', value: 'OCEAN,AIR' },
+    { key: 'OCEAN,AIR', value: 'OCEAN,AIR' },
   ]
 
   constructor(

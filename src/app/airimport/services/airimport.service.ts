@@ -8,6 +8,7 @@ import { iAirImport_Search, iAirImportModel } from '../models/iairimport';
 //Name : Alen Cherian
 //Date : 29/03/2025
 //Command : Create the AirImport Service Components. 
+// Sourav V : 15/07/2025 added Title in search 
 
 export class AirImportService extends baseService {
   constructor() {
@@ -18,7 +19,7 @@ export class AirImportService extends baseService {
     return <iAirImportModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iAirImport_Search>{ mbl_refno: '', mbl_from_date: '', mbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
+      searchRecord: <iAirImport_Search>{title:this.title, mbl_refno: '', mbl_from_date: '', mbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

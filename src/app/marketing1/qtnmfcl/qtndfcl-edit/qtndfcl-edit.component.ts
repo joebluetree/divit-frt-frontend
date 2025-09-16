@@ -173,7 +173,7 @@ export class QtndFclEditComponent {
 
     if (action.id == "qtnd_of" || action.id == "qtnd_pss" || action.id == "qtnd_baf" || action.id == "qtnd_isps" || action.id == "qtnd_haulage" || action.id == "qtnd_ifs") {
       let amount = of + pss + baf + isps + haul + ifs;
-      amount = this.gs.roundNumber(amount, this.iDec);
+      amount = this.gs.roundNumber(amount, this.gs.globalConstants.global_dec_places);
       this.mform.patchValue({
         qtnd_tot_amt: amount,
       })

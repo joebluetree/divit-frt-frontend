@@ -14,7 +14,7 @@ import { iSea_exportm_Search } from '../../models/iseaexportm';
 
 //Name : Sourav V
 //Created Date : 24/02/2025
-//Remark : this component manages searching of mbl-lcl records
+//Remark : this component manages searching of Sea Export records
 
 export class SeaExportmSearchComponent {
 

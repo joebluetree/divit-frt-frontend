@@ -14,11 +14,16 @@ import { FileUploadmEditComponent } from './fileupload-edit/fileuploadm-edit.com
 export class FileUploadComponent {
 
   data: any;
+  buttonLabel: string = '';
 
   @Input('inputdata') set inputdata(v: any) {
     this.data = v;
   }
 
+  @Input() set button_name(name: string) {
+    this.buttonLabel = name || 'ATTACHMENTS';
+  }
+  
   constructor(
     public dialog: MatDialog
   ) { }
