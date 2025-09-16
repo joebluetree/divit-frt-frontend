@@ -2,11 +2,11 @@ import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FileUploadmService } from '../services/fileuploadm.service';
 import { iFileUploadm } from '../../models/ifileuploadm';
 import { HistoryComponent } from '../../history/history.component';
 import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { baseListComponent } from '../../base-class/baseListComponent';
+import { FileUploadmService } from '../../services/fileuploadm.service';
 
 @Component({
   selector: 'app-fileuploadm-edit',

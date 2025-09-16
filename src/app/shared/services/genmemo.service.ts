@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../base-class/baseService';
-import { iGenRemarkm_Search, iGenRemarkmModel } from '../../models/igenremarkm';
-
+import { baseService } from '../base-class/baseService';
+import { iGenMemo_Search, iGenMemoModel } from '../models/igenmemo';
 
 
 @Injectable({ providedIn: 'root' })
-export class GenRemarkmService extends baseService {
+export class GenMemoService extends baseService {
 
   constructor() {
     super('remk_id', 'remk_desc');
   }
 
   setInitialState() {
-    return <iGenRemarkmModel>{
+    return <iGenMemoModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iGenRemarkm_Search>{ remk_parent_type: '', remk_desc: '', rec_company_id: 0, rec_branch_id: 0 },
+      searchRecord: <iGenMemo_Search>{ remk_parent_type: '', remk_desc: '', rec_company_id: 0, rec_branch_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

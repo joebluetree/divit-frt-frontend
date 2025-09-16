@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { MatDialog } from '@angular/material/dialog';
-import { GenRemarkmService } from '../services/genremarkm.service';
 import { iGenRemarkm } from '../../models/igenremarkm';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalService } from '../../../core/services/global.service';
 import { baseEditComponent } from '../../base-class/baseEditComponent';
+import { GenRemarkmService } from '../../services/genremarkm.service';
 
 @Component({
   selector: 'app-genremarkm-edit',

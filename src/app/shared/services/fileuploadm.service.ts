@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../base-class/baseService';
-import { iFileUploadm_Search, iFileUploadmModel } from '../../models/ifileuploadm';
+import { baseService } from '../base-class/baseService';
+import { iFileUploadm_Search, iFileUploadmModel } from '../models/ifileuploadm';
 import { HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 

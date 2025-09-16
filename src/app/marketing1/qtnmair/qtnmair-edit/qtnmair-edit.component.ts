@@ -21,6 +21,7 @@ import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-e
 //Name : Sourav V
 //Created Date : 03/01/2025
 //Remark : this component manages creation,editing and saving of qtnm-air records
+// version 3: added currency and exrate 12/09/2025
 
 export class QtnmAirEditComponent extends baseEditComponent {
 
@@ -28,6 +29,7 @@ export class QtnmAirEditComponent extends baseEditComponent {
 
   data_qtnmair: data_qtnmair;
   iDec = 3;
+  exrate_decimal: number;
   constructor(
     private ms: QtnmAirService,
     public dialog: MatDialog
@@ -58,6 +60,9 @@ export class QtnmAirEditComponent extends baseEditComponent {
       qtnm_salesman_name: [''],
       qtnm_move_type: [''],
       qtnm_commodity: [''],
+      qtnm_cur_id: [0],
+      qtnm_cur_code: [''],
+      qtnm_exrate: [0],
       rec_files_count: [0],
       rec_files_attached: [''],
       qtnd_air: this.fb.array([]),
@@ -84,7 +89,27 @@ export class QtnmAirEditComponent extends baseEditComponent {
     this.mform.patchValue({
       qtnm_id: this.id
     })
-
+    this.getDefaultData();
+  }
+  
+  getDefaultData() { //to get default currency and exrate
+    const param = {
+      'company_id': this.gs.user.user_company_id,
+      'branch_id': this.gs.user.user_branch_id,
+    };
+    this.ms.getRecord(param, '/api/marketing/qtnmlcl/GetDefaultData').subscribe({
+      next: (rec: iQtnm_lcl) => {
+        this.mform.patchValue({
+          qtnm_cur_id: rec.qtnm_cur_id,
+          qtnm_cur_code: rec.qtnm_cur_code,
+          qtnm_exrate: this.gs.roundNumber(rec.qtnm_exrate, rec.exrate_decimal),
+        });
+        this.exrate_decimal = rec.exrate_decimal;
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    })
   }
 
   addRow(rec: iQtnd_air) {
@@ -170,6 +195,9 @@ export class QtnmAirEditComponent extends baseEditComponent {
           qtnm_salesman_name: rec.qtnm_salesman_name,
           qtnm_move_type: rec.qtnm_move_type,
           qtnm_commodity: rec.qtnm_commodity,
+          qtnm_cur_id: rec.qtnm_cur_id,
+          qtnm_cur_code: rec.qtnm_cur_code,
+          qtnm_exrate: rec.qtnm_exrate,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
@@ -218,7 +246,8 @@ export class QtnmAirEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version,
           qtnm_cfno: v.qtnm_cfno,
-          qtnm_no: v.qtnm_no
+          qtnm_no: v.qtnm_no,
+          qtnm_type: v.qtnm_type,
         });
         this.fillQuotes(v.qtnd_air);
         this.fs.fillRemarkDetails(v.remk_remarks); //
@@ -233,92 +262,39 @@ export class QtnmAirEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
+    let rec: any = {};
     if (action.id == 'qtnm_to_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          qtnm_to_id: action.rec ? action.rec.cust_id : 0,
-          qtnm_to_code: action.rec ? action.rec.cust_code : '',
-          qtnm_to_name: action.rec ? action.rec.cust_name : '',
-          qtnm_to_addr1: action.rec ? action.rec.cust_address1 : '',
-          qtnm_to_addr2: action.rec ? action.rec.cust_address2 : '',
-          qtnm_to_addr3: action.rec ? action.rec.cust_address3 : '',
-        });
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          qtnm_to_id: 0,
-          qtnm_to_code: '',
-          qtnm_to_name: '',
-          qtnm_to_addr1: '',
-          qtnm_to_addr2: '',
-          qtnm_to_addr3: ''
-        });
-      }
+      this.mform.patchValue({
+        qtnm_to_id: rec.cust_id || 0,
+        qtnm_to_code: rec.cust_code || '',
+        qtnm_to_name: rec.cust_name || '',
+        qtnm_to_addr1: rec.cust_address1 || '',
+        qtnm_to_addr2: rec.cust_address2 || '',
+        qtnm_to_addr3: rec.cust_address3 || '',
+      });
     }
     if (action.id == 'qtnm_salesman_name') {
-      if (action.rec) {
-        this.mform.patchValue({
-          qtnm_salesman_id: action.rec ? action.rec.param_id : 0,
-          qtnm_salesman_name: action.rec ? action.rec.param_name : '',
-        });
+      if (action?.rec != null) {
+        rec = action.rec;
       }
-      else {
-        this.mform.patchValue({
-          qtnm_salesman_id: 0,
-          qtnm_salesman_name: '',
-        });
-      }
+      this.mform.patchValue({
+        qtnm_salesman_id: rec.param_id || 0,
+        qtnm_salesman_name: rec.param_name || '',
+      });
     }
-    // if (action.name == 'qtnd_pol_code') {
-    //   if (action.rec) {
-    //     this.formArrayRecord('qtnd_air', action.rowIndex)?.patchValue({
-    //       qtnd_pol_id: action.rec ? action.rec.pol_id : 0,
-    //       qtnd_pol_code: action.rec ? action.rec.pol_code : '',
-    //       qtnd_pol_name: action.rec ? action.rec.pol_name : '',
-    //     });
-    //   }
-    //   else {
-    //     this.mform.patchValue({
-    //       qtnd_pol_id: 0,
-    //       qtnd_pol_code: '',
-    //       qtnd_pol_name: '',
-    //     });
-    //   }
-    // }
-
-    // if (action.name == 'qtnd_pod_code') {
-    //   if (action.rec) {
-    //     this.formArrayRecord('qtnd_air', action.rowIndex)?.patchValue({
-    //       qtnd_pod_id: action.rec ? action.rec.pod_id : 0,
-    //       qtnd_pod_code: action.rec ? action.rec.pod_code : '',
-    //       qtnd_pod_name: action.rec ? action.rec.pod_name : '',
-    //     });
-    //   }
-    //   else {
-    //     this.mform.patchValue({
-    //       qtnd_pod_id: 0,
-    //       qtnd_pod_code: '',
-    //       qtnd_pod_name: '',
-    //     });
-    //   }
-    // }
-
-    // if (action.name == 'qtnd_carrier_code') {
-    //   if (action.rec) {
-    //     this.formArrayRecord('qtnd_air', action.rowIndex)?.patchValue({
-    //       qtnd_carrier_id: action.rec ? action.rec.carrier_id : 0,
-    //       qtnd_carrier_code: action.rec ? action.rec.carrier_code : '',
-    //       qtnd_carrier_name: action.rec ? action.rec.carrier_name : '',
-    //     });
-    //   }
-    //   else {
-    //     this.mform.patchValue({
-    //       qtnd_carrier_id: 0,
-    //       qtnd_carrier_code: '',
-    //       qtnd_carrier_name: '',
-    //     });
-    //   }
-    // }
+    if (action.id == 'qtnm_cur_code') {
+      if (action?.rec != null) {
+        rec = action.rec;
+      }
+      this.mform.patchValue({
+        qtnm_cur_id: rec.param_id || 0,
+        qtnm_cur_code: rec.param_code || '',
+        qtnm_exrate: this.gs.roundNumber(parseFloat(rec.param_value1), this.gs.globalConstants.global_exrate_decimal) || 0,
+      });
+    }
   }
   output(action: any) {
     if (action.mode == "new")

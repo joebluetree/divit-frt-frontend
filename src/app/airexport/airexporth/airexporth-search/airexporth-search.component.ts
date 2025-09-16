@@ -21,6 +21,7 @@ export class AirExporthSearchComponent {
   mform: FormGroup;
   record!: iAirExporth_Search;
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iAirExporth_Search) {
@@ -37,28 +38,31 @@ export class AirExporthSearchComponent {
 
   buildForm() {
     this.mform = this.fb.group({
-      hbl_houseno: [''],
       hbl_from_date: [''],
       hbl_to_date: [''],
+      hbl_mbl_refno: [''],
+      hbl_houseno: [''],
     })
   }
 
   ngOnInit(): void {
     this.mform.setValue({
-      hbl_houseno: this.record.hbl_houseno,
       hbl_from_date: this.record.hbl_from_date,
       hbl_to_date: this.record.hbl_to_date,
+      hbl_mbl_refno: this.record.hbl_mbl_refno,
+      hbl_houseno: this.record.hbl_houseno,      
     })
   }
 
   search(_action: string) {
-    if (this.output) {
-      this.record.hbl_houseno = this.mform.value.hbl_houseno;
+    if (this.output){
       this.record.hbl_from_date = this.mform.value.hbl_from_date;
       this.record.hbl_to_date = this.mform.value.hbl_to_date;
+      this.record.hbl_mbl_refno = this.mform.value.hbl_mbl_refno;
+      this.record.hbl_houseno = this.mform.value.hbl_houseno;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({ action:_action, record: this.record, url: this.search_url });
     }
   }
 

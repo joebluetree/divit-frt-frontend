@@ -358,9 +358,7 @@
                   name="oth_location_add4"></app-input>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
       <div class="page-body">
@@ -436,7 +434,6 @@
           </div>
         </div>
       </div>
-
 
       <div class="page-body">
         <div class="row">
@@ -549,29 +546,29 @@
         [disabled]="mform.invalid">Save</button>
     </div>
   </div>
+
   <div class="col-sm-2" *ngIf="mode=='edit'">
     <div class="page-body line-bottom">
       <div class="row">
         <div class="col-sm-12">
           <div class="d-grid gap-1">
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderDetList"
-              [queryParams]="{id:0,parent_id:mform.get('oth_id')?.value, parent_type:'OTHERS',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY
-              ORDER</button>
-            <button class="btn btn-success btn-sm">AR & AP</button>
+            <button *ngIf="gs.IsUserRightsExits('OTHEROP-DO')" class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderDetList"
+              [queryParams]="{id:0, menuid:'OTHEROP-DO', type: 'OTHEROP-DO', appid: appid, parent_id:mform.get('oth_id')?.value, parent_type:'OTHERS'}">DELIVERY ORDER</button>
+            <button *ngIf="gs.IsUserRightsExits('OTHEROP-INVOICE')" class="btn btn-success btn-sm" type="button" routerLink="/accounts/invoicemList"
+                [queryParams]="{id : 0, menuid:'OTHEROP-INVOICE', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">AR & AP</button>
             <button class="btn btn-success btn-sm">PROFIT REPORT</button>
             <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
-            <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,parent_id: mform.get('oth_id')?.value,
-                parent_type:mform.get('oth_mode')?.value}">MESSENGER SLIP</button>
-            <app-fileupload
-              [inputdata]="{mode:'add', id:id, parent_type: 'OTHERS',
-              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
-            <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">ADD
-              TO FOLLOW UP</button>
-            <button class="btn btn-sm"
+            <button *ngIf="gs.IsUserRightsExits('OTHEROP-SLIP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'OTHEROP-SLIP', type:'OTHEROP-SLIP', appid: appid,parent_id: mform.get('oth_id')?.value,
+              parent_type:mform.get('oth_mode')?.value}">MESSENGER SLIP</button>
+            <app-fileupload *ngIf="gs.IsUserRightsExits('OTHEROP-ATTACHMENT')"
+              [inputdata]="{mode:'add', id:id, parent_type:mform.get('oth_mode')?.value,
+              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}" [button_name]="'ATTACHMENTS'"></app-fileupload>
+            <button *ngIf="gs.IsUserRightsExits('OTHEROP-FOLLOWUP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'OTHEROP-FOLLOWUP', type:'OTHEROP-FOLLOWUP', appid: appid, parent_id: mform.get('oth_id')?.value, parent_type:mform.get('oth_mode')?.value}">ADD TO FOLLOW UP</button>
+            <button *ngIf="gs.IsUserRightsExits('OTHEROP-MEMO')" class="btn btn-sm"
               [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" routerLink="/common-shipment/memoEdit"
-              [queryParams]="{ id:0, parent_id: mform.get('oth_id')?.value,parent_type:'OTH-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
+              [queryParams]="{ id:0, mode: 'add',menuid:'OTHEROP-MEMO', type:'OTHEROP-MEMO', appid: appid, parent_id:mform.get('oth_id')?.value, parent_type:'OTH-CNTR-MEMO'}">INTERNAL MEMO
               <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"

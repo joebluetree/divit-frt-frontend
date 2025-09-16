@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { iPage } from 'ngx-jrt-controls';
-import { baseService } from '../../base-class/baseService';
-import { iHistorymModel, iHistorym_Search } from '../../models/ihistorym';
+import { baseService } from '../base-class/baseService';
+import { iHistorymModel, iHistorym_Search } from '../models/ihistorym';
 
 
 @Injectable({ providedIn: 'root' })

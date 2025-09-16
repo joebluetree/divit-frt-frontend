@@ -117,7 +117,6 @@ export interface iContainer {
 }
 
 export interface iDeliveryOrder_Search {
-  parent_type: string;
   do_order_no: string;
   do_from_date: string;
   do_to_date: string;

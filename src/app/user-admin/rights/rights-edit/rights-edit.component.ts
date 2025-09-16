@@ -116,8 +116,8 @@ export class RightsEditComponent extends baseEditComponent {
     // data.rec_company_id = this.gs.user.user_company_id;
     // data.rec_created_by = this.gs.user.user_code;
     data.records?.forEach(r => {
-      r.rec_company_id = this.gs.user.user_company_id;
-      r.rec_branch_id = this.gs.user.user_branch_id;
+      r.rec_company_id = data.comp_id;
+      r.rec_branch_id = data.branch_id;
       r.rec_created_by = this.gs.user.user_code;
       // if (r.rights_id === 0) {
       //   r.rec_created_by = this.gs.user.user_code;

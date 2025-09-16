@@ -107,6 +107,21 @@ export class AirExportEditComponent extends baseEditComponent {
     this.mform.patchValue({
       mbl_id: this.id
     })
+    this.getDefaultData();
+  }
+
+  getDefaultData() {
+    this.ms.getRecord({}, '/api/Airexport/GetDefaultData').subscribe({
+      next: (rec: iAirexport) => {
+        this.mform.patchValue({
+          mbl_shipment_stage_id: rec.mbl_shipment_stage_id,
+          mbl_shipment_stage_name: rec.mbl_shipment_stage_name
+        });
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    });
   }
 
   getRecord() {

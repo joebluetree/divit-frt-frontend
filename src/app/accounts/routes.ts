@@ -4,4 +4,6 @@ export const routes: Routes = [
   { path: 'accgroupEdit', loadComponent: () => import('./accgroup/accgroup-edit/accgroup-edit.component').then(c => c.AccGroupEditComponent) },
   { path: 'acctmList', loadComponent: () => import('./acctm/acctm-list/acctm-list.component').then(c => c.AcctmListComponent) },
   { path: 'acctmEdit', loadComponent: () => import('./acctm/acctm-edit/acctm-edit.component').then(c => c.AcctmEditComponent) },
+  { path: 'invoicemList', loadComponent: () => import('./invoicem/invoicem-list/invoicem-list.component').then(c => c.InvoicemListComponent) },
+  { path: 'invoicemEdit', loadComponent: () => import('./invoicem/invoicem-edit/invoicem-edit.component').then(c => c.InvoicemEditComponent) },
 ]

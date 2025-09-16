@@ -725,18 +725,17 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="d-grid gap-1">
-            <!-- <app-fileupload [inputdata]="{mode:'add', id:id, parent_type:'CUSTOMER'}"></app-fileupload> -->
             <app-fileupload
                 [inputdata]="{mode:'add', id:id, parent_type: 'CUSTOMER',
-               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
+               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'ATTACHMENTS'"></app-fileupload>
             <app-genmemo *ngIf="gs.IsUserRightsExits('CUSTOMER-MEMO')" [inputdata]="{id:id, parent_type:'CUSTOMER-MEMO',rec_is_memo_attached: mform.get('rec_memo_attached')?.value,
-              menuid:'CUSTOMER-MEMO', type: 'CUSTOMER-MEMO', appid: appid}" [button_name]="'MEMO'"></app-genmemo>
+              menuid:'CUSTOMER-MEMO', appid: appid}" [button_name]="'MEMO'"></app-genmemo>
             <app-genmemo *ngIf="gs.IsUserRightsExits('CUSTOMER-SOP')" [inputdata]="{id:id, parent_type:'CUSTOMER-SOP',rec_is_memo_attached: mform.get('rec_sop_attached')?.value,
-              menuid:'CUSTOMER-SOP', type: 'CUSTOMER-SOP', appid: appid}" [button_name]="'SOP'"></app-genmemo>
+              menuid:'CUSTOMER-SOP', appid: appid}" [button_name]="'SOP'"></app-genmemo>
             <app-genmemo *ngIf="gs.IsUserRightsExits('CUSTOMER-QTNM')" [inputdata]="{id:id, parent_type:'CUSTOMER-QTNM',rec_is_memo_attached: mform.get('rec_qtnm_attached')?.value,
-              menuid:'CUSTOMER-QTNM', type: 'CUSTOMER-QTNM', appid: appid}"[button_name]="'QUOTATION MEMO'"></app-genmemo>
+              menuid:'CUSTOMER-QTNM', appid: appid}"[button_name]="'QUOTATION MEMO'"></app-genmemo>
             <app-genmemo *ngIf="gs.IsUserRightsExits('CUSTOMER-ACC')" [inputdata]="{id:id, parent_type:'CUSTOMER-ACC',rec_is_memo_attached: mform.get('rec_acc_attached')?.value,
-              menuid:'CUSTOMER-ACC', type: 'CUSTOMER-ACC', appid: appid}" [button_name]="'ACCOUNTING ALERT'"></app-genmemo>            
+              menuid:'CUSTOMER-ACC', appid: appid}" [button_name]="'ACCOUNTING ALERT'"></app-genmemo>            
             <button class="btn btn-success btn-sm">DELIVERY ADDRESS</button>
             <button class="btn btn-success btn-sm">BUSINESS INFO</button>
             <button class="btn btn-success btn-sm">LOGIN DETAIL</button>

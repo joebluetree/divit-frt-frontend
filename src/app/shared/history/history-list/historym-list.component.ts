@@ -2,8 +2,8 @@ import { Component, Inject, ViewChild } from '@angular/core';
 import { CustomControls } from '../../../app.config';
 import { baseListComponent } from '../../base-class/baseListComponent';
 import { HistorymSearchComponent } from '../history-search/historym-search.component';
-import { HistorymService } from '../services/historym.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { HistorymService } from '../../services/historym.service';
 
 @Component({
   selector: 'app-historym-list',
@@ -49,8 +49,8 @@ export class HistorymListComponent extends baseListComponent {
     this.route.queryParams.forEach((rec: any) => {
       this.url_param = { ...rec };
       this.appid = rec["appid"];
-      this.menuid = "HISTORY-DATA";
-      this.type = "HISTORY-DATA";
+      this.menuid = "HISTORY";
+      this.type = "HISTORY";
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {
         this.title = this.menum.menu_name;

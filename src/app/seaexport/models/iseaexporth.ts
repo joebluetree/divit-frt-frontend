@@ -168,6 +168,7 @@ export interface iCargo_desc {
 }
 
 export interface iSea_exportH_Search {
+  hbl_mbl_refno: string;
   hbl_houseno: string;
   hbl_from_date: string;
   hbl_to_date: string;

@@ -151,6 +151,8 @@ export interface iSea_importH {
   hbl_delivery_date: string;
   rec_memo_count: number;
   rec_memo_attached: string;
+  rec_telex_count: number;
+  rec_telex_attached: string;
 
   desc_parent_id: number;
 
@@ -192,9 +194,11 @@ export interface iCargo_desc {
 }
 
 export interface iSea_importH_Search {
-  hbl_houseno: string;
+  hbl_date_type: string;
   hbl_from_date: string;
   hbl_to_date: string;
+  hbl_mbl_refno: string;
+  rec_created_by: string;
   rec_company_id: number;
   rec_branch_id: number;
 }

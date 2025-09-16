@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h5>{{title}}</h5>
+  <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/accounts/invoicemEdit"
+    [queryParams]="{id :0,mode:'add',menuid:menuid, appid:appid, inv_arap:'A/R', parent_id:this.parent_id , parent_type:this.parent_type}">New A/R</button>
+  <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/accounts/invoicemEdit"
+    [queryParams]="{id :0,mode:'add',menuid:menuid, appid:appid, inv_arap:'A/P', parent_id:this.parent_id, parent_type:this.parent_type}">New A/P</button>    
+  <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+</div>
+
+<div class="page-search">
+  <app-invoicem-search [search_url]="'/api/accounts/invoicem/GetListAsync'" [input]="ms.getSearchRecord()" [parent_id]="parent_id" 
+  [summary]="ms.getSummaryRecords()" (searchResult)="search($event)"></app-invoicem-search>
+</div>
+
+<div class="page-pagination">
+  <app-page [search_url]="'/api/accounts/invoicem/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>
+
+<div class="page-body">
+  <app-table [table]="table_data" [data]="ms.getRecords()" (callback_table)="callback_table($event)"
+    [delete_url]="'/api/accounts/invoicem/DeleteAsync'" [sort_column]="ms.sortColumn" [sort_order]="ms.sortOrder"
+    [row_id_name]="'inv_id'" [selected_id]="ms.selectedRow" >
+  </app-table>
+</div>
+
+<div class="page-pagination line-bottom">
+  <app-page [search_url]="'/api/accounts/invoicem/GetListAsync'" [page]="ms.getPageRecord()"
+    (pageEvents)="pageEvents($event)"></app-page>
+</div>

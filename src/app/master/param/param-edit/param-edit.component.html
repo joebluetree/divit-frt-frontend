@@ -34,7 +34,7 @@
         <div class=" form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">{{value1}}</label>
           <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="param_value1" [case]="'upper'"></app-input>
+            <app-input maxlength="100" formControlName="param_value1" [case]="'upper'"></app-input> <!--[case]="'upper'" removed since value1 can have int or string-->
           </div>
         </div>
         }
@@ -62,9 +62,9 @@
           </div>
         </div>
         }
-        @if( value4 !="" ) {
+        @if( value5 !="" ) {
         <div class=" form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">{{value4}}</label>
+          <label class="col-sm-4 form-label form-lable-sm" for="">{{value5}}</label>
           <div class="col-sm-8">
             <app-input maxlength="100" formControlName="param_value5" [case]="'upper'"></app-input>
           </div>
@@ -75,8 +75,7 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-label-sm" for="">Order</label>
           <div class="col-sm-8">
-            <app-input type="number" maxlength="5" formControlName="param_order" [case]="'upper'">
-            </app-input>
+            <app-input type="number" maxlength="5" formControlName="param_order"></app-input>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import { CustomControls } from '../../../app.config';
 import { baseListComponent } from '../../base-class/baseListComponent';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FileUploadmSearchComponent } from '../fileupload-search/fileuploadm-search.component';
-import { FileUploadmService } from '../services/fileuploadm.service';
+import { FileUploadmService } from '../../services/fileuploadm.service';
 
 @Component({
   selector: 'app-fileuploadm-list',

@@ -6,7 +6,7 @@
 </div>
 
 <div class="page-search">
-  <app-airimport-search [search_url]="'/api/Airimport/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-airimport-search [search_url]="'/api/Airimport/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-airimport-search>
 </div>
 

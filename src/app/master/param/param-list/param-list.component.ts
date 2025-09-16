@@ -35,16 +35,13 @@ export class ParamListComponent extends baseListComponent {
 
     this.init();
 
-    if (this.type == "SEA CARRIER") {
-      this.value1 = "SCAC CODE";
-    }
- 
+    this.isMultivalue();
 
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid };
 
     this.table_data = [
       { col_name: "edit", col_caption: "VIEW/EDIT", col_format: "edit", col_sortable: false, col_link: '/masters/paramEdit', col_param: param, col_show: this.bEdit || this.bView },
-      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "param_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel },
       { col_name: "param_type", col_caption: "TYPE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "param_code", col_caption: "CODE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "param_name", col_caption: "NAME", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
@@ -63,12 +60,16 @@ export class ParamListComponent extends baseListComponent {
       { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
     ];
-
-
   }
 
-
-
+  isMultivalue(){
+    if (this.type == "SEA-CARRIER") {
+      this.value1 = "SCAC CODE";
+    }
+    if (this.type == "CURRENCY") {
+      this.value2 = "EX-RATE";
+    }
+  }
 
 }
 

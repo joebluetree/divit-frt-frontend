@@ -69,17 +69,17 @@ export class CustomerSearchComponent {
     if (this.output) {
       this.record.cust_name = this.mform.value.cust_name;
       this.record.cust_date_type = this.mform.value.cust_date_type,
-        this.record.cust_from_date = this.mform.value.cust_from_date,
-        this.record.cust_to_date = this.mform.value.cust_to_date,
-        this.record.cust_created_by = this.mform.value.cust_created_by,
-        this.record.cust_edited_by = this.mform.value.cust_edited_by,
-        this.record.cust_code = this.mform.value.cust_code,
-        this.record.cust_name = this.mform.value.cust_name,
-        this.record.cust_firm_code = this.mform.value.cust_firm_code,
-        this.record.cust_is_blackacc = this.mform.value.cust_is_blackacc,
-        this.record.rec_company_id = this.gs.user.user_company_id;
-        this.record.rec_branch_id = this.gs.user.user_branch_id;
-      this.output.emit({action: _action, record: this.record, url: this.search_url });
+      this.record.cust_from_date = this.mform.value.cust_from_date,
+      this.record.cust_to_date = this.mform.value.cust_to_date,
+      this.record.cust_created_by = this.mform.value.cust_created_by,
+      this.record.cust_edited_by = this.mform.value.cust_edited_by,
+      this.record.cust_code = this.mform.value.cust_code,
+      this.record.cust_name = this.mform.value.cust_name,
+      this.record.cust_firm_code = this.mform.value.cust_firm_code,
+      this.record.cust_is_blackacc = this.mform.value.cust_is_blackacc,
+      this.record.rec_company_id = this.gs.user.user_company_id;
+      this.record.rec_branch_id = this.gs.user.user_branch_id;
+      this.output.emit({ action: _action, record: this.record, url: this.search_url });
     }
   }
 

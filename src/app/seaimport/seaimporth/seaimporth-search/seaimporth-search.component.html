@@ -4,7 +4,12 @@
     <div class="col-sm-6">
 
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="" >From</label>
+        <!-- <label class="col-sm-4 form-label form-label-sm" for="" >From</label> -->
+        <div class="col-sm-2">
+          <app-combobox maxlength="30" formControlName="hbl_date_type" name="hbl_date_type" [dataSource]="DatetypeList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+         </div>
+        <label class="col-sm-2 form-label form-label-sm" for="" ></label>
         <div class="col-sm-3">
           <app-date formControlName="hbl_from_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
         </div>
@@ -14,9 +19,15 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">House No</label>
+        <label class="col-sm-4 form-label form-label-sm" for="">Ref No</label>
         <div class="col-sm-8">
-          <app-input type="text" formControlName="hbl_houseno" case="UPPER"> </app-input>
+          <app-input type="text" formControlName="hbl_mbl_refno" case="UPPER"> </app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Created By</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="rec_created_by" case="UPPER"> </app-input>
         </div>
       </div>
     </div>
