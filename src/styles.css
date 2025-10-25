@@ -16,8 +16,8 @@ body {
 
 
 .router {
-  /* margin-top: 62px; */
-  margin-top: 75px;
+  margin-top: 62px;
+  /* margin-top: 75px; */
 }
 
 .table {
@@ -194,5 +194,6 @@ input[type="number"] {
 
 .bright-label {
   font-weight: normal;
-  color: #222; /* very dark gray, softer than black */
+  color: #222;
+  /* very dark gray, softer than black */
 }
