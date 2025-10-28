@@ -33,7 +33,8 @@ export class UserEditComponent extends baseEditComponent {
       rec_version: [0],
       userbranches: this.fb.array([]),
 
-    })
+    });
+    this.showModel = true;
   }
 
   addRow(rec: iUserBranches) {
