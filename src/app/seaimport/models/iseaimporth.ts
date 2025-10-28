@@ -149,6 +149,7 @@ export interface iSea_importH {
   hbl_pickup_date: string;
   hbl_empty_ret_date: string;
   hbl_delivery_date: string;
+  hbl_isf_attached: string;
   rec_memo_count: number;
   rec_memo_attached: string;
   rec_telex_count: number;

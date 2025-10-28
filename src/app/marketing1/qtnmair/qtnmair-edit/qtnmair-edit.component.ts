@@ -262,38 +262,56 @@ export class QtnmAirEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
-    let rec: any = {};
     if (action.id == 'qtnm_to_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_to_id: null,
+          qtnm_to_code: '',
+          qtnm_to_name: '',
+          qtnm_to_addr1: '',
+          qtnm_to_addr2: '',
+          qtnm_to_addr3: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_to_id: action.rec.cust_id,
+          qtnm_to_code: action.rec.cust_code,
+          qtnm_to_name: action.rec.cust_name,
+          qtnm_to_addr1: action.rec.cust_address1,
+          qtnm_to_addr2: action.rec.cust_address2,
+          qtnm_to_addr3: action.rec.cust_address3,
+        });
       }
-      this.mform.patchValue({
-        qtnm_to_id: rec.cust_id || 0,
-        qtnm_to_code: rec.cust_code || '',
-        qtnm_to_name: rec.cust_name || '',
-        qtnm_to_addr1: rec.cust_address1 || '',
-        qtnm_to_addr2: rec.cust_address2 || '',
-        qtnm_to_addr3: rec.cust_address3 || '',
-      });
     }
+
     if (action.id == 'qtnm_salesman_name') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_salesman_id: null,
+          qtnm_salesman_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_salesman_id: action.rec.param_id,
+          qtnm_salesman_name: action.rec.param_name,
+        });
       }
-      this.mform.patchValue({
-        qtnm_salesman_id: rec.param_id || 0,
-        qtnm_salesman_name: rec.param_name || '',
-      });
     }
+
     if (action.id == 'qtnm_cur_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_cur_id: null,
+          qtnm_cur_code: '',
+          qtnm_exrate: 0,
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_cur_id: action.rec.param_id,
+          qtnm_cur_code: action.rec.param_code,
+          qtnm_exrate: this.gs.roundNumber(parseFloat(action.rec.param_value1),this.gs.globalConstants.global_exrate_decimal),
+        });
       }
-      this.mform.patchValue({
-        qtnm_cur_id: rec.param_id || 0,
-        qtnm_cur_code: rec.param_code || '',
-        qtnm_exrate: this.gs.roundNumber(parseFloat(rec.param_value1), this.gs.globalConstants.global_exrate_decimal) || 0,
-      });
     }
   }
   output(action: any) {

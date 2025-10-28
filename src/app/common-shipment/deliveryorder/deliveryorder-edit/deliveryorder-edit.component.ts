@@ -420,7 +420,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: any) {
+  callBack(action: { id: string, rec: any }) {
     console.log(action);
     let rec: any = {};
     if (action?.rec != null) {

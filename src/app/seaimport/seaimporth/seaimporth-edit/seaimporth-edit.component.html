@@ -457,7 +457,10 @@
                   id="hbl_isf_no"></app-input>
               </div>
               <div class="col-sm-3">
-                <button class="btn btn-sm btn-success w-100 mb-1">Upload</button>
+                <!-- <button class="btn btn-sm btn-success w-100 mb-1">Upload</button> -->
+                <app-fileupload *ngIf="gs.IsUserRightsExits('SEA-IMP-ATTACHMENT')"
+                  [inputdata]="{mode:'add', id:id, parent_type: 'SEA IMPORT ISF',
+                  rec_files_attached: mform.get('hbl_isf_attached')?.value}" [button_name]="'Upload'"></app-fileupload>
               </div>
             </div>
           </div>

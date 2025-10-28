@@ -148,53 +148,51 @@ export class QtnmAirdEditComponent {
     }
     this.newRecord();
   }
+  
   callBack(action: any) {
     if (action.id == 'qtnd_pol_code') {
-      if (action.rec) {
+      if (action.rec == null) {
         this.mform.patchValue({
-          qtnd_pol_id: action.rec ? action.rec.param_id : 0,
-          qtnd_pol_code: action.rec ? action.rec.param_code : '',
-          qtnd_pol_name: action.rec ? action.rec.param_name : '',
-        })
-      }
-      else {
-        this.mform.patchValue({
-          qtnd_pol_id: 0,
+          qtnd_pol_id: null,
           qtnd_pol_code: '',
           qtnd_pol_name: '',
-        })
+        });
+      } else {
+        this.mform.patchValue({
+          qtnd_pol_id: action.rec.param_id,
+          qtnd_pol_code: action.rec.param_code,
+          qtnd_pol_name: action.rec.param_name,
+        });
       }
     }
     if (action.id == 'qtnd_pod_code') {
-      if (action.rec) {
+      if (action.rec == null) {
         this.mform.patchValue({
-          qtnd_pod_id: action.rec ? action.rec.param_id : 0,
-          qtnd_pod_code: action.rec ? action.rec.param_code : '',
-          qtnd_pod_name: action.rec ? action.rec.param_name : '',
-        })
-      }
-      else {
-        this.mform.patchValue({
-          qtnd_pod_id: 0,
+          qtnd_pod_id: null,
           qtnd_pod_code: '',
           qtnd_pod_name: '',
-        })
+        });
+      } else {
+        this.mform.patchValue({
+          qtnd_pod_id: action.rec.param_id,
+          qtnd_pod_code: action.rec.param_code,
+          qtnd_pod_name: action.rec.param_name,
+        });
       }
     }
     if (action.id == 'qtnd_carrier_code') {
-      if (action.rec) {
+      if (action.rec == null) {
         this.mform.patchValue({
-          qtnd_carrier_id: action.rec ? action.rec.param_id : 0,
-          qtnd_carrier_code: action.rec ? action.rec.param_code : '',
-          qtnd_carrier_name: action.rec ? action.rec.param_name : '',
-        })
-      }
-      else {
-        this.mform.patchValue({
-          qtnd_carrier_id: 0,
+          qtnd_carrier_id: null,
           qtnd_carrier_code: '',
           qtnd_carrier_name: '',
-        })
+        });
+      } else {
+        this.mform.patchValue({
+          qtnd_carrier_id: action.rec.param_id,
+          qtnd_carrier_code: action.rec.param_code,
+          qtnd_carrier_name: action.rec.param_name,
+        });
       }
     }
   }

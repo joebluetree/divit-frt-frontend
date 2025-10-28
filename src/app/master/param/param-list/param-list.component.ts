@@ -67,7 +67,7 @@ export class ParamListComponent extends baseListComponent {
       this.value1 = "SCAC CODE";
     }
     if (this.type == "CURRENCY") {
-      this.value2 = "EX-RATE";
+      this.value1 = "EX-RATE";
     }
   }
 
