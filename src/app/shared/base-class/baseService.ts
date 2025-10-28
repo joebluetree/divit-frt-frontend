@@ -73,6 +73,10 @@ export abstract class baseService {
   public getRecords() {
     return this.state.records;
   }
+  
+  public getSummaryRecords() {
+    return this.state.summary;
+  }
 
   public getSearchRecord() {
     return this.state.searchRecord
@@ -113,13 +117,14 @@ export abstract class baseService {
         }
         this.state.errorMessage = '';
         this.state.records = v.records;
+        this.state.summary = v.summary || null; // Added line for summary data
         this.state.pageRecord.currentPageNo = v.page.currentPageNo;
         this.state.pageRecord.pages = v.page.pages;
         this.state.pageRecord.rows = v.page.rows;
       },
       error: (v) => {
         this.state.errorMessage = v.message;
-        this.gs.showAlert([v.message]);
+        this.gs.showAlert([v.error]);
         this.state.records = [];
       }
     });

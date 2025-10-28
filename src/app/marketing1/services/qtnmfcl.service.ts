@@ -18,7 +18,7 @@ export class QtnmFclService extends baseService {
     return <iQtnmFclModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iQtnmFcl_Search>{ qtnm_no: '', qtnm_from_date: '', qtnm_to_date: '', rec_company_id: 0 },
+      searchRecord: <iQtnmFcl_Search>{ title: this.title, qtnm_no: '',qtnm_to_name: '', qtnm_from_date: '', qtnm_to_date: '', rec_branch_id:0 ,rec_company_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

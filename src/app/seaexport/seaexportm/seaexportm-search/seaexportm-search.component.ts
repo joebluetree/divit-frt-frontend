@@ -14,13 +14,14 @@ import { iSea_exportm_Search } from '../../models/iseaexportm';
 
 //Name : Sourav V
 //Created Date : 24/02/2025
-//Remark : this component manages searching of mbl-lcl records
+//Remark : this component manages searching of Sea Export records
 
 export class SeaExportmSearchComponent {
 
   mform: FormGroup;
   record!: iSea_exportm_Search;
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iSea_exportm_Search) {
@@ -70,7 +71,7 @@ export class SeaExportmSearchComponent {
 
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({action: _action, record: this.record, url: this.search_url });
     }
   }
 

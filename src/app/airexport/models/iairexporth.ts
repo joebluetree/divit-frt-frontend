@@ -187,9 +187,10 @@ export interface Cargo_desc {
 }
 
 export interface iAirExporth_Search {
-  hbl_houseno: string;
   hbl_from_date: string;
   hbl_to_date: string;
+  hbl_mbl_refno: string;
+  hbl_houseno: string;
   rec_company_id: number;
   rec_branch_id: number;
 }

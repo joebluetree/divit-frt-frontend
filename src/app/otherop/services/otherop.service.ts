@@ -9,6 +9,7 @@ import { iOtherOp_Search, iOtherOpModel } from '../models/iotherop';
 //Created Date : 07/05/2025
 //Remark : this component manages Other-Operation data and set initial state of records (page,row) and searching. 
 //version : v1 - 07/05/2025
+//v2 -11/07/2025 - title added
 
 export class OtherOpService extends baseService {
 
@@ -20,7 +21,7 @@ export class OtherOpService extends baseService {
     return <iOtherOpModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iOtherOp_Search>{ oth_refno:'', oth_from_date:'',oth_to_date:'', rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iOtherOp_Search>{title:this.title, oth_refno:'', oth_from_date:'',oth_to_date:'', rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

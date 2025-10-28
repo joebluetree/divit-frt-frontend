@@ -1,0 +1,119 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="page-body line-bottom">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">Ref #</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_mbl_refno" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">AR Total</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_inc_total" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">AP Total</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_exp_total" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">Revenue</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_revenue" [disable]="true"> </app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Deleted</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="rec_deleted"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm ">Show Deleted</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">AR Balance</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_ar_balance" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">AP Balance</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_ap_balance" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for=""></label>
+              <div class="col-sm-8 mt-1">
+                <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="page-body line-bottom">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">Memo</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_loss_memo"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Profit Requirement Met</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="inv_profit_req"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm ">Yes/No</label>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Loss Approved</label>
+              <div class="col-sm-8">
+                <app-checkbox formControlName="inv_loss_approved"></app-checkbox>
+                <label class="ms-1 form-label form-label-sm ">Yes/No</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Status</label>
+              <div class="col-sm-8">
+                <app-combobox maxlength="30" formControlName="inv_bo_status" name="inv_bo_status"
+                  [dataSource]="boStatus" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">Remarks</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_remarks"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for="">Stage</label>
+              <div class="col-sm-8">
+                <app-input type="text" formControlName="inv_mbl_stage" [disable]="true"> </app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-label-sm" for=""></label>
+              <div class="col-sm-8 mt-1">
+                <button class="btn btn-sm btn-success" (click)="saveMemo()">Update</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

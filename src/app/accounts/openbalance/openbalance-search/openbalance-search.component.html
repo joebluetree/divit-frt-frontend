@@ -1,0 +1,42 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <label class="col-sm-3 form-label form-label-sm" for="">Doc #</label>
+        <div class="col-sm-9">
+          <app-input type="text" formControlName="jv_docno" [case]="'UPPER'"> </app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 form-label form-label-sm" for=""></label>
+        <label class="col-sm-1 form-label form-label-sm" for="">DR</label>
+        <div class="col-sm-2">
+          <app-input type="number" formControlName="jv_debit_total" [disable]="true"> </app-input>
+        </div>
+        <label class="col-sm-1 form-label form-label-sm" for="">CR</label>
+        <div class="col-sm-2">
+          <app-input type="number" formControlName="jv_credit_total" [disable]="true"> </app-input>
+        </div>
+        <label class="col-sm-1 form-label form-label-sm" for="">Balance</label>
+        <div class="col-sm-2">
+          <app-input type="number" formControlName="jv_balance" [disable]="true" [showZero]="true"> </app-input>
+        </div>
+      </div>
+            
+      <!-- <div class="form-group row"> 
+        <label class="col-sm-3 form-label form-label-sm" for=""></label>
+        <label class="col-sm-8 form-label form-label-sm" for="">
+          DR : {{mform.get('jv_debit_total')?.value}} -  CR : {{mform.get('jv_credit_total')?.value}}   Balance : {{mform.get('jv_balance')?.value}}</label>
+      </div> -->
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -4,8 +4,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { baseEditComponent } from '../../base-class/baseEditComponent';
 import { CustomControls } from '../../../app.config';
 import { GenRemarkmEditComponent } from '../../genremarkm/genremarkm-edit/genremarkm-edit.component';
-import { GenMemoService } from '../services/genmemo.service';
 import { iGenMemo } from '../../models/igenmemo';
+import { GenMemoService } from '../../services/genmemo.service';
 
 @Component({
   selector: 'app-genmemo-edit',

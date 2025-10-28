@@ -20,7 +20,7 @@ export class SeaImportHService extends baseService {
     return <iSea_importHModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iSea_importH_Search>{ hbl_houseno:'', hbl_from_date:'',hbl_to_date:'', rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iSea_importH_Search>{title:this.title,hbl_date_type:'', hbl_mbl_refno:'', rec_created_by:'', hbl_from_date:'',hbl_to_date:'', rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

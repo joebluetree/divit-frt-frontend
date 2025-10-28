@@ -231,7 +231,7 @@
               <tbody formArrayName="air_export">
                 <tr *ngFor="let iRow of formArray('air_export').controls; let i=index;" [formGroupName]="i">
                   <td align="centre" class="link" routerLink="/airexport/airexporthEdit"
-                    [queryParams]="{id :iRow.get('hbl_id')?.value ,mode:'edit',menuid:'AIREXPORTH',type:'AIREXPORTH',appid:appid,mbl_id:mform.get('mbl_id')?.value}">
+                    [queryParams]="{id :iRow.get('hbl_id')?.value ,mode:'edit',menuid:'AIR-EXPORT-H',type:'AIR-EXPORT-H',appid:appid,mbl_id:mform.get('mbl_id')?.value}">
                     <!-- (click)="editdetails(i)"  -->
                     <i class="fa fa-pencil"></i>
                   </td>
@@ -290,7 +290,7 @@
             <div class="col-sm-12" *ngIf="mode=='edit'">
               <button class="btn btn-sm btn-success" *ngIf="{mode:'add'}" routerLink="/airexport/airexporthEdit"
                 type="button"
-                [queryParams]="{id : 0 ,mode:'add', menuid:'AIREXPORTH', type:'AIREXPORTH', appid: appid, mbl_id: mform.get('mbl_id')?.value}">Add
+                [queryParams]="{id : 0 ,mode:'add', menuid:'AIR-EXPORT-H', type:'AIR-EXPORT-H', appid: appid, mbl_id: mform.get('mbl_id')?.value}">Add
                 House</button>
             </div>
           </div>
@@ -312,23 +312,20 @@
             <div class="d-grid gap-1">
               <button class="btn btn-success btn-sm">PRINT MAWB</button>
               <button class="btn btn-success btn-sm">MANIFEST</button>
-              <button class="btn btn-success btn-sm" type="button">AR & AP</button>
+              <button *ngIf="gs.IsUserRightsExits('AIR-EXPORT-INVOICE')" class="btn btn-success btn-sm" type="button" routerLink="/accounts/invoicemList"
+                [queryParams]="{id : 0, menuid:'AIR-EXPORT-INVOICE', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">AR & AP</button>
               <button class="btn btn-success btn-sm" type="button">PROFIT REPORT</button>
               <button class="btn btn-success btn-sm" (click)="shipmentLabel()">SHIPMENT LABEL</button>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
                 [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
-                 parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER
-                SLIP
-              </button>
+                 parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">MESSENGER SLIP </button>
               <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
+              <!-- Check parent type of fileupload-->
               <app-fileupload
                 [inputdata]="{mode:'add', id:id, parent_type: 'AIR EXPORT',
-               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
+               rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'ATTACHMENTS'"></app-fileupload>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
-                [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">ADD
-                TO
-                FOLLOW UP
-              </button>
+                [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">ADD TO FOLLOW UP </button>
               <button class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
               routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'AIREXP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO
               <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>

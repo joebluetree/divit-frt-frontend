@@ -22,6 +22,7 @@ export class SeaExportHSearchComponent {
   mform: FormGroup;
   record!: iSea_exportH_Search;
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iSea_exportH_Search) {
@@ -39,6 +40,7 @@ export class SeaExportHSearchComponent {
     this.mform = this.fb.group({
       hbl_from_date: [''],
       hbl_to_date: [''],
+      hbl_mbl_refno: [''],
       hbl_houseno: [''],
     })
 
@@ -48,6 +50,7 @@ export class SeaExportHSearchComponent {
     this.mform.setValue({
       hbl_from_date: this.record.hbl_from_date,
       hbl_to_date: this.record.hbl_to_date,
+      hbl_mbl_refno: this.record.hbl_mbl_refno,
       hbl_houseno: this.record.hbl_houseno,
     })
   }
@@ -56,10 +59,11 @@ export class SeaExportHSearchComponent {
     if (this.output) {
       this.record.hbl_from_date = this.mform.value.hbl_from_date;
       this.record.hbl_to_date = this.mform.value.hbl_to_date;
+      this.record.hbl_mbl_refno = this.mform.value.hbl_mbl_refno;
       this.record.hbl_houseno = this.mform.value.hbl_houseno;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({action:_action, record: this.record, url: this.search_url });
     }
   }
 

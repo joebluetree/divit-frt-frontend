@@ -44,7 +44,7 @@
             </auto-complete>
           </div>
           <div class="col-sm-5">
-            <app-input maxlength="100" formControlName="qtnm_to_name" [case]="'UPPER'"></app-input>
+            <app-input maxlength="100" formControlName="qtnm_to_name" [case]="'UPPER'" required></app-input>
           </div>
         </div>
         <div class="form-group row">
@@ -87,23 +87,22 @@
       <div class="col-sm-6">
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Sales Rep.</label>
-          <div class="col-sm-8">
+          <div class="col-sm-3">
             <auto-complete formControlName="qtnm_salesman_name" id="qtnm_salesman_name" (CallBack)="callBack($event)"
               [table]="'param'" [subtable]="'salesman'" [company_id]="getCompanyId()" [url]="url"
               display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
           </div>
-        </div>
-
-        <div class="form-group row">
-          <label class="col-sm-4 form-label form-lable-sm" for="">Move Type</label>
-          <div class="col-sm-8">
-            <app-input maxlength="100" formControlName="qtnm_move_type" [case]="'UPPER'"></app-input>
+        <!-- </div>
+        <div class="form-group row"> -->
+          <label class="col-sm-2 form-label form-lable-sm" for="">Move Type</label>
+          <div class="col-sm-3">
+            <app-input maxlength="30" formControlName="qtnm_move_type" [case]="'UPPER'"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm" for="">Commodity</label>
           <div class="col-sm-3">
-            <app-input maxlength="100" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
+            <app-input maxlength="60" formControlName="qtnm_commodity" [case]="'UPPER'"></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">Package</label>
           <div class="col-sm-3">
@@ -113,25 +112,37 @@
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">KGS</label>
           <div class="col-sm-3">
-            <app-input formControlName="qtnm_kgs" type="number" name="qtnm_kgs" [dec]="iDec"
+            <app-input formControlName="qtnm_kgs" type="number" name="qtnm_kgs" [dec]="this.gs.globalConstants.global_dec_places"
               (blur)="findUnit($event)"></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">LBS</label>
           <div class="col-sm-3">
-            <app-input formControlName="qtnm_lbs" type="number" name="qtnm_lbs" [dec]="iDec"
+            <app-input formControlName="qtnm_lbs" type="number" name="qtnm_lbs" [dec]="this.gs.globalConstants.global_dec_places"
               (blur)="findUnit($event)"></app-input>
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-4 form-label form-lable-sm">CBM</label>
           <div class="col-sm-3">
-            <app-input formControlName="qtnm_cbm" type="number" name="qtnm_cbm" [dec]="iDec"
+            <app-input formControlName="qtnm_cbm" type="number" name="qtnm_cbm" [dec]="this.gs.globalConstants.global_dec_places"
               (blur)="findUnit($event)"></app-input>
           </div>
           <label class="col-sm-2 form-label form-lable-sm">CFT</label>
           <div class="col-sm-3">
-            <app-input formControlName="qtnm_cft" type="number" name="qtnm_cft" [dec]="iDec"
+            <app-input formControlName="qtnm_cft" type="number" name="qtnm_cft" [dec]="this.gs.globalConstants.global_dec_places"
               (blur)="findUnit($event)"></app-input>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-4 form-label form-lable-sm">Currency</label>
+          <div class="col-sm-3">
+            <auto-complete formControlName="qtnm_cur_code" id="qtnm_cur_code" (CallBack)="callBack($event)"
+              [table]="'param'" [subtable]="'CURRENCY'" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+          <label class="col-sm-2 form-label form-lable-sm">Ex-Rate</label>
+          <div class="col-sm-3">
+            <app-input formControlName="qtnm_exrate" type="number" name="qtnm_exrate" [dec]="this.gs.globalConstants.global_exrate_decimal"></app-input>
           </div>
         </div>
       </div>
@@ -274,10 +285,9 @@
 
 <div class="page-footer line-bottom">
   <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-  <!-- <app-fileupload [inputdata]="{mode:'add', id:id, parent_type: 'LCL'}"></app-fileupload> -->
-  <app-fileupload *ngIf="bEdit"
+  <app-fileupload *ngIf="id!=0"
     [inputdata]="{mode:'add', id:id, parent_type: mform.get('qtnm_type')?.value,
-    rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
+    rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'Supporting Documents'"></app-fileupload>
 </div>
 
 

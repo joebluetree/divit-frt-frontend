@@ -38,7 +38,7 @@ export class MessengerSlipListComponent extends baseListComponent {
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid, parent_type: this.parent_type };
     this.table_data = [
       { col_name: "edit", col_caption: "EDIT", col_format: "edit", col_sortable: false, col_link: '/common-shipment/messengerslipEdit', col_param: param, col_show: this.bEdit },
-      { col_name: "cs_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
+      { col_name: "cs_id", col_caption: "ID", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: this.showModel},
       { col_name: "cs_refno", col_caption: "REF", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "cs_to_name", col_caption: "TO", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "cs_date", col_caption: "DATE", col_format: "date", col_sortable: true, col_link: '', col_param: {}, col_show: true },

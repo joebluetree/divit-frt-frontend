@@ -148,7 +148,7 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm"></label>
               <div class="col-sm-8">
-                <app-input maxlength="25" formControlName="hbl_location_name" [case]="'UPPER'"></app-input>
+                <app-input maxlength="50" formControlName="hbl_location_name" [case]="'UPPER'"></app-input>
               </div>
             </div>
             <div class="form-group row">
@@ -750,12 +750,12 @@
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE</button>
             <button class="btn btn-success btn-sm">ARRIVAL NOTICE(INVOICE)</button>
             <button class="btn btn-success btn-sm">RELEASE ORDER</button>
-            <button class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
-            [queryParams]="{parent_id:mform.get('hbl_id')?.value, parent_type:'AIR-IMPORT-H',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY ORDER</button>
+            <button *ngIf="gs.IsUserRightsExits('AIR-IMPORT-H-DO')" class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+            [queryParams]="{menuid:'AIR-IMPORT-H-DO', type: 'AIR-IMPORT-H-DO', appid: appid, parent_id:mform.get('hbl_id')?.value, parent_type:'AIR-IMPORT-H'}">DELIVERY ORDER</button>
             <button class="btn btn-success btn-sm">AUTH. TO MAKE ENTRY</button>
             <button class="btn btn-success btn-sm">NOT RELEASE LETTER</button>
-            <button class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
-              routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, parent_id: mform.get('hbl_id')?.value,parent_type:'AIRIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">HOUSE INTERNAL MEMO
+            <button *ngIf="gs.IsUserRightsExits('AIR-IMP-H-MEMO')" class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
+              routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, mode: 'add',menuid:'AIR-IMP-H-MEMO', type: 'AIR-IMP-H-MEMO', appid: appid, parent_id: mform.get('hbl_id')?.value,parent_type:'AIR-IMP-CNTR-MEMO'}">HOUSE INTERNAL MEMO
               <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
           </div>
         </div>

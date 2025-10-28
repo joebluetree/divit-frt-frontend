@@ -4,14 +4,11 @@
 
     <div class="col-sm-6">
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-lable-sm">Date Type</label>
-        <div class="col-sm-8">
+        <div class="col-sm-2">
           <app-combobox maxlength="30" formControlName="cust_date_type" name="cust_date_type" [dataSource]="typeList"
             [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Date Range</label>
+        <label class="col-sm-2 form-label form-label-sm" for=""></label>
         <div class="col-sm-4">
           <app-date type="text" formControlName="cust_from_date" [format]="gs.globalConstants.global_date_format"
             [placeholder]="gs.globalConstants.global_date_format"> </app-date>
@@ -33,6 +30,12 @@
           <app-input type="text" formControlName="cust_edited_by" case="UPPER"> </app-input>
         </div>
       </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Firm Code</label>
+        <div class="col-sm-8">
+          <app-input type="text" formControlName="cust_firm_code" case="UPPER"> </app-input>
+        </div>
+      </div>
     </div>
 
     <div class="col-sm-6">
@@ -49,12 +52,6 @@
         </div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Firm Code</label>
-        <div class="col-sm-8">
-          <app-input type="text" formControlName="cust_firm_code" case="UPPER"> </app-input>
-        </div>
-      </div>
-      <div class="form-group row">
         <div class="col-sm-12">
           <app-checkbox formControlName="cust_is_blackacc"></app-checkbox>
           <label class="ms-1 form-label form-label-sm">Black Account</label>
@@ -63,7 +60,8 @@
 
       <div class="form-group row">
         <div class="col-sm-12">
-          <button class="btn btn-sm btn-success" (click)="search('search')">Search</button>
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')">Print</button>
         </div>
       </div>
     </div>

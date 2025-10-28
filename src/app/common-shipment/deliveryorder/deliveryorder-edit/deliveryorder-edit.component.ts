@@ -32,7 +32,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
   shipTerm = [
     { key: 'AIR', value: 'AIR' },
     { key: 'OCEAN', value: 'OCEAN' },
-    { key: 'OCEAN,,AIR', value: 'OCEAN,AIR' },
+    { key: 'OCEAN,AIR', value: 'OCEAN,AIR' },
   ]
 
   constructor(
@@ -420,7 +420,7 @@ export class DeliveryOrderEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action: any) {
+  callBack(action: { id: string, rec: any }) {
     console.log(action);
     let rec: any = {};
     if (action?.rec != null) {

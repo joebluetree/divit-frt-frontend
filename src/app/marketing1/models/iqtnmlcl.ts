@@ -64,6 +64,10 @@ export interface iQtnm_lcl {
   qtnm_trans_time: string;
   qtnm_routing: string;
   qtnm_amt: number;
+  qtnm_cur_id: number;
+  qtnm_cur_code: string;
+  qtnm_exrate: number;
+  exrate_decimal: number;
   rec_files_count?: number;
   rec_files_attached?: string;
   qtnd_lcl: iQtnd_lcl[];
@@ -81,7 +85,6 @@ export interface iQtnm_lcl {
 export interface iQtnm_lcl_Search {
   qtnm_type: string;
   qtnm_no: string;
-  qtnm_to_id: number;
   qtnm_to_name: string;
   qtnm_pld_name: string;
   qtnm_from_date: string;

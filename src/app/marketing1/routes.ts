@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 
-//Name : Alen Cherian
+//Name : Sourav V
 //Date : 03/01/2025
 //Command : Create the routes for define the path of the components
 

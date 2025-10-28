@@ -32,8 +32,8 @@
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Stage</label>
               <div class="col-sm-8">
-                <app-input maxlength="60" formControlName="hbl_shipment_stage_name" [case]="'UPPER'" id="hbl_shipment_stage_name"
-                    name="hbl_shipment_stage_name" [disable]="true"></app-input>
+                <app-input maxlength="60" formControlName="hbl_shipment_stage_name" [case]="'UPPER'"
+                  id="hbl_shipment_stage_name" name="hbl_shipment_stage_name" [disable]="true"></app-input>
               </div>
             </div>
           </div>
@@ -789,10 +789,10 @@
       </div> -->
 
 
-      <div class="col-sm-4">
-        <!-- <div class="form-group row"> -->
-          <label class="col-sm-8 form-label form-lable-sm" for=""></label>
-        <!-- </div> -->
+          <div class="col-sm-4">
+            <!-- <div class="form-group row"> -->
+            <label class="col-sm-8 form-label form-lable-sm" for=""></label>
+            <!-- </div> -->
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Lbs</label>
               <div class="col-sm-3">
@@ -903,7 +903,7 @@
               </div>
             </div>
 
-            
+
             <div class="form-group row">
               <label class="col-sm-4 form-label form-lable-sm" for="">Orginals</label>
               <div class="col-sm-8">
@@ -928,82 +928,46 @@
     </div>
   </div>
 
-  <div class="col-sm-2 border-top" *ngIf="mform.get('hbl_id')?.value != 0">
+  <div class="col-sm-2" *ngIf="mform.get('hbl_id')?.value != 0">
     <div class="page-body line-bottom">
       <div class="row">
         <div class="col-sm-12">
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'"
-                [displayColumn]="'value'" case="UPPER"></app-combobox>
-            </div>
-          </div>
+          <div class="d-grid gap-1">
 
-          <div class="form-group row">
+            <app-combobox maxlength="30" name="" [dataSource]="frtList" [valueColumn]="'key'" [displayColumn]="'value'"
+              case="UPPER"></app-combobox>
             <div class="col-sm-12">
               <app-checkbox></app-checkbox>
               <label class="col-sm-8 form-label form-lable-sm" for="">BL New Format</label>
             </div>
-          </div>
-          <div class="form-group row">
             <div class="col-sm-12">
               <app-checkbox></app-checkbox>
               <label class="ms-1 form-label form-label-sm">BL Backside</label>
             </div>
-          </div>
-
-          <div class="form-group row">
             <div class="col-sm-12">
               <app-checkbox></app-checkbox>
               <label class="ms-1 form-label form-label-sm">Colour</label>
             </div>
-          </div>
-          <div class="form-group row">
             <div class="col-sm-12">
               <app-checkbox></app-checkbox>
               <label class="ms-1 form-label form-label-sm">Cntr#/Seal#</label>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12 ">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(ORGINAL)</button>
-            </div>
-
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(TELEX)</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">HBL(DRAFT)</button>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button class="btn btn-sm btn-success w-100 mb-2">PRINT HBL</button>
-            </div>
-          </div>
-          <div class="form-group row mb-2">
-            <app-genmemo [inputdata]="{id:id, parent_type: mform.get('hbl_mode')?.value ,menuid:'SEA-EXP-RIDER', type: 'SEA-EXP-RIDER', appid: appid}" [button_name]="'RIDER'" *ngIf="gs.IsUserRightsExits('SEA-EXP-RIDER')"></app-genmemo>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12">
-              <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success w-100 mb-2" (click)="save()"
-                [disabled]="mform.invalid">SAVE</button>
-            </div>
+            <button class="btn btn-success btn-sm">HBL (ORIGINAL)</button>
+            <button class="btn btn-success btn-sm">HBL (TELEX)</button>
+            <button class="btn btn-success btn-sm">HBL (DRAFT)</button>
+            <button class="btn btn-success btn-sm">PRINT HBL</button>
+            <app-genmemo *ngIf="gs.IsUserRightsExits('SEA-EXP-RIDER')"
+              [inputdata]="{id:id, parent_type: mform.get('hbl_mode')?.value ,menuid:'SEA-EXP-RIDER', type: 'SEA-EXP-RIDER', appid: appid}"
+              [button_name]="'RIDER'">
+            </app-genmemo>
+            <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"
+              [disabled]="mform.invalid">SAVE</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-<!-- <div class="page-footer line-bottom">
-  <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()" [disabled]="mform.invalid">Save</button>
-</div> -->
 
 
 <div *ngIf="showModel">

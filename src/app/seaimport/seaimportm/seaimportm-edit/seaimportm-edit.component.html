@@ -218,8 +218,6 @@
                 <app-combobox maxlength="20" formControlName="mbl_ombl_sent_ampm" name="mbl_ombl_sent_ampm"
                   [dataSource]="TimeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
               </div>
-              <!-- </div>
-            <div class="form-group row"> -->
               <label class="col-sm-2 form-label form-lable-sm" for=""> O/F.Sent.On</label>
               <div class="col-sm-3">
                 <app-date formControlName="mbl_of_sent_on" name="mbl_of_sent_on"
@@ -248,7 +246,7 @@
             </div>
             <div class="form-group row">
               <div class="col-sm-4">
-                <button class="btn btn-sm btn-success w-100 mb-2">Copy To All House</button>
+                <button class="btn btn-sm btn-success w-100 ">Copy To All House</button>
               </div>
               <div class="col-sm-8">
                 <app-input maxlength="60" formControlName="mbl_cargo_loc_add1" [case]="'UPPER'" id="mbl_cargo_loc_add1"
@@ -430,7 +428,7 @@
       <div class="page-body" *ngIf="mform.get('mbl_id')?.value != 0">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+            <table class="table table-sm table-hover table-bordered table-striped ">
 
               <thead class="table-success">
                 <tr class="table-header">
@@ -543,30 +541,40 @@
         <div class="col-sm-12">
           <div class="d-grid gap-1">
             <button class="btn btn-success btn-sm">POD</button>
-            <button *ngIf="gs.IsUserRightsExits('DEVAN-INSTRUCTION')" class="btn btn-success btn-sm" routerLink="/common-shipment/devaninstEdit"
-              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type: mform.get('mbl_mode')?.value, mode: 'add',menuid:'DEVAN-INSTRUCTION', type: 'DEVAN-INSTRUCTION', appid: appid}">DEVANING INSTRUCTION</button>
-            <button class="btn btn-success btn-sm">AR & AP</button>
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMP-M-DEVAN')" class="btn btn-success btn-sm" routerLink="/common-shipment/devaninstEdit"
+              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type: mform.get('mbl_mode')?.value, mode: 'add',menuid:'SEA-IMP-M-DEVAN', type: 'SEA-IMP-M-DEVAN', appid: appid}">DEVANING INSTRUCTION</button>
+            
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMPORT-INVOICE')" class="btn btn-success btn-sm" type="button" routerLink="/accounts/invoicemList"
+              [queryParams]="{id : 0 , menuid:'SEA-IMPORT-INVOICE', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">AR & AP</button>
+            
             <button class="btn btn-success btn-sm">PROFIT REPORT</button>
             <button class="btn btn-success btn-sm">SHIPMENT LABEL</button>
-            <button *ngIf="gs.IsUserRightsExits('MESSENGER-SLIP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,
+            
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMPORT-SLIP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'SEA-IMPORT-SLIP', type:'SEA-IMPORT-SLIP', appid: appid,
               parent_id: mform.get('mbl_id')?.value,parent_type:mform.get('mbl_mode')?.value}">MESSENGER SLIP</button>
+            
             <button class="btn btn-success btn-sm">PAYMENT REQUEST</button>
-            <app-fileupload *ngIf="gs.IsUserRightsExits('FILE-UPLOAD')"
+            
+            <app-fileupload *ngIf="gs.IsUserRightsExits('SEA-IMP-ATTACHMENT')"
               [inputdata]="{mode:'add', id:id, parent_type: 'SEA IMPORT',
-              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"></app-fileupload>
-            <button *ngIf="gs.IsUserRightsExits('FOLLOWUP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
-              [queryParams]="{id : 0 ,mode:'add', menuid:'FOLLOWUP', type:'FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD
-              TO FOLLOW UP</button>
-            <button *ngIf="gs.IsUserRightsExits('MEMO')" class="btn btn-sm"
+              rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}" [button_name]="'ATTACHMENTS'"></app-fileupload>
+            
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMP-FOLLOWUP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/followupEdit"
+              [queryParams]="{id : 0 ,mode:'add', menuid:'SEA-IMP-FOLLOWUP', type:'SEA-IMP-FOLLOWUP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">ADD TO FOLLOW UP</button>
+            
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMP-M-MEMO')" class="btn btn-sm"
               [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" routerLink="/common-shipment/memoEdit"
-              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'MEMO', type: 'MEMO', appid: appid}">INTERNAL MEMO
+              [queryParams]="{ id:0, parent_id: mform.get('mbl_id')?.value,parent_type:'SEAIMP-CNTR-MEMO', mode: 'add',menuid:'SEA-IMP-M-MEMO', type: 'SEA-IMP-M-MEMO', appid: appid}">INTERNAL MEMO
               <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>
+            
             <button class="btn btn-success btn-sm">REQUEST FOR APPROVAL</button>
-            <button *ngIf="gs.IsUserRightsExits('DELIVERY-ORDER')" class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
-              [queryParams]="{parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M',menuid:'DELIVERY-ORDER', type: 'DELIVERY-ORDER', appid: appid }">DELIVERY
-              ORDER</button>
+            
+            <button *ngIf="gs.IsUserRightsExits('SEA-IMPORT-M-DO')" class="btn btn-success btn-sm" routerLink="/common-shipment/deliveryorderEdit"
+              [queryParams]="{menuid:'SEA-IMPORT-M-DO', appid: appid, parent_id:mform.get('mbl_id')?.value, parent_type:'SEA-IMPORT-M'}">DELIVERY ORDER</button>
+            
             <button class="btn btn-success btn-sm">PRODUCT</button>
+            
             <button *ngIf="bAdd || bEdit" class="btn btn-success btn-sm" (click)="save()"
               [disabled]="mform.invalid">SAVE</button>
           </div>

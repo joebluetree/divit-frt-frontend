@@ -1,12 +1,10 @@
 <div class="page-header">
   <h5>{{title}}</h5>
-  <!-- <button *ngIf="bAdd" class="btn btn-success btn-sm" routerLink="/seaimport/seaimporthEdit"
-    [queryParams]="{id :0,mode:'add',menuid:menuid,type:type,  appid:appid}">New</button> -->
   <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
 </div>
 
 <div class="page-search">
-  <app-seaimporth-search [search_url]="'/api/seaimport/seaimporth/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-seaimporth-search [search_url]="'/api/seaimport/seaimporth/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-seaimporth-search>
 </div>
 

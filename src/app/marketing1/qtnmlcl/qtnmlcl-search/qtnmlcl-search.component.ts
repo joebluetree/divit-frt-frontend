@@ -15,11 +15,15 @@ import { iQtnm_lcl_Search } from '../../models/iqtnmlcl';
 //Name : Sourav V
 //Created Date : 04/01/2025
 //Remark : this component manages searching of qtnm-lcl records
+// versio 2: added print option
 
 export class QtnmLclSearchComponent {
 
   mform: FormGroup;
   record!: iQtnm_lcl_Search;
+  appid: string = '';
+  
+  @Input() print: boolean = false;
 
   @Input('search_url') search_url = '';
 
@@ -47,6 +51,7 @@ export class QtnmLclSearchComponent {
   }
 
   ngOnInit(): void {
+    this.appid = this.gs.app_id
     this.mform.setValue({
       qtnm_from_date: this.record.qtnm_from_date,
       qtnm_to_date: this.record.qtnm_to_date,
@@ -66,7 +71,7 @@ export class QtnmLclSearchComponent {
       this.record.qtnm_pld_name = this.mform.value.qtnm_pld_name
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({action: _action, record: this.record, url: this.search_url }); // action added
     }
   }
 

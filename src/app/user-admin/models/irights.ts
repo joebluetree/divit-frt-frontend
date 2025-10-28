@@ -24,6 +24,9 @@ export interface iRights {
   rights_view: string;
   rights_delete: string;
   rights_print: string;
+  rights_pdf: string;
+  rights_excel: string;
+  rights_email: string;
   rights_doc_upload: string;
   rights_doc_view: string;
   rights_approver: string;

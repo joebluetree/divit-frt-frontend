@@ -6,7 +6,7 @@
 </div>
 
 <div class="page-search">
-  <app-otherop-search [search_url]="'/api/otherop/otherop/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-otherop-search [search_url]="'/api/otherop/otherop/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)"></app-otherop-search>
 </div>
 

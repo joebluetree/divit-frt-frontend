@@ -18,7 +18,7 @@ export class AirExportService extends baseService {
     return <iAirExportModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iAirExport_Search>{ mbl_refno: '', mbl_from_date: '', mbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
+      searchRecord: <iAirExport_Search>{ title:this.title, mbl_refno: '', mbl_from_date: '', mbl_to_date: '', rec_company_id: 0, rec_branch_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

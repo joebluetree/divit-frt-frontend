@@ -3,6 +3,7 @@ import { iParam_Search } from '../../models/iparam';
 import { FormBuilder, FormGroup, } from '@angular/forms';
 import { CustomControls } from '../../../app.config';
 import { GlobalService } from '../../../core/services/global.service';
+import { ParamService } from '../../services/param.service';
 
 
 @Component({
@@ -17,8 +18,11 @@ export class ParamSearchComponent {
   mform: FormGroup;
   record!: iParam_Search;
   appid: string = '';
+  // menu_id: string = '';
 
   @Input() showModel: boolean = false;
+
+  @Input() print: boolean = false;
 
   @Input('search_url') search_url = '';
 
@@ -29,7 +33,7 @@ export class ParamSearchComponent {
 
   constructor(
     private fb: FormBuilder,
-    private gs: GlobalService,
+    public gs: GlobalService,
   ) {
     this.buildForm();
   }
@@ -43,6 +47,7 @@ export class ParamSearchComponent {
 
   ngOnInit(): void {
     this.appid = this.gs.app_id
+    // this.menu_id = this.menu_id
     this.mform.setValue({
       param_name: this.record.param_name,
     })

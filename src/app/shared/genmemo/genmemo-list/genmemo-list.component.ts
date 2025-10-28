@@ -3,7 +3,8 @@ import { CustomControls } from '../../../app.config';
 import { baseListComponent } from '../../base-class/baseListComponent';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GenMemoSearchComponent } from '../genmemo-search/genmemo-search.component';
-import { GenMemoService } from '../services/genmemo.service';
+import { GenMemoService } from '../../services/genmemo.service';
+
 
 @Component({
   selector: 'app-genmemo-list',

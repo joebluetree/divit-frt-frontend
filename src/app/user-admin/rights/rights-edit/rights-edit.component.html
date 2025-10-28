@@ -6,11 +6,38 @@
 <form [formGroup]="mform">
 
   <div class="page-body">
-
     <div class="row">
-
       <div class="col-sm-12">
-        <div class="table-responsive">
+        <div class="mb-1 mt-1">
+          <button *ngIf="moduleNames?.length" class="btn btn-sm btn-success me-2"
+            [class.btn-primary]="selectedModule === ''" (click)="filterModule('')">All</button>
+
+          <button *ngFor="let module of moduleNames" class="btn btn-sm btn-success me-2"
+            (click)="filterModule(module)">{{ module }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group row mt-1 mb-1">
+          <label class="col-sm-1 form-label form-label-sm" for="">Search</label>
+          <div class="col-sm-11">
+            <input type="text" class="form-control form-control-sm" formControlName="menu_name"
+              (input)="filterModule(this.selectedModule)" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="table-responsive fixedTableHead" [style.height]="formArray('records').length>8?'700px':'auto'"
+          [style.overflow-y]="formArray('records').length>8?'scroll':'auto'">
           <table class="table table-sm table-hover table-bordered table-striped table-condensed">
             <thead class="table-success">
               <tr class="table-header">
@@ -24,6 +51,9 @@
                 <th>View</th>
                 <th>Delete</th>
                 <th>Print</th>
+                <th>Pdf</th>
+                <th>Excel</th>
+                <th>Email</th>
                 <th>Doc-Upload</th>
                 <th>Doc-View</th>
                 <th>Approver</th>
@@ -31,7 +61,7 @@
               </tr>
             </thead>
             <tbody formArrayName="records">
-              <tr *ngFor="let iRow of formArray('records').controls; let i=index;" [formGroupName]="i">
+              <tr *ngFor="let iRow of filteredRecords; let i=index;" [formGroupName]="i">
                 <td> {{iRow.get('rights_module_name')?.value}}</td>
                 <td> {{iRow.get('rights_menu_name')?.value}}</td>
                 <td> <app-checkbox formControlName="rights_selected"></app-checkbox> </td>
@@ -42,6 +72,9 @@
                 <td> <app-checkbox formControlName="rights_view"></app-checkbox> </td>
                 <td> <app-checkbox formControlName="rights_delete"></app-checkbox> </td>
                 <td> <app-checkbox formControlName="rights_print"></app-checkbox> </td>
+                <td> <app-checkbox formControlName="rights_pdf"></app-checkbox> </td>
+                <td> <app-checkbox formControlName="rights_excel"></app-checkbox> </td>
+                <td> <app-checkbox formControlName="rights_email"></app-checkbox> </td>
                 <td> <app-checkbox formControlName="rights_doc_upload"></app-checkbox> </td>
                 <td> <app-checkbox formControlName="rights_doc_view"></app-checkbox> </td>
                 <td> <app-checkbox formControlName="rights_approver"></app-checkbox> </td>

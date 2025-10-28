@@ -18,7 +18,7 @@ import { AirExporthService } from '../../services/airexporth.service';
 //Date : 28/02/2025
 //Command : Create the AirExport House Components.
 //version : 1.0
-
+//version 2 : 06/10/2025  modified callback function 
 
 export class AirExporthEditComponent extends baseEditComponent {
 
@@ -428,6 +428,8 @@ export class AirExporthEditComponent extends baseEditComponent {
         this.mform.patchValue({
           hbl_mbl_id: rec.hbl_mbl_id,
           hbl_mbl_refno: rec.hbl_mbl_refno,
+          hbl_shipment_stage_id: rec.hbl_shipment_stage_id,
+          hbl_shipment_stage_name: rec.hbl_shipment_stage_name,
           hbl_handled_id: rec.hbl_handled_id,
           hbl_handled_name: rec.hbl_handled_name,
           hbl_salesman_id: rec.hbl_salesman_id,
@@ -608,86 +610,115 @@ export class AirExporthEditComponent extends baseEditComponent {
 
   callBack(action: any) {
     if (action.id == 'hbl_shipment_stage_name') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_shipment_stage_id: null,
+          hbl_shipment_stage_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_shipment_stage_id: action.rec.param_id ,
+          hbl_shipment_stage_name: action.rec.param_name ,
+        });
       }
-      this.mform.patchValue({
-        hbl_shipment_stage_id: rec.param_id || 0,
-        hbl_shipment_stage_name: rec.param_name || "",
-      });
     }
+
     if (action.name == 'hbl_shipper_code') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_shipper_id: null,
+          hbl_shipper_code: '',
+          hbl_shipper_name: '',
+          hbl_shipper_add1: '',
+          hbl_shipper_add2: '',
+          hbl_shipper_add3: '',
+          hbl_shipper_add4: '',
+          hbl_shipper_add5: '',
+          hbl_by1_carrier: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_shipper_id: action.rec.cust_id ,
+          hbl_shipper_code: action.rec.cust_code ,
+          hbl_shipper_name: action.rec.cust_name ,
+          hbl_shipper_add1: action.rec.cust_address1 ,
+          hbl_shipper_add2: action.rec.cust_address2 ,
+          hbl_shipper_add3: action.rec.cust_address3 ,
+          hbl_shipper_add4: this.gs.getAttention(action.rec) ,
+          hbl_shipper_add5: this.gs.getTelFax(action.rec) ,
+          hbl_by1_carrier: action.rec.cust_name ,
+        });
       }
-      this.mform.patchValue({
-        hbl_shipper_id: rec.cust_id || 0,
-        hbl_shipper_code: rec.cust_code || "",
-        hbl_shipper_name: rec.cust_name || "",
-        hbl_shipper_add1: rec.cust_address1 || "",
-        hbl_shipper_add2: rec.cust_address2 || "",
-        hbl_shipper_add3: rec.cust_address3 || "",
-        hbl_shipper_add4: this.gs.getAttention(rec) || "",
-        hbl_shipper_add5: this.gs.getTelFax(rec) || "",
-        hbl_by1_carrier: rec.cust_name || "",
-      });
     }
+
     if (action.name == 'hbl_consignee_code') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_consignee_id: null,
+          hbl_consignee_code: '',
+          hbl_consignee_name: '',
+          hbl_consignee_add1: '',
+          hbl_consignee_add2: '',
+          hbl_consignee_add3: '',
+          hbl_consignee_add4: '',
+          hbl_consignee_add5: '',
+          hbl_bltype: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_consignee_id: action.rec.cust_id ,
+          hbl_consignee_code: action.rec.cust_code ,
+          hbl_consignee_name: action.rec.cust_name ,
+          hbl_consignee_add1: action.rec.cust_address1 ,
+          hbl_consignee_add2: action.rec.cust_address2 ,
+          hbl_consignee_add3: action.rec.cust_address3 ,
+          hbl_consignee_add4: this.gs.getAttention(action.rec) ,
+          hbl_consignee_add5: this.gs.getTelFax(action.rec) ,
+          hbl_bltype: action.rec.cust_nomination ,
+        });
       }
-      this.mform.patchValue({
-        hbl_consignee_id: rec.cust_id || 0,
-        hbl_consignee_code: rec.cust_code || "",
-        hbl_consignee_name: rec.cust_name || "",
-        hbl_consignee_add1: rec.cust_address1 || "",
-        hbl_consignee_add2: rec.cust_address2 || "",
-        hbl_consignee_add3: rec.cust_address3 || "",
-        hbl_consignee_add4: this.gs.getAttention(rec) || "",
-        hbl_consignee_add5: this.gs.getTelFax(rec) || "",
-        hbl_bltype: rec.cust_nomination || "",
-      });
     }
 
     if (action.id == 'hbl_handled_name') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_handled_id: null,
+          hbl_handled_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_handled_id: action.rec.param_id ,
+          hbl_handled_name: action.rec.param_name ,
+        });
       }
-      this.mform.patchValue({
-        hbl_handled_id: rec.param_id || 0,
-        hbl_handled_name: rec.param_name || "",
-      });
     }
+
     if (action.id == 'hbl_salesman_name') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_salesman_id: null,
+          hbl_salesman_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_salesman_id: action.rec.param_id ,
+          hbl_salesman_name: action.rec.param_name ,
+        });
       }
-      this.mform.patchValue({
-        hbl_salesman_id: rec.param_id || 0,
-        hbl_salesman_name: rec.param_name || "",
-      });
     }
 
     if (action.id == 'hbl_format_name') {
-      console.log(action);
-      let rec: any = {};
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          hbl_format_id: null,
+          hbl_format_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          hbl_format_id: action.rec.param_id ,
+        hbl_format_name: action.rec.param_name ,
+        });
       }
-      this.mform.patchValue({
-        hbl_format_id: rec.param_id || 0,
-        hbl_format_name: rec.param_name || "",
-      });
     }
   }
 

@@ -15,6 +15,10 @@ import { baseEditComponent } from '../../../shared/base-class/baseEditComponent'
 })
 export class RightsEditComponent extends baseEditComponent {
 
+  filteredRecords: any[] = [];
+  moduleNames: string[] = [];
+  selectedModule: string = '';
+
   constructor(
     private ms: RightsService
   ) {
@@ -24,6 +28,7 @@ export class RightsEditComponent extends baseEditComponent {
       comp_id: [0],
       branch_id: [0],
       user_id: [0],
+      menu_name: [''],
       records: this.fb.array([]),
     })
   }
@@ -43,6 +48,9 @@ export class RightsEditComponent extends baseEditComponent {
       rights_delete: [rec ? rec.rights_delete : 'N'],
       rights_view: [rec ? rec.rights_view : 'N'],
       rights_print: [rec ? rec.rights_print : 'N'],
+      rights_pdf: [rec ? rec.rights_pdf : 'N'],
+      rights_excel: [rec ? rec.rights_excel : 'N'],
+      rights_email: [rec ? rec.rights_email : 'N'],
       rights_doc_upload: [rec ? rec.rights_doc_upload : 'N'],
       rights_doc_view: [rec ? rec.rights_doc_view : 'N'],
       rights_approver: [rec ? rec.rights_approver : 'N'],
@@ -82,9 +90,16 @@ export class RightsEditComponent extends baseEditComponent {
       user_id: rec.user_id,
     });
     this.formArray('records').clear();
+    const allModules: string[] = [];
     rec.records.forEach(rec => {
       this.formArray('records').push(this.addRow(rec));
+      const moduleName = rec.rights_module_name;
+      if (moduleName && !allModules.includes(moduleName)) {
+        allModules.push(moduleName);
+      }
     });
+    this.moduleNames = allModules;
+    this.filteredRecords = this.formArray('records').controls;
   }
 
 
@@ -101,8 +116,8 @@ export class RightsEditComponent extends baseEditComponent {
     // data.rec_company_id = this.gs.user.user_company_id;
     // data.rec_created_by = this.gs.user.user_code;
     data.records?.forEach(r => {
-      r.rec_company_id = this.gs.user.user_company_id;
-      r.rec_branch_id = this.gs.user.user_branch_id;
+      r.rec_company_id = data.comp_id;
+      r.rec_branch_id = data.branch_id;
       r.rec_created_by = this.gs.user.user_code;
       // if (r.rights_id === 0) {
       //   r.rec_created_by = this.gs.user.user_code;
@@ -131,6 +146,34 @@ export class RightsEditComponent extends baseEditComponent {
     });
 
   }
+
+  filterModule(module: string) {
+    this.selectedModule = module;
+    this.filterRecords();
+  }
+
+  //function for Search
+  filterRecords() {
+    const search = (this.mform.get('menu_name')?.value || '').toUpperCase();
+    const allRecords = this.formArray('records').controls;
+    const selectedModuleName = this.selectedModule;
+
+    const modulrecord = allRecords.filter(rec => {
+      const moduleName = (rec.get('rights_module_name')?.value || '');
+      const moduleSearchRecords = !selectedModuleName || moduleName === selectedModuleName;
+      return moduleSearchRecords;
+    });
+
+    // Step 2: Filter by search term on the module-filtered records
+    this.filteredRecords = modulrecord.filter(rec => {
+      const menuName = (rec.get('rights_menu_name')?.value || '').toUpperCase();
+      const moduleName = (rec.get('rights_module_name')?.value || '');
+
+      const matchesSearch = !search || menuName.includes(search) || moduleName.includes(search);
+      return matchesSearch;
+    });
+  }
+
 
   callBack(action: { id: string, rec: iBranchm }) {
 

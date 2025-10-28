@@ -10,6 +10,7 @@ import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-e
 //Name : Sourav V
 //Created Date : 04/01/2025
 //Remark : this component manages creation,editing and saving of qtnm-lcl(parent table) records
+// version 3: added currency and exrate 12/09/2025
 
 @Component({
   selector: 'app-qtnmlcl-edit',
@@ -23,6 +24,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
   @ViewChild(GenRemarkmEditComponent) fs!: GenRemarkmEditComponent; //
 
   iDec = 3;
+  exrate_decimal: number;
   constructor(
     private ms: QtnmLclService,
     public dialog: MatDialog
@@ -72,6 +74,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
       qtnm_trans_time: [''],
       qtnm_routing: [''],
       qtnm_amt: [0],
+      qtnm_cur_id: [0],
+      qtnm_cur_code: [''],
+      qtnm_exrate: [0],
       rec_files_count: [0],
       rec_files_attached: [''],
       qtnd_lcl: this.fb.array([]),
@@ -95,7 +100,27 @@ export class QtnmLclEditComponent extends baseEditComponent {
     this.mform.patchValue({
       qtnm_id: this.id
     })
+    this.getDefaultData();
+  }
 
+  getDefaultData() { //to get default currency and exrate
+    const param = {
+      'company_id': this.gs.user.user_company_id,
+      'branch_id': this.gs.user.user_branch_id,
+    };
+    this.ms.getRecord(param, '/api/marketing/qtnmlcl/GetDefaultData').subscribe({
+      next: (rec: iQtnm_lcl) => {
+        this.mform.patchValue({
+          qtnm_cur_id: rec.qtnm_cur_id,
+          qtnm_cur_code: rec.qtnm_cur_code,
+          qtnm_exrate: this.gs.roundNumber(rec.qtnm_exrate, rec.exrate_decimal),
+        });
+        this.exrate_decimal = rec.exrate_decimal;
+      },
+      error: (e) => {
+        this.gs.showError(e);
+      }
+    })
   }
 
   addRow(rec: iQtnd_lcl) {
@@ -137,7 +162,6 @@ export class QtnmLclEditComponent extends baseEditComponent {
   }
 
   getRecord() {
-
     const param = { 'id': this.id };
     this.ms.getRecord(param, '/api/marketing/qtnmlcl/GetRecordAsync').subscribe({
       next: (rec: iQtnm_lcl) => {
@@ -182,6 +206,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
           qtnm_trans_time: rec.qtnm_trans_time,
           qtnm_routing: rec.qtnm_routing,
           qtnm_amt: rec.qtnm_amt ?? 0,
+          qtnm_cur_id: rec.qtnm_cur_id,
+          qtnm_cur_code: rec.qtnm_cur_code,
+          qtnm_exrate: rec.qtnm_exrate,
           rec_files_count: rec.rec_files_count,
           rec_files_attached: rec.rec_files_attached,
           rec_version: rec.rec_version,
@@ -195,8 +222,6 @@ export class QtnmLclEditComponent extends baseEditComponent {
       }
     })
   }
-
-
 
   save() {
     if (this.mform.invalid) {
@@ -231,7 +256,8 @@ export class QtnmLclEditComponent extends baseEditComponent {
         this.mform.patchValue({
           rec_version: v.rec_version,
           qtnm_cfno: v.qtnm_cfno,
-          qtnm_no: v.qtnm_no
+          qtnm_no: v.qtnm_no,
+          qtnm_type: v.qtnm_type
         });
         this.fillQuotes(v.qtnd_lcl);
         this.fs.fillRemarkDetails(v.remk_remarks); //
@@ -246,104 +272,122 @@ export class QtnmLclEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
-    if (action.id == 'qtnm_to_code') {
-      if (action.rec) {
+    if (action.id === 'qtnm_to_code') {
+      if (action.rec == null) {
         this.mform.patchValue({
-          qtnm_to_id: action.rec ? action.rec.cust_id : 0,
-          qtnm_to_code: action.rec ? action.rec.cust_code : '',
-          qtnm_to_name: action.rec ? action.rec.cust_name : '',
-          qtnm_to_addr1: action.rec ? action.rec.cust_address1 : '',
-          qtnm_to_addr2: action.rec ? action.rec.cust_address2 : '',
-          qtnm_to_addr3: action.rec ? action.rec.cust_address3 : '',
-        });
-      }
-      else {
-        this.mform.patchValue({
-          qtnm_to_id: 0,
+          qtnm_to_id: null,
           qtnm_to_code: '',
           qtnm_to_name: '',
           qtnm_to_addr1: '',
           qtnm_to_addr2: '',
-          qtnm_to_addr3: ''
+          qtnm_to_addr3: '',
         });
-      }
-    }
-    if (action.id == 'qtnm_salesman_name') {
-      if (action.rec) {
+      } else {
         this.mform.patchValue({
-          qtnm_salesman_id: action.rec ? action.rec.param_id : 0,
-          qtnm_salesman_name: action.rec ? action.rec.param_name : '',
-        });
-      }
-      else {
-        this.mform.patchValue({
-          qtnm_salesman_id: 0,
-          qtnm_salesman_name: '',
-        });
-      }
-    }
-    if (action.id == 'qtnm_por_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          qtnm_por_id: action.rec ? action.rec.param_id : 0,
-          qtnm_por_code: action.rec ? action.rec.param_code : '',
-          qtnm_por_name: action.rec ? action.rec.param_name : '',
-        });
-      }
-      else {
-        this.mform.patchValue({
-          qtnm_por_id: 0,
-          qtnm_por_code: '',
-          qtnm_por_name: '',
-        });
-      }
-    }
-    if (action.id == 'qtnm_pol_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          qtnm_pol_id: action.rec ? action.rec.param_id : 0,
-          qtnm_pol_code: action.rec ? action.rec.param_code : '',
-          qtnm_pol_name: action.rec ? action.rec.param_name : '',
-        });
-      }
-      else {
-        this.mform.patchValue({
-          qtnm_pol_id: 0,
-          qtnm_pol_code: '',
-          qtnm_pol_name: '',
-        });
-      }
-    }
-    if (action.id == 'qtnm_pod_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          qtnm_pod_id: action.rec ? action.rec.param_id : 0,
-          qtnm_pod_code: action.rec ? action.rec.param_code : '',
-          qtnm_pod_name: action.rec ? action.rec.param_name : '',
-        });
-      }
-      else {
-        this.mform.patchValue({
-          qtnm_pod_id: 0,
-          qtnm_pod_code: '',
-          qtnm_pod_name: '',
+          qtnm_to_id: action.rec.cust_id,
+          qtnm_to_code: action.rec.cust_code,
+          qtnm_to_name: action.rec.cust_name,
+          qtnm_to_addr1: action.rec.cust_address1,
+          qtnm_to_addr2: action.rec.cust_address2,
+          qtnm_to_addr3: action.rec.cust_address3,
         });
       }
     }
 
-    if (action.name == 'qtnd_acc_code') {
-      if (action.rec) {
-        this.formArrayRecord('qtnd_lcl', action.rowIndex)?.patchValue({
-          qtnd_acc_id: action.rec ? action.rec.acc_id : 0,
-          qtnd_acc_code: action.rec ? action.rec.acc_code : '',
-          qtnd_acc_name: action.rec ? action.rec.acc_name : '',
+    if (action.id === 'qtnm_salesman_name') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_salesman_id: null,
+          qtnm_salesman_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_salesman_id: action.rec.param_id,
+          qtnm_salesman_name: action.rec.param_name,
         });
       }
-      else {
+    }
+
+    if (action.id === 'qtnm_por_code') {
+      if (action.rec == null) {
         this.mform.patchValue({
-          qtnd_acc_id: 0,
+          qtnm_por_id: null,
+          qtnm_por_code: '',
+          qtnm_por_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_por_id: action.rec.param_id,
+          qtnm_por_code: action.rec.param_code,
+          qtnm_por_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_pol_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_pol_id: null,
+          qtnm_pol_code: '',
+          qtnm_pol_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_pol_id: action.rec.param_id,
+          qtnm_pol_code: action.rec.param_code,
+          qtnm_pol_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_pod_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_pod_id: null,
+          qtnm_pod_code: '',
+          qtnm_pod_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_pod_id: action.rec.param_id,
+          qtnm_pod_code: action.rec.param_code,
+          qtnm_pod_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_cur_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_cur_id: null,
+          qtnm_cur_code: '',
+          qtnm_exrate: 0,
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_cur_id: action.rec.param_id,
+          qtnm_cur_code: action.rec.param_code,
+          qtnm_exrate: this.gs.roundNumber(
+            parseFloat(action.rec.param_value1),
+            this.gs.globalConstants.global_exrate_decimal
+          ),
+        });
+      }
+    }
+
+    if (action.name === 'qtnd_acc_code') {
+      const row = this.formArrayRecord('qtnd_lcl', action.rowIndex);
+      if (action.rec == null) {
+        row?.patchValue({
+          qtnd_acc_id: null,
           qtnd_acc_code: '',
           qtnd_acc_name: '',
+        });
+      } else {
+        row?.patchValue({
+          qtnd_acc_id: action.rec.acc_id,
+          qtnd_acc_code: action.rec.acc_code,
+          qtnd_acc_name: action.rec.acc_name,
         });
       }
     }
@@ -379,25 +423,25 @@ export class QtnmLclEditComponent extends baseEditComponent {
     if (action.name == 'qtnm_kgs') {      // always use if condition maximum
       let nlbs = this.ConvertUnit(nqtnm_kgs, 'kgs');
       this.mform.patchValue({
-        qtnm_lbs: this.gs.roundNumber(nlbs, this.iDec),
+        qtnm_lbs: this.gs.roundNumber(nlbs, this.gs.globalConstants.global_dec_places),
       });
     }
     if (action.name == 'qtnm_lbs') {
       let nkgs = this.ConvertUnit(nqtnm_lbs, 'lbs');
       this.mform.patchValue({
-        qtnm_kgs: this.gs.roundNumber(nkgs, this.iDec),
+        qtnm_kgs: this.gs.roundNumber(nkgs, this.gs.globalConstants.global_dec_places),
       });
     }
     if (action.name == 'qtnm_cbm') {
       let ncft = this.ConvertUnit(nqtnm_cbm, 'cbm');
       this.mform.patchValue({
-        qtnm_cft: this.gs.roundNumber(ncft, this.iDec),
+        qtnm_cft: this.gs.roundNumber(ncft, this.gs.globalConstants.global_dec_places),
       });
     }
     if (action.name == 'qtnm_cft') {
       let ncbm = this.ConvertUnit(nqtnm_cft, 'cft');
       this.mform.patchValue({
-        qtnm_cbm: this.gs.roundNumber(ncbm, this.iDec),
+        qtnm_cbm: this.gs.roundNumber(ncbm, this.gs.globalConstants.global_dec_places),
       });
     }
     if (action.name == 'qtnd_amt') {
@@ -413,7 +457,6 @@ export class QtnmLclEditComponent extends baseEditComponent {
     this.mform.patchValue({
       qtnm_amt: amt
     });
-
   }
   onBlur(action: any) {
     console.log('onBlur Action', action);

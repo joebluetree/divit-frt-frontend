@@ -20,7 +20,9 @@ export class QtnmFclSearchComponent {
 
   mform: FormGroup;
   record!: iQtnmFcl_Search;
+  appid: string = '';
 
+  @Input() print: boolean = false;
   @Input('search_url') search_url = '';
 
   @Input('input') set input(v: iQtnmFcl_Search) {
@@ -38,14 +40,17 @@ export class QtnmFclSearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       qtnm_no: [''],
+      qtnm_to_name: [''],
       qtnm_from_date: [''],
       qtnm_to_date: [''],
     })
   }
 
   ngOnInit(): void {
+    this.appid = this.gs.app_id
     this.mform.setValue({
       qtnm_no: this.record.qtnm_no,
+      qtnm_to_name: this.record.qtnm_to_name,
       qtnm_from_date: this.record.qtnm_from_date,
       qtnm_to_date: this.record.qtnm_to_date,
     })
@@ -54,11 +59,12 @@ export class QtnmFclSearchComponent {
   search(_action: string) {
     if (this.output) {
       this.record.qtnm_no = this.mform.value.qtnm_no;
+      this.record.qtnm_to_name = this.mform.value.qtnm_to_name;
       this.record.qtnm_from_date = this.mform.value.qtnm_from_date;
       this.record.qtnm_to_date = this.mform.value.qtnm_to_date;
       this.record.rec_company_id = this.gs.user.user_company_id;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
-      this.output.emit({ record: this.record, url: this.search_url });
+      this.output.emit({ action:_action, record: this.record, url: this.search_url });
     }
   }
 

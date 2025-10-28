@@ -382,6 +382,7 @@ export class CustomerEditComponent extends baseEditComponent {
     data.cust_row_type = this.type;
 
     data.rec_company_id = this.gs.user.user_company_id;
+    data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
 
     let _mode = this.mode;
@@ -417,91 +418,104 @@ export class CustomerEditComponent extends baseEditComponent {
 
   callBack(action: any) {
     if (action.id == 'cust_parent_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_parent_id: null,
+          cust_parent_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_parent_id: action.rec.cust_id,
           cust_parent_name: action.rec.cust_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_parent_id: null,
-          cust_parent_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_state_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_state_id: null,
+          cust_state_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_state_id: action.rec.param_id,
           cust_state_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_state_id: 0,
-          cust_state_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_country_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_country_id: null,
+          cust_country_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_country_id: action.rec.param_id,
           cust_country_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_country_id: 0,
-          cust_country_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_salesman_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_salesman_id: null,
+          cust_salesman_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_salesman_id: action.rec.param_id,
           cust_salesman_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_salesman_id: 0,
-          cust_salesman_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_handled_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_handled_id: null,
+          cust_handled_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_handled_id: action.rec.param_id,
           cust_handled_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_handled_id: 0,
-          cust_handled_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_location_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_location_id: null,
+          cust_location_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_location_id: action.rec.branch_id,
           cust_location_name: action.rec.branch_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_location_id: 0,
-          cust_location_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_chb_code') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_chb_id: null,
+          cust_chb_code: '',
+          cust_chb_name: '',
+          cust_chb_address1: '',
+          cust_chb_address2: '',
+          cust_chb_address3: '',
+          cust_chb_contact: '',
+          cust_chb_tel: '',
+          cust_chb_fax: '',
+          cust_chb_email: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_chb_id: action.rec.cust_id,
           cust_chb_code: action.rec.cust_code,
@@ -515,76 +529,62 @@ export class CustomerEditComponent extends baseEditComponent {
           cust_chb_email: action.rec.cust_email,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_chb_id: null,
-          cust_chb_code: '',
-          cust_chb_name: '',
-          cust_chb_address1: '',
-          cust_chb_address2: '',
-          cust_chb_address3: '',
-          cust_chb_contact: '',
-          cust_chb_tel: '',
-          cust_chb_fax: '',
-          cust_chb_email: '',
-        });
-      }
     }
+
     if (action.id == 'cust_branch_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_branch_id: null,
+          cust_branch_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_branch_id: action.rec.branch_id,
           cust_branch_name: action.rec.branch_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_branch_id: 0,
-          cust_branch_name: '',
-        });
-      }
     }
+
     if (action.id == 'cust_cur_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          cust_cur_id: null,
+          cust_cur_name: '',
+        });
+      } else {
         this.mform.patchValue({
           cust_cur_id: action.rec.param_id,
           cust_cur_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cust_cur_id: 0,
-          cust_cur_name: '',
-        });
-      }
     }
+
     if (action.name == 'cont_country_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
+          cont_country_id: null,
+          cont_country_code: '',
+          cont_country_name: '',
+        });
+      } else {
         this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
           cont_country_id: action.rec.param_id,
           cont_country_code: action.rec.param_code,
           cont_country_name: action.rec.param_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          cont_country_id: null,
-          cont_country_code: '',
-          cont_country_name: '',
-        });
-      }
     }
+
     if (action.name == 'cont_group_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
+          cont_group_id: null,
+          cont_group_name: '',
+        });
+      } else {
         this.formArrayRecord('cust_contacts', action.rowIndex)?.patchValue({
           cont_group_id: action.rec.param_id,
           cont_group_name: action.rec.param_name,
-        });
-      }
-      else {
-        this.mform.patchValue({
-          cont_group_id: null,
-          cont_group_name: '',
         });
       }
     }

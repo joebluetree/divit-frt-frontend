@@ -43,14 +43,20 @@ export class ParamEditComponent extends baseEditComponent {
     })
   }
 
+  isMultiValue(){
+    if (this.type == "SEA-CARRIER") {
+      this.value1 = "SCAC Code";
+    }
+    if (this.type == "CURRENCY") {
+      this.value1 = "Ex-Rate";
+    }
+  }
+  
   ngOnInit() {
     this.id = 0;
     this.init();
 
-    if (this.type == "SEA CARRIER") {
-      this.value1 = "SCAC Code";
-    }
-
+    this.isMultiValue()
 
     if (this.mode == "add")
       this.newRecord();

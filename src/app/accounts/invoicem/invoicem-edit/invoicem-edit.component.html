@@ -1,0 +1,341 @@
+<div class="row">
+  <div class="col-md-10">
+    <div class="page-header">
+      <h5>{{inv_arap + ' INVOICE' }}</h5>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/invoicemEdit"
+        [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,appid:appid,inv_arap:'A/R',parent_id:parent_id,parent_type:parent_type}">Add A/R</button>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/invoicemEdit"
+        [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,appid:appid,inv_arap:'A/P',parent_id:parent_id,parent_type:parent_type}">Add A/P</button>
+      <app-history [inputdata]="{table: 'acc_invoicem', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inv #</label>
+              <div class="col-sm-8">
+                <app-input maxlength="15" formControlName="inv_no" [case]="'UPPER'" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref #</label>
+              <div class="col-sm-8">
+                <app-input maxlength="30" formControlName="inv_mbl_refno" [case]="'UPPER'" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="inv_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Customer</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="inv_cust_code" name="inv_cust_code" id="inv_cust_code"
+                  (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+              </div>
+              <div class="col-sm-5">
+                <app-input maxlength="100" formControlName="inv_cust_name" id="inv_cust_name" name="inv_cust_name"
+                  [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cust Ref</label>
+              <div class="col-sm-3">
+                <app-input maxlength="30" formControlName="inv_cust_refno" [case]="'UPPER'"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm">Arrival Notice</label>
+              <div class="col-sm-3">
+                <app-combobox maxlength="30" formControlName="inv_arrnotice" name="inv_arrnotice"
+                  [dataSource]="ArrivalList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Currency</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="inv_cur_code" name="inv_cur_code" id="inv_cur_code"
+                  (CallBack)="callBack($event)" table="param" subtable="currency" [company_id]="getCompanyId()"
+                  [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Ex-Rate</label>
+              <div class="col-sm-3">
+                <app-input [dec]="this.gs.globalConstants.global_exrate_decimal" formControlName="inv_exrate" type="number" [align]="'right'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Quote #</label>
+              <div class="col-sm-3">
+                <app-input maxlength="30" formControlName="inv_quoteno" [case]="'UPPER'"></app-input>
+              </div>
+              <div class="col-sm-3">
+                <button  class="btn btn-sm btn-success" (click)="getQtnmList()" type="button">Fill</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Master/House</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="inv_mbl_code" name="inv_mbl_code" (CallBack)="callBack($event)"
+                  table="master_house" [company_id]="getCompanyId()" [url]="url" case="upper"
+                  [filter]="{parent_id : mform.get('inv_mbl_id')?.value}"
+                  display_column="[{'caption':'MASTER NO','value':'master_refno'},{'caption':'HOUSE NO','value':'master_no'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">House No</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="inv_houseno" id="inv_houseno" name="inv_houseno"
+                  [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Shipper</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="inv_shipper" id="inv_shipper" name="inv_shipper"
+                  [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Consignee</label>
+              <div class="col-sm-8">
+                <app-input maxlength="100" formControlName="inv_consignee" id="inv_consignee" name="inv_consignee"
+                  [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Pcs</label>
+              <div class="col-sm-3">
+                <app-input maxlength="100" formControlName="inv_pcs" [type]="'number'" name="inv_pcs"
+                  id="inv_pcs"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Unit</label>
+              <div class="col-sm-3">
+                <auto-complete formControlName="inv_uom_code" id="inv_uom_code" name="inv_uom_code"
+                  fieldName="inv_uom_code" (CallBack)="callBack($event)" [table]="'param'" [subtable]="'unit-master'"
+                  [company_id]="getCompanyId()" [url]="url"
+                  display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Lbs</label>
+              <div class="col-sm-3">
+                <app-input formControlName="inv_lbs" [type]="'number'" name="inv_lbs" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Kgs</label>
+              <div class="col-sm-3">
+                <app-input formControlName="inv_kgs" [type]="'number'" name="inv_kgs" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Cbm</label>
+              <div class="col-sm-3">
+                <app-input formControlName="inv_cbm" [type]="'number'" name="inv_cbm" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Cft</label>
+              <div class="col-sm-3">
+                <app-input formControlName="inv_cft" [type]="'number'" name="inv_cft" (blur)="findUnit($event)"
+                  [dec]="gs.globalConstants.global_dec_places"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+
+              <thead class="table-success">
+                <tr class="table-header">
+                  <th *ngIf="showModel">ID</th>
+                  <th>CODE</th>
+                  <th>DESCRIPTION</th>
+                  <th>REMARKS</th>
+                  <th>QTY</th>
+                  <th>RATE</th>
+                  <th>AMOUNT</th>
+                  <th>CURRENCY</th>
+                  <th>EXRATE</th>
+                  <th *ngIf="showModel">RATE</th>
+                  <th>TOTAL</th>
+                  <th *ngIf="showModel">ORDER </th>
+                  <th>ADD</th>
+                  <th>DELETE</th>
+                </tr>
+              </thead>
+
+              <tbody formArrayName="invoiced">
+                <tr *ngFor="let iRow of formArray('invoiced').controls; let i=index;" [formGroupName]="i">
+                  <td *ngIf="showModel">
+                    <label>{{iRow.get('invd_id')?.value}}</label>
+                  </td>
+                  <td>
+                    <auto-complete formControlName="invd_acc_code" id="invd_acc_code-{{i}}" name="invd_acc_code"
+                      fieldName="invd_acc_code" [rowIndex]="i" (CallBack)="callBack($event)" [table]="'acctm'" [company_id]="getCompanyId()" [url]="url"
+                      display_column="[{'caption':'ID','value':'acc_id'},{'caption':'CODE','value':'acc_code'},{'caption':'NAME','value':'acc_name'}]"></auto-complete>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_acc_name" [rowIndex]="i" name="invd_acc_name"
+                      case="UPPER"></app-input>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_remarks" [rowIndex]="i" name="invd_remarks"
+                      case="UPPER"></app-input>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_qty" [rowIndex]="i" name="invd_qty"
+                      [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findTotal($event)" [align]="'right'"></app-input>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_frate" [rowIndex]="i" name="invd_frate"
+                      [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findTotal($event)" [align]="'right'"></app-input>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_ftotal" [rowIndex]="i" name="invd_ftotal"
+                      [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findTotal($event)" [align]="'right'"></app-input>
+                  </td>
+                  <td>
+                    <auto-complete formControlName="invd_cur_code" id="invd_cur_code-{{i}}" name="invd_cur_code"
+                      fieldName="invd_cur_code" [rowIndex]="i" (CallBack)="callBack($event)" [table]="'param'"
+                      [subtable]="'currency'" [company_id]="getCompanyId()" [url]="url" 
+                      display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'},{'caption':'RATE','value':'param_value1'}]"></auto-complete>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_exrate" [rowIndex]="i" name="invd_exrate"
+                      [dec]="this.gs.globalConstants.global_exrate_decimal" type="number" (blur)="findTotal($event)" [align]="'right'"></app-input>
+                  </td>
+                  <td *ngIf="showModel">
+                    <app-input formControlName="invd_rate" [rowIndex]="i" name="invd_rate"
+                      [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findTotal($event)"
+                      [disable]="true" [align]="'right'"></app-input>
+                  </td>
+                  <td>
+                    <app-input formControlName="invd_total" [rowIndex]="i" name="invd_total"
+                      [dec]="gs.globalConstants.global_dec_places" type="number" (blur)="findTotal($event)"
+                      [disable]="true" [align]="'right'"></app-input>
+                  </td>
+                  <td *ngIf="showModel">
+                    <label>{{iRow.get('invd_order')?.value}}</label>
+                  </td>
+                  <td align="centre" (click)="addInvoice()" class="link">
+                    <i class="fa fa-plus"></i>
+                  </td>
+                  <td align="centre" (click)="deleteRow(i)" class="link">
+                    <i class="fa fa-trash"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="formArray('invoiced').length <= 0">
+          <div class="col-md-12 text-center">
+            <button class="btn btn-sm btn-info" type="button" (click)="addInvoice()">Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Total</label>
+              <div class="col-sm-3">
+                <app-input maxlength="100" formControlName="inv_total" [type]="'number'" id="inv_total"
+                  [dec]="gs.globalConstants.global_dec_places" [disable]="true" [align]="'right'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Paid</label>
+              <div class="col-sm-3">
+                <app-input maxlength="100" formControlName="inv_paid" [type]="'number'" id="inv_paid"
+                  [dec]="gs.globalConstants.global_dec_places" [disable]="true" [align]="'right'"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Balance</label>
+              <div class="col-sm-3">
+                <app-input maxlength="100" formControlName="inv_balance" [type]="'number'" id="inv_balance"
+                  [dec]="gs.globalConstants.global_dec_places" [disable]="true" [align]="'right'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Remarks</label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="inv_remarks1" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="inv_remarks2" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="inv_remarks3" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="page-footer line-bottom">
+      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+      <button *ngIf="bDelete && mode== 'edit'" class="btn btn-sm"
+        [ngClass]="(mform.get('rec_deleted')?.value === 'Y') ? 'btn-danger' : 'btn-success'" (click)="restoreInvoice()">{{
+        mform.get('rec_deleted')?.value === 'Y' ? 'Restore' : 'Delete'}}</button>
+    </div>
+  </div>
+  <div class="col-sm-2" *ngIf="mode=='edit'">
+    <div class="page-body line-bottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="d-grid gap-1">
+            <button class="btn btn-success btn-sm">INSTANT PAYMENT</button>
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type:mform.get('inv_arap')?.value,
+                rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'ATTACHMENTS'"></app-fileupload>
+            <!--In Check Copy parent_type added +'Check' with arap for seprating attachment and check copy -->
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type:mform.get('inv_arap')?.value+' CHECK COPY',
+                rec_files_count: mform.get('rec_check_count')?.value, rec_files_attached: mform.get('rec_check_attached')?.value}"[button_name]="'CHECK COPY'"></app-fileupload>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

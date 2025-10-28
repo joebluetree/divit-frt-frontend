@@ -6,7 +6,7 @@
 </div>
 
 <div class="page-search">
-  <app-deliveryorder-search [search_url]="'/api/CommonShipment/deliveryorder/GetListAsync'" [input]="ms.getSearchRecord()"
+  <app-deliveryorder-search [search_url]="'/api/CommonShipment/deliveryorder/GetListAsync'" [input]="ms.getSearchRecord()" [print]="this.Print"
     (searchResult)="search($event)" [parent_type]="parent_type"></app-deliveryorder-search>
 </div>
 
