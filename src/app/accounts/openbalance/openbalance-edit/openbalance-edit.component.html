@@ -1,0 +1,130 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h5>{{title}}</h5>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/openbalanceEdit"
+        [queryParams]="{id :0, _id:id+1, mode:'add', menuid:menuid, type:type, appid:appid}">Add</button>
+      <app-history [inputdata]="{table: 'acc_ledgerh', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Doc #</label>
+              <div class="col-sm-4">
+                <app-input maxlength="15" formControlName="jvh_docno" [case]="'UPPER'" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+              <div class="col-sm-4">
+                <app-date formControlName="jvh_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+            <div formGroupName = "ledger_detail">
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm">A/c</label>
+                <div class="col-sm-4">
+                  <auto-complete formControlName="jv_acc_code" name="jv_acc_code" id="jv_acc_code"
+                    (CallBack)="callBack($event)" table="acctm" [company_id]="getCompanyId()" [url]="url" case="upper"
+                    display_column="[{'caption':'CODE','value':'acc_code'},{'caption':'NAME','value':'acc_name'}]"></auto-complete>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm" for=""></label>
+                <div class="col-sm-4">
+                  <app-input maxlength="35" formControlName="jv_acc_name" name="jv_acc_name" [case]="'UPPER'" [disable]="true"></app-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm" for="">Amount</label>
+                <div class="col-sm-4">
+                  <app-input maxlength="30" formControlName="jv_famt" type="number" name="jv_famt"
+                    [dec]="this.gs.globalConstants.global_dec_places" [align]="'right'" (blur)="findTotal($event)"></app-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm">Currency</label>
+                <div class="col-sm-4">
+                  <auto-complete formControlName="jv_cur_code" name="jv_cur_code" id="jv_cur_code"
+                    (CallBack)="callBack($event)" table="param" subtable="currency" [company_id]="getCompanyId()"
+                    [url]="url" case="upper"
+                    display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm" for="">Ex-Rate</label>
+                <div class="col-sm-4">
+                  <app-input [dec]="this.gs.globalConstants.global_exrate_decimal" formControlName="jv_exrate"
+                    type="number" [align]="'right'"></app-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm" for="">Total</label>
+                <div class="col-sm-4">
+                  <app-input maxlength="30" formControlName="jv_dcamt" type="number"
+                    [dec]="this.gs.globalConstants.global_dec_places" [align]="'right'" [disable]="true"></app-input>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 form-label form-lable-sm">Type</label>
+                <div class="col-sm-4">
+                  <app-combobox maxlength="30" formControlName="jv_drcr" name="jv_drcr" [dataSource]="TypeList"
+                  [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inv.No</label>
+              <div class="col-sm-4">
+                <app-input maxlength="15" formControlName="jvh_refno" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inv.Date</label>
+              <div class="col-sm-4">
+                <app-date formControlName="jvh_refdate" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref #</label>
+              <div class="col-sm-4">
+                <app-input maxlength="15" formControlName="jvh_shipment_ref" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref. Date</label>
+              <div class="col-sm-4">
+                <app-date formControlName="jvh_shipment_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Narration</label>
+              <div class="col-sm-4">
+                <app-input maxlength="60" formControlName="jvh_narration" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="page-footer line-bottom">
+      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div>

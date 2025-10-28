@@ -1,0 +1,178 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-header">
+      <h5>{{title}}</h5>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/acctransEdit"
+        [queryParams]="{id :0, _id:id+1, mode:'add', menuid:menuid, type:type, appid:appid}">New</button>
+      <app-history [inputdata]="{table: 'acc_ledgerh', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+    <form [formGroup]="mform">
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">VR #</label>
+              <div class="col-sm-8">
+                <app-input formControlName="jvh_vrno" type="number" [disable]="true"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="jvh_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref #</label>
+              <div class="col-sm-8">
+                <app-input maxlength="15" formControlName="jvh_shipment_ref" [case]="'UPPER'"></app-input>
+              </div>
+              </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Ref. Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="jvh_shipment_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
+            <!-- <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inv.No</label>
+              <div class="col-sm-4">
+                <app-input maxlength="15" formControlName="jvh_refno" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Inv.Date</label>
+              <div class="col-sm-4">
+                <app-date formControlName="jvh_refdate" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="col-md-12">
+          <app-acctransd-edit [input]="data_ledgerd" (output)="output($event)"></app-acctransd-edit>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-sm table-hover table-bordered table-striped table-condensed">
+              <thead class="table-success">
+                <tr class="table-header">
+                  <th>EDIT</th>
+                  <th *ngIf="showModel">ID</th>
+                  <th>A/C CODE</th>
+                  <th>A/C NAME</th>
+                  <th>AMT</th>
+                  <th>TYPE</th>
+                  <th>CURR.</th>
+                  <th>EX-RATE</th>
+                  <th>TOTAL</th>
+                  <th *ngIf="showModel">ORDER</th>
+                  <th>DELETE</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="ledger_details">
+                <tr *ngFor="let iRow of formArray('ledger_details').controls; let i=index;" [formGroupName]="i">
+                  <td align="centre" (click)="editLedgerd(i)" class="link">
+                    <i class="fa fa-pencil"></i>
+                  </td>
+                  <td *ngIf="showModel">
+                    <label>{{iRow.get('jv_id')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_acc_code')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_acc_name')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_famt')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_drcr')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_cur_code')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_exrate')?.value}}</label>
+                  </td>
+                  <td>
+                    <label>{{iRow.get('jv_dcamt')?.value}}</label>
+                  </td>
+                  <td *ngIf="showModel">
+                    <label>{{iRow.get('jv_ctr')?.value}}</label>
+                  </td>
+                  <td align="centre" (click)="deleteRow(i)" class="link">
+                    <i class="fa fa-trash"></i>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-6">
+
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-2 form-label form-lable-sm" for="">Total</label>
+              <div class="col-sm-2">
+                <app-input formControlName="jvh_total" [dec]="this.gs.globalConstants.global_dec_places" type="number" [align]="'right'" [disable]="true"></app-input>
+              </div>
+            <!-- </div>
+            <div class="form-group row"> -->
+              <label class="col-sm-2 form-label form-lable-sm" for="">Debit</label>
+              <div class="col-sm-2">
+                <app-input formControlName="jvh_debit" [dec]="this.gs.globalConstants.global_dec_places" type="number" [align]="'right'" [disable]="true"></app-input>
+              </div>
+              <label class="col-sm-2 form-label form-lable-sm" for="">Credit</label>
+              <div class="col-sm-2">
+                <app-input formControlName="jvh_credit" [dec]="this.gs.globalConstants.global_dec_places" type="number" [align]="'right'" [disable]="true"></app-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Narration</label>
+              <div class="col-sm-8">
+                <app-input maxlength="60" formControlName="jvh_narration" [case]="'UPPER'"></app-input>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="page-footer line-bottom">
+      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid">Save</button>
+    </div>
+  </div>
+
+  <div *ngIf="showModel">
+    <pre>
+    {{mform.value | json}}
+  </pre>
+  </div>

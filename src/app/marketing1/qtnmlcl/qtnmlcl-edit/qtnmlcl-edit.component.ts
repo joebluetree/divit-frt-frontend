@@ -102,7 +102,7 @@ export class QtnmLclEditComponent extends baseEditComponent {
     })
     this.getDefaultData();
   }
-  
+
   getDefaultData() { //to get default currency and exrate
     const param = {
       'company_id': this.gs.user.user_company_id,
@@ -272,80 +272,124 @@ export class QtnmLclEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
-    let rec: any = {};
-    if (action.id == 'qtnm_to_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+    if (action.id === 'qtnm_to_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_to_id: null,
+          qtnm_to_code: '',
+          qtnm_to_name: '',
+          qtnm_to_addr1: '',
+          qtnm_to_addr2: '',
+          qtnm_to_addr3: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_to_id: action.rec.cust_id,
+          qtnm_to_code: action.rec.cust_code,
+          qtnm_to_name: action.rec.cust_name,
+          qtnm_to_addr1: action.rec.cust_address1,
+          qtnm_to_addr2: action.rec.cust_address2,
+          qtnm_to_addr3: action.rec.cust_address3,
+        });
       }
-      this.mform.patchValue({
-        qtnm_to_id: rec.cust_id || 0,
-        qtnm_to_code: rec.cust_code || '',
-        qtnm_to_name: rec.cust_name || '',
-        qtnm_to_addr1: rec.cust_address1 || '',
-        qtnm_to_addr2: rec.cust_address2 || '',
-        qtnm_to_addr3: rec.cust_address3 || '',
-      });
-    }
-    if (action.id == 'qtnm_salesman_name') {
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        qtnm_salesman_id: rec.param_id || 0,
-        qtnm_salesman_name: rec.param_name || '',
-      });
-    }
-    if (action.id == 'qtnm_por_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        qtnm_por_id: rec.param_id || 0,
-        qtnm_por_code: rec.param_code || '',
-        qtnm_por_name: rec.param_name || '',
-      });
-
-    }
-    if (action.id == 'qtnm_pol_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        qtnm_pol_id: rec.param_id || 0,
-        qtnm_pol_code: rec.param_code || '',
-        qtnm_pol_name: rec.param_name || '',
-      });
-    }
-    if (action.id == 'qtnm_pod_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        qtnm_pod_id: rec.param_id || 0,
-        qtnm_pod_code: rec.param_code || '',
-        qtnm_pod_name: rec.param_name || '',
-      });
-    }
-    if (action.id == 'qtnm_cur_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
-      }
-      this.mform.patchValue({
-        qtnm_cur_id: rec.param_id || 0,
-        qtnm_cur_code: rec.param_code || '',
-        qtnm_exrate: this.gs.roundNumber(parseFloat(rec.param_value1), this.gs.globalConstants.global_exrate_decimal) || 0,
-      });
     }
 
-    if (action.name == 'qtnd_acc_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+    if (action.id === 'qtnm_salesman_name') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_salesman_id: null,
+          qtnm_salesman_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_salesman_id: action.rec.param_id,
+          qtnm_salesman_name: action.rec.param_name,
+        });
       }
-      this.formArrayRecord('qtnd_lcl', action.rowIndex)?.patchValue({
-        qtnd_acc_id: rec.acc_id || 0,
-        qtnd_acc_code: rec.acc_code || '',
-        qtnd_acc_name: rec.acc_name || '',
-      });
+    }
+
+    if (action.id === 'qtnm_por_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_por_id: null,
+          qtnm_por_code: '',
+          qtnm_por_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_por_id: action.rec.param_id,
+          qtnm_por_code: action.rec.param_code,
+          qtnm_por_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_pol_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_pol_id: null,
+          qtnm_pol_code: '',
+          qtnm_pol_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_pol_id: action.rec.param_id,
+          qtnm_pol_code: action.rec.param_code,
+          qtnm_pol_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_pod_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_pod_id: null,
+          qtnm_pod_code: '',
+          qtnm_pod_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_pod_id: action.rec.param_id,
+          qtnm_pod_code: action.rec.param_code,
+          qtnm_pod_name: action.rec.param_name,
+        });
+      }
+    }
+
+    if (action.id === 'qtnm_cur_code') {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          qtnm_cur_id: null,
+          qtnm_cur_code: '',
+          qtnm_exrate: 0,
+        });
+      } else {
+        this.mform.patchValue({
+          qtnm_cur_id: action.rec.param_id,
+          qtnm_cur_code: action.rec.param_code,
+          qtnm_exrate: this.gs.roundNumber(
+            parseFloat(action.rec.param_value1),
+            this.gs.globalConstants.global_exrate_decimal
+          ),
+        });
+      }
+    }
+
+    if (action.name === 'qtnd_acc_code') {
+      const row = this.formArrayRecord('qtnd_lcl', action.rowIndex);
+      if (action.rec == null) {
+        row?.patchValue({
+          qtnd_acc_id: null,
+          qtnd_acc_code: '',
+          qtnd_acc_name: '',
+        });
+      } else {
+        row?.patchValue({
+          qtnd_acc_id: action.rec.acc_id,
+          qtnd_acc_code: action.rec.acc_code,
+          qtnd_acc_name: action.rec.acc_name,
+        });
+      }
     }
   }
 

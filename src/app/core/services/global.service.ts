@@ -235,7 +235,7 @@ export class GlobalService {
     const decPlaces = this.getSettingValue('DECIMALS','3');
     const dateFormat = this.getSettingValue('DATE-FORMAT','mm/dd/yyyy');
     const exrateDec = this.getSettingValue('EXRATE DECIMAL','7');
-    //const currency = this.getSettingValue('CURRENCY','INR');
+    // const currency = this.getSettingValue('CURRENCY','INR');
     return {
       global_user_id: this.user.user_id,
       global_user_code: this.user.user_code,
@@ -249,10 +249,15 @@ export class GlobalService {
       global_display_date_format: 'dd-MMM-yyyy',
       global_time_format: 'HH:mm',
       global_exrate_decimal: parseInt(exrateDec),
+      global_fin_year: 2025,
+      // global_cur_id: currency, 
     };
   }
 
   public getHeaders(): HttpHeaders {
+    const decPlaces = this.getSettingValue('DECIMALS','3');
+    const dateFormat = this.getSettingValue('DATE-FORMAT','mm/dd/yyyy');
+    const exrateDec = this.getSettingValue('EXRATE DECIMAL','7');
     return new HttpHeaders({
       'global_user_id': this.user.user_id.toString(),
       'global_user_code': this.user.user_code,
@@ -260,11 +265,13 @@ export class GlobalService {
       'global_user_email': this.user.user_email,
       'global_user_company_id': this.user.user_company_id.toString(),
       'global_user_branch_id': this.user.user_branch_id.toString(),
-      'global_dec_places': 2,
-      'global_date_format': 'mm/dd/yyyy',
+      'global_dec_places': decPlaces.toString(),
+      'global_date_format': dateFormat.toString(),
       'global_output_datetime_format': 'dd-MMM-yyyy HH:mm',
       'global_display_date_format': 'dd-MMM-yyyy',
       'global_time_format': 'HH:mm',
+      'global_exrate_decimal': exrateDec.toString(),
+      'global_fin_year': '2025',
     });
 
   }

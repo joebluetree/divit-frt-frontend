@@ -368,80 +368,117 @@ export class InvoicemEditComponent extends baseEditComponent {
   }
 
   callBack(action: any) {
-    let rec: any = {};
-
     if (action.id == 'inv_cust_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          inv_cust_id: null,
+          inv_cust_code: '',
+          inv_cust_name: '',
+        });
+      } else {
+        this.mform.patchValue({
+          inv_cust_id: action.rec.cust_id ,
+          inv_cust_code: action.rec.cust_code ,
+          inv_cust_name: action.rec.cust_name ,
+        });
       }
-      this.mform.patchValue({
-        inv_cust_id: rec.cust_id || 0,
-        inv_cust_code: rec.cust_code || '',
-        inv_cust_name: rec.cust_name || '',
-      });
     }
     if (action.id == 'inv_uom_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          inv_uom_id: null,
+          inv_uom_code: '',
+        });
+      } else {
+        this.mform.patchValue({
+          inv_uom_id: action.rec.param_id ,
+          inv_uom_code: action.rec.param_code ,
+        });
       }
-      this.mform.patchValue({
-        inv_uom_id: rec.param_id || 0,
-        inv_uom_code: rec.param_code || '',
-      });
     }
+
     if (action.id == 'inv_cur_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          inv_cur_id: null,
+          inv_cur_code: '',
+          inv_exrate: 0,
+        });
+      } else {
+        this.mform.patchValue({
+          inv_cur_id: action.rec.param_id ,
+          inv_cur_code: action.rec.param_code ,
+          inv_exrate: this.gs.roundNumber(parseFloat(action.rec.param_value1), this.gs.globalConstants.global_exrate_decimal),
+        });
       }
-      this.mform.patchValue({
-        inv_cur_id: rec.param_id || 0,
-        inv_cur_code: rec.param_code || '',
-        inv_exrate: this.gs.roundNumber(parseFloat(rec.param_value1), this.gs.globalConstants.global_exrate_decimal),
-      });
     }
     if (action.name == 'inv_mbl_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.mform.patchValue({
+          inv_hbl_id: null,
+          inv_mbl_code: '',
+          inv_houseno: '',
+          inv_shipper: '',
+          inv_consignee: '',
+          inv_pcs: 0,
+          inv_uom_id: 0,
+          inv_uom_code: '',
+          inv_lbs: 0,
+          inv_kgs: 0,
+          inv_cbm: 0,
+          inv_cft: 0,
+        });
+      } else {
+        this.mform.patchValue({
+          inv_hbl_id: action.rec.house_id ,
+          inv_mbl_code: action.rec.master_refno ,
+          inv_houseno: action.rec.master_no ,
+          inv_shipper: action.rec.house_shipper ,
+          inv_consignee: action.rec.house_consignee ,
+          inv_pcs: action.rec.house_pcs ,
+          inv_uom_id: action.rec.house_uom_id ,
+          inv_uom_code: action.rec.house_uom_code ,
+          inv_lbs: action.rec.house_lbs ,
+          inv_kgs: action.rec.house_kgs ,
+          inv_cbm: action.rec.house_cbm ,
+          inv_cft: action.rec.house_cft ,
+        });
       }
-      this.mform.patchValue({
-        inv_hbl_id: rec.house_id || 0,
-        inv_mbl_code: rec.master_refno || '',
-        inv_houseno: rec.master_no || '',
-        inv_shipper: rec.house_shipper || '',
-        inv_consignee: rec.house_consignee || '',
-        inv_pcs: rec.house_pcs || 0,
-        inv_uom_id: rec.house_uom_id || 0,
-        inv_uom_code: rec.house_uom_code || '',
-        inv_lbs: rec.house_lbs || 0,
-        inv_kgs: rec.house_kgs || 0,
-        inv_cbm: rec.house_cbm || 0,
-        inv_cft: rec.house_cft || 0,
-      });
     }
     if (action.name == 'invd_acc_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
+          invd_acc_id: null,
+          invd_acc_code: '',
+          invd_acc_name: '',
+        });
+      } else {
+        this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
+          invd_acc_id: action.rec.acc_id ,
+          invd_acc_code: action.rec.acc_code ,
+          invd_acc_name: action.rec.acc_name ,
+        });
       }
-      this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
-        invd_acc_id: rec.acc_id || 0,
-        invd_acc_code: rec.acc_code || '',
-        invd_acc_name: rec.acc_name || '',
-      });
     }
     if (action.name == 'invd_cur_code') {
-      if (action?.rec != null) {
-        rec = action.rec;
+      if (action.rec == null) {
+        this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
+          invd_cur_id: null,
+          invd_cur_code: '',
+          invd_exrate: 0,
+        });
+      } else {
+        this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
+          invd_cur_id: action.rec.param_id ,
+          invd_cur_code: action.rec.param_code,
+          invd_exrate: this.gs.roundNumber(parseFloat(action.rec.param_value1), this.gs.globalConstants.global_exrate_decimal),
+        });
+        this.findTotal({
+          name: 'invd_exrate',
+          rowIndex: action.rowIndex,
+          isChanged: true
+        });
       }
-      this.formArrayRecord('invoiced', action.rowIndex)?.patchValue({
-        invd_cur_id: rec.param_id || 0,
-        invd_cur_code: rec.param_code || '',
-        invd_exrate: this.gs.roundNumber(parseFloat(rec.param_value1), this.gs.globalConstants.global_exrate_decimal) || 0,
-      });
-      this.findTotal({    // to calculate total using exrate corresponding to selected Currency
-        name: 'invd_exrate',
-        rowIndex: action.rowIndex,
-        isChanged: true
-      });
     }
   }
 

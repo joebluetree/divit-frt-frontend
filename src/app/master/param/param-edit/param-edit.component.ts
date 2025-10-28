@@ -48,7 +48,7 @@ export class ParamEditComponent extends baseEditComponent {
       this.value1 = "SCAC Code";
     }
     if (this.type == "CURRENCY") {
-      this.value2 = "Ex-Rate";
+      this.value1 = "Ex-Rate";
     }
   }
   

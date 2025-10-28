@@ -187,18 +187,9 @@ export class WiretransmEditComponent extends baseEditComponent {
     })
   }
 
-  callBack(action:any) {
+  callBack(action: any) {
     if (action.id == 'wtim_cust_code') {
-      if (action.rec) {
-        this.mform.patchValue({
-          wtim_cust_id: action.rec.cust_id,
-          wtim_cust_code:action.rec.cust_code,
-          wtim_cust_name: action.rec.cust_name,
-          wtim_cust_fax: action.rec.cust_fax,
-          wtim_cust_tel: action.rec.cust_tel,
-        });
-      }
-      else {
+      if (action.rec == null) {
         this.mform.patchValue({
           wtim_cust_id: null,
           wtim_cust_code: '',
@@ -206,34 +197,41 @@ export class WiretransmEditComponent extends baseEditComponent {
           wtim_cust_fax: '',
           wtim_cust_tel: '',
         });
+      } else {
+        this.mform.patchValue({
+          wtim_cust_id: action.rec.cust_id,
+          wtim_cust_code: action.rec.cust_code,
+          wtim_cust_name: action.rec.cust_name,
+          wtim_cust_fax: action.rec.cust_fax,
+          wtim_cust_tel: action.rec.cust_tel,
+        });
       }
     }
     if (action.id == 'wtid_benef_name') {
-      if (action.rec) {
+      if (action.rec == null) {
+        this.mform.patchValue({
+          wtid_benef_id: null,
+          wtid_benef_name: '',
+        });
+      } else {
         this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
           wtid_benef_id: action.rec.cust_id,
           wtid_benef_name: action.rec.cust_name,
         });
       }
-      else {
-        this.mform.patchValue({
-          wtid_benef_id: null,
-          wtid_benef_name: '',
-        });
-      }
     }
     if (action.id == 'wtid_bank_name') {
       if (action.rec) {
-        this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
-          wtid_bank_id: action.rec.cust_id,
-          wtid_bank_name: action.rec.cust_name,
-        });
-      }
-      else {
         this.mform.patchValue({
           wtid_bank_id: null,
           wtid_bank_name: '',
         });
+      } else {
+        this.formArrayRecord('wtim_details', action.rowIndex)?.patchValue({
+          wtid_bank_id: action.rec.cust_id,
+          wtid_bank_name: action.rec.cust_name,
+        });
+
       }
     }
   }
