@@ -23,7 +23,7 @@
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "ng2-pdf-viewer": "^10.4.0",
-    "ngx-jrt-controls": "^1.0.69",
+    "ngx-jrt-controls": "^1.0.72",
     "rxjs": "~7.8.0",
     "short-unique-id": "^5.2.0",
     "tslib": "^2.3.0",

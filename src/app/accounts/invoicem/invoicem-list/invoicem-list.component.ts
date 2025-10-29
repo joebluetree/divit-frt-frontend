@@ -43,16 +43,16 @@ export class InvoicemListComponent extends baseListComponent {
       { col_name: "inv_ar_total", col_caption: "AR TOTAL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "inv_ap_total", col_caption: "AP TOTAL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "inv_balance", col_caption: "BALANCE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
-      { col_name: "inv_houseno", col_caption: "HOUSE", col_format: "", col_sortable: true, col_link: houseData.link, col_param: HouseParam, col_show: true },
+      { col_name: "inv_houseno", col_caption: "HOUSE", col_format: "link", col_sortable: true, col_link: houseData.link, col_param: HouseParam, col_show: true, col_param_list: { 'id': 'inv_hbl_id' } },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_edited_date", col_caption: "EDITED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "delete", col_caption: "DELETE", col_format: "delete", col_sortable: false, col_link: '', col_param: {}, col_show: this.bDelete },
-      { col_name: "restore", col_caption: "RESTORE", col_format: "", col_sortable: false, col_link: '', col_param: {}, col_show: false },//need to add style of restore and col_link
+      { col_name: "restore", col_caption: "RESTORE", col_format: "callback", col_sortable: false, col_link: '', col_param: {}, col_show: false, col_icon: 'fa fa-trash' },
     ];
   }
-//this.restoreInvoice()
+  //this.restoreInvoice()
   getHouseEditLink() {
     let hData = { link: '', menuid: '', type: '' };
 
@@ -69,4 +69,7 @@ export class InvoicemListComponent extends baseListComponent {
     return hData;
   }
 
+  general_callback(data: any) {
+
+  }
 }
