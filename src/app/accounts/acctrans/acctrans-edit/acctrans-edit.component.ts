@@ -264,12 +264,9 @@ export class AccTransEditComponent extends baseEditComponent {
       console.log(total);
     }, 0);
 
-    const balance = TotalDebit - TotalCredit;
-
     this.mform.patchValue({
       jvh_debit: this.gs.roundNumber(TotalDebit, this.gs.globalConstants.global_dec_places),
       jvh_credit: this.gs.roundNumber(TotalCredit, this.gs.globalConstants.global_dec_places),
-      jvh_total: this.gs.roundNumber(balance, this.gs.globalConstants.global_dec_places)
     });
   }
 
