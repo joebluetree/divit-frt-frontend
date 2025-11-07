@@ -48,6 +48,7 @@ export interface iAccLedgerd {
 export interface iAccLedgerh {
   jvh_id: number;
   jvh_year: number;
+  jvh_year_name: string;
   jvh_vrno: number;
   jvh_docno: string;
   jvh_type: string;
@@ -63,11 +64,13 @@ export interface iAccLedgerh {
   jvh_shipment_date: string;
   jvh_credit: number;
   jvh_debit: number;
+  jvh_amount: number;
 
   ledger_detail: iAccLedgerd;
   ledger_details: iAccLedgerd[];
 
   rec_version: number;
+  rec_error: string;
   rec_locked: string;
   rec_branch_id: number;
   rec_company_id: number;

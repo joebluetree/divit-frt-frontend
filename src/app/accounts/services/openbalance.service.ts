@@ -20,7 +20,7 @@ export class OpenBalanceService extends baseService {
     return <iOpBalModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iOpBal_Search>{ jv_docno:'',jv_type: this.type, rec_branch_id: 0, rec_company_id: 0 },
+      searchRecord: <iOpBal_Search>{ jv_docno:'',jv_year: 0,  jv_year_name: '', jv_type: this.type, rec_branch_id: 0, rec_company_id: 0 },
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

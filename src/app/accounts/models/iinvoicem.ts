@@ -33,6 +33,7 @@ export interface iInvoicem {
   inv_cfno: number;
   inv_no: string;
   inv_date: string;
+  inv_year: number;
   inv_cust_id: number;
   inv_cust_code: string;
   inv_cust_name: string;

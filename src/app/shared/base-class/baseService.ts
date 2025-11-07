@@ -74,9 +74,12 @@ export abstract class baseService {
     return this.state.records;
   }
   
-  public getSummaryRecords() {
-    return this.state.summary;
-  }
+ public getSummaryRecords() {
+  if (this.state.records.length === 0)
+    return null;
+  
+  return this.state.summary;
+}
 
   public getSearchRecord() {
     return this.state.searchRecord

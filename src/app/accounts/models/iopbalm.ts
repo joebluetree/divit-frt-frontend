@@ -5,6 +5,7 @@ export interface iOpBalm {
   jv_header_id: number;
   jv_docno: string;
   jv_date: string;
+  jv_year: number;
   jv_acc_code: string;
   jv_acc_name: string;
   jv_famt: number;
@@ -17,6 +18,7 @@ export interface iOpBalm {
   jv_refdate: string;
   jv_shipment_ref: string;
   jv_shipment_date: string;
+  jv_narration: string;
 
   rec_version: number;
   rec_company_id: number;

@@ -37,7 +37,7 @@
         <label class="col-sm-2 form-label form-lable-sm" for="">Ex-Rate</label> 
         <div class="col-sm-3">
           <app-input [dec]="this.gs.globalConstants.global_exrate_decimal" formControlName="jv_exrate" name="jv_exrate" type="number" (blur)="findTotal($event)"
-            [align]="'right'"></app-input>
+            [align]="'right'" required ></app-input>
         </div>
       </div>
       <div class="form-group row">

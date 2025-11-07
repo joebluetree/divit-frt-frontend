@@ -33,11 +33,12 @@ export class AccTransEditComponent extends baseEditComponent {
 
   createform() {
     let date = this.gs.getToday();
-    // data.param_type = this.type;
-    let year = this.gs.globalConstants.global_fin_year;
+    let year_code = this.gs.globalConstants.global_fin_year;
+    let year_name = this.gs.globalConstants.global_fin_year_name;
     return this.fb.group({
       jvh_id: [0],
-      jvh_year: [year],
+      jvh_year: [year_code],
+      jvh_year_name: [year_name],
       jvh_vrno: [0],
       jvh_docno: [''],
       jvh_type: [''],
@@ -78,31 +79,6 @@ export class AccTransEditComponent extends baseEditComponent {
       jvh_id: this.id,
     })
     // this.getDefaultData();
-  }
-
-  getDefaultData() {
-    const param = {
-      'company_id': this.gs.user.user_company_id,
-      'branch_id': this.gs.user.user_branch_id,
-    };
-    this.ms.getRecord(param, '/api/accounts/acctrans/GetDefaultData').subscribe({
-      next: (rec: iAccLedgerh) => {
-        this.mform.patchValue({
-          jv_cur_id: rec.ledger_detail.jv_cur_id,
-          jv_cur_code: rec.ledger_detail.jv_cur_code,
-          jv_exrate: this.gs.roundNumber(rec.ledger_detail.jv_exrate, this.gs.globalConstants.global_exrate_decimal),
-
-          rec_branch_id: rec.rec_branch_id,
-          rec_company_id: rec.rec_company_id,
-          // rec_version: rec.rec_version,
-        });
-        // this.exrate_decimal = rec.exrate_decimal;
-        console.log(rec);
-      },
-      error: (e) => {
-        this.gs.showError(e);
-      }
-    })
   }
 
   addRow(rec: iAccLedgerd) {
@@ -171,6 +147,8 @@ export class AccTransEditComponent extends baseEditComponent {
         this.mform.patchValue({
           jvh_id: rec.jvh_id,
           jvh_vrno: rec.jvh_vrno,
+          jvh_year: rec.jvh_year,
+          jvh_year_name: rec.jvh_year_name,
           jvh_docno: rec.jvh_docno,
           jvh_type: rec.jvh_type,
           jvh_date: rec.jvh_date,
@@ -231,6 +209,8 @@ export class AccTransEditComponent extends baseEditComponent {
         this.mform.patchValue({
           jvh_vrno: v.jvh_vrno,
           jvh_docno: v.jvh_docno,
+          jvh_debit: v.jvh_debit,
+          jvh_credit: v.jvh_credit,
           rec_version: v.rec_version
         });
 
@@ -268,6 +248,15 @@ export class AccTransEditComponent extends baseEditComponent {
       jvh_debit: this.gs.roundNumber(TotalDebit, this.gs.globalConstants.global_dec_places),
       jvh_credit: this.gs.roundNumber(TotalCredit, this.gs.globalConstants.global_dec_places),
     });
+  }
+  
+  callBack(action: { id: string, rec: any }) {
+    if (action.id == 'jvh_year') {
+        this.mform.patchValue({
+          jvh_year: action.rec? action.rec.year_code : 0,
+          jvh_year_name: action.rec? action.rec.year_name: "",
+        });
+    }
   }
 
   output(action: any) {

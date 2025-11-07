@@ -32,7 +32,10 @@ export class GlobalService {
 
   public appStates: { [key: string]: any } = {};
 
-  public pageSize = 10;
+  // public pageSize = 25;
+  public get pageSize(): number {
+    return parseInt(this.getSettingValue('PAGE SIZE', '20'));
+  }
 
   constructor(
     private location: Location,
@@ -228,6 +231,9 @@ export class GlobalService {
     );
     
     const value = branchSetting?.value || companySetting?.value || defaultValue;
+    if (value === '0' || parseInt(value) === 0) {
+      return defaultValue;
+    }
     return value;
   }
 
@@ -250,6 +256,7 @@ export class GlobalService {
       global_time_format: 'HH:mm',
       global_exrate_decimal: parseInt(exrateDec),
       global_fin_year: 2025,
+      global_fin_year_name: '2025-2026',
       // global_cur_id: currency, 
     };
   }
