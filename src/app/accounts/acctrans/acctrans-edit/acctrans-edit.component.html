@@ -26,6 +26,14 @@
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Fin-year</label>
+              <div class="col-sm-8">
+                <auto-complete formControlName="jvh_year" name="jvh_year" id="jvh_year" (CallBack)="callBack($event)"
+                  table="year" [company_id]="getCompanyId()" [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'year_code'},{'caption':'NAME','value':'year_name'}]"></auto-complete>
+              </div>
+            </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group row">

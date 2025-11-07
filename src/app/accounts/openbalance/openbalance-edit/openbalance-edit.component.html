@@ -26,6 +26,14 @@
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm">Fin-year</label>
+              <div class="col-sm-4">
+                <auto-complete formControlName="jvh_year" name="jvh_year" id="jvh_year" (CallBack)="callBack($event)"
+                  table="year" [company_id]="getCompanyId()" [url]="url" case="upper"
+                  display_column="[{'caption':'CODE','value':'year_code'},{'caption':'NAME','value':'year_name'}]"></auto-complete>
+              </div>
+            </div>
             <div formGroupName = "ledger_detail">
               <div class="form-group row">
                 <label class="col-sm-4 form-label form-lable-sm">A/c</label>
@@ -44,7 +52,7 @@
               <div class="form-group row">
                 <label class="col-sm-4 form-label form-lable-sm" for="">Amount</label>
                 <div class="col-sm-4">
-                  <app-input maxlength="30" formControlName="jv_famt" type="number" name="jv_famt"
+                  <app-input formControlName="jv_famt" type="number" name="jv_famt"
                     [dec]="this.gs.globalConstants.global_dec_places" [align]="'right'" (blur)="findTotal($event)"></app-input>
                 </div>
               </div>
@@ -117,8 +125,11 @@
     </form>
 
     <div class="page-footer line-bottom">
-      <button *ngIf="bAdd || bEdit" class="btn btn-sm btn-success" (click)="save()"
-        [disabled]="mform.invalid">Save</button>
+      <button  class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid || !bSave" type="button">Save</button>
+    </div>
+    <div class="ms-2">
+      <h6 class="text-danger me-5">{{mform.get('rec_error')?.value}}</h6>
     </div>
   </div>
 </div>

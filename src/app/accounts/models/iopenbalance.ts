@@ -6,6 +6,7 @@ import { iOpBalm } from './iopbalm';
 export interface iOpBal_Search {
   jv_docno: string;
   jv_year: number;
+  jv_year_name: string;
   jv_type: string;
   jv_debit_total: number;
   jv_credit_total: number;

@@ -50,10 +50,8 @@ export class AccTransSearchComponent {
   }
 
   ngOnInit(): void {
-    // this.mform.setValue({
-    // }) 
     this.getSummary();
-    this.search('');
+    // this.search('');
   }
   
   getSummary() {

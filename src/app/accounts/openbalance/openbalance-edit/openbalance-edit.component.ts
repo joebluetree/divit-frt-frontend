@@ -20,6 +20,8 @@ import { iOpBalm } from '../../models/iopbalm';
 
 export class OpenBalanceEditComponent extends baseEditComponent {
 
+  bSave = true;
+
   TypeList = [
     { key: 'CR', value: 'CR' },
     { key: 'DR', value: 'DR' },
@@ -30,6 +32,8 @@ export class OpenBalanceEditComponent extends baseEditComponent {
   ) {
     super();
     this.mform = this.createform();
+
+    
   }
 
   createform() {
@@ -53,6 +57,8 @@ export class OpenBalanceEditComponent extends baseEditComponent {
       jvh_shipment_date: [''],
       ledger_detail: this.createDetailForm(),
       rec_version: [0],
+      rec_locked: [''],
+      rec_error: [''],
     })
   }
   createDetailForm() {
@@ -83,10 +89,15 @@ export class OpenBalanceEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    if (this.mode == "add")
+    this.bSave = false;
+    if (this.mode == "add") {
+      this.bSave = this.bAdd;
       this.newRecord();
-    if (this.mode == "edit")
+    }
+    if (this.mode == "edit") {
+      this.bSave = this.bEdit;
       this.getRecord();
+    }
   }
 
   newRecord() {
@@ -111,9 +122,7 @@ export class OpenBalanceEditComponent extends baseEditComponent {
 
           rec_branch_id: rec.rec_branch_id,
           rec_company_id: rec.rec_company_id,
-          // rec_version: rec.rec_version,
         });
-        // this.exrate_decimal = rec.exrate_decimal;
         console.log(rec);
       },
       error: (e) => {
@@ -132,6 +141,7 @@ export class OpenBalanceEditComponent extends baseEditComponent {
           jvh_docno: rec.jvh_docno,
           jvh_type: rec.jvh_type,
           jvh_date: rec.jvh_date,
+          jvh_year: rec.jvh_year,
           jvh_refno: rec.jvh_refno,
           jvh_refdate: rec.jvh_refdate,
           jvh_status: rec.jvh_status,
@@ -142,9 +152,13 @@ export class OpenBalanceEditComponent extends baseEditComponent {
           jvh_shipment_ref: rec.jvh_shipment_ref,
           jvh_shipment_date: rec.jvh_shipment_date,
           rec_version: rec.rec_version,
+          rec_locked: rec.rec_locked,
+          rec_error: rec.rec_error,
         });
-        // this.exrate_decimal = rec.exrate_decimal;
         this.patchDetailRecord(rec.ledger_detail);
+        if(rec.rec_error != ""){
+          this.bSave = false;
+        }
       },
       error: (e) => {
         this.gs.showError(e);
@@ -188,6 +202,7 @@ export class OpenBalanceEditComponent extends baseEditComponent {
     const data = <iAccLedgerh>this.mform.value;
     let _mode = this.mode;
 
+    data.jvh_type = this.type;
     data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_created_by = this.gs.user.user_code;
@@ -236,6 +251,7 @@ export class OpenBalanceEditComponent extends baseEditComponent {
       jv_header_id: v.jvh_id,
       jv_docno: v.jvh_docno,
       jv_date: v.jvh_date,
+      jv_year: v.jvh_year,
       jv_refno: v.jvh_refno,
       jv_refdate: v.jvh_refdate,
       jv_acc_code: v.ledger_detail.jv_acc_code,
@@ -248,6 +264,7 @@ export class OpenBalanceEditComponent extends baseEditComponent {
       jv_credit: v.ledger_detail.jv_credit,
       jv_shipment_ref: v.jvh_shipment_ref,
       jv_shipment_date: v.jvh_shipment_date,
+      jv_narration: v.jvh_narration,
 
       rec_version: v.rec_version,
       rec_company_id: v.rec_company_id,
@@ -261,41 +278,31 @@ export class OpenBalanceEditComponent extends baseEditComponent {
 
   callBack(action: { id: string, rec: any }) {
     if (action.id == 'jv_acc_code') {
-      if (action.rec == null) {
-        this.mform.get('ledger_detail')?.patchValue({
-          jv_acc_id: null,
-          jv_acc_code: '',
-          jv_acc_name: '',
-        });
-      } else {
-        this.mform.get('ledger_detail')?.patchValue({
-          jv_acc_id: action.rec.acc_id,
-          jv_acc_code: action.rec.acc_code,
-          jv_acc_name: action.rec.acc_name,
-        });
-      }
+      this.mform.get('ledger_detail')?.patchValue({
+        jv_acc_id: action.rec ? action.rec.acc_id : 0,
+        jv_acc_code: action.rec ? action.rec.acc_code : "",
+        jv_acc_name: action.rec ? action.rec.acc_name : "",
+      });
     }
     if (action.id == 'jv_cur_code') {
-      if (action.rec == null) {
-        this.mform.get('ledger_detail')?.patchValue({
-          jv_cur_id: null,
-          jv_cur_code: '',
-          jv_exrate: 0,
-        });
-      } else {
-        this.mform.get('ledger_detail')?.patchValue({
-          jv_cur_id: action.rec.param_id,
-          jv_cur_code: action.rec.param_code,
-          jv_exrate: this.gs.roundNumber(
-            parseFloat(action.rec.param_value1),
-            this.gs.globalConstants.global_exrate_decimal
-          ),
-        });
-      }
+      this.mform.get('ledger_detail')?.patchValue({
+        jv_cur_id: action.rec ? action.rec.param_id : 0,
+        jv_cur_code: action.rec ? action.rec.param_code : "",
+        jv_exrate: action.rec ? this.gs.roundNumber(
+          parseFloat(action.rec.param_value1),
+          this.gs.globalConstants.global_exrate_decimal
+        ) : 0,
+      });
       this.findTotal({
         name: 'jv_exrate',
         rowIndex: action.id,
         isChanged: true,
+      });
+    }
+    if (action.id == 'jvh_year') {
+      this.mform.patchValue({
+        jvh_year: action.rec ? action.rec.year_code : 0,
+        jvh_year_name: action.rec ? action.rec.year_name : "",
       });
     }
   }

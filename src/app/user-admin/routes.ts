@@ -17,4 +17,6 @@ export const routes: Routes = [
   { path: 'mailservermEdit', loadComponent: () => import('./mailserverm/mailserverm-edit/mailserverm-edit.component').then(c => c.MailServermEditComponent) },
   { path: 'historyList', loadComponent: () => import('./history/history-list/history-list.component').then(c => c.HistoryListComponent) },
   { path: 'historyEdit', loadComponent: () => import('./history/history-edit/history-edit.component').then(c => c.HistoryEditComponent) },
+  { path: 'yearList', loadComponent: () => import('./year/year-list/year-list.component').then(c => c.YearListComponent) },
+  { path: 'yearEdit', loadComponent: () => import('./year/year-edit/year-edit.component').then(c => c.YearEditComponent) },
 ]
