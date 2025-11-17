@@ -18,7 +18,8 @@ export class InvoicemEditComponent extends baseEditComponent {
   parent_id: number = 0;
   parent_type: string = '';
   inv_arap: string = '';
-  // exrate_decimal: number;
+  bSave = true;
+
   ArrivalList = [
     { key: 'YES', value: 'YES' },
     { key: 'NO', value: 'NO' },
@@ -82,6 +83,8 @@ export class InvoicemEditComponent extends baseEditComponent {
       rec_check_count: [0],
       rec_check_attached: [''],
       rec_version: [0],
+      rec_locked: [''],
+      rec_error: [''],
     })
   }
 
@@ -93,10 +96,15 @@ export class InvoicemEditComponent extends baseEditComponent {
       this.parent_type = rec["parent_type"] || '';
       this.inv_arap = rec["inv_arap"] || '';
     });
-    if (this.mode == "add")
+    this.bSave = false;
+    if (this.mode == "add") {
+      this.bSave = this.bAdd;
       this.newRecord();
-    if (this.mode == "edit")
+    }
+    if (this.mode == "edit") {
+      this.bSave = this.bEdit;
       this.getRecord();
+    }
   }
 
   newRecord() {
@@ -230,8 +238,12 @@ export class InvoicemEditComponent extends baseEditComponent {
           rec_check_count: rec.rec_check_count,
           rec_check_attached: rec.rec_check_attached,
           rec_version: rec.rec_version,
+          rec_locked: rec.rec_locked,
+          rec_error: rec.rec_error,
         });
-        // this.exrate_decimal = rec.exrate_decimal;
+        if(rec.rec_error != ""){
+          this.bSave = false;
+        }
         this.inv_arap = rec.inv_arap;
         this.fillInvoices(rec.invoiced)
       },

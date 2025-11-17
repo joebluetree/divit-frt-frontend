@@ -8,9 +8,8 @@ export interface iAccTrans_Search {
   jvh_docno: string;
   jvh_type: string;
   jvh_year: number;
-  jvh_debit_total: number;
-  jvh_credit_total: number;
-  jvh_balance: number;
+  jvh_from_date: string;
+  jvh_to_date: string;
 
   rec_branch_id: number;
   rec_company_id: number;

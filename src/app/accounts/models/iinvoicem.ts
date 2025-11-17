@@ -76,7 +76,7 @@ export interface iInvoicem {
   rec_files_attached?: string;
   rec_check_count: number;
   rec_check_attached: string;
-  
+  rec_error: string;
   invoiced: iInvoiced[];
   invoicem_list: iInvoicem[];
 

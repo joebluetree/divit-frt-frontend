@@ -1090,7 +1090,7 @@
             <button *ngIf="gs.IsUserRightsExits('CUSTOM-HOLD')" class="btn btn-success btn-sm" routerLink="/common-shipment/customholdEdit" 
               [queryParams]="{mode: 'add', menuid:'CUSTOM-HOLD', type: 'CUSTOM-HOLD', appid: appid, parent_id: mform.get('hbl_id')?.value}">US CUSTOM HOLD</button>
             <button *ngIf="gs.IsUserRightsExits('SEA-IMP-H-DEVAN')" class="btn btn-success btn-sm" routerLink="/common-shipment/devaninstEdit"
-              [queryParams]="{ id:0, mode: 'add', menuid:'SEA-IMP-H-DEVAN', type: 'SEA-IMP-H-DEVAN', appid: appid, parent_id: mform.get('hbl_id')?.value,parent_type: mform.get('hbl_mode')?.value}">DEVAN / INSTRUCTIONS</button>
+              [queryParams]="{ id:0, mode: 'add', menuid:'SEA-IMP-H-DEVAN', type: 'SEA-IMP-H-DEVAN', appid: appid, parent_id: mform.get('hbl_id')?.value,parent_type: 'SEA IMPORT H'}">DEVAN / INSTRUCTIONS</button>
             <button *ngIf="gs.IsUserRightsExits('SEA-IMP-H-MEMO')" class="btn btn-sm" [ngClass]="(mform.get('rec_memo_attached')?.value === 'Y') ? 'btn-danger' : 'btn-success'" 
               routerLink="/common-shipment/memoEdit" [queryParams]="{ id:0, mode: 'add',menuid:'SEA-IMP-H-MEMO', type: 'SEA-IMP-H-MEMO', appid: appid, parent_id: mform.get('hbl_id')?.value,parent_type:'SEAIMP-SHIP-MEMO'}">HOUSE INTERNAL MEMO
               <span *ngIf="!!mform.get('rec_memo_count')?.value">({{ mform.get('rec_memo_count')?.value }})</span> </button>

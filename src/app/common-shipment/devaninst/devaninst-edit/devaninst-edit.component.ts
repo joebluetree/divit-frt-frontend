@@ -75,9 +75,7 @@ export class DevanInstEditComponent extends baseEditComponent {
     });
     if (this.mode == "add")
       this.getRecord();
-      // this.newRecord();
     else {
-      // this.getRecord();
       this.newRecord();
     }
   }

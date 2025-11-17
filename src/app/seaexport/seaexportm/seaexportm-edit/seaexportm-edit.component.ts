@@ -207,9 +207,11 @@ export class SeaExportmEditComponent extends baseEditComponent {
           if (response.status) {
             this.formArray('master_house').removeAt(idx);
           }
+          // this.gs.showAlert([response.message]);
         },
         error: (e) => {
-          this.gs.showError(e);
+          this.gs.showAlert([e.error]);
+          // this.gs.showError(e.error);
         }
       });
     }
