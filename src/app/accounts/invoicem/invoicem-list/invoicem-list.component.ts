@@ -32,7 +32,7 @@ export class InvoicemListComponent extends baseListComponent {
     const houseData = this.getHouseEditLink();
 
     const param = { id: 0, mode: 'edit', menuid: this.menuid, type: this.type, appid: this.appid, parent_id: this.parent_id, parent_type: this.parent_type };
-    const HouseParam = { id: 0, mbl_id: this.parent_id, mode: 'edit', menuid: houseData.menuid, type: houseData.type, appid: this.appid }; // modify id for geting hbl_id of selected row
+    const HouseParam = { id: 0, mbl_id: this.parent_type == 'OTHERS' ? this.parent_id : 0, mode: 'edit', menuid: houseData.menuid, type: houseData.type, appid: this.appid }; // modify id for geting hbl_id of selected row
     const MasterParam = { id: 0, mode: 'edit', menuid: masterData.menuid, type: masterData.type, appid: this.appid };
 
     this.table_data = [
@@ -48,7 +48,7 @@ export class InvoicemListComponent extends baseListComponent {
       { col_name: "inv_ap_total", col_caption: "AP TOTAL", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "inv_balance", col_caption: "BALANCE", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "inv_mbl_refno", col_caption: "MASTER", col_format: "link", col_sortable: true, col_link: masterData.link, col_param: MasterParam, col_show: true, col_param_list: { 'id': 'inv_mbl_id' } },
-      { col_name: "inv_houseno", col_caption: "HOUSE", col_format: "link", col_sortable: true, col_link: houseData.link, col_param: HouseParam, col_show: true, col_param_list: { 'id': 'inv_hbl_id' } },
+      { col_name: "inv_houseno", col_caption: "HOUSE", col_format: "link", col_sortable: true, col_link: houseData.link, col_param: HouseParam, col_show: true, col_param_list: this.parent_type == 'OTHERS' ? { 'id': 'inv_mbl_id' } : { 'id': 'inv_hbl_id' } },
       { col_name: "rec_created_by", col_caption: "CREATED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_created_date", col_caption: "CREATED-DT", col_format: "datetime", col_sortable: true, col_link: '', col_param: {}, col_show: true },
       { col_name: "rec_edited_by", col_caption: "EDITED-BY", col_format: "", col_sortable: true, col_link: '', col_param: {}, col_show: true },
@@ -70,7 +70,7 @@ export class InvoicemListComponent extends baseListComponent {
     if (this.parent_type == 'AIR IMPORT')
       hData = { link: '/airimport/airimporthEdit', menuid: 'AIR-IMPORT-H', type: 'AIR-IMPORT-H' };
     if (this.parent_type == 'OTHERS')
-      hData = { link: '/otherop/otheropEdit', menuid: 'OTHERS', type: 'OTHERS' };
+      hData = { link: '/otherop/otheropEdit', menuid: 'OTHEROP', type: 'OTHEROP' };
     return hData;
   }
   getMasterEditLink() {
@@ -84,7 +84,7 @@ export class InvoicemListComponent extends baseListComponent {
     if (this.parent_type == 'AIR IMPORT')
       hData = { link: '/airimport/airimportmEdit', menuid: 'AIR-IMPORT-M', type: 'AIR-IMPORT-M' };
     if (this.parent_type == 'OTHERS')
-      hData = { link: '/otherop/otheropEdit', menuid: 'OTHERS', type: 'OTHERS' };
+      hData = { link: '/otherop/otheropEdit', menuid: 'OTHEROP', type: 'OTHEROP' };
     return hData;
   }
 

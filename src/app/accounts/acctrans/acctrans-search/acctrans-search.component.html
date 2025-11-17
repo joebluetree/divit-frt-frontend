@@ -3,8 +3,18 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group row">
-        <label class="col-sm-4 form-label form-label-sm" for="">Doc #</label>
-        <div class="col-sm-4">
+        <label class="col-sm-3 form-label form-label-sm" for="" >From</label>
+        <div class="col-sm-3">
+          <app-date formControlName="jvh_from_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date type="text" formControlName="jvh_to_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 form-label form-label-sm" for="">Doc #</label>
+        <div class="col-sm-3">
           <app-input type="text" formControlName="jvh_docno" [case]="'UPPER'"> </app-input>
         </div>
       </div>

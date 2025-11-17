@@ -7,7 +7,7 @@
 
 <div class="page-search">
   <app-acctrans-search [search_url]="'/api/accounts/acctrans/GetListAsync'" [input]="ms.getSearchRecord()"
-  [summary]="ms.getSummaryRecords()" (searchResult)="search($event)"></app-acctrans-search>
+  (searchResult)="search($event)"></app-acctrans-search>
 </div>
 
 <div class="page-pagination">

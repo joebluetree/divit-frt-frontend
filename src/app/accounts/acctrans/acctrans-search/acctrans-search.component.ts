@@ -21,51 +21,43 @@ export class AccTransSearchComponent {
   mform: FormGroup;
   record!: iAccTrans_Search;
   private summaryData: any = {};
+  date = this.gs.getToday();
 
   @Input('search_url') search_url = '';
-  @Input('summary') set summary(val: any) {
-    this.summaryData = val?.[0] ?? val ?? {};
-    this.getSummary();
-  }
 
   @Input('input') set input(v: iAccTrans_Search) {
     this.record = { ...v };
   }
 
   @Output('searchResult') output = new EventEmitter<any>();
-
+  
   constructor(
     private fb: FormBuilder,
-    private gs: GlobalService,) {
+    public gs: GlobalService,) {
     this.buildForm();
   }
 
   buildForm() {
     this.mform = this.fb.group({
       jvh_docno: [''],
-      jvh_debit_total: [0],
-      jvh_credit_total: [0],
-      jvh_balance: [0],
+      jvh_from_date: [this.date],
+      jvh_to_date: [''],
     });
   }
 
   ngOnInit(): void {
-    this.getSummary();
-    // this.search('');
-  }
-  
-  getSummary() {
-    if (!this.mform) return;
     this.mform.patchValue({
       jvh_docno: this.record.jvh_docno,
-      jvh_debit_total: this.summaryData.jvh_debit_total || 0,
-      jvh_credit_total: this.summaryData.jvh_credit_total || 0,
-      jvh_balance: this.summaryData.jvh_balance || 0,
+      jvh_from_date: this.record.jvh_from_date || this.date,
+      jvh_to_date: this.record.jvh_to_date
     })
   }
+  
   search(_action: string) {
     if (this.output) {
       this.record.jvh_docno = this.mform.value.jvh_docno;
+      this.record.jvh_from_date = this.mform.value.jvh_from_date;
+      this.record.jvh_to_date = this.mform.value.jvh_to_date;
       this.record.jvh_year = this.gs.globalConstants.global_fin_year;
       this.record.rec_branch_id = this.gs.user.user_branch_id;
       this.record.rec_company_id = this.gs.user.user_company_id;

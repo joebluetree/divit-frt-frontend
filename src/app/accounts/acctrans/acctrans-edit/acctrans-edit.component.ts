@@ -22,6 +22,7 @@ import { AccTransdEditComponent } from "../acctransd-edit/acctransd-edit.compone
 export class AccTransEditComponent extends baseEditComponent {
 
   data_ledgerd: data_ledgerd;
+  bSave = true;
 
   constructor(
     private ms: AccTransService,
@@ -57,6 +58,8 @@ export class AccTransEditComponent extends baseEditComponent {
       jvh_debit: [0],
       ledger_details: this.fb.array([]),
       rec_version: [0],
+      rec_locked: [''],
+      rec_error: [''],
     })
   }
 
@@ -67,10 +70,15 @@ export class AccTransEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-    if (this.mode == "add")
+    this.bSave = false;
+    if (this.mode == "add") {
+      this.bSave = this.bAdd;
       this.newRecord();
-    if (this.mode == "edit")
+    }
+    if (this.mode == "edit") {
+      this.bSave = this.bEdit;
       this.getRecord();
+    }
   }
 
   newRecord() {
@@ -164,8 +172,13 @@ export class AccTransEditComponent extends baseEditComponent {
           jvh_credit: rec.jvh_credit,
           jvh_debit: rec.jvh_debit,
           rec_version: rec.rec_version,
+          rec_locked: rec.rec_locked,
+          rec_error: rec.rec_error,
         });
         this.fillLedgerd(rec.ledger_details);
+        if(rec.rec_error != ""){
+          this.bSave = false;
+        }
       },
       error: (e) => {
         this.gs.showError(e);
@@ -213,7 +226,7 @@ export class AccTransEditComponent extends baseEditComponent {
           jvh_credit: v.jvh_credit,
           rec_version: v.rec_version
         });
-
+        this.fillLedgerd(v.ledger_details)
         this.ms.UpdateRecord(v, _mode);
         this.gs.showAlert(["Save Complete"]);
       },
