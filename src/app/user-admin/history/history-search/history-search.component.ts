@@ -35,6 +35,7 @@ export class HistorySearchComponent {
   buildForm() {
     this.mform = this.fb.group({
       log_table: [''],
+      log_type: [''],
       log_from_date: [''],
       log_to_date: [''],
     })
@@ -43,6 +44,7 @@ export class HistorySearchComponent {
   ngOnInit(): void {
     this.mform.setValue({
       log_table: this.record.log_table,
+      log_type: this.record.log_type,
       log_from_date: this.record.log_from_date,
       log_to_date: this.record.log_to_date,
     })

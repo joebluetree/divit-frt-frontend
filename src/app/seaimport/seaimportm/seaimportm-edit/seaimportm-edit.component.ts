@@ -256,7 +256,7 @@ export class SeaImportmEditComponent extends baseEditComponent {
           }
         },
         error: (e) => {
-          this.gs.showError(e);
+          this.gs.showAlert([e.error]);
         }
       });
     }

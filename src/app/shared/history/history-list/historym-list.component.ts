@@ -49,8 +49,8 @@ export class HistorymListComponent extends baseListComponent {
     this.route.queryParams.forEach((rec: any) => {
       this.url_param = { ...rec };
       this.appid = rec["appid"];
-      this.menuid = "HISTORY";
-      this.type = "HISTORY";
+      this.menuid = "HISTORY G";
+      this.type = "HISTORY G";
       this.menum = this.gs.getUserRights(this.menuid);
       if (this.menum) {
         this.title = this.menum.menu_name;

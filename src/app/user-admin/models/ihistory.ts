@@ -20,6 +20,7 @@ export interface iHistory {
 }
 export interface iHistory_Search {
     log_table: string;
+    log_type: string;
     log_from_date: string;
     log_to_date: string;
     rec_company_id: number;
