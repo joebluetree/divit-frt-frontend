@@ -1,0 +1,72 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Date Type</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="hbl_date_type" name="hbl_date_type"
+            [dataSource]="DateTypeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="" >From</label>
+        <div class="col-sm-3">
+          <app-date formControlName="hbl_from_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date formControlName="hbl_to_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Group</label>
+        <div class="col-sm-8">
+          <app-input maxlength="15" formControlName="hbl_mode" [case]="'UPPER'" [disable]="true"></app-input>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Parent</label>
+        <div class="col-sm-8">
+          <auto-complete maxlength="60" formControlName="hbl_parent_name" id="hbl_parent_name" (CallBack)="callBack($event)"
+            table="customerm" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+            display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Consignee</label>
+        <div class="col-sm-8">
+          <auto-complete maxlength="60" formControlName="hbl_consignee_name" id="hbl_consignee_name" (CallBack)="callBack($event)"
+            table="customerm" [company_id]="getCompanyId()" [url]="url"
+            display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Type</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="hbl_bl_type" name="hbl_bl_type"
+            [dataSource]="blTypeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Format</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="hbl_format" name="hbl_format"
+            [dataSource]="formatList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')" >Excel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

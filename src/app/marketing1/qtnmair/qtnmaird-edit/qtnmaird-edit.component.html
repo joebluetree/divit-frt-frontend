@@ -7,7 +7,7 @@
         <label class="col-sm-4 form-label form-lable-sm" for="">POL</label>
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_pol_code" id="qtnd_pol_code" (CallBack)="callBack($event)"
-            [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
+            [table]="'param'" [subtable]="'AIR-PORT'" [company_id]="getCompanyId()" [url]="url"
             display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
             required></auto-complete>
         </div>
@@ -20,7 +20,7 @@
         <label class="col-sm-4 form-label form-lable-sm" for="">POD</label>
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_pod_code" id="qtnd_pod_code" (CallBack)="callBack($event)"
-            [table]="'param'" [subtable]="'sea-port'" [company_id]="getCompanyId()" [url]="url"
+            [table]="'param'" [subtable]="'AIR-PORT'" [company_id]="getCompanyId()" [url]="url"
             display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
             required></auto-complete>
         </div>
@@ -33,7 +33,7 @@
         <label class="col-sm-4 form-label form-lable-sm" for="">Carrier</label>
         <div class="col-sm-3">
           <auto-complete formControlName="qtnd_carrier_code" id="qtnd_carrier_code" (CallBack)="callBack($event)"
-            [table]="'param'" [subtable]="'air carrier'" [company_id]="getCompanyId()" [url]="url"
+            [table]="'param'" [subtable]="'AIR-CARRIER'" [company_id]="getCompanyId()" [url]="url"
             display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"
             required></auto-complete>
         </div>

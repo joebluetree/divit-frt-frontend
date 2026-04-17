@@ -30,7 +30,7 @@
               <label class="col-sm-4 form-label form-lable-sm">Stage</label>
               <div class="col-sm-8">
                 <auto-complete formControlName="mbl_shipment_stage_name" name="mbl_shipment_stage_name"
-                  id="mbl_shipment_stage_name" (CallBack)="callBack($event)" table="param" subtable="SHIPSTAGE AE"
+                  id="mbl_shipment_stage_name" (CallBack)="callBack($event)" table="param" subtable="SHIPSTAGE-AE"
                   [company_id]="getCompanyId()" [url]="url" case="upper"
                   display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
               </div>
@@ -314,7 +314,8 @@
               <button class="btn btn-success btn-sm">MANIFEST</button>
               <button *ngIf="gs.IsUserRightsExits('AIR-EXPORT-INVOICE')" class="btn btn-success btn-sm" type="button" routerLink="/accounts/invoicemList"
                 [queryParams]="{id : 0, menuid:'AIR-EXPORT-INVOICE', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">AR & AP</button>
-              <button class="btn btn-success btn-sm" type="button">PROFIT REPORT</button>
+              <button *ngIf="gs.IsUserRightsExits('AIR-EXP-PROFIT-REP')" class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/profitList"
+                [queryParams]="{id : 0 , menuid:'AIR-EXP-PROFIT-REP', appid: appid, parent_id: mform.get('mbl_id')?.value, parent_type:mform.get('mbl_mode')?.value}">PROFIT REPORT</button>
               <button class="btn btn-success btn-sm" (click)="shipmentLabel()">SHIPMENT LABEL</button>
               <button class="btn btn-success btn-sm" type="button" routerLink="/common-shipment/messengerslipDetList"
                 [queryParams]="{id : 0 ,mode:'add', menuid:'MESSENGER-SLIP', type:'MESSENGER-SLIP', appid: appid,

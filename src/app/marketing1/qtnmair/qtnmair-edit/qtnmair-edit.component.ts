@@ -9,6 +9,7 @@ import { QtnmAirService } from '../../services/qtnmair.service';
 import { data_qtnmair, iQtnd_air, iQtnm_air } from '../../models/iqtnmair';
 import { QtnmAirdEditComponent } from '../qtnmaird-edit/qtnmaird-edit.component';
 import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-edit/genremarkm-edit.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-qtnmair-edit',
@@ -30,8 +31,11 @@ export class QtnmAirEditComponent extends baseEditComponent {
   data_qtnmair: data_qtnmair;
   iDec = 3;
   exrate_decimal: number;
+  screen_id: string = '';
+
   constructor(
     private ms: QtnmAirService,
+    private http: HttpClient,
     public dialog: MatDialog
 
   ) {
@@ -77,7 +81,9 @@ export class QtnmAirEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-
+    this.route.queryParams.forEach((rec: any) => {
+      this.screen_id = rec["menuid"] || '';
+    });
     if (this.mode == "add")
       this.newRecord();
     else
@@ -212,6 +218,33 @@ export class QtnmAirEditComponent extends baseEditComponent {
     })
   }
 
+  printQuotation() {
+    if (!this.id) {
+      this.gs.showError("Quotation ID is required.");
+      return;
+    }
+
+    const param = {
+      id: this.id,
+      user_name: this.gs.globalConstants.global_user_code,
+    };
+
+    this.http.post<any>(this.gs.getUrl('/api/marketing/qtnmair/PrintQuotationAsync'), param, {
+      headers: this.gs.getHeaders()
+    }).subscribe({
+      next: (v: any) => {
+        if (v && v.fileData) {
+          this.gs.FilesActions('PRINT', v.fileData, this.screen_id);
+        } else {
+          this.gs.showError("No file returned from server.");
+        }
+      },
+      error: (e: any) => {
+        // this.gs.showError(e?.error || e?.message || "Error generating invoice PDF");
+        this.gs.showAlert([e.error]);
+      }
+    });
+  }
 
   save() {
     if (this.mform.invalid) {

@@ -50,6 +50,10 @@ export class ParamEditComponent extends baseEditComponent {
     if (this.type == "CURRENCY") {
       this.value1 = "Ex-Rate";
     }
+    if (this.type == "SEA-PORT" || this.type == "AIR-PORT") {
+      this.value1 = "Country Code";
+      this.value2 = "Country Name";
+    }
   }
   
   ngOnInit() {

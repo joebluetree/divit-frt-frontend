@@ -1,0 +1,130 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">From</label>
+        <div class="col-sm-3">
+          <app-date formControlName="mbl_from_date" [format]="gs.globalConstants.global_date_format"
+            [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date formControlName="mbl_to_date" [format]="gs.globalConstants.global_date_format"
+            [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Format</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_format" name="mbl_format" [dataSource]="formatList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="mform.value.mbl_format !== 'PARTY'">
+        <label class="col-sm-4 form-label form-label-sm" for="">Type</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_report_type" name="mbl_report_type"
+            [dataSource]="repTypeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="mform.value.mbl_format === 'PARTY'">
+        <label class="col-sm-4 form-label form-label-sm" for="">Type</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_report_type" name="mbl_report_type"
+            [dataSource]="PartyTypeList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+          <!-- <app-input type="text" formControlName="mbl_report_type" name="mbl_report_type" [disable]="true"></app-input> -->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Group</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_mode" name="mbl_mode" [dataSource]="groupList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Salesman</label>
+        <div class="col-sm-8">
+          <auto-complete maxlength="60" formControlName="mbl_salesman_name" id="mbl_salesman_name"
+            (CallBack)="callBack($event)" table="param" subtable="salesman" [company_id]="getCompanyId()" [url]="url"
+            display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="mform.value.mbl_format === 'AGENT'">
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Parent</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_parent_name" id="mbl_parent_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Agent</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_agent_name" id="mbl_agent_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="mform.value.mbl_format === 'PARTY'">
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Parent</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_parent_name" id="mbl_parent_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url" [filter]="{cust_is_parent : 'Y'}"
+              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Billing-Party</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_customer_name" id="mbl_customer_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'code','value':'cust_code'},{'caption':'name','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div *ngIf="mform.value.mbl_report_type === 'MASTER'" class="form-group row ">
+        <label class="col-sm-4 form-label form-label-sm" for="">Criteria</label>
+        <div class="col-sm-4">
+          <app-combobox maxlength="30" formControlName="mbl_profit_criteria" name="mbl_profit_criteria"
+            [dataSource]="CriteriaList" [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+        <div class="col-sm-2">
+          <app-input type="number" [dec]="this.gs.globalConstants.global_dec_places" formControlName="mbl_profit_val"
+            name="mbl_profit_val"></app-input>
+        </div>
+      </div>
+      <div *ngIf="mform.value.mbl_report_type === 'MASTER'" class="form-group row">
+        <label class="col-sm-4 form-label form-lable-sm">Hide</label>
+        <div class="col-sm-4">
+          <app-checkbox formControlName="mbl_profit_met"></app-checkbox>
+          <label class="ms-1 form-label form-label-sm ">Profit Met</label>
+        </div>
+        <div class="col-sm-4">
+          <app-checkbox formControlName="mbl_loss_approved"></app-checkbox>
+          <label class="ms-1 form-label form-label-sm ">Loss Approved</label>
+        </div>
+      </div>
+      <div class="form-group row mt-1">
+        <label *ngIf="mform.value.mbl_report_type === 'MASTER'" class="col-sm-4 form-label form-label-sm"
+          for=""></label>
+        <div class="col-sm-3">
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

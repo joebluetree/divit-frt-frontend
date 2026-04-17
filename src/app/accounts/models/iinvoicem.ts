@@ -112,21 +112,6 @@ export interface iInvoicem_Search {
   rec_company_id: number;
 }
 
-// export interface iInvoicem_Summary {
-//   inv_mbl_stage: string;
-//   inv_mbl_refno: string;
-//   inv_inc_total: number;
-//   inv_exp_total: number;
-//   inv_revenue: number;
-//   inv_ar_balance: number;
-//   inv_ap_balance: number;
-//   inv_loss_memo: string;
-//   inv_loss_approved: string;
-//   inv_profit_req: string;
-//   inv_bo_status: string;
-//   inv_remarks: string;
-// }
-
 export interface iInvoicemModel {
   selected_row_id: number;
   records: iInvoicem[],

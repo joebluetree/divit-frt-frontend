@@ -5,6 +5,7 @@ import { iAccGroupm } from '../../models/iaccgroupm';
 import { baseEditComponent } from '../../../shared/base-class/baseEditComponent';
 import { InvoicemService } from '../../services/invoicem.service';
 import { iInvoiced, iInvoicem } from '../../models/iinvoicem';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-invoicem-edit',
@@ -19,6 +20,7 @@ export class InvoicemEditComponent extends baseEditComponent {
   parent_type: string = '';
   inv_arap: string = '';
   bSave = true;
+  screen_id: string = '';
 
   ArrivalList = [
     { key: 'YES', value: 'YES' },
@@ -27,6 +29,7 @@ export class InvoicemEditComponent extends baseEditComponent {
 
   constructor(
     private ms: InvoicemService,
+    private http: HttpClient,
   ) {
     super();
     this.mform = this.createform();
@@ -95,6 +98,7 @@ export class InvoicemEditComponent extends baseEditComponent {
       this.parent_id = +rec["parent_id"] || 0;
       this.parent_type = rec["parent_type"] || '';
       this.inv_arap = rec["inv_arap"] || '';
+      this.screen_id = rec["menuid"] || '';
     });
     this.bSave = false;
     if (this.mode == "add") {
@@ -241,7 +245,7 @@ export class InvoicemEditComponent extends baseEditComponent {
           rec_locked: rec.rec_locked,
           rec_error: rec.rec_error,
         });
-        if(rec.rec_error != ""){
+        if (rec.rec_error != "") {
           this.bSave = false;
         }
         this.inv_arap = rec.inv_arap;
@@ -334,6 +338,35 @@ export class InvoicemEditComponent extends baseEditComponent {
       },
       complete: () => { }
     })
+  }
+  
+  printInvoice() {
+    if (!this.id) {
+      this.gs.showError("Invoice ID is required.");
+      return;
+    }
+
+    const param = {
+      id: this.id,
+      user_name: this.gs.globalConstants.global_user_code,
+      inv_type: this.inv_arap
+    };
+
+    this.http.post<any>(this.gs.getUrl('/api/accounts/invoicem/PrintInvoiceAsync'), param, {
+      headers: this.gs.getHeaders()
+    }).subscribe({
+      next: (v: any) => {
+        if (v && v.fileData) {
+          this.gs.FilesActions('PRINT', v.fileData, this.screen_id);
+        } else {
+          this.gs.showError("No file returned from server.");
+        }
+      },
+      error: (e: any) => {
+        // this.gs.showError(e?.error || e?.message || "Error generating invoice PDF");
+        this.gs.showAlert([e.error]);
+      }
+    });
   }
 
   restoreInvoice() {

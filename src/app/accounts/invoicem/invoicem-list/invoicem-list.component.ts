@@ -12,7 +12,7 @@ import { InvoicemService } from '../../services/invoicem.service';
   imports: [...CustomControls, InvoicemSearchComponent],
 })
 export class InvoicemListComponent extends baseListComponent {
-  @ViewChild(InvoicemSearchComponent) invSearch!: InvoicemSearchComponent;
+  // @ViewChild(InvoicemSearchComponent) invSearch!: InvoicemSearchComponent;
 
   parent_id: number = 0;
   parent_type: string = "";
@@ -80,9 +80,9 @@ export class InvoicemListComponent extends baseListComponent {
     if (this.parent_type == 'SEA IMPORT')
       hData = { link: '/seaimport/seaimportmEdit', menuid: 'SEA-IMPORT-M', type: 'SEA-IMPORT-M' };
     if (this.parent_type == 'AIR EXPORT')
-      hData = { link: '/airexport/airexportmEdit', menuid: 'AIR-EXPORT-M', type: 'AIR-EXPORT-M' };
+      hData = { link: '/airexport/airexportEdit', menuid: 'AIR-EXPORT-M', type: 'AIR-EXPORT-M' };
     if (this.parent_type == 'AIR IMPORT')
-      hData = { link: '/airimport/airimportmEdit', menuid: 'AIR-IMPORT-M', type: 'AIR-IMPORT-M' };
+      hData = { link: '/airimport/airimportEdit', menuid: 'AIR-IMPORT-M', type: 'AIR-IMPORT-M' };
     if (this.parent_type == 'OTHERS')
       hData = { link: '/otherop/otheropEdit', menuid: 'OTHEROP', type: 'OTHEROP' };
     return hData;

@@ -333,6 +333,7 @@ export class OtherOpEditComponent extends baseEditComponent {
     data.rec_company_id = this.gs.user.user_company_id;
     data.rec_branch_id = this.gs.user.user_branch_id;
     data.rec_created_by = this.gs.user.user_code;
+    data.oth_mode = this.type;
 
     let _mode = this.mode;
 

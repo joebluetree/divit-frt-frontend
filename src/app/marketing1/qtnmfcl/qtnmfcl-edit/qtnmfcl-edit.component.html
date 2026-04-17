@@ -232,6 +232,7 @@
   <app-fileupload *ngIf="id != 0"
     [inputdata]="{mode:'add', id:id, parent_type: mform.get('qtnm_type')?.value,
     rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'Supporting Documents'"></app-fileupload>
+    <button *ngIf="mode== 'edit' && bPrint" class="btn btn-sm btn-success" id:id (click)="printQuotation()">Print</button>
 </div>
 
 <div *ngIf="showModel">
