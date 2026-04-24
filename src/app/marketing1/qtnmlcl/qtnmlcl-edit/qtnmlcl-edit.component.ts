@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QtnmLclService } from '../../services/qtnmlcl.service';
 import { iQtnd_lcl, iQtnm_lcl } from '../../models/iqtnmlcl';
 import { GenRemarkmEditComponent } from '../../../shared/genremarkm/genremarkm-edit/genremarkm-edit.component';
+import { HttpClient } from '@angular/common/http';
 
 //Name : Sourav V
 //Created Date : 04/01/2025
@@ -25,8 +26,11 @@ export class QtnmLclEditComponent extends baseEditComponent {
 
   iDec = 3;
   exrate_decimal: number;
+  screen_id: string = '';
+
   constructor(
     private ms: QtnmLclService,
+    private http: HttpClient,
     public dialog: MatDialog
 
   ) {
@@ -88,7 +92,9 @@ export class QtnmLclEditComponent extends baseEditComponent {
   ngOnInit() {
     this.id = 0;
     this.init();
-
+    this.route.queryParams.forEach((rec: any) => {
+      this.screen_id = rec["menuid"] || '';
+    });
     if (this.mode == "add")
       this.newRecord();
     else
@@ -221,6 +227,34 @@ export class QtnmLclEditComponent extends baseEditComponent {
         this.gs.showError(e);
       }
     })
+  }
+
+  printQuotation() {
+    if (!this.id) {
+      this.gs.showError("Quotation ID is required.");
+      return;
+    }
+
+    const param = {
+      id: this.id,
+      user_name: this.gs.globalConstants.global_user_code,
+    };
+
+    this.http.post<any>(this.gs.getUrl('/api/marketing/qtnmlcl/PrintQuotationAsync'), param, {
+      headers: this.gs.getHeaders()
+    }).subscribe({
+      next: (v: any) => {
+        if (v && v.fileData) {
+          this.gs.FilesActions('PRINT', v.fileData, this.screen_id);
+        } else {
+          this.gs.showError("No file returned from server.");
+        }
+      },
+      error: (e: any) => {
+        // this.gs.showError(e?.error || e?.message || "Error generating invoice PDF");
+        this.gs.showAlert([e.error]);
+      }
+    });
   }
 
   save() {
@@ -454,8 +488,10 @@ export class QtnmLclEditComponent extends baseEditComponent {
     const amt = invoice.reduce((total, row) => {
       return total + row.qtnd_amt || 0; // here changed
     }, 0);
+    let namt = this.gs.roundNumber(amt, this.gs.globalConstants.global_dec_places);
     this.mform.patchValue({
-      qtnm_amt: amt
+      qtnm_amt: namt
+      
     });
   }
   onBlur(action: any) {

@@ -902,6 +902,13 @@
                   id="hbl_issued_place"></app-input>
               </div>
             </div>
+            <div class="form-group row">
+              <label class="col-sm-4 form-label form-lable-sm" for="">Issue Date</label>
+              <div class="col-sm-8">
+                <app-date formControlName="hbl_issued_date" [format]="gs.globalConstants.global_date_format"
+                  [placeholder]="gs.globalConstants.global_date_format"></app-date>
+              </div>
+            </div>
 
 
             <div class="form-group row">
@@ -912,7 +919,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-4 form-label form-lable-sm" for="">Issue Date</label>
+              <label class="col-sm-4 form-label form-lable-sm" for="">Actual Delivery Date</label>
               <div class="col-sm-8">
                 <app-date formControlName="hbl_delivery_date" [format]="gs.globalConstants.global_date_format"
                   [placeholder]="gs.globalConstants.global_date_format"></app-date>

@@ -1,0 +1,49 @@
+<!-- <div class="row">
+  <div class="col-md-10">
+    <div class="page-header">
+      <h5>{{inv_arap + ' INVOICE' }}</h5>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/invoicemEdit"
+        [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,appid:appid,inv_arap:'A/R',parent_id:parent_id,parent_type:parent_type}">Add A/R</button>
+      <button *ngIf="bAdd" class="btn btn-sm btn-success" routerLink="/accounts/invoicemEdit"
+        [queryParams]="{id :0, _id:id+1,mode:'add',menuid:menuid,appid:appid,inv_arap:'A/P',parent_id:parent_id,parent_type:parent_type}">Add A/P</button>
+      <app-history [inputdata]="{table: 'acc_invoicem', id:id}"></app-history>
+      <button class="btn btn-success btn-sm" (click)="return2Parent()">Return</button>
+    </div>
+
+
+    <div class="page-footer line-bottom">
+      <button  class="btn btn-sm btn-success" (click)="save()"
+        [disabled]="mform.invalid || !bSave" type="button">Save</button>
+      <button *ngIf="mode== 'edit'" class="btn btn-sm"
+        [ngClass]="(mform.get('rec_deleted')?.value === 'Y') ? 'btn-danger' : 'btn-success'" [disabled]="!bSave && bDelete"  (click)="restoreInvoice()">{{
+        mform.get('rec_deleted')?.value === 'Y' ? 'Restore' : 'Delete'}}</button>
+        <button *ngIf="mode== 'edit'" class="btn btn-sm btn-success" id:id (click)="printInvoice()">Print</button>
+    </div>
+    <div class="ms-2">
+      <h6 class="text-danger me-5">{{mform.get('rec_error')?.value}}</h6>
+    </div>
+  </div>
+  <div class="col-sm-2" *ngIf="mode=='edit'">
+    <div class="page-body line-bottom">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="d-grid gap-1">
+            <button class="btn btn-success btn-sm">INSTANT PAYMENT</button>
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type:mform.get('inv_arap')?.value,
+                rec_files_count: mform.get('rec_files_count')?.value, rec_files_attached: mform.get('rec_files_attached')?.value}"[button_name]="'ATTACHMENTS'"></app-fileupload>
+            <app-fileupload
+              [inputdata]="{mode:'add', id:id, parent_type:mform.get('inv_arap')?.value+' CHECK COPY',
+                rec_files_count: mform.get('rec_check_count')?.value, rec_files_attached: mform.get('rec_check_attached')?.value}"[button_name]="'CHECK COPY'"></app-fileupload>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModel">
+  <pre>
+    {{mform.value | json}}
+  </pre>
+</div> -->

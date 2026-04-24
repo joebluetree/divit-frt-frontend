@@ -57,6 +57,7 @@ export const routes: Routes = [
   { path: 'common-shipment', loadChildren: () => import('./common-shipment/routes').then(m => m.routes), canActivate: [AuthGuard] },
 
   { path: 'otherop', loadChildren: () => import('./otherop/routes').then(m => m.routes), canActivate: [AuthGuard] },
+  { path: 'report', loadChildren: () => import('./report/routes').then(m => m.routes), canActivate: [AuthGuard] },
 
 ];
 

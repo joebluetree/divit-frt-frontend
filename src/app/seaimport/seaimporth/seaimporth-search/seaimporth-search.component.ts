@@ -54,7 +54,7 @@ export class SeaImportHSearchComponent {
 
   ngOnInit(): void {
     this.mform.setValue({
-      hbl_date_type: "Ref Date", 
+      hbl_date_type: this.record.hbl_date_type == ''? "Ref Date" : this.record.hbl_date_type,
       hbl_from_date: this.record.hbl_from_date,
       hbl_to_date: this.record.hbl_to_date,
       hbl_mbl_refno: this.record.hbl_mbl_refno,

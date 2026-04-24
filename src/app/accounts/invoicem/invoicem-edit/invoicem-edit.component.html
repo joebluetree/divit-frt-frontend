@@ -317,6 +317,7 @@
       <button *ngIf="mode== 'edit'" class="btn btn-sm"
         [ngClass]="(mform.get('rec_deleted')?.value === 'Y') ? 'btn-danger' : 'btn-success'" [disabled]="!bSave && bDelete"  (click)="restoreInvoice()">{{
         mform.get('rec_deleted')?.value === 'Y' ? 'Restore' : 'Delete'}}</button>
+        <button *ngIf="mode== 'edit'" class="btn btn-sm btn-success" id:id (click)="printInvoice()">Print</button>
     </div>
     <div class="ms-2">
       <h6 class="text-danger me-5">{{mform.get('rec_error')?.value}}</h6>

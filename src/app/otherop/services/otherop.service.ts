@@ -21,7 +21,7 @@ export class OtherOpService extends baseService {
     return <iOtherOpModel>{
       selected_row_id: -1,
       records: [],
-      searchRecord: <iOtherOp_Search>{title:this.title, oth_refno:'', oth_from_date:'',oth_to_date:'', rec_company_id: 0,rec_branch_id: 0},
+      searchRecord: <iOtherOp_Search>{title:this.title, oth_mode:this.type ,oth_refno:'', oth_from_date:'',oth_to_date:'', rec_company_id: 0,rec_branch_id: 0},
       pageRecord: <iPage>{ currentPageNo: 0, pages: 0, pageSize: this.gs.pageSize, rows: 0 },
       errorMessage: '',
       sort_column: '',

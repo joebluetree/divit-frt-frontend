@@ -44,10 +44,11 @@ export class FileUploadComponent {
       'AIREXP-CNTR-MEMO',
       'AIRIMP-CNTR-MEMO',
       'AIRIMP-SHIP-MEMO',
-      'OTH-CNTR-MEMO',
       'SEAEXP-CNTR-MEMO',
       'SEAIMP-CNTR-MEMO',
       'SEAIMP-SHIP-MEMO',
+      'OTHERS-MEMO',
+      'PS-MEMO',
     ];
 
     for (const t of memoTypes) {

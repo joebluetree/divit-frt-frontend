@@ -41,7 +41,17 @@ export class ProcessPdfComponent extends baseEditComponent {
   ngOnInit(): void {
     this.init();
     this.loadFileData();
+    if (!this.pdfFileStream && this.excelFileStream) {
+      this.gs.downloadProcess(this.excelFileStream, this.excelFileName);
+
+      this.return2Parent();
+      return;
+  }
+
+  if (this.pdfFileStream) {
     this.loadPdf(this.pdfFileStream);
+  }
+    // this.loadPdf(this.pdfFileStream);
   }
 
   loadFileData() {

@@ -1,0 +1,49 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-6">
+
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="" >From</label>
+        <div class="col-sm-3">
+          <app-date formControlName="ophandle_from_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date type="text" formControlName="ophandle_to_date" [format]="gs.globalConstants.global_date_format" [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Type</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="ophandle_type" name="ophandle_type" [dataSource]="typeList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Group</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="ophandle_group" name="ophandle_group" [dataSource]="groupList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+      <label class="col-sm-4 form-label form-label-sm" for="">Handled By</label>
+        <div class="col-sm-8">
+          <auto-complete maxlength="60" formControlName="ophandle_handled_by" id="ophandle_handled_by" (CallBack)="callBack($event)"
+            table="param" subtable="salesman" [company_id]="getCompanyId()" [url]="url"
+            display_column="[{'caption':'code','value':'param_code'},{'caption':'name','value':'param_name'}]"></auto-complete>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')">Print</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

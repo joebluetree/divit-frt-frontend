@@ -1,0 +1,141 @@
+<form [formGroup]="mform">
+
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <!-- <label class="col-sm-4 form-label form-label-sm" for="">From</label> -->
+         <div class="col-sm-4">
+          <app-combobox maxlength="30" formControlName="mbl_date_type" name="mbl_date_type" [dataSource]="DateTypeList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+        <div class="col-sm-3">
+          <app-date formControlName="mbl_from_date" [format]="gs.globalConstants.global_date_format"
+            [placeholder]="gs.globalConstants.global_date_format"></app-date>
+        </div>
+        <label class="col-sm-2 form-label form-label-sm" for="">To</label>
+        <div class="col-sm-3">
+          <app-date formControlName="mbl_to_date" [format]="gs.globalConstants.global_date_format"
+            [placeholder]="gs.globalConstants.global_date_format"> </app-date>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Group</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_mode" name="mbl_mode" [dataSource]="groupList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Shipper</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_shipper_name" id="mbl_shipper_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Consignee</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_consignee_name" id="mbl_consignee_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Agent</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_agent_name" id="mbl_agent_name"
+              (CallBack)="callBack($event)" table="customerm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'cust_code'},{'caption':'NAME','value':'cust_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <!-- <label class="col-sm-4 form-label form-label-sm" for="">Handled By</label> -->
+        <div class="col-sm-4">
+          <app-combobox maxlength="30" formControlName="mbl_user_role" name="mbl_user_role" [dataSource]="HandleList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="mbl_handled_name" id="mbl_handled_name"
+              (CallBack)="callBack($event)" table="param" subtable="salesman" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'param_code'},{'caption':'NAME','value':'param_name'}]"></auto-complete>
+          </div>
+        </div>
+        <div class="row">
+          <label class="col-sm-4 form-label form-label-sm" for="">Created By</label>
+          <div class="col-sm-8">
+            <auto-complete maxlength="60" formControlName="rec_created_name" id="rec_created_name"
+              (CallBack)="callBack($event)" table="userm" [company_id]="getCompanyId()" [url]="url"
+              display_column="[{'caption':'CODE','value':'user_code'},{'caption':'NAME','value':'user_name'}]"></auto-complete>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <button class="btn btn-sm btn-success me-1" (click)="selectAll()">Select All</button>
+      <button class="btn btn-sm btn-success me-1" (click)="clearAll()">DeSelect All</button>
+      <div *ngFor="let s of stageList">
+        <app-checkbox [ngModel]="selectedStages.includes(s.param_code)"
+          (ngModelChange)="onStageChange($event, s.param_code)" 
+          [ngModelOptions]="{ standalone: true }">
+        </app-checkbox>
+        {{ s.param_name }}
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-lable-sm">Based On</label>
+        <div class="col-sm-2 mb-1">
+          <app-checkbox formControlName="mbl_is_master"></app-checkbox>
+          <label class="col-sm-2 form-label form-lable-sm">Master</label>
+        </div>
+        <div class="col-sm-2 mb-1">
+          <app-checkbox formControlName="mbl_is_house"></app-checkbox>
+          <label class="col-sm-2 form-label form-lable-sm">House</label>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="mform.value.mbl_mode === 'SEA IMPORT'">
+        <label class="col-sm-4 form-label form-label-sm" for="">Inco Term</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_incoterm" name="mbl_incoterm" [dataSource]="deliveryTerms"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Sort Order</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_sort_order" name="mbl_sort_order" [dataSource]="sortList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">Formats</label>
+        <div class="col-sm-8">
+          <app-combobox maxlength="30" formControlName="mbl_list_format" name="mbl_list_format" [dataSource]="FormatList"
+            [valueColumn]="'key'" [displayColumn]="'value'" case="UPPER"></app-combobox>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 form-label form-label-sm" for="">ETA Within</label>
+        <div class="col-sm-4">
+          <app-input type="number" formControlName="mbl_eta_within" ></app-input>
+        </div>
+        <div class="col-sm-4 mb-1" *ngIf="mform.value.mbl_mode === 'SEA IMPORT'">
+          <app-checkbox formControlName="mbl_pending_ams"></app-checkbox>
+          <label class="col-sm-2 form-label form-lable-sm">Pending.AMS</label>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="col-sm-3">
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <button class="btn btn-sm btn-success me-1" (click)="search('SEARCH')">Search</button>
+          <button class="btn btn-sm btn-success me-1 " *ngIf="print" (click)="search('PRINT')">Excel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
