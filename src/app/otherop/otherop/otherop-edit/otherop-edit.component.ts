@@ -44,9 +44,9 @@ export class OtherOpEditComponent extends baseEditComponent {
     { key: 'SUBMITTED', value: 'SUBMITTED' },
   ]
   DeliveryList = [
-    { key: 'N/A', value: 'N/A' },
-    { key: 'N', value: 'NO' },
-    { key: 'Y', value: 'YES' },
+    { key: 'NA', value: 'NA' },
+    { key: 'NO', value: 'NO' },
+    { key: 'YES', value: 'YES' },
   ]
   constructor(
     public ms: OtherOpService,
@@ -127,7 +127,7 @@ export class OtherOpEditComponent extends baseEditComponent {
       oth_is_ci: [''],
       oth_is_carr_an: [''],
       oth_custom_reles_status: ['N/A'],
-      oth_is_delivery: ['N/A'],
+      oth_is_delivery: ['NA'],
       oth_lfd_date: [''],
       oth_it_no: [''],
       oth_it_date: [''],

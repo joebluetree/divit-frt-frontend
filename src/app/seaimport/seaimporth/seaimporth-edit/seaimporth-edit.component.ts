@@ -42,9 +42,9 @@ export class SeaImportHEditComponent extends baseEditComponent {
     { key: 'SUBMITTED', value: 'SUBMITTED' },
   ]
   DeliveryList = [
-    { key: 'N/A', value: 'N/A' },
-    { key: 'N', value: 'NO' },
-    { key: 'Y', value: 'YES' },
+    { key: 'NA', value: 'NA' },
+    { key: 'NO', value: 'NO' },
+    { key: 'YES', value: 'YES' },
   ]
   BlStatuslList = [
     { key: 'NIL', value: 'NIL' },
@@ -158,7 +158,7 @@ export class SeaImportHEditComponent extends baseEditComponent {
       hbl_is_carr_an: [''],
       hbl_custom_reles_status: ['N/A'],
       hbl_custom_clear_date: [''],
-      hbl_is_delivery: ['N/A'],
+      hbl_is_delivery: ['NA'],
       hbl_paid_status_id: [0],
       hbl_paid_status_name: [''],
       hbl_paid_remarks: [''],
